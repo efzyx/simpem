@@ -53,6 +53,4 @@ class Pemesanan extends Model
         'nama_pemesanan' => 'required',
         'tanggal_pesan' => 'required'
     ];
-
-    
 }

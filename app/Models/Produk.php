@@ -46,6 +46,4 @@ class Produk extends Model
         'nama_produk' => 'required',
         'harga_satuan' => 'required'
     ];
-
-    
 }
