@@ -1,84 +1,149 @@
 <!-- Id Field -->
-<div class="form-group">
-    {!! Form::label('id', 'Id:') !!}
-    <p>{!! $pemesanan->id !!}</p>
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('id', 'Id') !!}
+  </div>
+  <div class="col-sm-9">
+    {!! $pemesanan->id !!}
+  </div>
 </div>
 
 <!-- Nama Pemesana Field -->
-<div class="form-group">
-    {!! Form::label('nama_pemesanan', 'Nama Pemesana:') !!}
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('nama_pemesanan', 'Nama Pemesanan') !!}
+  </div>
+  <div class="col-sm-9">
     <p>{!! $pemesanan->nama_pemesanan !!}</p>
+  </div>
 </div>
 
 <!-- Produk Id Field -->
-<div class="form-group">
-    {!! Form::label('produk_id', 'Produk Id:') !!}
-    <p>{!! $pemesanan->produk_id !!}</p>
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('produk_id', 'Produk') !!}
+  </div>
+  <div class="col-sm-9">
+    <p>{!! $pemesanan->produk->mutu_produk !!}</p>
+  </div>
 </div>
 
 <!-- Volume Pesanan Field -->
-<div class="form-group">
-    {!! Form::label('volume_pesanan', 'Volume Pesanan:') !!}
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('volume_pesanan', 'Volume Pesanan') !!}
+  </div>
+  <div class="col-sm-9">
     <p>{!! $pemesanan->volume_pesanan !!}</p>
+  </div>
 </div>
 
 <!-- Tanggal Pesanan Field -->
-<div class="form-group">
-    {!! Form::label('tanggal_pesanan', 'Tanggal Pesanan:') !!}
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('tanggal_pesanan', 'Tanggal Pesanan') !!}
+  </div>
+  <div class="col-sm-9">
     <p>{!! $pemesanan->tanggal_pesanan !!}</p>
+  </div>
 </div>
 
 <!-- Tanggal Kirim Field -->
-<div class="form-group">
-    {!! Form::label('tanggal_kirim', 'Tanggal Kirim:') !!}
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('tanggal_kirim', 'Tanggal Kirim') !!}
+  </div>
+  <div class="col-sm-9">
     <p>{!! $pemesanan->tanggal_kirim !!}</p>
+  </div>
 </div>
 
 <!-- Lokasi Proyek Field -->
-<div class="form-group">
-    {!! Form::label('lokasi_proyek', 'Lokasi Proyek:') !!}
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('lokasi_proyek', 'Lokasi Proyek') !!}
+  </div>
+  <div class="col-sm-9">
     <p>{!! $pemesanan->lokasi_proyek !!}</p>
+  </div>
 </div>
 
 <!-- Jenis Pesanan Field -->
-<div class="form-group">
-    {!! Form::label('jenis_pesanan', 'Jenis Pesanan:') !!}
-    <p>{!! $pemesanan->jenis_pesanan !!}</p>
+@php
+  $jenis = ['Retail', 'Non Retail'];
+@endphp
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('jenis_pesanan', 'Jenis Pesanan') !!}
+  </div>
+  <div class="col-sm-9">
+    <p>{!! $jenis[$pemesanan->jenis_pesanan] !!}</p>
+  </div>
 </div>
 
 <!-- Cp Pesanan Field -->
-<div class="form-group">
-    {!! Form::label('cp_pesanan', 'Cp Pesanan:') !!}
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('cp_pesanan', 'CP Pesanan') !!}
+  </div>
+  <div class="col-sm-9">
     <p>{!! $pemesanan->cp_pesanan !!}</p>
-</div>
-
-<!-- User Id Field -->
-<div class="form-group">
-    {!! Form::label('user_id', 'User Id:') !!}
-    <p>{!! $pemesanan->user_id !!}</p>
+  </div>
 </div>
 
 <!-- Keterangan Field -->
-<div class="form-group">
-    {!! Form::label('keterangan', 'Keterangan:') !!}
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('keterangan', 'Keterangan') !!}
+  </div>
+  <div class="col-sm-9">
     <p>{!! $pemesanan->keterangan !!}</p>
+  </div>
 </div>
 
 <!-- Status Field -->
-<div class="form-group">
-    {!! Form::label('status', 'Status:') !!}
-    <p>{!! $pemesanan->status !!}</p>
+@php
+  $status = [
+    'Produksi',
+    'Sedang dikirim',
+    'Terkirim'
+  ];
+@endphp
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('status', 'Status') !!}
+  </div>
+  <div class="col-sm-9">
+    <p>{!! $status[$pemesanan->status] !!}</p>
+  </div>
+</div>
+
+<!-- User Id Field -->
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('user_id', 'Pegawai') !!}
+  </div>
+  <div class="col-sm-9">
+    <p>{!! $pemesanan->user->name !!}</p>
+  </div>
 </div>
 
 <!-- Created At Field -->
-<div class="form-group">
-    {!! Form::label('created_at', 'Created At:') !!}
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('created_at', 'Created At') !!}
+  </div>
+  <div class="col-sm-9">
     <p>{!! $pemesanan->created_at !!}</p>
+  </div>
 </div>
 
 <!-- Updated At Field -->
-<div class="form-group">
-    {!! Form::label('updated_at', 'Updated At:') !!}
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('updated_at', 'Updated At') !!}
+  </div>
+  <div class="col-sm-9">
     <p>{!! $pemesanan->updated_at !!}</p>
+  </div>
 </div>
-

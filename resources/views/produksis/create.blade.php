@@ -22,3 +22,14 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+  <script type="text/javascript">
+              $(function () {
+                  $('#calendar').datetimepicker({
+                    // locale : 'id'
+                    format: "YYYY-MM-DD HH:mm"
+                  });
+              });
+  </script>
+@endsection

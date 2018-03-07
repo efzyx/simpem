@@ -1,11 +1,11 @@
 <!-- Mutu Produk Field -->
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-12">
     {!! Form::label('mutu_produk', 'Mutu Produk:') !!}
     {!! Form::text('mutu_produk', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Satuan Field -->
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-12">
     {!! Form::label('satuan', 'Satuan:') !!}
     {!! Form::text('satuan', null, ['class' => 'form-control']) !!}
 </div>

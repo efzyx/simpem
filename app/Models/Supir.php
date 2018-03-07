@@ -18,7 +18,7 @@ class Supir extends Model
     use SoftDeletes;
 
     public $table = 'supirs';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -44,7 +44,7 @@ class Supir extends Model
      * @var array
      */
     public static $rules = [
-        'no_supir' => 'required,unique',
+        'no_supir' => 'required|unique:supirs',
         'nama_supir' => 'required'
     ];
 }

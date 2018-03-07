@@ -17,5 +17,7 @@ class UsersTableSeeder extends Seeder
       $user->email = 'admin@admin.com';
       $user->password = bcrypt('secret');
       $user->jabatan_id = 1;
+      $user->remember_token = str_random(10);
+      $user->save();
     }
 }

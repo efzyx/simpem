@@ -1,34 +1,33 @@
 <table class="table table-responsive" id="pemesanans-table">
     <thead>
         <tr>
+          <th>#</th>
             <th>Nama Pemesana</th>
-        <th>Produk Id</th>
-        <th>Volume Pesanan</th>
+        <th>Produk</th>
         <th>Tanggal Pesanan</th>
-        <th>Tanggal Kirim</th>
-        <th>Lokasi Proyek</th>
         <th>Jenis Pesanan</th>
-        <th>Cp Pesanan</th>
-        <th>User Id</th>
-        <th>Keterangan</th>
         <th>Status</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
     <tbody>
+      @php
+        $no = 1;
+        $jenis = ['Retail', 'Non Retail'];
+        $status = [
+          'Produksi',
+          'Sedang dikirim',
+          'Terkirim'
+        ];
+      @endphp
     @foreach($pemesanans as $pemesanan)
         <tr>
+            <td>{{ $no++ }}</td>
             <td>{!! $pemesanan->nama_pemesanan !!}</td>
-            <td>{!! $pemesanan->produk_id !!}</td>
-            <td>{!! $pemesanan->volume_pesanan !!}</td>
+            <td>{!! $pemesanan->produk->mutu_produk !!}</td>
             <td>{!! $pemesanan->tanggal_pesanan !!}</td>
-            <td>{!! $pemesanan->tanggal_kirim !!}</td>
-            <td>{!! $pemesanan->lokasi_proyek !!}</td>
-            <td>{!! $pemesanan->jenis_pesanan !!}</td>
-            <td>{!! $pemesanan->cp_pesanan !!}</td>
-            <td>{!! $pemesanan->user_id !!}</td>
-            <td>{!! $pemesanan->keterangan !!}</td>
-            <td>{!! $pemesanan->status !!}</td>
+            <td>{!! $jenis[$pemesanan->jenis_pesanan] !!}</td>
+            <td>{!! $status[$pemesanan->status] !!}</td>
             <td>
                 {!! Form::open(['route' => ['pemesanans.destroy', $pemesanan->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

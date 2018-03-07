@@ -27,7 +27,7 @@ class Pemesanan extends Model
     use SoftDeletes;
 
     public $table = 'pemesanans';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -73,6 +73,15 @@ class Pemesanan extends Model
         'produk_id' => 'required',
         'tanggal_pesanan' => 'required',
         'jenis_pesanan' => 'required',
-        'user_id' => 'required'
     ];
+
+    public function produk()
+    {
+      return $this->belongsTo('App\Models\Produk');
+    }
+
+    public function user()
+    {
+      return $this->belongsTo('App\User');
+    }
 }

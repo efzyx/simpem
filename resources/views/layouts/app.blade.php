@@ -25,7 +25,7 @@
 
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-
+    <link href="{{ url('/css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet">
     @yield('css')
 </head>
 
@@ -100,7 +100,7 @@
 
         <!-- Main Footer -->
         <footer class="main-footer" style="max-height: 100px;text-align: center">
-            <strong>Copyright © 2016 <a href="#">Company</a>.</strong> All rights reserved.
+            <strong>Copyright © {{ date('Y')}} <a href="#">Company</a>.</strong> All rights reserved.
         </footer>
 
     </div>
@@ -160,6 +160,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script type="text/javascript" src="{{ url('/js/moment-with-locales.min.js')}}"></script>
+    <script type="text/javascript" src="{{ url('/js/bootstrap-datetimepicker.min.js')}}"></script>
 
     @yield('scripts')
 </body>

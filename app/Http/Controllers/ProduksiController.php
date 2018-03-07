@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Models\Pemesanan;
+use App\Models\Supir;
+use Auth;
 
 class ProduksiController extends AppBaseController
 {
@@ -19,6 +22,8 @@ class ProduksiController extends AppBaseController
     public function __construct(ProduksiRepository $produksiRepo)
     {
         $this->produksiRepository = $produksiRepo;
+        $this->pemesanans = Pemesanan::pluck('nama_pemesanan', 'id');
+        $this->supirs = Supir::pluck('nama_supir', 'id');
     }
 
     /**
@@ -43,7 +48,9 @@ class ProduksiController extends AppBaseController
      */
     public function create()
     {
-        return view('produksis.create');
+        return view('produksis.create')
+              ->with('pemesanans', $this->pemesanans)
+              ->with('supirs', $this->supirs);
     }
 
     /**
@@ -56,6 +63,7 @@ class ProduksiController extends AppBaseController
     public function store(CreateProduksiRequest $request)
     {
         $input = $request->all();
+        $input['user_id'] = Auth::user()->id;
 
         $produksi = $this->produksiRepository->create($input);
 

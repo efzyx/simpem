@@ -9,7 +9,9 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
+use App\Models\Produk;
 use Response;
+use Auth;
 
 class PemesananController extends AppBaseController
 {
@@ -31,9 +33,11 @@ class PemesananController extends AppBaseController
     {
         $this->pemesananRepository->pushCriteria(new RequestCriteria($request));
         $pemesanans = $this->pemesananRepository->all();
+        $produks = Produk::pluck('mutu_produk', 'id');
 
         return view('pemesanans.index')
-            ->with('pemesanans', $pemesanans);
+            ->with('pemesanans', $pemesanans)
+            ->with('produks', $produks);
     }
 
     /**
@@ -43,7 +47,9 @@ class PemesananController extends AppBaseController
      */
     public function create()
     {
-        return view('pemesanans.create');
+        $produks = Produk::pluck('mutu_produk', 'id');
+        return view('pemesanans.create')
+              ->with('produks', $produks);
     }
 
     /**
@@ -56,6 +62,7 @@ class PemesananController extends AppBaseController
     public function store(CreatePemesananRequest $request)
     {
         $input = $request->all();
+        $input['user_id'] = Auth::user()->id;
 
         $pemesanan = $this->pemesananRepository->create($input);
 
@@ -94,14 +101,16 @@ class PemesananController extends AppBaseController
     public function edit($id)
     {
         $pemesanan = $this->pemesananRepository->findWithoutFail($id);
-
+        $produks = Produk::pluck('mutu_produk', 'id');
         if (empty($pemesanan)) {
             Flash::error('Pemesanan not found');
 
             return redirect(route('pemesanans.index'));
         }
 
-        return view('pemesanans.edit')->with('pemesanan', $pemesanan);
+        return view('pemesanans.edit')
+              ->with('pemesanan', $pemesanan)
+              ->with('produks', $produks);
     }
 
     /**

@@ -27,9 +27,9 @@ class Produksi extends Model
     use SoftDeletes;
 
     public $table = 'produksis';
-    
 
-    protected $dates = ['deleted_at'];
+
+    protected $dates = ['deleted_at', 'waktu_produksi'];
 
 
     public $fillable = [
@@ -60,8 +60,7 @@ class Produksi extends Model
         'addictive' => 'integer',
         'air' => 'integer',
         'supir_id' => 'integer',
-        'no_kendaraan' => 'string',
-        'user_id' => 'integer'
+        'no_kendaraan' => 'string'
     ];
 
     /**
@@ -73,6 +72,5 @@ class Produksi extends Model
         'pemesanan_id' => 'required',
         'volume' => 'required',
         'supir_id' => 'required',
-        'user_id' => 'required'
     ];
 }
