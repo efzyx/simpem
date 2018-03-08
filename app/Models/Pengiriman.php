@@ -19,7 +19,7 @@ class Pengiriman extends Model
     use SoftDeletes;
 
     public $table = 'pengiriman';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -49,6 +49,5 @@ class Pengiriman extends Model
     public static $rules = [
         'produksi_id' => 'required',
         'status' => 'required',
-        'user_id' => 'required'
     ];
 }

@@ -29,7 +29,7 @@ class Pemesanan extends Model
     public $table = 'pemesanans';
 
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'tanggal_pesanan', 'tanggal_kirim'];
 
 
     public $fillable = [

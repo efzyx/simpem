@@ -49,3 +49,6 @@ Route::resource('bahanBakus', 'BahanBakuController');
 Route::resource('pengadaans', 'PengadaanController');
 
 Route::resource('opnames', 'OpnameController');
+
+
+Route::resource('pengirimen', 'PengirimanController');

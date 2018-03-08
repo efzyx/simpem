@@ -4,7 +4,7 @@
           <th>#</th>
             <th>Nama Pemesana</th>
         <th>Produk</th>
-        <th>Tanggal Pesanan</th>
+        <th>Pemesanan</th>
         <th>Jenis Pesanan</th>
         <th>Status</th>
             <th colspan="3">Action</th>
@@ -25,7 +25,7 @@
             <td>{{ $no++ }}</td>
             <td>{!! $pemesanan->nama_pemesanan !!}</td>
             <td>{!! $pemesanan->produk->mutu_produk !!}</td>
-            <td>{!! $pemesanan->tanggal_pesanan !!}</td>
+            <td>{!! $pemesanan->tanggal_pesanan->diffForHumans() !!}</td>
             <td>{!! $jenis[$pemesanan->jenis_pesanan] !!}</td>
             <td>{!! $status[$pemesanan->status] !!}</td>
             <td>

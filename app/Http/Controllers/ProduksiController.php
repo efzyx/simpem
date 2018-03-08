@@ -13,6 +13,7 @@ use Response;
 use App\Models\Pemesanan;
 use App\Models\Supir;
 use Auth;
+use App\Models\Pengiriman;
 
 class ProduksiController extends AppBaseController
 {
@@ -35,7 +36,7 @@ class ProduksiController extends AppBaseController
     public function index(Request $request)
     {
         $this->produksiRepository->pushCriteria(new RequestCriteria($request));
-        $produksis = $this->produksiRepository->all();
+        $produksis = $this->produksiRepository->simplePaginate(10);
 
         return view('produksis.index')
             ->with('produksis', $produksis);
@@ -66,6 +67,12 @@ class ProduksiController extends AppBaseController
         $input['user_id'] = Auth::user()->id;
 
         $produksi = $this->produksiRepository->create($input);
+
+        $pengiriman = new Pengiriman();
+        $pengiriman->produksi_id = $produksi->id;
+        $pengiriman->status = 0;
+        $pengiriman->user_id = Auth::user()->id;
+        $pengiriman->save();
 
         Flash::success('Produksi saved successfully.');
 

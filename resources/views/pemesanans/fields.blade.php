@@ -17,14 +17,14 @@
 
 <!-- Tanggal Pesanan Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('tanggal_pesanan', 'Tanggal Pesanan:') !!}
-    {!! Form::date('tanggal_pesanan', null, ['class' => 'form-control']) !!}
+    {!! Form::label('tanggal_pesanan', 'Waktu Pemesanan:') !!}
+    {!! Form::text('tanggal_pesanan', null, ['class' => 'form-control', 'id'=>'calendar1'])!!}
 </div>
 
 <!-- Tanggal Kirim Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('tanggal_kirim', 'Tanggal Kirim:') !!}
-    {!! Form::date('tanggal_kirim', null, ['class' => 'form-control']) !!}
+    {!! Form::label('tanggal_kirim', 'Waktu Kirim:') !!}
+    {!! Form::text('tanggal_kirim', null, ['class' => 'form-control', 'id'=>'calendar2'])!!}
 </div>
 
 <!-- Lokasi Proyek Field -->

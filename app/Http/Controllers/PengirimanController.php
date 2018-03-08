@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use Auth;
 
 class PengirimanController extends AppBaseController
 {
@@ -114,19 +115,20 @@ class PengirimanController extends AppBaseController
      */
     public function update($id, UpdatePengirimanRequest $request)
     {
+        // dd($request)
         $pengiriman = $this->pengirimanRepository->findWithoutFail($id);
 
         if (empty($pengiriman)) {
             Flash::error('Pengiriman not found');
 
-            return redirect(route('pengiriman.index'));
+            return redirect()->back();
         }
-
+        $pengiriman->user_id = Auth::user()->id;
         $pengiriman = $this->pengirimanRepository->update($request->all(), $id);
 
-        Flash::success('Pengiriman updated successfully.');
+        Flash::success('Status updated successfully.');
 
-        return redirect(route('pengiriman.index'));
+        return redirect()->back();
     }
 
     /**

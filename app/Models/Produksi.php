@@ -88,4 +88,9 @@ class Produksi extends Model
     {
       return $this->belongsTo('App\Models\Supir');
     }
+
+    public function pengiriman()
+    {
+      return $this->hasOne('App\Models\pengiriman');
+    }
 }

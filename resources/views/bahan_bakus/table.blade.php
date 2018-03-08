@@ -7,7 +7,7 @@
         </tr>
     </thead>
     <tbody>
-    @foreach($bahanBakus as $bahanBaku)
+    @forelse($bahanBakus as $bahanBaku)
         <tr>
             <td>{!! $bahanBaku->nama_bahan_baku !!}</td>
             <td>{!! $bahanBaku->satuan !!}</td>
@@ -21,6 +21,12 @@
                 {!! Form::close() !!}
             </td>
         </tr>
-    @endforeach
+    @empty
+      <tr>
+        <td colspan="3" class="text-center">
+          Belum ada data
+        </td>
+      </tr>
+    @endforelse
     </tbody>
 </table>

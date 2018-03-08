@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@php
+  // dd(request())
+@endphp
 @section('content')
     <section class="content-header">
         <h1 class="pull-left">List Produksi</h1>
@@ -16,10 +18,21 @@
         <div class="box box-primary">
             <div class="box-body">
                     @include('produksis.table')
+                    <div class="pull-right">
+                      {{ $produksis->render() }}
+                    </div>
             </div>
         </div>
         <div class="text-center">
 
         </div>
     </div>
+@endsection
+
+@section('scripts')
+  <script type="text/javascript">
+  $('select').on('change',function() {
+    $(this.form).trigger('submit')
+  });
+  </script>
 @endsection

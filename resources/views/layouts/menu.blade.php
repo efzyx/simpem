@@ -34,3 +34,7 @@
 <li class="{{ Request::is('opnames*') ? 'active' : '' }}">
     <a href="{!! route('opnames.index') !!}"><i class="fa fa-edit"></i><span>Opname</span></a>
 </li>
+<li class="{{ Request::is('pengirimen*') ? 'active' : '' }}">
+    <a href="{!! route('pengirimen.index') !!}"><i class="fa fa-edit"></i><span>Pengirimen</span></a>
+</li>
+

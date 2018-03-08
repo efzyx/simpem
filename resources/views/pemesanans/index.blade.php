@@ -16,10 +16,19 @@
         <div class="box box-primary">
             <div class="box-body">
                     @include('pemesanans.table')
+                    <div class="pull-right">
+                      {{ $pemesanans->render() }}
+                    </div>
             </div>
         </div>
         <div class="text-center">
 
         </div>
     </div>
+@endsection
+
+@section('scripts')
+  <script type="text/javascript">
+    // $('table').datatables()
+  </script>
 @endsection

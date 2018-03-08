@@ -32,7 +32,7 @@ class PemesananController extends AppBaseController
     public function index(Request $request)
     {
         $this->pemesananRepository->pushCriteria(new RequestCriteria($request));
-        $pemesanans = $this->pemesananRepository->all();
+        $pemesanans = $this->pemesananRepository->paginate(10);
         $produks = Produk::pluck('mutu_produk', 'id');
 
         return view('pemesanans.index')

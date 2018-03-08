@@ -108,6 +108,22 @@
   </div>
 </div>
 
+@php
+  $status = [
+    'Sedang Produksi',
+    'Sedang Dikirim',
+    'Terkirim'
+  ];
+@endphp
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('', 'Satus') !!}
+  </div>
+  <div class="col-sm-9">
+    <p>{!! $status[$produksi->pengiriman->status] !!}</p>
+  </div>
+</div>
+
 <!-- User Id Field -->
 <div class="form-group col-sm-12">
   <div class="col-sm-3">
@@ -134,6 +150,6 @@
     {!! Form::label('updated_at', 'Updated At') !!}
   </div>
   <div class="col-sm-9">
-    <p>{!! $produksi->updated_at !!}</p>
+    <p>{!! $produksi->pengiriman->updated_at !!}</p>
   </div>
 </div>

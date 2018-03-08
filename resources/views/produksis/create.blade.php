@@ -28,7 +28,7 @@
               $(function () {
                   $('#calendar').datetimepicker({
                     // locale : 'id'
-                    format: "YYYY-MM-DD HH:mm"
+                    format: "YYYY-MM-DD HH:mm:ss"
                   });
               });
   </script>

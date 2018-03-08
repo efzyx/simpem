@@ -44,7 +44,7 @@
     {!! Form::label('tanggal_pesanan', 'Tanggal Pesanan') !!}
   </div>
   <div class="col-sm-9">
-    <p>{!! $pemesanan->tanggal_pesanan !!}</p>
+    <p>{!! $pemesanan->tanggal_pesanan->format('d F Y') !!}</p>
   </div>
 </div>
 
@@ -54,7 +54,7 @@
     {!! Form::label('tanggal_kirim', 'Tanggal Kirim') !!}
   </div>
   <div class="col-sm-9">
-    <p>{!! $pemesanan->tanggal_kirim !!}</p>
+    <p>{!! $pemesanan->tanggal_kirim->format('d F Y') !!}</p>
   </div>
 </div>
 

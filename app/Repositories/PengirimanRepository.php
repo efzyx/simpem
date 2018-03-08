@@ -8,7 +8,7 @@ use InfyOm\Generator\Common\BaseRepository;
 /**
  * Class PengirimanRepository
  * @package App\Repositories
- * @version March 2, 2018, 7:47 pm UTC
+ * @version March 9, 2018, 3:55 am WIB
  *
  * @method Pengiriman findWithoutFail($id, $columns = ['*'])
  * @method Pengiriman find($id, $columns = ['*'])
@@ -20,7 +20,9 @@ class PengirimanRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'status'
+        'produksi_id',
+        'status',
+        'user_id'
     ];
 
     /**
