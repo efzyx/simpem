@@ -73,4 +73,19 @@ class Produksi extends Model
         'volume' => 'required',
         'supir_id' => 'required',
     ];
+
+    public function pemesanan()
+    {
+      return $this->belongsTo('App\Models\Pemesanan');
+    }
+
+    public function user()
+    {
+      return $this->belongsTo('App\User');
+    }
+
+    public function supir()
+    {
+      return $this->belongsTo('App\Models\Supir');
+    }
 }
