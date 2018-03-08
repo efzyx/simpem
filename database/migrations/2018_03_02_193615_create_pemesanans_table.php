@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreatePemesananTable extends Migration
+class CreatePemesanansTable extends Migration
 {
 
     /**
@@ -28,8 +28,8 @@ class CreatePemesananTable extends Migration
             $table->integer('status');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('produk_id')->references('id')->on('produks');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('produk_id')->references('id')->on('produks')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

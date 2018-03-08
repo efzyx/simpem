@@ -18,7 +18,7 @@ class Jabatan extends Model
     use SoftDeletes;
 
     public $table = 'jabatans';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -46,4 +46,14 @@ class Jabatan extends Model
     public static $rules = [
         'nama_jabatan' => 'required'
     ];
+
+    public function getJabatan($kode)
+    {
+      return $this->where('kode_jabatan', $kode)->first();
+    }
+
+    public function users()
+    {
+      $this->hasMany('App\User');
+    }
 }

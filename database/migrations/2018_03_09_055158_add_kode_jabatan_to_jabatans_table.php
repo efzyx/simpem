@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddJabatanIdToUsers extends Migration
+class AddKodeJabatanToJabatansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class AddJabatanIdToUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->integer('jabatan_id')->unsigned()->nullable();
-            $table->foreign('jabatan_id')->references('id')->on('jabatans')->onDelete('cascade');
+        Schema::table('jabatans', function (Blueprint $table) {
+            $table->string('kode_jabatan');
         });
     }
 
@@ -26,8 +25,8 @@ class AddJabatanIdToUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
+        Schema::table('jabatans', function (Blueprint $table) {
+            $table->dropColumn('kode_jabatan');
         });
     }
 }

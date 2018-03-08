@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateSupirTable extends Migration
+class CreateSupirsTable extends Migration
 {
 
     /**

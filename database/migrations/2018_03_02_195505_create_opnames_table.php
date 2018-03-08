@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateOpnameTable extends Migration
+class CreateOpnamesTable extends Migration
 {
 
     /**
@@ -21,7 +21,7 @@ class CreateOpnameTable extends Migration
             $table->datetime('tanggal_pemakaian');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('bahan_baku_id')->references('id')->on('bahan_bakus');
+            $table->foreign('bahan_baku_id')->references('id')->on('bahan_bakus')->onDelete('cascade');
         });
     }
 

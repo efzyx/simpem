@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreatePengadaanTable extends Migration
+class CreatePengadaansTable extends Migration
 {
 
     /**
@@ -23,8 +23,8 @@ class CreatePengadaanTable extends Migration
             $table->string('keterangan');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('bahan_baku_id')->references('id')->on('bahan_bakus');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('bahan_baku_id')->references('id')->on('bahan_bakus')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

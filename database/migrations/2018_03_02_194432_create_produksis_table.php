@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateProduksiTable extends Migration
+class CreateProduksisTable extends Migration
 {
 
     /**
@@ -28,9 +28,9 @@ class CreateProduksiTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('pemesanan_id')->references('id')->on('pemesanans');
-            $table->foreign('supir_id')->references('id')->on('supirs');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('pemesanan_id')->references('id')->on('pemesanans')->onDelete('cascade');
+            $table->foreign('supir_id')->references('id')->on('supirs')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
