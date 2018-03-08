@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreatePengadaansTable extends Migration
+class CreatePengadaanTable extends Migration
 {
 
     /**

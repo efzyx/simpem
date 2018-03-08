@@ -109,7 +109,10 @@ class ProduksiController extends AppBaseController
             return redirect(route('produksis.index'));
         }
 
-        return view('produksis.edit')->with('produksi', $produksi);
+        return view('produksis.edit')
+              ->with('produksi', $produksi)
+              ->with('pemesanans', $this->pemesanans)
+              ->with('supirs', $this->supirs);;
     }
 
     /**

@@ -16,7 +16,7 @@
     @foreach($produksis as $produksi)
         <tr>
             <td>{{ $no++ }}</td>
-            <td>{!! $produksi->pemesanan_id !!}</td>
+            <td>{!! $produksi->pemesanan->nama_pemesanan !!}</td>
             <td>{!! $produksi->volume !!}</td>
             <td>{!! $produksi->waktu_produksi->diffForHumans() !!}</td>
             <td>{!! $produksi->no_kendaraan !!}</td>
