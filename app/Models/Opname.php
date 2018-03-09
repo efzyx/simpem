@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -20,7 +20,7 @@ class Opname extends Model
     use SoftDeletes;
 
     public $table = 'opnames';
-    
+
 
     protected $dates = ['deleted_at'];
 

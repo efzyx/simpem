@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -18,7 +18,7 @@ class Produk extends Model
     use SoftDeletes;
 
     public $table = 'produks';
-    
+
 
     protected $dates = ['deleted_at'];
 
