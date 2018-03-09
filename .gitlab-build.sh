@@ -1,6 +1,6 @@
 #!/bin/bash
 # Ensure we fail fast if there is a problem.
-set -eo pipefail
+set -e pipefail
 
 # Move the files over to current directory
 mv /root/composer.phar .
