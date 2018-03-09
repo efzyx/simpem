@@ -59,6 +59,6 @@ test_job:
 stage_job:
   stage: staging_deploy
   script:
-    - sh .gitlab-staging-pull-deploy.sh # Change this to .gitlab-staging-pull-deploy.sh for PULL deployments
+    - sh .gitlab-staging-deploy.sh # Change this to .gitlab-staging-pull-deploy.sh for PULL deployments
   environment:
     name: staging
