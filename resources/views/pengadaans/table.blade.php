@@ -1,23 +1,26 @@
 <table class="table table-responsive" id="pengadaans-table">
     <thead>
         <tr>
-            <th>Bahan Baku Id</th>
+        <th>#</th>
+        <th>Bahan Baku</th>
         <th>Berat</th>
         <th>Supplier</th>
         <th>Tanggal Pengadaan</th>
-        <th>User Id</th>
         <th>Keterangan</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
     <tbody>
+      @php
+      $no = 1;
+      @endphp
     @foreach($pengadaans as $pengadaan)
         <tr>
-            <td>{!! $pengadaan->bahan_baku_id !!}</td>
+            <td>{{ $no++ }}</td>
+            <td>{!! $pengadaan->bahan_baku->nama_bahan_baku !!}</td>
             <td>{!! $pengadaan->berat !!}</td>
             <td>{!! $pengadaan->supplier !!}</td>
-            <td>{!! $pengadaan->tanggal_pengadaan !!}</td>
-            <td>{!! $pengadaan->user_id !!}</td>
+            <td>{!! $pengadaan->tanggal_pengadaan->diffForHumans() !!}</td>
             <td>{!! $pengadaan->keterangan !!}</td>
             <td>
                 {!! Form::open(['route' => ['pengadaans.destroy', $pengadaan->id], 'method' => 'delete']) !!}
