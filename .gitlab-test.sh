@@ -1,6 +1,6 @@
 #!/bin/sh
 # Ensure we fail fast if there is a problem.
-set -eo pipefail
+set -e pipefail
 
 # Ensure that php is working
 php -v
