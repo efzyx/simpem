@@ -22,7 +22,7 @@ before_script:
 variables:
   MYSQL_DATABASE: laravel
   MYSQL_ROOT_PASSWORD: secret
-  SSH_PRIVATE_KEY: somethingsomethingblahblah # Recommended to put into GitLab secret variables instead
+  SSH_PRIVATE_KEY: kSEFxPEEx2D5TxKfhB5t # Recommended to put into GitLab secret variables instead
   GIT_DEPLOYMENT_URL: git@gitlab.com:fauzipadlaw/pemesanan.git # Used for PUSH deployments
   GIT_DEPLOYMENT_REMOTE: staging # Used for PUSH and PULL deployments
   GIT_DEPLOYMENT_BRANCH: master # Used for PUSH and PULL deployments
