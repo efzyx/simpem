@@ -27,6 +27,10 @@
     <a href="{!! route('opnames.index') !!}"><i class="fa fa-search-minus"></i><span>Opname</span></a>
 </li>
 
+<li class="{{ Request::is('users*') ? 'active' : '' }}">
+    <a href="{!! route('users.index') !!}"><i class="fa fa-users"></i><span>Pegawai</span></a>
+</li>
+
 <li class="treeview {{ Request::is('jabatans*') || Request::is('bahanBakus*') ? 'active' : '' }}">
       <a href="#">
         <i class="fa fa-gear"></i> <span>Konfigurasi</span>

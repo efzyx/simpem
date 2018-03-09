@@ -26,6 +26,7 @@ Route::resource('jabatans', 'JabatanController');
 
 Route::resource('supirs', 'SupirController');
 
+Route::get('pemesanans/downloadPdf', 'PemesananController@downloadPdf')->name('downloadPdf');
 Route::resource('pemesanans', 'PemesananController');
 
 Route::resource('produksis', 'ProduksiController');
@@ -37,3 +38,5 @@ Route::resource('bahanBakus', 'BahanBakuController');
 Route::resource('pengadaans', 'PengadaanController');
 
 Route::resource('opnames', 'OpnameController');
+
+Route::resource('users', 'UserController');
