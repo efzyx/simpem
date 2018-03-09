@@ -21,7 +21,33 @@ before_script:
 variables:
   MYSQL_DATABASE: laravel
   MYSQL_ROOT_PASSWORD: secret
-  SSH_PRIVATE_KEY: somethingsomethingblahblah # Recommended to put into GitLab secret variables instead
+  SSH_PRIVATE_KEY: -----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAtsdKpUPk0N98H5+vYvUYNWghYSR7IbX6SlXm/JhDfzytl2zg
+5Rigl99AKpgJUilG1smCqM75V16v271iB+pptgO8xFZgLiBtp4k+GtHRF2DUeDxE
++PlvbfY/gGj027SKUg9m5MsIR6AkPSwHPRxodJqrypqfHbGgDLVb22t6GJVvxi3j
+PNlZ0K8JesMrpafFUmF7UcZWl/UgxPpszfz+DgxH4u2Of9kTL5gm15Lh9pVTRrz/
+dwydVk+474CbYxaS8hOPNGBtOqkKC8DWMetTuRp/2YVgkoc1h1tHdhR53gnP5AXU
+lIA9A6uKTEVDkEyLoZadWuT5JF6nsUNQhIPtewIDAQABAoIBAEITUbzlCncoE6sr
+AzB3AkVsW4TOt2S8cLsmytZOBTieKvMu/S5U9Nlyb7P2OohlO6KyPnXgPOuE43ZA
+xIuwBn8yYq9numVye7GxP65aY4hcDPNadmS7Z7kM6G/3gW1bmxWHU98qNtgN4Ivs
+usEw3+IneCtKMnN9nyp49bgg5oa0AsDbI0SBFLAkGgiwUTUgnxE3PcDndR9LMODt
+JxzGTBfX2ZDodAes8UZFvYzyKotn4pUxGFwrzqncb5XcZkkGJZFjyQAU6kNkD+9r
+PagI3dDAoh+OAdmdI9Bc2YzM+soHyeJx3D6VIpJv83ALFs3R2dF0mIuvqq4gWJEB
+0GYtnUECgYEA3Qb37PsLwGRvEY1SwrF8yzxWaWj77xaJWvEoKyPHG/E591+qCfgw
+80/5qt5DD7s6eEFq5114ZN5FKR2tvacEsMkCxw79OL8QVg5LIMqz96aUWyfPiR+7
+kZzn66DOzc0XqAwg0vqrOA0NpzxNK0zAJosJY6eWRFwd0rEnyyoFgnkCgYEA07MA
+fu1CJ4V7jBTrAihnGH57+akczjaD2F48wOM/Vt+e6LrpN9qWhe115r6p21Wmg77J
+dGgyYUuIcy6pzeZ3H38ayIlWePw9xc2JRrieNNplb9qjt3f+MZ9TI15BqC/dUukv
+k8VMQSzgIAEo/ZYjJ6KE/eEIiEnBQbsOq0I5kpMCgYAQlTZCtG8kRyTCJ10/ODvJ
+r8Q38mV8ga9agF9oJS4KHaYgti+2wcVCbAyqUjSr2HtBjH7tzuh6gOaleBGR+hbz
+AJHRx4EeIc+i9T2Tv0GTYg8da7Y5boUPHruTxSPe8vVEaWyJB7+S2//bPT348rAz
+9BiHPoqapGKkbSA0MPnq2QKBgQC/4OndIZ0phzIhGMCddxNivxoNgvuJ6R19moTE
+a/T3/73fwbIrHuP5xe5sU3pPRAWmOeIMsXigeT7W73+XEYH9OU6EXv7SsAYpaA85
+25IB48W3KVvkqkzqmzdWwlMOZzvar2KhNF3WYR9Pwt1tY4y/mu2h0zrRlNAmjK5S
+Cbd3IwKBgQDO9rwNx9zp7PeVn8BciUgDJAWF/Zcn8G/q9FRStMf1oE9NdBLkvyNx
+7fgXbauT/2bSOqjYiLXaRi7244AfIfkd1AlDkFDrizK5Gcsall/OOOOPGDttjWkZ
+xq9JfcsYyo7qC9DYdpC1ADQEF+Va00GvVs0e3NP6u2L4p3rfmgFG2w==
+-----END RSA PRIVATE KEY----- # Recommended to put into GitLab secret variables instead
   GIT_DEPLOYMENT_URL: git@gitlab.com:fauzipadlaw/pemesanan.git # Used for PUSH deployments
   GIT_DEPLOYMENT_REMOTE: staging # Used for PUSH and PULL deployments
   GIT_DEPLOYMENT_BRANCH: master # Used for PUSH and PULL deployments
