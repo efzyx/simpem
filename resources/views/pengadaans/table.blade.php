@@ -5,7 +5,7 @@
         <th>Bahan Baku</th>
         <th>Berat</th>
         <th>Supplier</th>
-        <th>Tanggal Pengadaan</th>
+        <th>Pengadaan</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>

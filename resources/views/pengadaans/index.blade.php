@@ -16,11 +16,13 @@
         <div class="box box-primary">
             <div class="box-body">
                     @include('pengadaans.table')
+                    <div class="pull-right">
+                      {{ $pengadaans->render() }}
+                    </div>
             </div>
         </div>
         <div class="text-center">
-        
+
         </div>
     </div>
 @endsection
-
