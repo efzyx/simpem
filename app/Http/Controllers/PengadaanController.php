@@ -21,6 +21,7 @@ class PengadaanController extends AppBaseController
     public function __construct(PengadaanRepository $pengadaanRepo)
     {
         $this->pengadaanRepository = $pengadaanRepo;
+        $this->bahanBakus = BahanBaku::pluck('nama_bahan_baku', 'id');
     }
 
     /**
@@ -33,11 +34,9 @@ class PengadaanController extends AppBaseController
     {
         $this->pengadaanRepository->pushCriteria(new RequestCriteria($request));
         $pengadaans = $this->pengadaanRepository->paginate(10);
-        $bhnbakus = BahanBaku::pluck('nama_bahan_baku', 'id');
 
         return view('pengadaans.index')
-            ->with('pengadaans', $pengadaans)
-            ->with('bhnbakus', $bhnbakus);
+            ->with('pengadaans', $pengadaans);
     }
 
     /**
@@ -47,9 +46,8 @@ class PengadaanController extends AppBaseController
      */
     public function create()
     {
-        $bhnbakus = BahanBaku::pluck('nama_bahan_baku', 'id');
         return view('pengadaans.create')
-            ->with('bhnbakus', $bhnbakus);
+            ->with('bahanBakus', $this->bahanBakus);
     }
 
     /**
@@ -110,7 +108,7 @@ class PengadaanController extends AppBaseController
 
         return view('pengadaans.edit')
         ->with('pengadaan', $pengadaan)
-        ->with('bhnbakus', $bhnbakus);
+        ->with('bahanBakus', $this->bahanBakus);
     }
 
     /**

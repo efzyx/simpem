@@ -6,7 +6,6 @@
         <th>Berat</th>
         <th>Supplier</th>
         <th>Tanggal Pengadaan</th>
-        <th>Keterangan</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
@@ -21,7 +20,6 @@
             <td>{!! $pengadaan->berat !!}</td>
             <td>{!! $pengadaan->supplier !!}</td>
             <td>{!! $pengadaan->tanggal_pengadaan->diffForHumans() !!}</td>
-            <td>{!! $pengadaan->keterangan !!}</td>
             <td>
                 {!! Form::open(['route' => ['pengadaans.destroy', $pengadaan->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
