@@ -14,7 +14,6 @@ before_script:
   - echo "$SSH_PRIVATE_KEY" > ssh.priv
   - chmod 600 ssh.priv
   - cat ssh.priv
-  - chmod 400 ~/.ssh/staging_deploy_private_key
   # disable host key checking (NOTE: makes you susceptible to man-in-the-middle attacks)
   # WARNING: use only in docker container, if you use it with shell you will overwrite your user's ssh config
   - mkdir -p ~/.ssh
