@@ -25,7 +25,7 @@
 
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link href="{{ url('/css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet">
     @yield('css')
 </head>
 
@@ -43,7 +43,7 @@
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top" role="navigation">
                 <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                     <span class="sr-only">Toggle navigation</span>
                 </a>
                 <!-- Navbar Right Menu -->
@@ -160,8 +160,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-    <script type="text/javascript" src="{{ url('/js/moment-with-locales.min.js')}}"></script>
-    <script type="text/javascript" src="{{ url('/js/bootstrap-datetimepicker.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/moment-with-locales.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap-datetimepicker.min.js')}}"></script>
 
     @yield('scripts')
 </body>
