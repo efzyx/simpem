@@ -1,6 +1,6 @@
 #!/bin/bash
 # Ensure we fail fast if there is a problem.
-set -eo pipefail
+set -e pipefail
 
 # Setup Git remote
 git remote add "$GIT_DEPLOYMENT_REMOTE" "$GIT_DEPLOYMENT_URL"
