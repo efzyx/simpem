@@ -12,8 +12,8 @@ apt-get install git libcurl4-gnutls-dev libicu-dev libmcrypt-dev libvpx-dev libj
 docker-php-ext-install mbstring mcrypt pdo_mysql curl json intl gd xml zip bz2 opcache
 
 # Install Composer and project dependencies.
-curl -sS https://getcomposer.org/installer | php
-php composer.phar install
+apt-get install composer
+composer install
 
 # Copy over testing configuration.
 cp .env.testing .env
