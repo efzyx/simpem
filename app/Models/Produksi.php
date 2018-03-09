@@ -76,21 +76,21 @@ class Produksi extends Model
 
     public function pemesanan()
     {
-      return $this->belongsTo('App\Models\Pemesanan');
+        return $this->belongsTo('App\Models\Pemesanan');
     }
 
     public function user()
     {
-      return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User');
     }
 
     public function supir()
     {
-      return $this->belongsTo('App\Models\Supir');
+        return $this->belongsTo('App\Models\Supir');
     }
 
     public function pengiriman()
     {
-      return $this->hasOne('App\Models\pengiriman');
+        return $this->hasOne('App\Models\pengiriman');
     }
 }

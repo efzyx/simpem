@@ -25,10 +25,10 @@ class JabatanSeeder extends Seeder
         ];
 
         foreach ($jabatans as $key => $value) {
-          $jabatan = new Jabatan();
-          $jabatan->kode_jabatan = $key;
-          $jabatan->nama_jabatan = $value;
-          $jabatan->save();
+            $jabatan = new Jabatan();
+            $jabatan->kode_jabatan = $key;
+            $jabatan->nama_jabatan = $value;
+            $jabatan->save();
         }
     }
 }

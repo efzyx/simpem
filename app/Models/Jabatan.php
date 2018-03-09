@@ -49,11 +49,11 @@ class Jabatan extends Model
 
     public static function getJabatan($kode)
     {
-      return Jabatan::where('kode_jabatan', $kode)->first();
+        return Jabatan::where('kode_jabatan', $kode)->first();
     }
 
     public function users()
     {
-      return $this->hasMany('App\User');
+        return $this->hasMany('App\User');
     }
 }

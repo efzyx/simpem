@@ -77,11 +77,11 @@ class Pemesanan extends Model
 
     public function produk()
     {
-      return $this->belongsTo('App\Models\Produk');
+        return $this->belongsTo('App\Models\Produk');
     }
 
     public function user()
     {
-      return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User');
     }
 }
