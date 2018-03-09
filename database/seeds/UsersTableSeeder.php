@@ -23,6 +23,7 @@ class UsersTableSeeder extends Seeder
       $user->password = bcrypt('secret');
       $user->remember_token = str_random(10);
       $user->save();
-      $user->jabatan->associate(Jabatan::getJabatan('admin'));
+      $admin = Jabatan::getJabatan('admin');
+      $user->jabatan()->associate($admin)->save();
     }
 }

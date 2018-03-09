@@ -47,13 +47,13 @@ class Jabatan extends Model
         'nama_jabatan' => 'required'
     ];
 
-    public function getJabatan($kode)
+    public static function getJabatan($kode)
     {
-      return $this->where('kode_jabatan', $kode)->first();
+      return Jabatan::where('kode_jabatan', $kode)->first();
     }
 
     public function users()
     {
-      $this->hasMany('App\User');
+      return $this->hasMany('App\User');
     }
 }
