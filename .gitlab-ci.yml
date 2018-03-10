@@ -69,4 +69,4 @@ heroku_deploy:
   script:
     - sh .heroku-deploy.sh # push to heroku
   tags:
-    - heroku
+    - staging
