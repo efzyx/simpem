@@ -33,6 +33,7 @@ stages:
   - build
   - test
   - staging_deploy
+  - heroku_deploy
 
 build_job:
   stage: build
@@ -63,7 +64,7 @@ stage_job:
   environment:
     name: staging
 
-heroku_job:
+heroku_deploy:
   stage: heroku_deploy
   script:
     - sh .heroku-deploy.sh # push to heroku
