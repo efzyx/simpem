@@ -24,7 +24,7 @@ class Pengadaan extends Model
     public $table = 'pengadaans';
 
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at','tanggal_pengadaan'];
 
 
     public $fillable = [
@@ -59,6 +59,15 @@ class Pengadaan extends Model
         'berat' => 'required',
         'supplier' => 'required',
         'tanggal_pengadaan' => 'required',
-        'user_id' => 'required'
     ];
+
+    public function bahan_baku()
+    {
+        return $this->belongsTo('App\Models\BahanBaku');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

@@ -1,14 +1,19 @@
 <table class="table table-responsive" id="produks-table">
     <thead>
         <tr>
+          <th>#</th>
             <th>Mutu Produk</th>
         <th>Satuan</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
     <tbody>
+      @php
+        $no = 1;
+      @endphp
     @foreach($produks as $produk)
         <tr>
+          <td>{{ $no++ }}</td>
             <td>{!! $produk->mutu_produk !!}</td>
             <td>{!! $produk->satuan !!}</td>
             <td>

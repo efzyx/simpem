@@ -47,4 +47,9 @@ class BahanBaku extends Model
         'nama_bahan_baku' => 'required',
         'satuan' => 'required'
     ];
+
+    public static function getBahanBaku($kode)
+    {
+      return BahanBaku::where('kode', $kode)->first();
+    }
 }

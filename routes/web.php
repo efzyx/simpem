@@ -22,22 +22,11 @@ Route::get('/home', 'HomeController@index');
 
 Route::resource('produks', 'ProdukController');
 
-Route::resource('pemesanans', 'PemesananController');
-
-Route::get('pemesanan/{id}/detail', 'DetailController@index')->name('detailPemesanan');
-Route::get('pemesanan/{id}/detail/create', 'DetailController@create')->name('createPesanan');
-Route::post('pemesanan/{id}/detail/store', 'DetailController@store')->name('storePesanan');
-Route::post('pemesanan/{id}/detail/destroy', 'DetailController@destroy')->name('destroyPesanan');
-
-
-Route::resource('produks', 'ProdukController');
-
 Route::resource('jabatans', 'JabatanController');
-
-
 
 Route::resource('supirs', 'SupirController');
 
+Route::get('pemesanans/downloadPdf', 'PemesananController@downloadPdf')->name('downloadPdf');
 Route::resource('pemesanans', 'PemesananController');
 
 Route::resource('produksis', 'ProduksiController');
@@ -50,5 +39,7 @@ Route::resource('pengadaans', 'PengadaanController');
 
 Route::resource('opnames', 'OpnameController');
 
+Route::resource('users', 'UserController');
 
-Route::resource('pengirimen', 'PengirimanController');
+
+Route::resource('bahanBakuHistories', 'BahanBakuHistoryController');

@@ -9,7 +9,9 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
+use App\Models\BahanBaku;
 use Response;
+use Auth;
 
 class PengadaanController extends AppBaseController
 {
@@ -19,6 +21,7 @@ class PengadaanController extends AppBaseController
     public function __construct(PengadaanRepository $pengadaanRepo)
     {
         $this->pengadaanRepository = $pengadaanRepo;
+        $this->bahanBakus = BahanBaku::pluck('nama_bahan_baku', 'id');
     }
 
     /**
@@ -30,7 +33,7 @@ class PengadaanController extends AppBaseController
     public function index(Request $request)
     {
         $this->pengadaanRepository->pushCriteria(new RequestCriteria($request));
-        $pengadaans = $this->pengadaanRepository->all();
+        $pengadaans = $this->pengadaanRepository->paginate(10);
 
         return view('pengadaans.index')
             ->with('pengadaans', $pengadaans);
@@ -43,7 +46,8 @@ class PengadaanController extends AppBaseController
      */
     public function create()
     {
-        return view('pengadaans.create');
+        return view('pengadaans.create')
+            ->with('bahanBakus', $this->bahanBakus);
     }
 
     /**
@@ -56,6 +60,7 @@ class PengadaanController extends AppBaseController
     public function store(CreatePengadaanRequest $request)
     {
         $input = $request->all();
+        $input['user_id'] = Auth::user()->id;
 
         $pengadaan = $this->pengadaanRepository->create($input);
 
@@ -94,14 +99,16 @@ class PengadaanController extends AppBaseController
     public function edit($id)
     {
         $pengadaan = $this->pengadaanRepository->findWithoutFail($id);
-
+        $bhnbakus = BahanBaku::pluck('nama_bahan_baku', 'id');
         if (empty($pengadaan)) {
             Flash::error('Pengadaan not found');
 
             return redirect(route('pengadaans.index'));
         }
 
-        return view('pengadaans.edit')->with('pengadaan', $pengadaan);
+        return view('pengadaans.edit')
+        ->with('pengadaan', $pengadaan)
+        ->with('bahanBakus', $this->bahanBakus);
     }
 
     /**

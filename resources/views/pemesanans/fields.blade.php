@@ -6,7 +6,7 @@
 
 <!-- Produk Id Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('produk_id', 'Produk Id:') !!}
+    {!! Form::label('produk_id', 'Produk:') !!}
 {!! Form::select('produk_id', $produks , null, ['class' => 'form-control']) !!}</div>
 
 <!-- Volume Pesanan Field -->
@@ -41,7 +41,7 @@
 
 <!-- Cp Pesanan Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('cp_pesanan', 'Cp Pesanan:') !!}
+    {!! Form::label('cp_pesanan', 'CP Pesanan:') !!}
     {!! Form::text('cp_pesanan', null, ['class' => 'form-control']) !!}
 </div>
 

@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Pengadaan
+            User
         </h1>
     </section>
     <div class="content">
@@ -12,23 +12,13 @@
 
             <div class="box-body">
                 <div class="row">
-                    {!! Form::open(['route' => 'pengadaans.store']) !!}
+                    {!! Form::open(['route' => 'users.store']) !!}
 
-                        @include('pengadaans.fields')
+                        @include('users.fields')
 
                     {!! Form::close() !!}
                 </div>
             </div>
         </div>
     </div>
-@endsection
-
-@section('scripts')
-  <script type="text/javascript">
-              $(function () {
-                  $('#calendar1').datetimepicker({
-                    format: "YYYY-MM-DD HH:mm:ss"
-                  });
-              });
-  </script>
 @endsection
