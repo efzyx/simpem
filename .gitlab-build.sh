@@ -11,14 +11,15 @@ php -v
 # Ensure that mysql server is up and running
 ping -c 3 mysql
 
-# Update project dependencies.
-php composer.phar install
-
 # Copy over testing configuration. This configuration is used for Gitlab CI unit testing
 cp -v .env.gitlab-testing .env
 
 # Generate an application key. Clear config and cache route
 php artisan key:generate
+
+# Update project dependencies.
+php composer.phar install
+
 php artisan optimize
 php artisan config:clear
 #php artisan route:cache # Uncomment this if you do not use closures in your route files as this helps to improve performance
