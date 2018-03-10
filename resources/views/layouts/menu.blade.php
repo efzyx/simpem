@@ -47,3 +47,7 @@
         </li>
       </ul>
   </li>
+<li class="{{ Request::is('bahanBakuHistories*') ? 'active' : '' }}">
+    <a href="{!! route('bahanBakuHistories.index') !!}"><i class="fa fa-edit"></i><span>Bahan Baku Histories</span></a>
+</li>
+

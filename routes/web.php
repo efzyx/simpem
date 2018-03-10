@@ -40,3 +40,6 @@ Route::resource('pengadaans', 'PengadaanController');
 Route::resource('opnames', 'OpnameController');
 
 Route::resource('users', 'UserController');
+
+
+Route::resource('bahanBakuHistories', 'BahanBakuHistoryController');
