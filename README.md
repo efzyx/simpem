@@ -18,6 +18,6 @@
 
 * `php artisan key:generate`
 
-**Default Email    :** __admin@admin.com__
+**Default Email    :** _admin@admin.com_
 
-**Default Password :** __secret__
+**Default Password :** _secret_
