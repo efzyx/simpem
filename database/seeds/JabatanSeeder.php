@@ -13,9 +13,6 @@ class JabatanSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        Jabatan::truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         $jabatans = [
           'admin' => 'Admin',
           'marketing' => 'Marketing',

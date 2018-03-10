@@ -21,9 +21,6 @@ class BahanBakuSeeder extends Seeder
           'addictive' => ['Addictive', 'ntah'],
         ];
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        BahanBaku::truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         foreach ($bahan as $key => $value) {
           $bahanBaku = new BahanBaku();
           $bahanBaku->kode = $key;
