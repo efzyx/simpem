@@ -66,6 +66,6 @@ stage_job:
 heroku_job:
   stage: heroku_deploy
   script:
-    - sh .heroku-deploy.sh
+    - sh .heroku-deploy.sh # push to heroku
   tags:
     - heroku
