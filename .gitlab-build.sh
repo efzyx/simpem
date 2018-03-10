@@ -14,11 +14,11 @@ ping -c 3 mysql
 # Copy over testing configuration. This configuration is used for Gitlab CI unit testing
 cp -v .env.gitlab-testing .env
 
-# Generate an application key. Clear config and cache route
-php artisan key:generate
-
 # Update project dependencies.
 php composer.phar install
+
+# Generate an application key. Clear config and cache route
+php artisan key:generate
 
 php artisan optimize
 php artisan config:clear
