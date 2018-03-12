@@ -3,10 +3,6 @@
 use Illuminate\Database\Seeder;
 use App\Models\Jabatan;
 use Illuminate\Support\Facades\DB;
-use App\Models\BahanBaku;
-use App\User;
-use App\Models\Produk;
-use App\Models\Supir;
 
 class TruncateSeeder extends Seeder
 {
@@ -17,22 +13,25 @@ class TruncateSeeder extends Seeder
      */
     public function run()
     {
+        $table_names = [];
+        $tables = DB::select('SHOW TABLES');
+        foreach ($tables as $table) {
+            foreach ($table as $key => $value) {
+                $table_names[] = $value;
+            }
+        }
         switch (env('DB_CONNECTION')) {
           case 'mysql':
             DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-            Jabatan::truncate();
-            User::truncate();
-            BahanBaku::truncate();
-            Produk::truncate();
-            Supir::truncate();
+            foreach ($table_names as $key => $value) {
+                DB::statement('TRUNCATE TABLE '.$value);
+            }
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');
             break;
           case 'pgsql':
-            DB::statement('TRUNCATE jabatans CASCADE');
-            DB::statement('TRUNCATE users CASCADE');
-            DB::statement('TRUNCATE bahan_bakus CASCADE');
-            DB::statement('TRUNCATE produks CASCADE');
-            DB::statement('TRUNCATE supirs CASCADE');
+            foreach ($table_names as $key => $value) {
+                DB::statement('TRUNCATE '.$value.' CASCADE');
+            }
             break;
           default:
             # code...

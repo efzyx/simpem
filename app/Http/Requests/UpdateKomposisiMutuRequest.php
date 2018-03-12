@@ -3,10 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Produk;
-use App\Models\BahanBaku;
+use App\Models\KomposisiMutu;
 
-class UpdateProdukRequest extends FormRequest
+class UpdateKomposisiMutuRequest extends FormRequest
 {
 
     /**
@@ -26,12 +25,6 @@ class UpdateProdukRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = Produk::$rules;
-        $bahan_bakus = BahanBaku::pluck('nama_bahan_baku');
-        foreach ($bahan_bakus as $key => $bahan_baku) {
-            $bahan_baku = str_replace(' ', '_', strtolower($bahan_baku));
-            $rules[$bahan_baku] = 'required';
-        }
-        return $rules;
+        return KomposisiMutu::$rules;
     }
 }

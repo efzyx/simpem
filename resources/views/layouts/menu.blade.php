@@ -47,7 +47,10 @@
         </li>
       </ul>
   </li>
-<li class="{{ Request::is('bahanBakuHistories*') ? 'active' : '' }}">
+{{-- <li class="{{ Request::is('bahanBakuHistories*') ? 'active' : '' }}">
     <a href="{!! route('bahanBakuHistories.index') !!}"><i class="fa fa-edit"></i><span>Bahan Baku Histories</span></a>
 </li>
 
+<li class="{{ Request::is('komposisiMutus*') ? 'active' : '' }}">
+    <a href="{!! route('komposisiMutus.index') !!}"><i class="fa fa-edit"></i><span>Komposisi Mutus</span></a>
+</li> --}}
