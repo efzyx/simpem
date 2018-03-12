@@ -16,7 +16,7 @@ class SupirSeeder extends Seeder
         $faker = Faker::create();
         foreach (range(1, 10) as $index) {
             Supir::insert([
-            'no_supir' => $faker->unique()->randomDigit,
+            'no_supir' => 'SPR'.$faker->unique()->randomDigit,
             'nama_supir' => $faker->name,
          ]);
         }
