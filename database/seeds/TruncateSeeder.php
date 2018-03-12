@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\BahanBaku;
 use App\User;
 use App\Models\Produk;
+use App\Models\Supir;
 
 class TruncateSeeder extends Seeder
 {
@@ -23,6 +24,7 @@ class TruncateSeeder extends Seeder
             User::truncate();
             BahanBaku::truncate();
             Produk::truncate();
+            Supir::truncate();
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');
             break;
           case 'pgsql':
@@ -30,6 +32,7 @@ class TruncateSeeder extends Seeder
             DB::statement('TRUNCATE users CASCADE');
             DB::statement('TRUNCATE bahan_bakus CASCADE');
             DB::statement('TRUNCATE produks CASCADE');
+            DB::statement('TRUNCATE supirs CASCADE');
             break;
           default:
             # code...

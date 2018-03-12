@@ -12,16 +12,16 @@ class ProdukSeeder extends Seeder
      */
     public function run()
     {
-      $produks = [
+        $produks = [
         'K250' => 'kg/m3',
         'K350' => 'kg/m3',
       ];
 
-      foreach ($produks as $key => $value) {
-        $produk = new Produk();
-        $produk->mutu_produk = $key;
-        $produk->satuan = $value;
-        $produk->save();
-      }
+        foreach ($produks as $key => $value) {
+            $produk = new Produk();
+            $produk->mutu_produk = $key;
+            $produk->satuan = $value;
+            $produk->save();
+        }
     }
 }

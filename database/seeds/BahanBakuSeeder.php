@@ -22,12 +22,12 @@ class BahanBakuSeeder extends Seeder
         ];
 
         foreach ($bahan as $key => $value) {
-          $bahanBaku = new BahanBaku();
-          $bahanBaku->kode = $key;
-          $bahanBaku->nama_bahan_baku = $value[0];
-          $bahanBaku->satuan = $value[1];
-          $bahanBaku->sisa = rand(100, 1000);
-          $bahanBaku->save();
+            $bahanBaku = new BahanBaku();
+            $bahanBaku->kode = $key;
+            $bahanBaku->nama_bahan_baku = $value[0];
+            $bahanBaku->satuan = $value[1];
+            $bahanBaku->sisa = rand(100, 1000);
+            $bahanBaku->save();
         }
     }
 }

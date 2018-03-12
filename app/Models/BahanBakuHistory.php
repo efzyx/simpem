@@ -63,6 +63,4 @@ class BahanBakuHistory extends Model
         'opname_id' => 'nullable',
         'total_sisa' => 'required'
     ];
-
-
 }

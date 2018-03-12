@@ -52,6 +52,6 @@ class BahanBaku extends Model
 
     public static function getBahanBaku($kode)
     {
-      return BahanBaku::where('kode', $kode)->first();
+        return BahanBaku::where('kode', $kode)->first();
     }
 }

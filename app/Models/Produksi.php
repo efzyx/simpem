@@ -12,11 +12,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property integer pemesanan_id
  * @property integer volume
- * @property integer semen
- * @property integer pasir
- * @property integer split
- * @property integer addictive
- * @property integer air
  * @property string|\Carbon\Carbon waktu_produksi
  * @property integer supir_id
  * @property string no_kendaraan
@@ -35,11 +30,6 @@ class Produksi extends Model
     public $fillable = [
         'pemesanan_id',
         'volume',
-        'semen',
-        'pasir',
-        'split',
-        'addictive',
-        'air',
         'waktu_produksi',
         'supir_id',
         'no_kendaraan',
@@ -54,11 +44,6 @@ class Produksi extends Model
     protected $casts = [
         'pemesanan_id' => 'integer',
         'volume' => 'integer',
-        'semen' => 'integer',
-        'pasir' => 'integer',
-        'split' => 'integer',
-        'addictive' => 'integer',
-        'air' => 'integer',
         'supir_id' => 'integer',
         'no_kendaraan' => 'string'
     ];
