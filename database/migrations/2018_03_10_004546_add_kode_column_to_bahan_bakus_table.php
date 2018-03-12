@@ -15,6 +15,7 @@ class AddKodeColumnToBahanBakusTable extends Migration
     {
         Schema::table('bahan_bakus', function (Blueprint $table) {
             $table->string('kode');
+            $table->integer('sisa')->nullable();
         });
     }
 
@@ -27,6 +28,7 @@ class AddKodeColumnToBahanBakusTable extends Migration
     {
         Schema::table('bahan_bakus', function (Blueprint $table) {
             $table->dropColumn('kode');
+            $table->dropColumn('sisa');
         });
     }
 }

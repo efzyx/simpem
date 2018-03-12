@@ -165,7 +165,8 @@ class PemesananController extends AppBaseController
 
     public function downloadPdf()
     {
-      $pdf = PDF::loadView('pemesanans.index', ['pemesanans' => $this->pemesananRepository->paginate(10)]);
-      return $pdf->download('pemesanan_'.time().'.pdf');
+      $pdf = PDF::loadView('pemesanans.pdf', ['pemesanans' => $this->pemesananRepository->paginate(10)]);
+      $pdf->setPaper('a4', 'landscape');
+      return $pdf->stream('pemesanan_'.time().'.pdf');
     }
 }
