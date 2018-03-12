@@ -14,7 +14,17 @@ class TruncateSeeder extends Seeder
     public function run()
     {
         $table_names = [];
-        $tables = DB::select('SHOW TABLES');
+        switch (env('DB_CONNECTION')) {
+          case 'mysql':
+            $tables = DB::select('SHOW TABLES');
+            break;
+          case 'pgsql':
+            $tables = DB::select("SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname = 'public'");
+            break;
+          default:
+            break;
+        }
+
         foreach ($tables as $table) {
             foreach ($table as $key => $value) {
                 $table_names[] = $value;
