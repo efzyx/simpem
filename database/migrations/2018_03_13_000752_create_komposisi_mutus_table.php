@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateKomposisiMutuTable extends Migration
+class CreateKomposisiMutusTable extends Migration
 {
 
     /**
