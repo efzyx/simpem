@@ -25,4 +25,4 @@ php artisan config:clear
 #php artisan route:cache # Uncomment this if you do not use closures in your route files as this helps to improve performance
 
 # Run database migrations and seed the data
-php artisan migrate --seed
+# php artisan migrate --seed

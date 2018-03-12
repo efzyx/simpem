@@ -17,31 +17,32 @@
 
 
 Auth::routes();
-Route::group(['middleware' => 'auth'], function()
-{
-  Route::get('/', 'HomeController@index');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', 'HomeController@index');
 
-  Route::resource('produks', 'ProdukController');
+    Route::resource('produks', 'ProdukController');
 
-  Route::resource('jabatans', 'JabatanController');
+    Route::resource('jabatans', 'JabatanController');
 
-  Route::resource('supirs', 'SupirController');
+    Route::resource('supirs', 'SupirController');
 
-  Route::get('pemesanans/downloadPdf', 'PemesananController@downloadPdf')->name('downloadPdf');
-  Route::resource('pemesanans', 'PemesananController');
+    Route::get('pemesanans/downloadPdf', 'PemesananController@downloadPdf')->name('downloadPdf');
+    Route::resource('pemesanans', 'PemesananController');
 
-  Route::resource('produksis', 'ProduksiController');
+    Route::resource('produksis', 'ProduksiController');
 
-  Route::resource('pengiriman', 'PengirimanController');
+    Route::resource('pengiriman', 'PengirimanController');
 
-  Route::resource('bahanBakus', 'BahanBakuController');
+    Route::resource('bahanBakus', 'BahanBakuController');
 
-  Route::resource('pengadaans', 'PengadaanController');
+    Route::resource('pengadaans', 'PengadaanController');
 
-  Route::resource('opnames', 'OpnameController');
+    Route::resource('opnames', 'OpnameController');
 
-  Route::resource('users', 'UserController');
+    Route::resource('users', 'UserController');
 
-  Route::resource('bahanBakuHistories', 'BahanBakuHistoryController');
-
+    Route::resource('bahanBakuHistories', 'BahanBakuHistoryController');
 });
+
+
+Route::resource('komposisiMutus', 'KomposisiMutuController');
