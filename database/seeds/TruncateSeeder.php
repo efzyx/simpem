@@ -19,15 +19,9 @@ class TruncateSeeder extends Seeder
             $tables = DB::select('SHOW TABLES');
             break;
           case 'pgsql':
-            $tables = DB::select("SELECT
-             tablename
-            FROM
-             pg_catalog.pg_tables
-            WHERE
-             schemaname = 'public'");
+            $tables = DB::select("SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname = 'public'");
             break;
           default:
-            # code...
             break;
         }
 
