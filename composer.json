@@ -13,11 +13,11 @@
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.5.0",
-        "stechstudio/laravel-php-cs-fixer": "^0.0.1",
-        "fzaninotto/faker": "~1.4"
+        "stechstudio/laravel-php-cs-fixer": "^0.0.1"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
+        "fzaninotto/faker": "~1.4",
         "mockery/mockery": "~1.0",
         "phpunit/phpunit": "~6.0"
     },

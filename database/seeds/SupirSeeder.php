@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Supir;
-use Faker\Factory as Faker;
 
 class SupirSeeder extends Seeder
 {
@@ -13,11 +12,23 @@ class SupirSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
-        foreach (range(1, 10) as $index) {
+        $supirs = [
+          'Lenny Even',
+          'Weston Ballard',
+          'Wilburn Ohearn',
+          'Booker Brochu',
+          'Jeffery Fleenor',
+          'Asa Velazco',
+          'Wilfredo Hubler',
+          'Lonnie Axtell',
+          'Theodore Abdulla',
+          'Brooks Oler'
+        ];
+
+        foreach ($supirs as $supir) {
             Supir::insert([
-            'no_supir' => 'SPR'.$faker->unique()->randomDigit,
-            'nama_supir' => $faker->name,
+            'no_supir' => 'SPR'.(string)rand(1, 20),
+            'nama_supir' => $supir,
          ]);
         }
     }
