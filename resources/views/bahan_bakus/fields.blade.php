@@ -10,6 +10,12 @@
     {!! Form::text('satuan', null, ['class' => 'form-control']) !!}
 </div>
 
+<!-- Sisa Field -->
+<div class="form-group col-sm-12">
+    {!! Form::label('sisa', 'Sisa:') !!}
+    {!! Form::number('sisa', null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
