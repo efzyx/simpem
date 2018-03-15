@@ -38,3 +38,10 @@
     <a href="{!! route('pengirimen.index') !!}"><i class="fa fa-edit"></i><span>Pengirimen</span></a>
 </li>
 
+<li class="{{ Request::is('kendaraans*') ? 'active' : '' }}">
+    <a href="{!! route('kendaraans.index') !!}"><i class="fa fa-edit"></i><span>Kendaraans</span></a>
+</li>
+<li class="{{ Request::is('kendaraanDetails*') ? 'active' : '' }}">
+    <a href="{!! route('kendaraanDetails.index') !!}"><i class="fa fa-edit"></i><span>Kendaraan Details</span></a>
+</li>
+

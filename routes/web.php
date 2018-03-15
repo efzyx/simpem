@@ -52,3 +52,13 @@ Route::resource('opnames', 'OpnameController');
 
 
 Route::resource('pengirimen', 'PengirimanController');
+
+
+Route::resource('kendaraans', 'KendaraanController');
+
+
+Route::resource('kendaraanDetails', 'KendaraanDetailController');
+
+Route::resource('kendaraanDetails', 'KendaraanDetailController');
+
+Route::resource('kendaraanDetails', 'KendaraanDetailController');
