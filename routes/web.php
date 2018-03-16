@@ -11,11 +11,6 @@
 |
 */
 
-// Route::get('/', function () {
-//     return url('/login');
-// });
-
-
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@index');
@@ -42,7 +37,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', 'UserController');
 
     Route::resource('bahanBakuHistories', 'BahanBakuHistoryController');
+
+    Route::resource('komposisiMutus', 'KomposisiMutuController');
+
+    Route::resource('kendaraans', 'KendaraanController');
+
+    Route::resource('kendaraanDetails', 'KendaraanDetailController');
 });
-
-
-Route::resource('komposisiMutus', 'KomposisiMutuController');
