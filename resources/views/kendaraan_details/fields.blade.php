@@ -1,6 +1,6 @@
 <!-- Kendaraan Id Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('kendaraan_id', 'Kendaraan Id:') !!}
+    {!! Form::label('kendaraan_id', 'Kendaraan:') !!}
     {!! Form::select('kendaraan_id', $kendaraans, null, ['class' => 'form-control']) !!}
 </div>
 
