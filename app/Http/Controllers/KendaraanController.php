@@ -19,6 +19,11 @@ class KendaraanController extends AppBaseController
     public function __construct(KendaraanRepository $kendaraanRepo)
     {
         $this->kendaraanRepository = $kendaraanRepo;
+        $this->status = [
+          '1' => 'Stand By',
+          '2' => 'Rusak',
+          '3' => 'Rental'
+        ];
     }
 
     /**
@@ -33,7 +38,8 @@ class KendaraanController extends AppBaseController
         $kendaraans = $this->kendaraanRepository->all();
 
         return view('kendaraans.index')
-            ->with('kendaraans', $kendaraans);
+            ->with('kendaraans', $kendaraans)
+            ->with('status', $this->status);
     }
 
     /**

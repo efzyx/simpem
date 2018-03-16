@@ -36,7 +36,6 @@ class KendaraanDetail extends Model
      * @var array
      */
     protected $casts = [
-        'kendaraan_id' => 'integer',
         'status' => 'integer'
     ];
 
@@ -46,7 +45,6 @@ class KendaraanDetail extends Model
      * @var array
      */
     public static $rules = [
-        'kendaraan_id' => 'required',
         'status' => 'required',
         'waktu' => 'required'
     ];
@@ -54,5 +52,10 @@ class KendaraanDetail extends Model
     public function kendaraan()
     {
         return $this->belongsTo('App\Models\Kendaraan');
+    }
+
+    public function last()
+    {
+      return $this->latest()->first();
     }
 }
