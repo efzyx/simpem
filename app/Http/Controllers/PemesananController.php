@@ -11,6 +11,7 @@ use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Models\Produk;
 use Response;
+use PDF;
 use Auth;
 
 class PemesananController extends AppBaseController
@@ -160,5 +161,12 @@ class PemesananController extends AppBaseController
         Flash::success('Pemesanan deleted successfully.');
 
         return redirect(route('pemesanans.index'));
+    }
+
+    public function downloadPdf()
+    {
+        $pdf = PDF::loadView('pemesanans.pdf', ['pemesanans' => $this->pemesananRepository->paginate(10)]);
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('pemesanan_'.time().'.pdf');
     }
 }

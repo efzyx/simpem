@@ -27,7 +27,7 @@ class AddJabatanIdToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropColumn('jabatan_id');
         });
     }
 }

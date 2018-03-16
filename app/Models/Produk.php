@@ -47,4 +47,15 @@ class Produk extends Model
         'mutu_produk' => 'required',
         'satuan' => 'required'
     ];
+
+    public function komposisi_mutus()
+    {
+        return $this->hasMany('App\Models\KomposisiMutu');
+    }
+
+    public function bahan($kode)
+    {
+        $bahan_id = BahanBaku::where('kode', $kode)->first()->id;
+        return $this->komposisi_mutus->where('bahan_baku_id', $bahan_id)->first();
+    }
 }

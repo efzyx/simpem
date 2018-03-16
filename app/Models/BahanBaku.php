@@ -25,7 +25,8 @@ class BahanBaku extends Model
 
     public $fillable = [
         'nama_bahan_baku',
-        'satuan'
+        'satuan',
+        'sisa'
     ];
 
     /**
@@ -35,7 +36,8 @@ class BahanBaku extends Model
      */
     protected $casts = [
         'nama_bahan_baku' => 'string',
-        'satuan' => 'string'
+        'satuan' => 'string',
+        'sisa' => 'integer'
     ];
 
     /**
@@ -47,4 +49,9 @@ class BahanBaku extends Model
         'nama_bahan_baku' => 'required',
         'satuan' => 'required'
     ];
+
+    public static function getBahanBaku($kode)
+    {
+        return BahanBaku::where('kode', $kode)->first();
+    }
 }

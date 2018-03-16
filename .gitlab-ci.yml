@@ -25,7 +25,7 @@ variables:
   SSH_PRIVATE_KEY: kSEFxPEEx2D5TxKfhB5t # Recommended to put into GitLab secret variables instead
   GIT_DEPLOYMENT_URL: git@gitlab.com:fauzipadlaw/pemesanan.git # Used for PUSH deployments
   GIT_DEPLOYMENT_REMOTE: staging # Used for PUSH and PULL deployments
-  GIT_DEPLOYMENT_BRANCH: master # Used for PUSH and PULL deployments
+  GIT_DEPLOYMENT_BRANCH: develop # Used for PUSH and PULL deployments
   STAGING_SERVER_HOSTNAME: admin@localhost # Used for PULL deployments
   STAGING_SERVER_DIRECTORY: /home/admin/pemesanan/public # Used for PULL deployments
 
@@ -33,6 +33,7 @@ stages:
   - build
   - test
   - staging_deploy
+  - heroku_deploy
 
 build_job:
   stage: build
@@ -60,5 +61,12 @@ stage_job:
   stage: staging_deploy
   script:
     - sh .gitlab-staging-deploy.sh # Change this to .gitlab-staging-pull-deploy.sh for PULL deployments
+  environment:
+    name: staging
+
+heroku_deploy:
+  stage: heroku_deploy
+  script:
+    - sh .heroku-deploy.sh # push to heroku
   environment:
     name: staging

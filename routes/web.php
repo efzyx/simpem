@@ -11,54 +11,39 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return url('/login');
+// });
 
 
 Auth::routes();
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', 'HomeController@index');
 
-Route::get('/home', 'HomeController@index');
+    Route::resource('produks', 'ProdukController');
 
-Route::resource('produks', 'ProdukController');
+    Route::resource('jabatans', 'JabatanController');
 
-Route::resource('pemesanans', 'PemesananController');
+    Route::resource('supirs', 'SupirController');
 
-Route::get('pemesanan/{id}/detail', 'DetailController@index')->name('detailPemesanan');
-Route::get('pemesanan/{id}/detail/create', 'DetailController@create')->name('createPesanan');
-Route::post('pemesanan/{id}/detail/store', 'DetailController@store')->name('storePesanan');
-Route::post('pemesanan/{id}/detail/destroy', 'DetailController@destroy')->name('destroyPesanan');
+    Route::get('pemesanans/downloadPdf', 'PemesananController@downloadPdf')->name('downloadPdf');
+    Route::resource('pemesanans', 'PemesananController');
 
+    Route::resource('produksis', 'ProduksiController');
 
-Route::resource('produks', 'ProdukController');
+    Route::resource('pengiriman', 'PengirimanController');
 
-Route::resource('jabatans', 'JabatanController');
+    Route::resource('bahanBakus', 'BahanBakuController');
 
+    Route::resource('pengadaans', 'PengadaanController');
 
+    Route::resource('opnames', 'OpnameController');
 
-Route::resource('supirs', 'SupirController');
+    Route::resource('users', 'UserController');
 
-Route::resource('pemesanans', 'PemesananController');
+    Route::resource('bahanBakuHistories', 'BahanBakuHistoryController');
+    
+    Route::resource('kendaraans', 'KendaraanController');
 
-Route::resource('produksis', 'ProduksiController');
-
-Route::resource('pengiriman', 'PengirimanController');
-
-Route::resource('bahanBakus', 'BahanBakuController');
-
-Route::resource('pengadaans', 'PengadaanController');
-
-Route::resource('opnames', 'OpnameController');
-
-
-Route::resource('pengirimen', 'PengirimanController');
-
-
-Route::resource('kendaraans', 'KendaraanController');
-
-
-Route::resource('kendaraanDetails', 'KendaraanDetailController');
-
-Route::resource('kendaraanDetails', 'KendaraanDetailController');
-
-Route::resource('kendaraanDetails', 'KendaraanDetailController');
+    Route::resource('kendaraanDetails', 'KendaraanDetailController');
+});

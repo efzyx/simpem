@@ -21,3 +21,13 @@
        </div>
    </div>
 @endsection
+
+@section('scripts')
+  <script type="text/javascript">
+              $(function () {
+                  $('#calendar1').datetimepicker({
+                    format: "YYYY-MM-DD HH:mm:ss"
+                  });
+              });
+  </script>
+@endsection

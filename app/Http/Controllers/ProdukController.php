@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Models\BahanBaku;
+use App\Models\KomposisiMutu;
 
 class ProdukController extends AppBaseController
 {
@@ -19,6 +21,7 @@ class ProdukController extends AppBaseController
     public function __construct(ProdukRepository $produkRepo)
     {
         $this->produkRepository = $produkRepo;
+        $this->bahan_bakus = BahanBaku::all();
     }
 
     /**
@@ -43,7 +46,8 @@ class ProdukController extends AppBaseController
      */
     public function create()
     {
-        return view('produks.create');
+        return view('produks.create')
+              ->with('bahan_bakus', $this->bahan_bakus);
     }
 
     /**
@@ -56,9 +60,22 @@ class ProdukController extends AppBaseController
     public function store(CreateProdukRequest $request)
     {
         $input = $request->all();
-
+        $bahan_baku_field = [];
+        foreach ($this->bahan_bakus as $key => $bahan_baku) {
+            $field = $bahan_baku->kode;
+            $bahan_baku_field[$field] = $input[$field];
+            unset($input[$field]);
+        }
         $produk = $this->produkRepository->create($input);
 
+        foreach ($bahan_baku_field as $key => $bbf) {
+            $bahan_baku_id = BahanBaku::where('kode', $key)->first()->id;
+            KomposisiMutu::create([
+            'bahan_baku_id' => $bahan_baku_id,
+            'produk_id'     => $produk->id,
+            'volume'        => $bbf
+          ]);
+        }
         Flash::success('Produk saved successfully.');
 
         return redirect(route('produks.index'));
@@ -101,7 +118,9 @@ class ProdukController extends AppBaseController
             return redirect(route('produks.index'));
         }
 
-        return view('produks.edit')->with('produk', $produk);
+        return view('produks.edit')
+              ->with('produk', $produk)
+              ->with('bahan_bakus', $this->bahan_bakus);
     }
 
     /**
@@ -121,9 +140,28 @@ class ProdukController extends AppBaseController
 
             return redirect(route('produks.index'));
         }
-
-        $produk = $this->produkRepository->update($request->all(), $id);
-
+        $input = $request->all();
+        $bahan_baku_field = [];
+        foreach ($this->bahan_bakus as $key => $bahan_baku) {
+            $field = $bahan_baku->kode;
+            $bahan_baku_field[$field] = $input[$field];
+            unset($input[$field]);
+        }
+        $produk = $this->produkRepository->update($input, $id);
+        foreach ($bahan_baku_field as $key => $bbf) {
+            $bahan_baku_id = BahanBaku::where('kode', $key)
+                          ->first()->id;
+            $komposisi = KomposisiMutu::where([
+            'produk_id' => $id,
+            'bahan_baku_id' => $bahan_baku_id
+          ])->first() ?:
+          new KomposisiMutu([
+            'produk_id' => $id,
+            'bahan_baku_id' => $bahan_baku_id
+          ]);
+            $komposisi->volume = $bbf;
+            $komposisi->save();
+        }
         Flash::success('Produk updated successfully.');
 
         return redirect(route('produks.index'));

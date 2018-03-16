@@ -10,36 +10,6 @@
     {!! Form::number('volume', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Semen Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('semen', 'Semen:') !!}
-    {!! Form::number('semen', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Pasir Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('pasir', 'Pasir:') !!}
-    {!! Form::number('pasir', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Split Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('split', 'Split:') !!}
-    {!! Form::number('split', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Addictive Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('addictive', 'Addictive:') !!}
-    {!! Form::number('addictive', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Air Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('air', 'Air:') !!}
-    {!! Form::number('air', null, ['class' => 'form-control']) !!}
-</div>
-
 <!-- Waktu Produksi Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('waktu_produksi', 'Waktu Produksi:') !!}

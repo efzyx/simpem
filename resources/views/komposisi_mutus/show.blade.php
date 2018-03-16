@@ -3,20 +3,15 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Tambah Produk
+            Komposisi Mutu
         </h1>
     </section>
     <div class="content">
-        @include('adminlte-templates::common.errors')
         <div class="box box-primary">
-
             <div class="box-body">
-                <div class="row">
-                    {!! Form::open(['route' => array('storePesanan', $pemesanan_id)]) !!}
-
-                        @include('detail.fields')
-
-                    {!! Form::close() !!}
+                <div class="row" style="padding-left: 20px">
+                    @include('komposisi_mutus.show_fields')
+                    <a href="{!! route('komposisiMutus.index') !!}" class="btn btn-default">Back</a>
                 </div>
             </div>
         </div>

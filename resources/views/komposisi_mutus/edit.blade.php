@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Pemesanan
+            Komposisi Mutu
         </h1>
    </section>
    <div class="content">
@@ -11,9 +11,9 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($pemesanan, ['route' => ['pemesanans.update', $pemesanan->id], 'method' => 'patch']) !!}
+                   {!! Form::model($komposisiMutu, ['route' => ['komposisiMutus.update', $komposisiMutu->id], 'method' => 'patch']) !!}
 
-                        @include('pemesanans.fields')
+                        @include('komposisi_mutus.fields')
 
                    {!! Form::close() !!}
                </div>

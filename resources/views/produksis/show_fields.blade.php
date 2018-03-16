@@ -28,56 +28,6 @@
   </div>
 </div>
 
-<!-- Semen Field -->
-<div class="form-group col-sm-12">
-  <div class="col-sm-3">
-    {!! Form::label('semen', 'Semen') !!}
-  </div>
-  <div class="col-sm-9">
-    <p>{!! $produksi->semen !!}</p>
-  </div>
-</div>
-
-<!-- Pasir Field -->
-<div class="form-group col-sm-12">
-  <div class="col-sm-3">
-    {!! Form::label('pasir', 'Pasir') !!}
-  </div>
-  <div class="col-sm-9">
-    <p>{!! $produksi->pasir !!}</p>
-  </div>
-</div>
-
-<!-- Split Field -->
-<div class="form-group col-sm-12">
-  <div class="col-sm-3">
-    {!! Form::label('split', 'Split') !!}
-  </div>
-  <div class="col-sm-9">
-    <p>{!! $produksi->split !!}</p>
-  </div>
-</div>
-
-<!-- Addictive Field -->
-<div class="form-group col-sm-12">
-  <div class="col-sm-3">
-    {!! Form::label('addictive', 'Addictive') !!}
-  </div>
-  <div class="col-sm-9">
-    <p>{!! $produksi->addictive !!}</p>
-  </div>
-</div>
-
-<!-- Air Field -->
-<div class="form-group col-sm-12">
-  <div class="col-sm-3">
-    {!! Form::label('air', 'Air') !!}
-  </div>
-  <div class="col-sm-9">
-    <p>{!! $produksi->air !!}</p>
-  </div>
-</div>
-
 <!-- Waktu Produksi Field -->
 <div class="form-group col-sm-12">
   <div class="col-sm-3">

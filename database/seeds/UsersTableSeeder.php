@@ -14,9 +14,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        User::truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         $user = new User();
         $user->name = "Admin";
         $user->email = 'admin@admin.com';

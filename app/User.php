@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'jabatan_id'
     ];
 
     /**
@@ -31,4 +31,28 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Models\Jabatan');
     }
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'name' => 'string',
+        'email' => 'string',
+        'password' => 'string',
+        'jabatan_id' => 'integer'
+    ];
+
+    /**
+     * Validation rules
+     *
+     * @var array
+     */
+    public static $rules = [
+        'name' => 'required',
+        'email' => 'required|email|unique:users',
+        'password' => 'required',
+        'jabatan_id' => 'required',
+    ];
 }

@@ -3,6 +3,7 @@
         <tr>
             <th>Nama Bahan Baku</th>
         <th>Satuan</th>
+        <th>Sisa</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
@@ -11,6 +12,7 @@
         <tr>
             <td>{!! $bahanBaku->nama_bahan_baku !!}</td>
             <td>{!! $bahanBaku->satuan !!}</td>
+            <td>{!! $bahanBaku->sisa !!}</td>
             <td>
                 {!! Form::open(['route' => ['bahanBakus.destroy', $bahanBaku->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
