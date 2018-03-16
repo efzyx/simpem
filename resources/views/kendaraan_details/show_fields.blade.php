@@ -1,17 +1,7 @@
-<!-- Id Field -->
-<div class="form-group col-sm-12">
-    <div class="col-sm-3">
-    {!! Form::label('id', 'Id:') !!}
-  </div>
-  <div class="col-sm-9">
-    {!! $kendaraanDetail->id !!}
-  </div>
-</div>
-
 <!-- Kendaraan Id Field -->
 <div class="form-group col-sm-12">
     <div class="col-sm-3">
-    {!! Form::label('kendaran_id', 'Kendaraan Id:') !!}
+    {!! Form::label('kendaran_id', 'Kendaraan:') !!}
   </div>
   <div class="col-sm-9">
     {!! $kendaraanDetail->kendaraan->jenis_kendaraan !!}

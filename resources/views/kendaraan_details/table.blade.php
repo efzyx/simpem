@@ -2,7 +2,7 @@
     <thead>
         <tr>
           <th>#</th>
-            <th>Kendaraan Id</th>
+            <th>Kendaraan</th>
         <th>Status</th>
         <th>Waktu</th>
             <th colspan="3">Action</th>
