@@ -42,7 +42,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', 'UserController');
 
     Route::resource('bahanBakuHistories', 'BahanBakuHistoryController');
+    
+    Route::resource('kendaraans', 'KendaraanController');
+
+    Route::resource('kendaraanDetails', 'KendaraanDetailController');
 });
-
-
-Route::resource('komposisiMutus', 'KomposisiMutuController');
