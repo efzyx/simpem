@@ -70,6 +70,5 @@ heroku_deploy:
     - sh .heroku-deploy.sh # push to heroku
   environment:
     name: staging
-    url: http://pemesanan.herokuapp.com
   only:
     - master
