@@ -2,9 +2,6 @@
 # Ensure we fail fast if there is a problem.
 set -e pipefail
 
-chown gitlab-www:gitlab-www /var/opt/gitlab/nginx
-
-
 # Move the files over to current directory
 mv /root/composer.phar .
 
