@@ -47,4 +47,9 @@ class Kendaraan extends Model
         'jenis_kendaraan' => 'required',
         'no_polisi' => 'required'
     ];
+
+    public function kendaraanDetails()
+    {
+      return $this->hasMany('App\Models\KendaraanDetail');
+    }
 }

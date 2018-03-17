@@ -1,13 +1,8 @@
-<!-- Kendaraan Id Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('kendaraan_id', 'Kendaraan:') !!}
-    {!! Form::select('kendaraan_id', $kendaraans, null, ['class' => 'form-control']) !!}
-</div>
 
 <!-- Status Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('status', 'Status:') !!}
-    {!! Form::select('status', $stt, null, ['class' => 'form-control']) !!}
+    {!! Form::select('status', $status, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Waktu Field -->
@@ -19,5 +14,5 @@
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-    <a href="{!! route('kendaraanDetails.index') !!}" class="btn btn-default">Cancel</a>
+    <a href="{!! route('kendaraans.kendaraanDetails.index', $kendaraan) !!}" class="btn btn-default">Cancel</a>
 </div>

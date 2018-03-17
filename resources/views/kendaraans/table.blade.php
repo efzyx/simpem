@@ -4,6 +4,7 @@
             <th>#</th>
             <th>Jenis Kendaraan</th>
             <th>No Polisi</th>
+            <th>Status</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
@@ -16,6 +17,7 @@
             <td>{{ $no++ }}</td>
             <td>{!! $kendaraan->jenis_kendaraan !!}</td>
             <td>{!! $kendaraan->no_polisi !!}</td>
+            <td><a href="{{ route('kendaraans.kendaraanDetails.index', $kendaraan->id) }}" class="btn btn-success">{{ $status[$kendaraan->kendaraanDetails->last()->status] }}</a></td>
             <td>
                 {!! Form::open(['route' => ['kendaraans.destroy', $kendaraan->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

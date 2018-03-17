@@ -20,6 +20,11 @@ class KendaraanDetailController extends AppBaseController
     public function __construct(KendaraanDetailRepository $kendaraanDetailRepo)
     {
         $this->kendaraanDetailRepository = $kendaraanDetailRepo;
+        $this->status = [
+          '1' => 'Stand By',
+          '2' => 'Rusak',
+          '3' => 'Rental'
+        ];
     }
 
     /**
@@ -28,19 +33,16 @@ class KendaraanDetailController extends AppBaseController
      * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index(Kendaraan $kendaraan, Request $request)
     {
+        // $kendaraan = Kendaraan::findOrFail($request->kendaraan);
         $this->kendaraanDetailRepository->pushCriteria(new RequestCriteria($request));
         $kendaraanDetails = $this->kendaraanDetailRepository->all();
-        $stt = array(
-          '1' => 'Stand By',
-          '2' => 'Rusak',
-          '3' => 'Rental'
-        );
 
         return view('kendaraan_details.index')
             ->with('kendaraanDetails', $kendaraanDetails)
-            ->with('stt', $stt);
+            ->with('status', $this->status)
+            ->with('kendaraan', $kendaraan);
     }
 
     /**
@@ -48,17 +50,14 @@ class KendaraanDetailController extends AppBaseController
      *
      * @return Response
      */
-    public function create()
+    public function create(Kendaraan $kendaraan)
     {
         $kendaraans = Kendaraan::pluck('jenis_kendaraan', 'id');
-        $stt = array(
-          '1' => 'Stand By',
-          '2' => 'Rusak',
-          '3' => 'Rental'
-        );
+
         return view('kendaraan_details.create')
         ->with('kendaraans', $kendaraans)
-        ->with('stt', $stt);
+        ->with('status', $this->status)
+        ->with('kendaraan', $kendaraan);
     }
 
     /**
@@ -68,15 +67,15 @@ class KendaraanDetailController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateKendaraanDetailRequest $request)
+    public function store(Kendaraan $kendaraan, CreateKendaraanDetailRequest $request)
     {
         $input = $request->all();
-
+        $input['kendaraan_id'] = $kendaraan->id;
         $kendaraanDetail = $this->kendaraanDetailRepository->create($input);
 
-        Flash::success('Kendaraan Detail saved successfully.');
+        Flash::success('Status Kendaraan saved successfully.');
 
-        return redirect(route('kendaraanDetails.index'));
+        return redirect(route('kendaraans.kendaraanDetails.index', $kendaraan));
     }
 
     /**
@@ -86,23 +85,20 @@ class KendaraanDetailController extends AppBaseController
      *
      * @return Response
      */
-    public function show($id)
+    public function show(Kendaraan $kendaraan, $id)
     {
         $kendaraanDetail = $this->kendaraanDetailRepository->findWithoutFail($id);
-        $stt = array(
-          '1' => 'Stand By',
-          '2' => 'Rusak',
-          '3' => 'Rental'
-        );
 
         if (empty($kendaraanDetail)) {
             Flash::error('Kendaraan Detail not found');
 
-            return redirect(route('kendaraanDetails.index'));
+            return redirect(route('kendaraans.kendaraanDetails.index', $kendaraan));
         }
 
-        return view('kendaraan_details.show')->with('kendaraanDetail', $kendaraanDetail)
-        ->with('stt', $stt);
+        return view('kendaraan_details.show')
+              ->with('kendaraanDetail', $kendaraanDetail)
+              ->with('status', $this->status)
+              ->with('kendaraan', $kendaraan);
     }
 
     /**
@@ -112,26 +108,22 @@ class KendaraanDetailController extends AppBaseController
      *
      * @return Response
      */
-    public function edit($id)
+    public function edit(Kendaraan $kendaraan, $id)
     {
         $kendaraanDetail = $this->kendaraanDetailRepository->findWithoutFail($id);
         $kendaraans = Kendaraan::pluck('jenis_kendaraan', 'id');
-        $stt = array(
-            '1' => 'Stand By',
-            '2' => 'Rusak',
-            '3' => 'Rental'
-          );
 
         if (empty($kendaraanDetail)) {
             Flash::error('Kendaraan Detail not found');
 
-            return redirect(route('kendaraanDetails.index'));
+            return redirect(route('kendaraans.kendaraanDetails.index', $kendaraan));
         }
 
         return view('kendaraan_details.edit')
         ->with('kendaraanDetail', $kendaraanDetail)
         ->with('kendaraans', $kendaraans)
-        ->with('stt', $stt);
+        ->with('status', $this->status)
+        ->with('kendaraan', $kendaraan);
     }
 
     /**
@@ -142,21 +134,21 @@ class KendaraanDetailController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdateKendaraanDetailRequest $request)
+    public function update(Kendaraan $kendaraan, $id, UpdateKendaraanDetailRequest $request)
     {
         $kendaraanDetail = $this->kendaraanDetailRepository->findWithoutFail($id);
 
         if (empty($kendaraanDetail)) {
             Flash::error('Kendaraan Detail not found');
 
-            return redirect(route('kendaraanDetails.index'));
+            return redirect(route('kendaraans.kendaraanDetails.index', $kendaraan));
         }
 
         $kendaraanDetail = $this->kendaraanDetailRepository->update($request->all(), $id);
 
-        Flash::success('Kendaraan Detail updated successfully.');
+        Flash::success('Status Kendaraan updated successfully.');
 
-        return redirect(route('kendaraanDetails.index'));
+        return redirect(route('kendaraans.kendaraanDetails.index', $kendaraan));
     }
 
     /**
@@ -166,20 +158,20 @@ class KendaraanDetailController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Kendaraan $kendaraan, $id)
     {
         $kendaraanDetail = $this->kendaraanDetailRepository->findWithoutFail($id);
 
         if (empty($kendaraanDetail)) {
             Flash::error('Kendaraan Detail not found');
 
-            return redirect(route('kendaraanDetails.index'));
+            return redirect(route('kendaraans.kendaraanDetails.index', $kendaraan));
         }
 
         $this->kendaraanDetailRepository->delete($id);
 
         Flash::success('Kendaraan Detail deleted successfully.');
 
-        return redirect(route('kendaraanDetails.index'));
+        return redirect(route('kendaraans.kendaraanDetails.index', $kendaraan));
     }
 }

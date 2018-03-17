@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Kendaraan Detail
+            Tambah Status Kendaraan <strong>{{ $kendaraan->jenis_kendaraan }} ({{ $kendaraan->no_polisi }})</strong>
         </h1>
     </section>
     <div class="content">
@@ -12,7 +12,7 @@
 
             <div class="box-body">
                 <div class="row">
-                    {!! Form::open(['route' => 'kendaraanDetails.store']) !!}
+                    {!! Form::open(['route' => ['kendaraans.kendaraanDetails.store', $kendaraan]]) !!}
 
                         @include('kendaraan_details.fields')
 
@@ -27,10 +27,6 @@
   <script type="text/javascript">
               $(function () {
                   $('#calendar1').datetimepicker({
-                    // locale : 'id'
-                    format: "YYYY-MM-DD HH:mm:ss"
-                  });
-                  $('#calendar2').datetimepicker({
                     // locale : 'id'
                     format: "YYYY-MM-DD HH:mm:ss"
                   });

@@ -1,10 +1,10 @@
 <!-- Kendaraan Id Field -->
 <div class="form-group col-sm-12">
     <div class="col-sm-3">
-    {!! Form::label('kendaran_id', 'Kendaraan:') !!}
+    {!! Form::label('kendaran_id', 'No Polisi:') !!}
   </div>
   <div class="col-sm-9">
-    {!! $kendaraanDetail->kendaraan->jenis_kendaraan !!}
+    {!! $kendaraan->no_polisi !!}
   </div>
 </div>
 
@@ -15,7 +15,7 @@
     {!! Form::label('status', 'Status:') !!}
   </div>
   <div class="col-sm-9">
-    {!! $stt[$kendaraanDetail->status] !!}
+    {!! $status[$kendaraanDetail->status] !!}
   </div>
 </div>
 
