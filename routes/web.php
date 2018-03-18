@@ -23,6 +23,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('pemesanans/downloadPdf', 'PemesananController@downloadPdf')->name('downloadPdf');
     Route::resource('pemesanans', 'PemesananController');
+    Route::resource('pemesanans.produksis', 'Pemesanan\ProduksiController');
+    Route::resource('pemesanans.produksis.pengiriman', 'Pemesanan\Produksi\PengirimanController');
 
     Route::resource('produksis', 'ProduksiController');
 

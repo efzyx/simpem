@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Pemesanan;
 
 use App\Http\Requests\CreateProduksiRequest;
 use App\Http\Requests\UpdateProduksiRequest;
-use App\Repositories\ProduksiRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -16,16 +15,13 @@ use Auth;
 use App\Models\Pengiriman;
 use App\Models\Kendaraan;
 use Illuminate\Support\Facades\DB;
+use App\Models\Produksi;
 
 class ProduksiController extends AppBaseController
 {
-    /** @var  ProduksiRepository */
-    private $produksiRepository;
 
-    public function __construct(ProduksiRepository $produksiRepo)
+    public function __construct()
     {
-        $this->produksiRepository = $produksiRepo;
-        $this->pemesanans = Pemesanan::pluck('nama_pemesanan', 'id');
         $this->supirs = Supir::pluck('nama_supir', 'id');
         $this->kendaraans = Kendaraan::select(DB::raw("concat(jenis_kendaraan, ' - ', no_polisi) as nama"), 'id')
                           ->pluck('nama', 'id');
@@ -37,13 +33,12 @@ class ProduksiController extends AppBaseController
      * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index(Pemesanan $pemesanan, Request $request)
     {
-        $this->produksiRepository->pushCriteria(new RequestCriteria($request));
-        $produksis = $this->produksiRepository->simplePaginate(10);
-
-        return view('produksis.index')
-            ->with('produksis', $produksis);
+        return view('pemesanans.produksis.index')
+            ->with('produksis', $pemesanan->produksis)
+            ->with('pemesanan', $pemesanan)
+            ->with('kendaraans', $this->kendaraans);
     }
 
     /**
@@ -51,10 +46,10 @@ class ProduksiController extends AppBaseController
      *
      * @return Response
      */
-    public function create()
+    public function create(Pemesanan $pemesanan)
     {
-        return view('produksis.create')
-              ->with('pemesanans', $this->pemesanans)
+        return view('pemesanans.produksis.create')
+              ->with('pemesanan', $pemesanan)
               ->with('supirs', $this->supirs)
               ->with('kendaraans', $this->kendaraans);
     }
@@ -66,12 +61,12 @@ class ProduksiController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateProduksiRequest $request)
+    public function store(Pemesanan $pemesanan, CreateProduksiRequest $request)
     {
         $input = $request->all();
         $input['user_id'] = Auth::user()->id;
 
-        $produksi = $this->produksiRepository->create($input);
+        $produksi = Produksi::create($input);
 
         $pengiriman = new Pengiriman();
         $pengiriman->produksi_id = $produksi->id;
@@ -81,7 +76,7 @@ class ProduksiController extends AppBaseController
 
         Flash::success('Produksi saved successfully.');
 
-        return redirect(route('produksis.index'));
+        return redirect(route('pemesanans.produksis.index', $pemesanan));
     }
 
     /**
@@ -91,9 +86,9 @@ class ProduksiController extends AppBaseController
      *
      * @return Response
      */
-    public function show($id)
+    public function show(Pemesanan $pemesanan, $id)
     {
-        $produksi = $this->produksiRepository->findWithoutFail($id);
+        $produksi = Produksi::find($id);
 
         if (empty($produksi)) {
             Flash::error('Produksi not found');
@@ -101,7 +96,9 @@ class ProduksiController extends AppBaseController
             return redirect(route('produksis.index'));
         }
 
-        return view('produksis.show')->with('produksi', $produksi);
+        return view('pemesanans.produksis.show')
+              ->with('produksi', $produksi)
+              ->with('pemesanan', $pemesanan);
     }
 
     /**
@@ -111,19 +108,19 @@ class ProduksiController extends AppBaseController
      *
      * @return Response
      */
-    public function edit($id)
+    public function edit(Pemesanan $pemesanan, $id)
     {
-        $produksi = $this->produksiRepository->findWithoutFail($id);
+        $produksi = Produksi::find($id);
 
         if (empty($produksi)) {
             Flash::error('Produksi not found');
 
-            return redirect(route('produksis.index'));
+            return redirect(route('pemesanans.produksis.index', $pemesanan));
         }
 
-        return view('produksis.edit')
+        return view('pemesanans.produksis.edit')
               ->with('produksi', $produksi)
-              ->with('pemesanans', $this->pemesanans)
+              ->with('pemesanan', $pemesanan)
               ->with('supirs', $this->supirs)
               ->with('kendaraans', $this->kendaraans);
         ;
@@ -137,21 +134,21 @@ class ProduksiController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdateProduksiRequest $request)
+    public function update(Pemesanan $pemesanan, $id, UpdateProduksiRequest $request)
     {
-        $produksi = $this->produksiRepository->findWithoutFail($id);
+        $produksi = Produksi::find($id);
 
         if (empty($produksi)) {
             Flash::error('Produksi not found');
 
-            return redirect(route('produksis.index'));
+            return redirect(route('pemesanans.produksis.index', $pemesanan));
         }
 
-        $produksi = $this->produksiRepository->update($request->all(), $id);
+        $produksi->update($request->all());
 
         Flash::success('Produksi updated successfully.');
 
-        return redirect(route('produksis.index'));
+        return redirect(route('pemesanans.produksis.index', $pemesanan));
     }
 
     /**
@@ -161,17 +158,17 @@ class ProduksiController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Pemesanan $pemesanan, $id)
     {
-        $produksi = $this->produksiRepository->findWithoutFail($id);
+        $produksi = Produksi::find($id);
 
         if (empty($produksi)) {
             Flash::error('Produksi not found');
 
-            return redirect(route('produksis.index'));
+            return redirect(route('pemesanans.produksis.index', $pemesanan));
         }
 
-        $this->produksiRepository->delete($id);
+        $produksi->delete();
 
         Flash::success('Produksi deleted successfully.');
 

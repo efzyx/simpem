@@ -21,6 +21,15 @@ class Produksi extends Model
 {
     use SoftDeletes;
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::deleting(function (Produksi $produksi) {
+            foreach ($produksi->pengirimans as $child) $child->delete();
+        });
+    }
+
     public $table = 'produksis';
 
 
@@ -32,7 +41,7 @@ class Produksi extends Model
         'volume',
         'waktu_produksi',
         'supir_id',
-        'no_kendaraan',
+        'kendaraan_id',
         'user_id'
     ];
 
@@ -45,7 +54,7 @@ class Produksi extends Model
         'pemesanan_id' => 'integer',
         'volume' => 'integer',
         'supir_id' => 'integer',
-        'no_kendaraan' => 'string'
+        'kendaraan_id' => 'integer'
     ];
 
     /**
@@ -57,6 +66,7 @@ class Produksi extends Model
         'pemesanan_id' => 'required',
         'volume' => 'required',
         'supir_id' => 'required',
+        'kendaraan_id' => 'required'
     ];
 
     public function pemesanan()
@@ -74,8 +84,13 @@ class Produksi extends Model
         return $this->belongsTo('App\Models\Supir');
     }
 
-    public function pengiriman()
+    public function pengirimans()
     {
-        return $this->hasOne('App\Models\pengiriman');
+        return $this->hasMany('App\Models\Pengiriman');
+    }
+
+    public function kendaraan()
+    {
+      return $this->belongsTo(Kendaraan::class, 'kendaraan_id', 'id');
     }
 }

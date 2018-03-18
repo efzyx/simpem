@@ -15,10 +15,6 @@
     <a href="{!! route('produksis.index') !!}"><i class="fa fa-flask"></i><span>Produksi</span></a>
 </li>
 
-<li class="{{ Request::is('pengiriman*') ? 'active' : '' }}">
-    <a href="{!! route('pengiriman.index') !!}"><i class="fa fa-plane"></i><span>Pengiriman</span></a>
-</li>
-
 <li class="{{ Request::is('pengadaans*') ? 'active' : '' }}">
     <a href="{!! route('pengadaans.index') !!}"><i class="fa fa-cart-arrow-down"></i><span>Pengadaan</span></a>
 </li>

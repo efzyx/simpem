@@ -11,9 +11,9 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($produksi, ['route' => ['produksis.update', $produksi->id], 'method' => 'patch']) !!}
+                   {!! Form::model($produksi, ['route' => ['pemesanans.produksis.update', $pemesanan, $produksi->id], 'method' => 'patch']) !!}
 
-                        @include('produksis.fields')
+                        @include('pemesanans.produksis.fields')
 
                    {!! Form::close() !!}
                </div>
@@ -26,6 +26,7 @@
   <script type="text/javascript">
               $(function () {
                   $('.datetimepicker').datetimepicker({
+                    // locale : 'id'
                     format: "YYYY-MM-DD HH:mm:ss"
                   });
               });

@@ -51,7 +51,7 @@
 <!-- No Kendaraan Field -->
 <div class="form-group col-sm-12">
   <div class="col-sm-3">
-    {!! Form::label('no_polisi', 'Nomor Polisi') !!}
+    {!! Form::label('no_kendaraan', 'Nomor Polisi') !!}
   </div>
   <div class="col-sm-9">
     <p>{!! $produksi->kendaraan->no_polisi !!}</p>

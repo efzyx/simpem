@@ -2,10 +2,12 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Pengiriman</h1>
-        <h1 class="pull-right">
-           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('pengiriman.create') !!}">Add New</a>
-        </h1>
+      <div class="btn-toolbar">
+        <a class="btn btn-default" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('pemesanans.produksis.index', $produksi->pemesanan, $produksi) !!}"><i class="fa fa-list"></i> Produksi dari {{ $produksi->pemesanan->nama_pemesanan }}</a>
+        <a class="btn btn-default" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('pemesanans.index') !!}"><i class="fa fa-list"></i> List Pemesanan</a>
+        <a class="btn btn-default" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('produksis.index') !!}"><i class="fa fa-list"></i> List Produksi</a>
+      </div>
+        <h1 class="pull-left">Riwayat Status Pengiriman <strong>{{ $produksi->kendaraan->no_polisi }} - {{ $produksi->pemesanan->nama_pemesanan }}</strong> </h1>
     </section>
     <div class="content">
         <div class="clearfix"></div>
@@ -19,8 +21,7 @@
             </div>
         </div>
         <div class="text-center">
-        
+
         </div>
     </div>
 @endsection
-

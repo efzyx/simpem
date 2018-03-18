@@ -50,4 +50,20 @@ class Pengiriman extends Model
         'produksi_id' => 'required',
         'status' => 'required',
     ];
+
+
+    public function last()
+    {
+      return $this->orderBy('id', 'asc')->first();
+    }
+
+    public function produksi()
+    {
+      return $this->belongsTo(Produksi::class);
+    }
+
+    public function user()
+    {
+      return $this->belongsTo('App\User');
+    }
 }

@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Produksi
+            Tambah Produksi untuk <strong>{{ $pemesanan->nama_pemesanan }}</strong>
         </h1>
     </section>
     <div class="content">
@@ -12,9 +12,9 @@
 
             <div class="box-body">
                 <div class="row">
-                    {!! Form::open(['route' => 'produksis.store']) !!}
+                    {!! Form::open(['route' => ['pemesanans.produksis.store', $pemesanan]]) !!}
 
-                        @include('produksis.fields')
+                        @include('pemesanans.produksis.fields')
 
                     {!! Form::close() !!}
                 </div>
@@ -27,7 +27,6 @@
   <script type="text/javascript">
               $(function () {
                   $('.datetimepicker').datetimepicker({
-                    // locale : 'id'
                     format: "YYYY-MM-DD HH:mm:ss"
                   });
               });

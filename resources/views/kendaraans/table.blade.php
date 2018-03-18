@@ -17,7 +17,7 @@
             <td>{{ $no++ }}</td>
             <td>{!! $kendaraan->jenis_kendaraan !!}</td>
             <td>{!! $kendaraan->no_polisi !!}</td>
-            <td><a href="{{ route('kendaraans.kendaraanDetails.index', $kendaraan->id) }}" class="btn btn-success">{{ $status[$kendaraan->kendaraanDetails->last()->status] }}</a></td>
+            <td><a href="{{ route('kendaraans.kendaraanDetails.index', $kendaraan->id) }}" class="btn btn-success">{{ $kendaraan->kendaraanDetails->count() ? $status[$kendaraan->kendaraanDetails->last()->status] : 'Belum Ada' }}</a></td>
             <td>
                 {!! Form::open(['route' => ['kendaraans.destroy', $kendaraan->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

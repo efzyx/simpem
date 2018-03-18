@@ -26,6 +26,15 @@ class Pemesanan extends Model
 {
     use SoftDeletes;
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::deleting(function (Pemesanan $pemesanan) {
+            foreach ($pemesanan->produksis as $child) $child->delete();
+        });
+    }
+
     public $table = 'pemesanans';
 
 
@@ -91,5 +100,10 @@ class Pemesanan extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function produksis()
+    {
+      return $this->hasMany(Produksi::class);
     }
 }

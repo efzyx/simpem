@@ -1,8 +1,5 @@
-<!-- Pemesanan Id Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('pemesanan_id', 'Pemesanan') !!}
-    {!! Form::select('pemesanan_id', $pemesanans, null, ['class' => 'form-control']) !!}
-</div>
+
+{!! Form::hidden('pemesanan_id', $pemesanan->id) !!}
 
 <!-- Volume Field -->
 <div class="form-group col-sm-12">
@@ -19,17 +16,17 @@
 <!-- Supir Id Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('supir_id', 'Supir') !!}
-    {!! Form::select('supir_id', $supirs , null, ['class' => 'form-control', 'placeholder' => '- Pilih Supir -']) !!}
+    {!! Form::select('supir_id', $supirs , null, ['class' => 'form-control', 'placeholder' => 'Pilih Supir']) !!}
 </div>
 
 <!-- No Kendaraan Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('kendaraan', 'Kendaraan') !!}
-    {!! Form::select('kendaraan_id', $kendaraans, null, ['class' => 'form-control', 'placeholder' => '- Pilih Kendaraan -']) !!}
+    {!! Form::select('kendaraan_id', $kendaraans, null, ['class' => 'form-control', 'placeholder' => 'Pilih Kendaraan']) !!}
 </div>
 
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-    <a href="{!! route('produksis.index') !!}" class="btn btn-default">Cancel</a>
+    <a href="{!! route('pemesanans.produksis.index', $pemesanan) !!}" class="btn btn-default">Cancel</a>
 </div>
