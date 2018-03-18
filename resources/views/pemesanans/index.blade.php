@@ -20,9 +20,6 @@
         <div class="box box-primary">
             <div class="box-body">
                     @include('pemesanans.table')
-                    <div class="pull-right">
-                      {{ $pemesanans->render() }}
-                    </div>
             </div>
         </div>
         <div class="text-center">
@@ -33,6 +30,23 @@
 
 @section('scripts')
   <script type="text/javascript">
-    // $('table').datatables()
+      $(document).ready(function() {
+      var table = $('#pemesanans-table').DataTable({
+        responsive: true,
+      });
+      new $.fn.dataTable.FixedHeader( table );
+      // Apply the search
+      table.columns().every( function () {
+        var that = this;
+
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+    } );
   </script>
 @endsection

@@ -1,12 +1,12 @@
 <table class="table table-responsive" id="pemesanans-table">
     <thead>
         <tr>
-          <th>#</th>
-            <th>Nama Pemesanan</th>
-        <th>Produk</th>
-        <th>Pemesanan</th>
-        <th>Status</th>
-            <th colspan="3">Action</th>
+          <th width="5px">#</th>
+          <th>Pemesan</th>
+          <th>Produk</th>
+          <th>Tanggal</th>
+          <th>Status</th>
+          <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -20,10 +20,10 @@
       @endphp
     @foreach($pemesanans as $pemesanan)
         <tr>
-            <td>{{ $no++ }}</td>
+            <td width="5px">{{ $no++ }}</td>
             <td>{!! $pemesanan->nama_pemesanan !!}</td>
             <td>{!! $pemesanan->produk->mutu_produk !!}</td>
-            <td>{!! $pemesanan->tanggal_pesanan->diffForHumans() !!}</td>
+            <td>{!! $pemesanan->tanggal_pesanan->format('d F y') !!}</td>
             <td>{!! $status[$pemesanan->status] !!}</td>
             <td>
                 {!! Form::open(['route' => ['pemesanans.destroy', $pemesanan->id], 'method' => 'delete']) !!}
@@ -38,4 +38,14 @@
         </tr>
     @endforeach
     </tbody>
+    <tfoot>
+      <tr>
+        <th width="5px"></th>
+        <th><input type="text" placeholder="Search Pemesan" /></th>
+        <th><input type="text" placeholder="Search Produk" /></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </tfoot>
 </table>
