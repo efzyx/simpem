@@ -18,13 +18,19 @@
 <!-- Tanggal Pesanan Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('tanggal_pesanan', 'Waktu Pemesanan:') !!}
-    {!! Form::text('tanggal_pesanan', null, ['class' => 'form-control', 'id'=>'calendar1'])!!}
+    {!! Form::text('tanggal_pesanan', null, ['class' => 'form-control datetimepicker'])!!}
 </div>
 
 <!-- Tanggal Kirim Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('tanggal_kirim', 'Waktu Kirim:') !!}
-    {!! Form::text('tanggal_kirim', null, ['class' => 'form-control', 'id'=>'calendar2'])!!}
+    <br>
+    <div class="col-sm-6">
+      {!! Form::text('tanggal_kirim_dari', null, ['class' => 'form-control datetimepicker', 'placeholder' => 'Dari...'])!!}
+    </div>
+    <div class="col-sm-6">
+      {!! Form::text('tanggal_kirim_sampai', null, ['class' => 'form-control datetimepicker', 'placeholder' => 'Sampai...'])!!}
+    </div>
 </div>
 
 <!-- Lokasi Proyek Field -->

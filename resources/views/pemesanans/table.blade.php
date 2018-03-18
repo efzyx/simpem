@@ -2,7 +2,7 @@
     <thead>
         <tr>
           <th>#</th>
-            <th>Nama Pemesana</th>
+            <th>Nama Pemesanan</th>
         <th>Produk</th>
         <th>Pemesanan</th>
         <th>Jenis Pesanan</th>

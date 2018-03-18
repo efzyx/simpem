@@ -29,7 +29,12 @@ class Pemesanan extends Model
     public $table = 'pemesanans';
 
 
-    protected $dates = ['deleted_at', 'tanggal_pesanan', 'tanggal_kirim'];
+    protected $dates = [
+      'deleted_at',
+      'tanggal_pesanan',
+      'tanggal_kirim_dari',
+      'tanggal_kirim_sampai',
+    ];
 
 
     public $fillable = [
@@ -37,7 +42,8 @@ class Pemesanan extends Model
         'produk_id',
         'volume_pesanan',
         'tanggal_pesanan',
-        'tanggal_kirim',
+        'tanggal_kirim_dari',
+        'tanggal_kirim_sampai',
         'lokasi_proyek',
         'jenis_pesanan',
         'cp_pesanan',
@@ -71,7 +77,9 @@ class Pemesanan extends Model
     public static $rules = [
         'nama_pemesanan' => 'required',
         'produk_id' => 'required',
-        'tanggal_pesanan' => 'required',
+        'tanggal_pesanan' => 'required|date_format:Y-m-d H:i:s',
+        'tanggal_kirim_dari' => 'required|date_format:Y-m-d H:i:s',
+        'tanggal_kirim_sampai' => 'nullable|date_format:Y-m-d H:i:s',
         'jenis_pesanan' => 'required',
     ];
 
