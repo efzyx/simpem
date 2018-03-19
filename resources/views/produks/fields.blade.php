@@ -21,7 +21,7 @@
   @endphp
   <div class="form-group col-sm-12">
       {!! Form::label($field, $bahan_baku->nama_bahan_baku.':') !!}
-      {!! Form::number($field, isset($produk) ? $produk->bahan($bahan_baku->kode) ? $produk->bahan($bahan_baku->kode)->volume : null : null, ['class' => 'form-control']) !!}
+      {!! Form::number($field, isset($produk) ? $produk->bahan($bahan_baku->kode) ? $produk->bahan($bahan_baku->kode)->volume : 0 : 0, ['class' => 'form-control']) !!}
   </div>
 @endforeach
 <!-- Submit Field -->
