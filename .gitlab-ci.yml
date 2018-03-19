@@ -63,6 +63,8 @@ stage_job:
     - sh .gitlab-staging-deploy.sh # Change this to .gitlab-staging-pull-deploy.sh for PULL deployments
   environment:
     name: staging
+  only:
+    - develop
 
 heroku_deploy:
   stage: heroku_deploy
