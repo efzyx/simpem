@@ -64,6 +64,15 @@ class PengadaanController extends AppBaseController
 
         $pengadaan = $this->pengadaanRepository->create($input);
 
+        $bahan_baku = BahanBaku::find($pengadaan->bahan_baku_id);
+
+        $total = $bahan_baku->sisa + $pengadaan->berat;
+
+        if ($bahan_baku) {
+            $bahan_baku->sisa = $total;
+            $bahan_baku->save();
+        }
+
         Flash::success('Pengadaan saved successfully.');
 
         return redirect(route('pengadaans.index'));
