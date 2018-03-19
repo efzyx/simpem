@@ -54,4 +54,9 @@ class BahanBaku extends Model
     {
         return BahanBaku::where('kode', $kode)->first();
     }
+
+    public function bahan_baku_histories()
+    {
+      return $this->hasMany(BahanBakuHistory::class);
+    }
 }

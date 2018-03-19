@@ -26,8 +26,12 @@ class Produksi extends Model
         parent::boot();
 
         self::deleting(function (Produksi $produksi) {
-            foreach ($produksi->pengirimans as $child) {
-                $child->delete();
+            foreach ($produksi->pengirimans as $pengiriman) {
+                $pengiriman->delete();
+            }
+
+            foreach ($produksi->bahan_baku_histories as $bahan_baku_history) {
+                $bahan_baku_history->delete();
             }
         });
     }
@@ -94,5 +98,10 @@ class Produksi extends Model
     public function kendaraan()
     {
         return $this->belongsTo(Kendaraan::class, 'kendaraan_id', 'id');
+    }
+
+    public function bahan_baku_histories()
+    {
+      return $this->hasMany(BahanBakuHistory::class);
     }
 }

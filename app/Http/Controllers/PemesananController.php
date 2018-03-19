@@ -125,6 +125,18 @@ class PemesananController extends AppBaseController
     public function update($id, UpdatePemesananRequest $request)
     {
         $pemesanan = $this->pemesananRepository->findWithoutFail($id);
+        $input = $request->all();
+
+        $produksis = $pemesanan->produksis;
+        $old_volume = $pemesanan->volume_pesanan;
+        $old_produk = $pemesanan->produk_id;
+
+        if ($produksis->count() &&
+           ($input['volume_pesanan'] != $old_volume ||
+           $input['produk_id'] != $old_produk)) {
+          Flash::error('Proses produksi sedang berjalan, tidak bisa rubah jenis produk dan atau volume pesanan');
+          return redirect()->back();
+        }
 
         if (empty($pemesanan)) {
             Flash::error('Pemesanan not found');
@@ -132,7 +144,7 @@ class PemesananController extends AppBaseController
             return redirect(route('pemesanans.index'));
         }
 
-        $pemesanan = $this->pemesananRepository->update($request->all(), $id);
+        $pemesanan = $this->pemesananRepository->update($input, $id);
 
         Flash::success('Pemesanan updated successfully.');
 
