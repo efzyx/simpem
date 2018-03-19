@@ -54,7 +54,7 @@ class BahanBaku extends Model
     {
         return BahanBaku::where('kode', $kode)->first();
     }
-    public function pengadaan()
+    public function pengadaans()
     {
         return $this->hasMany('App\Models\Pengadaan');
     }

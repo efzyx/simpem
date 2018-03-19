@@ -70,6 +70,7 @@ class OpnameController extends AppBaseController
             $bahan_baku->save();
         } else {
             Flash::error('Bahan Baku Kurang');
+            return redirect()->back()->withInput($input);
         }
 
         Flash::success('Opname saved successfully.');
@@ -114,7 +115,9 @@ class OpnameController extends AppBaseController
             return redirect(route('opnames.index'));
         }
 
-        return view('opnames.edit')->with('opname', $opname);
+        return view('opnames.edit')
+        ->with('opname', $opname)
+        ->with('bahanBakus', $this->bahanBakus);
     }
 
     /**
@@ -128,6 +131,9 @@ class OpnameController extends AppBaseController
     public function update($id, UpdateOpnameRequest $request)
     {
         $opname = $this->opnameRepository->findWithoutFail($id);
+        $bahan_baku = BahanBaku::find($opname->bahan_baku_id);
+        $berat = $opname->volume_opname;
+
 
         if (empty($opname)) {
             Flash::error('Opname not found');
@@ -136,6 +142,15 @@ class OpnameController extends AppBaseController
         }
 
         $opname = $this->opnameRepository->update($request->all(), $id);
+
+        if ($berat > $opname->volume_opname) {
+            $berat = $berat - $opname->volume_opname;
+            $bahan_baku->sisa = $bahan_baku->sisa + $berat;
+        } else {
+            $berat = $opname->volume_opname - $berat;
+            $bahan_baku->sisa = $bahan_baku->sisa - $berat;
+        }
+        $bahan_baku->save();
 
         Flash::success('Opname updated successfully.');
 
@@ -152,6 +167,10 @@ class OpnameController extends AppBaseController
     public function destroy($id)
     {
         $opname = $this->opnameRepository->findWithoutFail($id);
+        $bahan_baku = BahanBaku::find($opname->bahan_baku_id);
+        $berat = $opname->volume_opname;
+        $bahan_baku->sisa = $bahan_baku->sisa + $berat;
+        $bahan_baku->save();
 
         if (empty($opname)) {
             Flash::error('Opname not found');
