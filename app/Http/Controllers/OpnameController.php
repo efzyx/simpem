@@ -132,7 +132,8 @@ class OpnameController extends AppBaseController
     {
         $opname = $this->opnameRepository->findWithoutFail($id);
         $bahan_baku = BahanBaku::find($opname->bahan_baku_id);
-        $berat = $opname->volume_opname;
+        $input = $request->all();
+        $old_volume = $opname->volume_opname;
 
 
         if (empty($opname)) {
@@ -140,18 +141,10 @@ class OpnameController extends AppBaseController
 
             return redirect(route('opnames.index'));
         }
+        $bahan_baku->sisa += $input['volume_opname'] - $old_volume;
+        $bahan_baku->update();
 
-        $opname = $this->opnameRepository->update($request->all(), $id);
-
-        if ($berat > $opname->volume_opname) {
-            $berat = $berat - $opname->volume_opname;
-            $bahan_baku->sisa = $bahan_baku->sisa + $berat;
-        } else {
-            $berat = $opname->volume_opname - $berat;
-            $bahan_baku->sisa = $bahan_baku->sisa - $berat;
-        }
-        $bahan_baku->save();
-
+        $opname = $this->opnameRepository->update($input, $id);
         Flash::success('Opname updated successfully.');
 
         return redirect(route('opnames.index'));
@@ -168,9 +161,10 @@ class OpnameController extends AppBaseController
     {
         $opname = $this->opnameRepository->findWithoutFail($id);
         $bahan_baku = BahanBaku::find($opname->bahan_baku_id);
-        $berat = $opname->volume_opname;
-        $bahan_baku->sisa = $bahan_baku->sisa + $berat;
-        $bahan_baku->save();
+        $old_volume = $opname->volume_opname;
+
+        $bahan_baku->sisa +=  $old_volume;
+        $bahan_baku->update();
 
         if (empty($opname)) {
             Flash::error('Opname not found');
