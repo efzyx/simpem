@@ -32,7 +32,7 @@ variables:
 stages:
   - build
   - test
-  - staging_deploy
+#  - staging_deploy
   - heroku_deploy
 
 build_job:
@@ -57,14 +57,14 @@ test_job:
   tags:
     - docker
 
-stage_job:
-  stage: staging_deploy
-  script:
-    - sh .gitlab-staging-deploy.sh # Change this to .gitlab-staging-pull-deploy.sh for PULL deployments
-  environment:
-    name: staging
-  only:
-    - develop
+#stage_job:
+#  stage: staging_deploy
+#  script:
+#    - sh .gitlab-staging-deploy.sh # Change this to .gitlab-staging-pull-deploy.sh for PULL deployments
+#  environment:
+#    name: staging
+#  only:
+#    - develop
 
 heroku_deploy:
   stage: heroku_deploy
