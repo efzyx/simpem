@@ -33,6 +33,7 @@ class BahanBakuHistory extends Model
         'pengadaan_id',
         'produksi_id',
         'opname_id',
+        'volume',
         'total_sisa'
     ];
 
@@ -47,6 +48,7 @@ class BahanBakuHistory extends Model
         'pengadaan_id' => 'integer',
         'produksi_id' => 'integer',
         'opname_id' => 'integer',
+        'volume' => 'integer',
         'total_sisa' => 'integer'
     ];
 
@@ -63,4 +65,24 @@ class BahanBakuHistory extends Model
         'opname_id' => 'nullable',
         'total_sisa' => 'required'
     ];
+
+    public function bahan_baku()
+    {
+      return $this->belongsTo(BahanBaku::class);
+    }
+    
+    public function produksi()
+    {
+      return $this->belongsTo(Produksi::class);
+    }
+
+    public function opname()
+    {
+      return $this->belongsTo(Opname::class);
+    }
+
+    public function pengadaan()
+    {
+      return $this->belongsTo(Pengadaan::class);
+    }
 }

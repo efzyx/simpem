@@ -16,6 +16,8 @@ use Auth;
 use App\Models\Pengiriman;
 use App\Models\Kendaraan;
 use Illuminate\Support\Facades\DB;
+use App\Models\BahanBaku;
+use App\Models\BahanBakuHistory;
 
 class ProduksiController extends AppBaseController
 {
@@ -70,8 +72,29 @@ class ProduksiController extends AppBaseController
     {
         $input = $request->all();
         $input['user_id'] = Auth::user()->id;
+        $pemesanan = Pemesanan::find($input['pemesanan_id']);
+        $komposisi_mutus = $pemesanan->produk->komposisi_mutus;
+
+        if (!$komposisi_mutus->count()) {
+            Flash::error('Komposisi produk pemesanan belum diset');
+            return redirect()->back()->withInput($input);
+        }
 
         $produksi = $this->produksiRepository->create($input);
+
+        foreach ($komposisi_mutus as $key => $komposisi) {
+            $bahan_baku = BahanBaku::find($komposisi->bahan_baku_id);
+            $bahan_baku->sisa -= $komposisi->volume * $input['volume'];
+            $bahan_baku->update();
+
+            $bahan_baku_history = new BahanBakuHistory();
+            $bahan_baku_history->bahan_baku_id = $komposisi->bahan_baku_id;
+            $bahan_baku_history->type = 0;
+            $bahan_baku_history->produksi_id = $produksi->id;
+            $bahan_baku_history->volume = $komposisi->volume * $input['volume'];
+            $bahan_baku_history->total_sisa = $bahan_baku->sisa;
+            $bahan_baku_history->save();
+        }
 
         $pengiriman = new Pengiriman();
         $pengiriman->produksi_id = $produksi->id;
@@ -140,6 +163,7 @@ class ProduksiController extends AppBaseController
     public function update($id, UpdateProduksiRequest $request)
     {
         $produksi = $this->produksiRepository->findWithoutFail($id);
+        $input = $request->all();
 
         if (empty($produksi)) {
             Flash::error('Produksi not found');
@@ -147,7 +171,29 @@ class ProduksiController extends AppBaseController
             return redirect(route('produksis.index'));
         }
 
-        $produksi = $this->produksiRepository->update($request->all(), $id);
+        $komposisi_mutus = $produksi->pemesanan->produk->komposisi_mutus;
+        $old_volume = $produksi->volume;
+
+        if (!$komposisi_mutus->count()) {
+            Flash::error('Komposisi produk pemesanan belum diset');
+            return redirect()->back();
+        }
+
+        foreach ($komposisi_mutus as $key => $komposisi) {
+            $bahan_baku = BahanBaku::find($komposisi->bahan_baku_id);
+            $bahan_baku->sisa -= $komposisi->volume * ($input['volume'] - $old_volume);
+            $bahan_baku->update();
+
+            $bahan_baku_history = $bahan_baku->bahan_baku_histories->where('produksi_id', $produksi->id)->first();
+            $bahan_baku_history->bahan_baku_id = $komposisi->bahan_baku_id;
+            $bahan_baku_history->type = 0;
+            $bahan_baku_history->produksi_id = $produksi->id;
+            $bahan_baku_history->volume = $komposisi->volume * ($input['volume'] - $old_volume);
+            $bahan_baku_history->total_sisa = $bahan_baku->sisa;
+            $bahan_baku_history->update();
+        }
+
+        $produksi = $this->produksiRepository->update($input, $id);
 
         Flash::success('Produksi updated successfully.');
 
@@ -169,6 +215,14 @@ class ProduksiController extends AppBaseController
             Flash::error('Produksi not found');
 
             return redirect(route('produksis.index'));
+        }
+
+        $komposisi_mutus = $produksi->pemesanan->produk->komposisi_mutus;
+        
+        foreach ($komposisi_mutus as $key => $komposisi) {
+            $bahan_baku = BahanBaku::find($komposisi->bahan_baku_id);
+            $bahan_baku->sisa += $komposisi->volume * $produksi->volume;
+            $bahan_baku->update();
         }
 
         $this->produksiRepository->delete($id);

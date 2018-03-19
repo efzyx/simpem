@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnInSupplier extends Migration
+class AddVolumeColumnToBahanBakuHistoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddColumnInSupplier extends Migration
      */
     public function up()
     {
-        Schema::table('pengadaans', function (Blueprint $table) {
-            $table->string('supir')->after('supplier');
+        Schema::table('bahan_baku_histories', function (Blueprint $table) {
+            $table->integer('volume')->after('opname_id');
         });
     }
 
@@ -25,8 +25,8 @@ class AddColumnInSupplier extends Migration
      */
     public function down()
     {
-        Schema::table('pengadaans', function (Blueprint $table) {
-            $table->dropColumn('supir');
+        Schema::table('bahan_baku_histories', function (Blueprint $table) {
+            $table->dropColumn('volume');
         });
     }
 }
