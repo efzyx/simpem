@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property integer bahan_baku_id
  * @property integer berat
  * @property string supplier
+ * @property string supir
  * @property string|\Carbon\Carbon tanggal_pengadaan
  * @property integer user_id
  * @property string keterangan
@@ -31,6 +32,7 @@ class Pengadaan extends Model
         'bahan_baku_id',
         'berat',
         'supplier',
+        'supir',
         'tanggal_pengadaan',
         'user_id',
         'keterangan'
@@ -45,6 +47,7 @@ class Pengadaan extends Model
         'bahan_baku_id' => 'integer',
         'berat' => 'integer',
         'supplier' => 'string',
+        'supir' => 'string',
         'user_id' => 'integer',
         'keterangan' => 'string'
     ];
@@ -58,6 +61,7 @@ class Pengadaan extends Model
         'bahan_baku_id' => 'required',
         'berat' => 'required',
         'supplier' => 'required',
+        'supir' => 'required',
         'tanggal_pengadaan' => 'required',
     ];
 

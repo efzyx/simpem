@@ -5,6 +5,7 @@
         <th>Bahan Baku</th>
         <th>Berat</th>
         <th>Supplier</th>
+        <th>Supir</th>
         <th>Pengadaan</th>
             <th colspan="3">Action</th>
         </tr>
@@ -19,6 +20,7 @@
             <td>{!! $pengadaan->bahan_baku->nama_bahan_baku !!}</td>
             <td>{!! $pengadaan->berat !!}</td>
             <td>{!! $pengadaan->supplier !!}</td>
+            <td>{!! $pengadaan->supir !!}</td>
             <td>{!! $pengadaan->tanggal_pengadaan->diffForHumans() !!}</td>
             <td>
                 {!! Form::open(['route' => ['pengadaans.destroy', $pengadaan->id], 'method' => 'delete']) !!}

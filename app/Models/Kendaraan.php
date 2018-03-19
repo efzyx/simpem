@@ -50,6 +50,6 @@ class Kendaraan extends Model
 
     public function kendaraanDetails()
     {
-      return $this->hasMany('App\Models\KendaraanDetail');
+        return $this->hasMany('App\Models\KendaraanDetail');
     }
 }

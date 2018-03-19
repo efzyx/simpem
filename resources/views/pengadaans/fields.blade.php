@@ -16,6 +16,12 @@
     {!! Form::text('supplier', null, ['class' => 'form-control']) !!}
 </div>
 
+<!-- Supir Field -->
+<div class="form-group col-sm-12">
+    {!! Form::label('supir', 'Supir/No Polisi:') !!}
+    {!! Form::text('supir', null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Tanggal Pengadaan Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('tanggal_pengadaan', 'Tanggal Pengadaan:') !!}

@@ -27,8 +27,8 @@ class ChangePemesanansTable extends Migration
     public function down()
     {
         Schema::table('pemesanans', function (Blueprint $table) {
-          $table->renameColumn('tanggal_kirim_dari', 'tanggal_kirim');
-          $table->dropColumn('tanggal_kirim_sampai');
+            $table->renameColumn('tanggal_kirim_dari', 'tanggal_kirim');
+            $table->dropColumn('tanggal_kirim_sampai');
         });
     }
 }

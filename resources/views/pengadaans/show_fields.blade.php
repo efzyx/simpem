@@ -38,6 +38,16 @@
   </div>
 </div>
 
+<!-- Supir Field -->
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('supir', 'Supir/No Polisi') !!}
+  </div>
+  <div class="col-sm-9">
+    {!! $pengadaan->supir !!}
+  </div>
+</div>
+
 <!-- Tanggal Pengadaan Field -->
 <div class="form-group col-sm-12">
   <div class="col-sm-3">

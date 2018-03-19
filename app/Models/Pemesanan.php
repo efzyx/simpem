@@ -31,7 +31,9 @@ class Pemesanan extends Model
         parent::boot();
 
         self::deleting(function (Pemesanan $pemesanan) {
-            foreach ($pemesanan->produksis as $child) $child->delete();
+            foreach ($pemesanan->produksis as $child) {
+                $child->delete();
+            }
         });
     }
 
@@ -104,6 +106,6 @@ class Pemesanan extends Model
 
     public function produksis()
     {
-      return $this->hasMany(Produksi::class);
+        return $this->hasMany(Produksi::class);
     }
 }
