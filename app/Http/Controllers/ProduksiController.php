@@ -29,7 +29,7 @@ class ProduksiController extends AppBaseController
         $this->produksiRepository = $produksiRepo;
         $this->pemesanans = Pemesanan::pluck('nama_pemesanan', 'id');
         $this->supirs = Supir::pluck('nama_supir', 'id');
-        $this->kendaraans = Kendaraan::select(DB::raw("concat(jenis_kendaraan, ' - ', no_polisi) as nama"), 'id')
+        $this->kendaraans = Kendaraan::select(DB::raw("concat(no_polisi, ' - ', jenis_kendaraan) as nama"), 'id')
                           ->pluck('nama', 'id');
     }
 
@@ -42,10 +42,11 @@ class ProduksiController extends AppBaseController
     public function index(Request $request)
     {
         $this->produksiRepository->pushCriteria(new RequestCriteria($request));
-        $produksis = $this->produksiRepository->simplePaginate(10);
+        $produksis = $this->produksiRepository->all();
 
         return view('produksis.index')
-            ->with('produksis', $produksis);
+            ->with('produksis', $produksis)
+            ->with('kendaraans', $this->kendaraans);
     }
 
     /**
@@ -218,7 +219,7 @@ class ProduksiController extends AppBaseController
         }
 
         $komposisi_mutus = $produksi->pemesanan->produk->komposisi_mutus;
-        
+
         foreach ($komposisi_mutus as $key => $komposisi) {
             $bahan_baku = BahanBaku::find($komposisi->bahan_baku_id);
             $bahan_baku->sisa += $komposisi->volume * $produksi->volume;
