@@ -1,7 +1,7 @@
 <table class="table table-responsive" id="opnames-table">
     <thead>
         <tr>
-            <th>Bahan Baku Id</th>
+            <th>Bahan Baku</th>
         <th>Volume Opname</th>
         <th>Keterangan</th>
         <th>Tanggal Pemakaian</th>
@@ -11,7 +11,7 @@
     <tbody>
     @foreach($opnames as $opname)
         <tr>
-            <td>{!! $opname->bahan_baku_id !!}</td>
+            <td>{!! $opname->bahan_baku->nama_bahan_baku !!}</td>
             <td>{!! $opname->volume_opname !!}</td>
             <td>{!! $opname->keterangan !!}</td>
             <td>{!! $opname->tanggal_pemakaian !!}</td>

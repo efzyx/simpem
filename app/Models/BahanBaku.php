@@ -54,4 +54,13 @@ class BahanBaku extends Model
     {
         return BahanBaku::where('kode', $kode)->first();
     }
+    public function pengadaans()
+    {
+        return $this->hasMany('App\Models\Pengadaan');
+    }
+
+    public function getTambahan($id)
+    {
+        return BahanBaku::where('id', $id)->first();
+    }
 }
