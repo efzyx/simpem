@@ -33,6 +33,7 @@ class BahanBakuHistory extends Model
         'pengadaan_id',
         'produksi_id',
         'opname_id',
+        'volume',
         'total_sisa'
     ];
 
@@ -47,6 +48,7 @@ class BahanBakuHistory extends Model
         'pengadaan_id' => 'integer',
         'produksi_id' => 'integer',
         'opname_id' => 'integer',
+        'volume' => 'integer',
         'total_sisa' => 'integer'
     ];
 

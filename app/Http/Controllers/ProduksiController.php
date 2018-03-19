@@ -16,6 +16,9 @@ use Auth;
 use App\Models\Pengiriman;
 use App\Models\Kendaraan;
 use Illuminate\Support\Facades\DB;
+use App\Models\BahanBaku;
+use App\Models\BahanBakuHistory;
+use App\Models\KomposisiMutu;
 
 class ProduksiController extends AppBaseController
 {
@@ -70,8 +73,29 @@ class ProduksiController extends AppBaseController
     {
         $input = $request->all();
         $input['user_id'] = Auth::user()->id;
+        $pemesanan = Pemesanan::find($input['pemesanan_id']);
+        $komposisi_mutus = $pemesanan->produk->komposisi_mutus;
+
+        if (!$komposisi_mutus->count()) {
+          Flash::error('Komposisi produk pemesanan belum diset');
+          return redirect()->back()->withInput($input);
+        }
 
         $produksi = $this->produksiRepository->create($input);
+
+        foreach ($komposisi_mutus as $key => $komposisi) {
+          $bahan_baku = BahanBaku::find($komposisi->bahan_baku_id);
+          $bahan_baku->sisa -= $komposisi->volume * $produksi->volume;
+          $bahan_baku->update();
+
+          $bahan_baku_history = new BahanBakuHistory();
+          $bahan_baku_history->bahan_baku_id = $komposisi->bahan_baku_id;
+          $bahan_baku_history->type = 0;
+          $bahan_baku_history->produksi_id = $produksi->id;
+          $bahan_baku_history->volume = $komposisi->volume * $produksi->volume;
+          $bahan_baku_history->total_sisa = $bahan_baku->sisa;
+          $bahan_baku_history->save();
+        }
 
         $pengiriman = new Pengiriman();
         $pengiriman->produksi_id = $produksi->id;
