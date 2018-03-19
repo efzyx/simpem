@@ -34,5 +34,5 @@
 
 * Samakan gaya penulisan dengan gaya penulisan kode yang sudah ada. Misal penulisan array : `[1,2,3]` bukan `array(1,2,3)`
 
-
-### _**Boring solutions:** Use the most simple and boring solution for a problem. You can always make it more complex later if that is needed. The speed of innovation for our organization and product is constrained by the total complexity we have added so far, so every little reduction in complexity helps. Don't pick an interesting technology just to make your work more fun, using code that is popular will ensure many bugs are already solved and its familiarity makes it easier for others to contribute._
+### Motivation
+ _**Boring solutions:** Use the most simple and boring solution for a problem. You can always make it more complex later if that is needed. The speed of innovation for our organization and product is constrained by the total complexity we have added so far, so every little reduction in complexity helps. Don't pick an interesting technology just to make your work more fun, using code that is popular will ensure many bugs are already solved and its familiarity makes it easier for others to contribute._
