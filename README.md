@@ -26,10 +26,10 @@
 
 #### **_Aturan penulisan kode:_**
 
-* Penulisan variable jangan disingkat dengan singkatan yang tidak wajar (betul : $pemesanan, $no_polisi | salah : $pmsnn, $no_pls)
+* Penulisan variable jangan disingkat dengan singkatan yang tidak wajar (betul : `$pemesanan`, `$no_polisi` | salah : `$pmsnn`, `$no_pls`)
 
 * Jika belum di merge, push ke branch yang sama dengan branch push terakhir
 
 * Jalankan `php artisan fixer:fix` sebelum push kode
 
-* Samakan gaya penulisan dengan gaya penulisan kode yang sudah ada. Misal penulisan array : [1,2,3] bukan array(1,2,3)
+* Samakan gaya penulisan dengan gaya penulisan kode yang sudah ada. Misal penulisan array : `[1,2,3]` bukan `array(1,2,3)`
