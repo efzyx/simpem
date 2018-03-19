@@ -78,7 +78,6 @@ class ProduksiController extends AppBaseController
         foreach ($komposisi_mutus as $key => $komposisi) {
             $bahan_baku = BahanBaku::find($komposisi->bahan_baku_id);
             $bahan_baku->sisa -= $komposisi->volume * $input['volume'];
-
             $bahan_baku->update();
 
             $bahan_baku_history = new BahanBakuHistory();
