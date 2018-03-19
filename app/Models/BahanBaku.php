@@ -59,4 +59,14 @@ class BahanBaku extends Model
     {
         return $this->hasMany(BahanBakuHistory::class);
     }
+    
+    public function pengadaans()
+    {
+        return $this->hasMany('App\Models\Pengadaan');
+    }
+
+    public function getTambahan($id)
+    {
+        return BahanBaku::find($id);
+    }
 }

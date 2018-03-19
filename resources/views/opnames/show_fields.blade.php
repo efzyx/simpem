@@ -1,42 +1,63 @@
-<!-- Id Field -->
-<div class="form-group">
-    {!! Form::label('id', 'Id:') !!}
-    <p>{!! $opname->id !!}</p>
-</div>
-
 <!-- Bahan Baku Id Field -->
-<div class="form-group">
-    {!! Form::label('bahan_baku_id', 'Bahan Baku Id:') !!}
-    <p>{!! $opname->bahan_baku_id !!}</p>
+<div class="form-group col-sm-12">
+    <div class="col-sm-3">
+    {!! Form::label('bahan_baku_id', 'Bahan Baku:') !!}
+  </div>
+  <div class="col-sm-9">
+    {!! $opname->bahan_baku->nama_bahan_baku !!}
+  </div>
 </div>
 
 <!-- Volume Opname Field -->
-<div class="form-group">
+<div class="form-group col-sm-12">
+    <div class="col-sm-3">
     {!! Form::label('volume_opname', 'Volume Opname:') !!}
-    <p>{!! $opname->volume_opname !!}</p>
+  </div>
+  <div class="col-sm-9">
+    {!! $opname->volume_opname !!}
+  </div>
 </div>
+
 
 <!-- Keterangan Field -->
-<div class="form-group">
+<div class="form-group col-sm-12">
+    <div class="col-sm-3">
     {!! Form::label('keterangan', 'Keterangan:') !!}
-    <p>{!! $opname->keterangan !!}</p>
+  </div>
+  <div class="col-sm-9">
+    {!! $opname->keterangan !!}
+  </div>
 </div>
+
 
 <!-- Tanggal Pemakaian Field -->
-<div class="form-group">
+<div class="form-group col-sm-12">
+    <div class="col-sm-3">
     {!! Form::label('tanggal_pemakaian', 'Tanggal Pemakaian:') !!}
-    <p>{!! $opname->tanggal_pemakaian !!}</p>
+  </div>
+  <div class="col-sm-9">
+    {!! $opname->tanggal_pemakaian !!}
+  </div>
 </div>
+
 
 <!-- Created At Field -->
-<div class="form-group">
+<div class="form-group col-sm-12">
+    <div class="col-sm-3">
     {!! Form::label('created_at', 'Created At:') !!}
-    <p>{!! $opname->created_at !!}</p>
+  </div>
+  <div class="col-sm-9">
+    {!! $opname->created_at !!}
+  </div>
 </div>
+
 
 <!-- Updated At Field -->
-<div class="form-group">
+<div class="form-group col-sm-12">
+    <div class="col-sm-3">
     {!! Form::label('updated_at', 'Updated At:') !!}
-    <p>{!! $opname->updated_at !!}</p>
+  </div>
+  <div class="col-sm-9">
+    {!! $opname->updated_at !!}
+  </div>
 </div>
-

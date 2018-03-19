@@ -64,6 +64,14 @@ class PengadaanController extends AppBaseController
 
         $pengadaan = $this->pengadaanRepository->create($input);
 
+        $bahan_baku = BahanBaku::find($pengadaan->bahan_baku_id);
+
+        $total = $bahan_baku->sisa + $pengadaan->berat;
+
+        $bahan_baku->sisa = $total;
+        $bahan_baku->save();
+
+
         Flash::success('Pengadaan saved successfully.');
 
         return redirect(route('pengadaans.index'));
@@ -122,6 +130,9 @@ class PengadaanController extends AppBaseController
     public function update($id, UpdatePengadaanRequest $request)
     {
         $pengadaan = $this->pengadaanRepository->findWithoutFail($id);
+        $bahan_baku = BahanBaku::find($pengadaan->bahan_baku_id);
+        $input = $request->all();
+        $old_volume = $pengadaan->volume_opname;
 
         if (empty($pengadaan)) {
             Flash::error('Pengadaan not found');
@@ -129,7 +140,11 @@ class PengadaanController extends AppBaseController
             return redirect(route('pengadaans.index'));
         }
 
-        $pengadaan = $this->pengadaanRepository->update($request->all(), $id);
+
+
+        $bahan_baku->sisa += $input['berat'] - $old_volume;
+        $bahan_baku->update();
+        $pengadaan = $this->pengadaanRepository->update($input, $id);
 
         Flash::success('Pengadaan updated successfully.');
 
@@ -146,6 +161,11 @@ class PengadaanController extends AppBaseController
     public function destroy($id)
     {
         $pengadaan = $this->pengadaanRepository->findWithoutFail($id);
+        $bahan_baku = BahanBaku::find($pengadaan->bahan_baku_id);
+        $old_volume = $pengadaan->berat;
+
+        $bahan_baku->sisa -=  $old_volume;
+        $bahan_baku->save();
 
         if (empty($pengadaan)) {
             Flash::error('Pengadaan not found');

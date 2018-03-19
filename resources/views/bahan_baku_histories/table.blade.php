@@ -1,33 +1,31 @@
 <table class="table table-responsive" id="bahanBakuHistories-table">
     <thead>
         <tr>
-            <th>Bahan Baku Id</th>
+          <th>#</th>
+        <th>Bahan Baku</th>
         <th>Type</th>
-        <th>Pengadaan Id</th>
-        <th>Produksi Id</th>
-        <th>Opname Id</th>
+        <th>Volume</th>
         <th>Total Sisa</th>
-            <th colspan="3">Action</th>
         </tr>
     </thead>
     <tbody>
+      @php
+        $no = 1
+      @endphp
     @foreach($bahanBakuHistories as $bahanBakuHistory)
         <tr>
-            <td>{!! $bahanBakuHistory->bahan_baku_id !!}</td>
-            <td>{!! $bahanBakuHistory->type !!}</td>
-            <td>{!! $bahanBakuHistory->pengadaan_id !!}</td>
-            <td>{!! $bahanBakuHistory->produksi_id !!}</td>
-            <td>{!! $bahanBakuHistory->opname_id !!}</td>
+            <td>{{ $no++ }}</td>
+            <td>{!! $bahanBakuHistory->bahan_baku->nama_bahan_baku !!}</td>
+            @if ($produksi = $bahanBakuHistory->produksi)
+              <td><a href="{{ route('pemesanans.produksis.show', [$produksi->pemesanan, $produksi])}}">Produksi</a></td>
+            @elseif ($pengadaan = $bahanBakuHistory->pengadaan)
+              <td><a href="{{ route('pengadaans.show', $pengadaan->id)}}">Pengadaan</a></td>
+            @else
+              <td><a href="{{ route('opnames.show', $bahanBakuHistory->opname->id)}}">Pengadaan</a></td>
+            @endif
+
+            <td>{{ abs($bahanBakuHistory->volume) }}</td>
             <td>{!! $bahanBakuHistory->total_sisa !!}</td>
-            <td>
-                {!! Form::open(['route' => ['bahanBakuHistories.destroy', $bahanBakuHistory->id], 'method' => 'delete']) !!}
-                <div class='btn-group'>
-                    <a href="{!! route('bahanBakuHistories.show', [$bahanBakuHistory->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                    <a href="{!! route('bahanBakuHistories.edit', [$bahanBakuHistory->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
-                </div>
-                {!! Form::close() !!}
-            </td>
         </tr>
     @endforeach
     </tbody>

@@ -53,4 +53,9 @@ class Opname extends Model
         'volume_opname' => 'required',
         'tanggal_pemakaian' => 'required'
     ];
+
+    public function bahan_baku()
+    {
+        return $this->belongsTo('App\Models\BahanBaku');
+    }
 }

@@ -2,10 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Bahan Baku Histories</h1>
-        <h1 class="pull-right">
-           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('bahanBakuHistories.create') !!}">Add New</a>
-        </h1>
+        <h1 class="pull-left">Riwayat Bahan Baku</h1>
     </section>
     <div class="content">
         <div class="clearfix"></div>
@@ -19,8 +16,20 @@
             </div>
         </div>
         <div class="text-center">
-        
+
         </div>
     </div>
 @endsection
 
+@section('scripts')
+
+  <script type="text/javascript">
+  $(document).ready(function() {
+    var table = $('#bahanBakuHistories-table').DataTable({
+      responsive: true,
+    });
+    new $.fn.dataTable.FixedHeader(table);
+  });
+  </script>
+
+@endsection

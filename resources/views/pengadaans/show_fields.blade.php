@@ -1,13 +1,3 @@
-<!-- Id Field -->
-<div class="form-group col-sm-12">
-    <div class="col-sm-3">
-    {!! Form::label('id', 'ID') !!}
-  </div>
-  <div class="col-sm-9">
-    {!! $pengadaan->id !!}
-  </div>
-</div>
-
 <!-- Bahan Baku Id Field -->
 <div class="form-group col-sm-12">
   <div class="col-sm-3">
