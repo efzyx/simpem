@@ -19,7 +19,6 @@ use App\Models\Produksi;
 
 class ProduksiController extends AppBaseController
 {
-
     public function __construct()
     {
         $this->supirs = Supir::pluck('nama_supir', 'id');

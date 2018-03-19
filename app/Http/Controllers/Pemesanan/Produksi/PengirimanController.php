@@ -16,7 +16,6 @@ use App\Models\Pengiriman;
 
 class PengirimanController extends AppBaseController
 {
-
     public function index(Pemesanan $pemesanan, Produksi $produksi, Request $request)
     {
         $pengirimans = $produksi->pengirimans;
@@ -43,5 +42,4 @@ class PengirimanController extends AppBaseController
 
         return redirect()->back();
     }
-
 }

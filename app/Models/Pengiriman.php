@@ -54,16 +54,16 @@ class Pengiriman extends Model
 
     public function last()
     {
-      return $this->orderBy('id', 'asc')->first();
+        return $this->orderBy('id', 'asc')->first();
     }
 
     public function produksi()
     {
-      return $this->belongsTo(Produksi::class);
+        return $this->belongsTo(Produksi::class);
     }
 
     public function user()
     {
-      return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User');
     }
 }

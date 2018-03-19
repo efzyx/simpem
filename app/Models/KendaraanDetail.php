@@ -56,6 +56,6 @@ class KendaraanDetail extends Model
 
     public function last()
     {
-      return $this->latest()->first();
+        return $this->latest()->first();
     }
 }
