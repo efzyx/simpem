@@ -102,6 +102,6 @@ class Produksi extends Model
 
     public function bahan_baku_histories()
     {
-      return $this->hasMany(BahanBakuHistory::class);
+        return $this->hasMany(BahanBakuHistory::class);
     }
 }

@@ -220,9 +220,9 @@ class ProduksiController extends AppBaseController
 
         $komposisi_mutus = $produksi->pemesanan->produk->komposisi_mutus;
         foreach ($komposisi_mutus as $key => $komposisi) {
-          $bahan_baku = BahanBaku::find($komposisi->bahan_baku_id);
-          $bahan_baku->sisa += $komposisi->volume * $produksi->volume;
-          $bahan_baku->update();
+            $bahan_baku = BahanBaku::find($komposisi->bahan_baku_id);
+            $bahan_baku->sisa += $komposisi->volume * $produksi->volume;
+            $bahan_baku->update();
         }
 
         $this->produksiRepository->delete($id);

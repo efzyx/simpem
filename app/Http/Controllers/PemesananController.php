@@ -134,8 +134,8 @@ class PemesananController extends AppBaseController
         if ($produksis->count() &&
            ($input['volume_pesanan'] != $old_volume ||
            $input['produk_id'] != $old_produk)) {
-          Flash::error('Proses produksi sedang berjalan, tidak bisa rubah jenis produk dan atau volume pesanan');
-          return redirect()->back();
+            Flash::error('Proses produksi sedang berjalan, tidak bisa rubah jenis produk dan atau volume pesanan');
+            return redirect()->back();
         }
 
         if (empty($pemesanan)) {
