@@ -24,7 +24,7 @@ class ProduksiController extends AppBaseController
     public function __construct()
     {
         $this->supirs = Supir::pluck('nama_supir', 'id');
-        $this->kendaraans = Kendaraan::select(DB::raw("concat(jenis_kendaraan, ' - ', no_polisi) as nama"), 'id')
+        $this->kendaraans = Kendaraan::select(DB::raw("concat(no_polisi, ' - ', jenis_kendaraan) as nama"), 'id')
                           ->pluck('nama', 'id');
     }
 

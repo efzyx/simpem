@@ -17,7 +17,9 @@
         <div class="clearfix"></div>
         <div class="box box-primary">
             <div class="box-body">
-                    @include('pemesanans.produksis.table')
+              <div class="table-responsive">
+                @include('pemesanans.produksis.table')
+              </div>
             </div>
         </div>
         <div class="text-center">
@@ -28,8 +30,11 @@
 
 @section('scripts')
   <script type="text/javascript">
-  $('select').on('change',function() {
-    $(this.form).trigger('submit')
+  $(document).ready(function() {
+    $('#produksis-table').DataTable();
+    $('select').on('change',function() {
+      $(this.form).trigger('submit')
+    });
   });
   </script>
 @endsection
