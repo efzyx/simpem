@@ -63,4 +63,24 @@ class BahanBakuHistory extends Model
         'opname_id' => 'nullable',
         'total_sisa' => 'required'
     ];
+
+    public function bahan_baku()
+    {
+      return $this->belongsTo(BahanBaku::class);
+    }
+    
+    public function produksi()
+    {
+      return $this->belongsTo(Produksi::class);
+    }
+
+    public function opname()
+    {
+      return $this->belongsTo(Opname::class);
+    }
+
+    public function pengadaan()
+    {
+      return $this->belongsTo(Pengadaan::class);
+    }
 }
