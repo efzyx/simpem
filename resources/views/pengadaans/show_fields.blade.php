@@ -41,7 +41,7 @@
 <!-- Supir Field -->
 <div class="form-group col-sm-12">
   <div class="col-sm-3">
-    {!! Form::label('supir', 'Supir') !!}
+    {!! Form::label('supir', 'Supir/No Polisi') !!}
   </div>
   <div class="col-sm-9">
     {!! $pengadaan->supir !!}
