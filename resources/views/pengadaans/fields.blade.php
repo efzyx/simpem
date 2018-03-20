@@ -6,7 +6,7 @@
 
 <!-- Berat Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('berat', 'Berat:') !!}
+    {!! Form::label('berat', 'Kuantitas:') !!}
     {!! Form::number('berat', null, ['class' => 'form-control']) !!}
 </div>
 

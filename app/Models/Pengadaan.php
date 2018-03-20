@@ -74,4 +74,21 @@ class Pengadaan extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function bahan_baku_histories()
+    {
+      return $this->hasMany(BahanBakuHistory::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::deleting(function (Pengadaan $pengadaan) {
+
+            foreach ($pengadaan->bahan_baku_histories as $bahan_baku_history) {
+                $bahan_baku_history->delete();
+            }
+        });
+    }
 }
