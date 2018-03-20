@@ -74,6 +74,7 @@ class OpnameController extends AppBaseController
             $history->bahan_baku_id = $opname->bahan_baku_id;
             $history->type = 1;
             $history->opname_id = $opname->id;
+            $history->volume = $opname->volume_opname;
             $history->total_sisa = $bahan_baku->sisa;
             $history->save();
         } else {
@@ -159,6 +160,7 @@ class OpnameController extends AppBaseController
         $history->bahan_baku_id = $opname->bahan_baku_id;
         $history->type = 1;
         $history->opname_id = $opname->id;
+        $history->volume = $opname->volume_opname;
         $history->total_sisa = $bahan_baku->sisa;
         $history->update();
 
