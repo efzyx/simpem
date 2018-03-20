@@ -1,42 +1,67 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+  <div class="card-header">
+    <section class="content-header">
+    <h1>
+      Beranda
+      <small>Dashboard</small>
+    </h1>
+  </section>
+  </div>
+  <section class="content">
+    <div class="col-md-7">
+      <div class="box box-solid box-primary">
+        <div class="box-header">
+          <h3 class="box-title">Status Bahan Baku</h3>
+        </div>
+        <div class="box-body">
+          <div class="row">
+            @foreach($bahanBakus as $bahanBaku)
+              @php
+                $sisa = $bahanBaku->sisa;
+              @endphp
+            <div class="col-md-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box {{ $sisa < 250 ? 'bg-red' : ($sisa < 500 ? 'bg-yellow' : ($sisa < 1000 ? 'bg-green' : 'bg-aqua')) }}" sty>
+                <div class="inner">
+                  <h3>{!! $bahanBaku->sisa !!}</h3>
 
-  <section class="content-header">
-  <h1>
-    Welcome
-    <small>Informasi Bahan Baku</small>
-  </h1>
-</section>
-
-    <div class="row">
-
-      <div class="row">
-        @foreach($bahanBakus as $bahanBaku)
-
-        <div class="col-lg-2 col-xs-5">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h3>{!! $bahanBaku->sisa !!}</h3>
-
-              <p>{!! $bahanBaku->nama_bahan_baku !!}</p>
+                  <p>{!! $bahanBaku->satuan !!}</p>
+                </div>
+                <a href="#" class="small-box-footer">{!! $bahanBaku->nama_bahan_baku !!}</i></a>
+              </div>
             </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="#" class="small-box-footer">Information</i></a>
+            @endforeach
           </div>
         </div>
 
-
-        @endforeach
-
-        <!-- ./col -->
       </div>
     </div>
+    <div class="col-md-5">
+      <div class="box box-solid bg-green-gradient">
+        <div class="box-header">
+          <i class="fa fa-calendar"></i>
+          <h3 class="box-title">Kalender</h3>
+        </div>
+        <div class="box-body no-padding">
+          <div id="calendar" style="width: 100%"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  </div>
+@endsection
 
+@section('scripts')
+  <script>
+    $(function () {
+      $('#calendar').datepicker({
+        "setDate": new Date(),
+        "autoclose": true,
+        "todayBtn": true,
+        "todayHighlight": true
+      })
+    })
+</script>
 @endsection

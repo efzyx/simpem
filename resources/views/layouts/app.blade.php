@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link href="{{ asset('css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.min.css')}}">
     @yield('css')
 </head>
 
@@ -168,7 +169,8 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/fixedheader/3.1.3/js/dataTables.fixedHeader.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap.min.js"></script>
-
+    <script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.min.js')}}">
+    </script>
     @yield('scripts')
 </body>
 </html>
