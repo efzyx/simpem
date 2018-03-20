@@ -8,6 +8,7 @@ use App\Repositories\PengadaanRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use App\Models\BahanBakuHistory;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Models\BahanBaku;
 use Response;
@@ -70,6 +71,13 @@ class PengadaanController extends AppBaseController
 
         $bahan_baku->sisa = $total;
         $bahan_baku->save();
+
+        $history = new BahanBakuHistory();
+        $history->bahan_baku_id = $pengadaan->bahan_baku_id;
+        $history->type = 2;
+        $history->pengadaan_id = $pengadaan->id;
+        $history->total_sisa = $bahan_baku->sisa;
+        $history->save();
 
 
         Flash::success('Pengadaan saved successfully.');
@@ -145,6 +153,13 @@ class PengadaanController extends AppBaseController
         $bahan_baku->sisa += $input['berat'] - $old_volume;
         $bahan_baku->update();
         $pengadaan = $this->pengadaanRepository->update($input, $id);
+
+        $history = $bahan_baku->bahan_baku_histories->where('pengadaan_id', $pengadaan->id)->first();
+        $history->bahan_baku_id = $pengadaan->bahan_baku_id;
+        $history->type = 2;
+        $history->pengadaan_id = $pengadaan->id;
+        $history->total_sisa = $bahan_baku->sisa;
+        $history->update();
 
         Flash::success('Pengadaan updated successfully.');
 

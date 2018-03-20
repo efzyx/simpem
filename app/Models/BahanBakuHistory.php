@@ -68,21 +68,21 @@ class BahanBakuHistory extends Model
 
     public function bahan_baku()
     {
-      return $this->belongsTo(BahanBaku::class);
+        return $this->belongsTo(BahanBaku::class);
     }
     
     public function produksi()
     {
-      return $this->belongsTo(Produksi::class);
+        return $this->belongsTo(Produksi::class);
     }
 
     public function opname()
     {
-      return $this->belongsTo(Opname::class);
+        return $this->belongsTo(Opname::class);
     }
 
     public function pengadaan()
     {
-      return $this->belongsTo(Pengadaan::class);
+        return $this->belongsTo(Pengadaan::class);
     }
 }
