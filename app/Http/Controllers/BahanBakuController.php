@@ -56,6 +56,7 @@ class BahanBakuController extends AppBaseController
     public function store(CreateBahanBakuRequest $request)
     {
         $input = $request->all();
+        $input['kode'] = strtolower(str_replace(' ', '_', $input['nama_bahan_baku']));
 
         $bahanBaku = $this->bahanBakuRepository->create($input);
 

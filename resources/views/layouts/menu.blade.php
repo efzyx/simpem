@@ -1,4 +1,9 @@
+<li class="{{ Request::is('/') ? 'active' : '' }}">
+    <a href="{!! url('/') !!}"><i class="fa fa-home"></i><span>Beranda</span></a>
+</li>
+
 <li class="header text-center">MENU</li>
+
 <li class="{{ Request::is('produks*') ? 'active' : '' }}">
     <a href="{!! route('produks.index') !!}"><i class="fa fa-industry"></i><span>Produk</span></a>
 </li>

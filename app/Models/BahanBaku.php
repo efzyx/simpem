@@ -26,7 +26,8 @@ class BahanBaku extends Model
     public $fillable = [
         'nama_bahan_baku',
         'satuan',
-        'sisa'
+        'sisa',
+        'kode',
     ];
 
     /**
@@ -59,7 +60,7 @@ class BahanBaku extends Model
     {
         return $this->hasMany(BahanBakuHistory::class);
     }
-    
+
     public function pengadaans()
     {
         return $this->hasMany('App\Models\Pengadaan');
