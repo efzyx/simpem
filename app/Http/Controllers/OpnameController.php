@@ -8,6 +8,7 @@ use App\Repositories\OpnameRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use App\Models\BahanBaku;
+use App\Models\BahanBakuHistory;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
@@ -68,6 +69,13 @@ class OpnameController extends AppBaseController
         if ($sisa>0) {
             $bahan_baku->sisa = $sisa;
             $bahan_baku->save();
+
+            $history = new BahanBakuHistory();
+            $history->bahan_baku_id = $opname->bahan_baku_id;
+            $history->type = 1;
+            $history->opname_id = $opname->id;
+            $history->total_sisa = $bahan_baku->sisa;
+            $history->save();
         } else {
             Flash::error('Bahan Baku Kurang');
             return redirect()->back()->withInput($input);
@@ -141,10 +149,20 @@ class OpnameController extends AppBaseController
 
             return redirect(route('opnames.index'));
         }
-        $bahan_baku->sisa += $input['volume_opname'] - $old_volume;
+
+        $bahan_baku->sisa -= $input['volume_opname'] - $old_volume;
         $bahan_baku->update();
 
         $opname = $this->opnameRepository->update($input, $id);
+
+        $history = $bahan_baku->bahan_baku_histories->where('opname_id', $opname->id)->first();
+        $history->bahan_baku_id = $opname->bahan_baku_id;
+        $history->type = 1;
+        $history->opname_id = $opname->id;
+        $history->total_sisa = $bahan_baku->sisa;
+        $history->update();
+
+
         Flash::success('Opname updated successfully.');
 
         return redirect(route('opnames.index'));
