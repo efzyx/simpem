@@ -27,9 +27,8 @@ class CreateProdukRequest extends FormRequest
     public function rules()
     {
         $rules = Produk::$rules;
-        $bahan_bakus = BahanBaku::pluck('nama_bahan_baku');
+        $bahan_bakus = BahanBaku::pluck('kode');
         foreach ($bahan_bakus as $key => $bahan_baku) {
-            $bahan_baku = str_replace(' ', '_', strtolower($bahan_baku));
             $rules[$bahan_baku] = 'required';
         }
         return $rules;
