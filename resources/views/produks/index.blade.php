@@ -23,3 +23,10 @@
         </div>
     </div>
 @endsection
+@section('scripts')
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#produks-table').DataTable();
+  });
+</script>
+@endsection

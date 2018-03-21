@@ -26,3 +26,10 @@
         </div>
     </div>
 @endsection
+@section('scripts')
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#pengadaans-table').DataTable();
+  });
+</script>
+@endsection

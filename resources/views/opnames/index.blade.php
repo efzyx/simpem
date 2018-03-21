@@ -19,8 +19,15 @@
             </div>
         </div>
         <div class="text-center">
-        
+
         </div>
     </div>
 @endsection
 
+@section('scripts')
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#opnames-table').DataTable();
+  });
+</script>
+@endsection
