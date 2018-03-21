@@ -27,9 +27,6 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $('#supirs-table').DataTable();
-    $('select').on('change', function() {
-      $(this.form).trigger('submit')
-    });
   });
 </script>
 @endsection

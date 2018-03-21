@@ -28,9 +28,6 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $('#opnames-table').DataTable();
-    $('select').on('change', function() {
-      $(this.form).trigger('submit')
-    });
   });
 </script>
 @endsection
