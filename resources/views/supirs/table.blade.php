@@ -1,14 +1,19 @@
 <table class="table table-responsive" id="supirs-table">
     <thead>
         <tr>
+          <th>#</th>
             <th>No Supir</th>
         <th>Nama Supir</th>
-            <th colspan="3">Action</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
+      @php
+      $no = 1;
+      @endphp
     @foreach($supirs as $supir)
         <tr>
+          <td>{!! $no++ !!}</td>
             <td>{!! $supir->no_supir !!}</td>
             <td>{!! $supir->nama_supir !!}</td>
             <td>

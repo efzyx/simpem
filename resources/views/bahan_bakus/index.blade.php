@@ -19,8 +19,14 @@
             </div>
         </div>
         <div class="text-center">
-        
+
         </div>
     </div>
 @endsection
-
+@section('scripts')
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#bahanBakus-table').DataTable();
+  });
+</script>
+@endsection

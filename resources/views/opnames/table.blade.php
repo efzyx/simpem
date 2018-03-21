@@ -1,16 +1,21 @@
 <table class="table table-responsive" id="opnames-table">
     <thead>
         <tr>
+          <th>#</th>
             <th>Bahan Baku</th>
         <th>Volume Opname</th>
         <th>Keterangan</th>
         <th>Tanggal Pemakaian</th>
-            <th colspan="3">Action</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
+      @php
+        $no = 1;
+      @endphp
     @foreach($opnames as $opname)
         <tr>
+          <td>{!! $no++ !!}</td>
             <td>{!! $opname->bahan_baku->nama_bahan_baku !!}</td>
             <td>{!! $opname->volume_opname !!}</td>
             <td>{!! $opname->keterangan !!}</td>

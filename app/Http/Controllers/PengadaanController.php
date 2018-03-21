@@ -66,7 +66,7 @@ class PengadaanController extends AppBaseController
         $pengadaan = $this->pengadaanRepository->create($input);
 
         $bahan_baku = BahanBaku::find($pengadaan->bahan_baku_id);
-        $bahan_baku->sisa = $bahan_baku->sisa + $pengadaan->berat;;
+        $bahan_baku->sisa = $bahan_baku->sisa + $pengadaan->berat;
         $bahan_baku->save();
 
         $history = new BahanBakuHistory();

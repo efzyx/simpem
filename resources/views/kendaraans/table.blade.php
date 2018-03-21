@@ -5,7 +5,7 @@
             <th>Jenis Kendaraan</th>
             <th>No Polisi</th>
             <th>Status</th>
-            <th colspan="3">Action</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>

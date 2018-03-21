@@ -1,15 +1,20 @@
 <table class="table table-responsive" id="bahanBakus-table">
     <thead>
         <tr>
+          <th>#</th>
             <th>Nama Bahan Baku</th>
         <th>Satuan</th>
         <th>Sisa</th>
-            <th colspan="3">Action</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
+      @php
+      $no=1
+      @endphp
     @forelse($bahanBakus as $bahanBaku)
         <tr>
+          <td>{!! $no++ !!}</td>
             <td>{!! $bahanBaku->nama_bahan_baku !!}</td>
             <td>{!! $bahanBaku->satuan !!}</td>
             <td>{!! $bahanBaku->sisa !!}</td>
