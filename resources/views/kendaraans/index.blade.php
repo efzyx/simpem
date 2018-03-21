@@ -23,3 +23,13 @@
         </div>
     </div>
 @endsection
+@section('scripts')
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#kendaraans-table').DataTable();
+    $('select').on('change', function() {
+      $(this.form).trigger('submit')
+    });
+  });
+</script>
+@endsection

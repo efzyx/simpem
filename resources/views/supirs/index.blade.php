@@ -19,8 +19,17 @@
             </div>
         </div>
         <div class="text-center">
-        
+
         </div>
     </div>
 @endsection
-
+@section('scripts')
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#supirs-table').DataTable();
+    $('select').on('change', function() {
+      $(this.form).trigger('submit')
+    });
+  });
+</script>
+@endsection
