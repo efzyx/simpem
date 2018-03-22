@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Jabatan
+            Jabatan <small>Tambah</small>
         </h1>
     </section>
     <div class="content">

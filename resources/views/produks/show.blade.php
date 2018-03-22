@@ -3,11 +3,14 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Produk
+            Produk <small>Show {{ $produk->mutu_produk }}</small>
         </h1>
     </section>
     <div class="content">
-        <div class="box box-primary">
+      <div class="box box-solid box-primary">
+        <div class="box-header">
+          <h3 class="box-title">Detail Produk {{ $produk->mutu_produk }}</h3>
+        </div>
             <div class="box-body">
                 <div class="row" style="padding-left: 20px">
                     @include('produks.show_fields')

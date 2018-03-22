@@ -1,6 +1,6 @@
 @extends('layouts.app') @section('content')
 <section class="content-header">
-  <h1 class="pull-left">List Produksi</h1>
+  <h1 class="pull-left">Produksi</h1>
   <h1 class="pull-right">
            <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('produksis.create') !!}">Add New</a>
         </h1>
@@ -11,7 +11,10 @@
   @include('flash::message')
 
   <div class="clearfix"></div>
-  <div class="box box-primary">
+  <div class="box box-solid box-primary">
+    <div class="box-header">
+      <h3 class="box-title">List Produksi</h3>
+    </div>
     <div class="box-body">
       <div class="table-responsive">
         @include('produksis.table')

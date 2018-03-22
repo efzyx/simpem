@@ -5,7 +5,7 @@
         <th>Nama</th>
         <th>Email</th>
         <th>Jabatan</th>
-            <th colspan="3">Action</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>

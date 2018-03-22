@@ -15,7 +15,9 @@
         <div class="clearfix"></div>
         <div class="box box-primary">
             <div class="box-body">
+              <div class="table-responsive">
                     @include('bahan_bakus.table')
+              </div>
             </div>
         </div>
         <div class="text-center">

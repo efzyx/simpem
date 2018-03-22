@@ -1,6 +1,6 @@
 @extends('layouts.app') @section('content')
 <section class="content-header">
-  <h1 class="pull-left">List Pemesanan</h1>
+  <h1 class="pull-left">Pemesanan</h1>
   <br><br><br>
   <h1 class="pull-left">
            <a class="btn btn-danger pull-left" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('downloadPdf') !!}" target="_blank"><i class="fa fa-file"></i> Download</a>
@@ -15,7 +15,10 @@
   @include('flash::message')
 
   <div class="clearfix"></div>
-  <div class="box box-primary">
+  <div class="box box-solid box-primary">
+    <div class="box-header">
+      <h3 class="box-title">List Pemesanan</h3>
+    </div>
     <div class="box-body">
       @include('pemesanans.table')
     </div>
