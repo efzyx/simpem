@@ -3,11 +3,14 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Detail Status Kendaraan {{ $kendaraan->jenis_kendaraan }} ({{ $kendaraan->no_polisi }})
+            Status Kendaraan {{ $kendaraan->jenis_kendaraan }} ({{ $kendaraan->no_polisi }})
         </h1>
     </section>
     <div class="content">
-        <div class="box box-primary">
+      <div class="box box-solid box-primary">
+        <div class="box-header">
+          <h3 class="box-title">Detail Status Kendaraan</h3>
+        </div>
             <div class="box-body">
                 <div class="row" style="padding-left: 20px">
                     @include('kendaraan_details.show_fields')

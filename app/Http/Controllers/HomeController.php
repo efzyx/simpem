@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BahanBaku;
+use App\Models\Produk;
 
 class HomeController extends Controller
 {
@@ -25,7 +26,9 @@ class HomeController extends Controller
     public function index()
     {
         $bahanBaku = BahanBaku::all();
+        $produks = Produk::all();
         return view('home')
-        ->with('bahanBakus', $bahanBaku);
+        ->with('bahanBakus', $bahanBaku)
+        ->with('produks', $produks);
     }
 }

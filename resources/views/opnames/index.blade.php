@@ -13,9 +13,14 @@
         @include('flash::message')
 
         <div class="clearfix"></div>
-        <div class="box box-primary">
+        <div class="box box-solid box-primary">
+          <div class="box-header">
+            <h3 class="box-title">List Opname</h3>
+          </div>
             <div class="box-body">
+              <div class="table-responsive">
                     @include('opnames.table')
+              </div>
             </div>
         </div>
         <div class="text-center">

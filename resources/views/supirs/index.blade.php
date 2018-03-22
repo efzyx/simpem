@@ -13,9 +13,14 @@
         @include('flash::message')
 
         <div class="clearfix"></div>
-        <div class="box box-primary">
+        <div class="box box-solid box-primary">
+          <div class="box-header">
+            <h3 class="box-title">List Supir</h3>
+          </div>
             <div class="box-body">
-                    @include('supirs.table')
+              <div class="table-responsive">
+                @include('supirs.table')
+              </div>
             </div>
         </div>
         <div class="text-center">

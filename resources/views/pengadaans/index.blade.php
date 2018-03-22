@@ -13,12 +13,14 @@
         @include('flash::message')
 
         <div class="clearfix"></div>
-        <div class="box box-primary">
+        <div class="box box-solid box-primary">
+          <div class="box-header">
+            <h3 class="box-title">List Pengadaan</h3>
+          </div>
             <div class="box-body">
-                    @include('pengadaans.table')
-                    <div class="pull-right">
-                      {{ $pengadaans->render() }}
-                    </div>
+              <div class="table-responsive">
+                  @include('pengadaans.table')
+              </div>
             </div>
         </div>
         <div class="text-center">
