@@ -1,13 +1,7 @@
 @extends('layouts.app') @section('content')
 <section class="content-header">
   <h1 class="pull-left">Pemesanan</h1>
-  <br><br><br>
-  <h1 class="pull-left">
-           <a class="btn btn-danger pull-left" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('downloadPdf') !!}" target="_blank"><i class="fa fa-file"></i> Download</a>
-        </h1>
-  <h1 class="pull-right">
-           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('pemesanans.create') !!}">Add New</a>
-        </h1>
+  <hr>
 </section>
 <div class="content">
   <div class="clearfix"></div>
@@ -15,11 +9,39 @@
   @include('flash::message')
 
   <div class="clearfix"></div>
+  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#filter"><i class="fa fa-filter"></i> Filter</button>
+  <br><br>
+  <div id="filter" class="collapse">
+    <div class="box box-solid box-primary">
+      <div class="box-header">
+        <h3 class="box-title">Filter</h3>
+      </div>
+      <div class="box-body">
+        {!! Form::open(['route' => 'pemesanans.filter']) !!}
+
+            @include('pemesanans.filter_fields')
+
+        {!! Form::close() !!}
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
   <div class="box box-solid box-primary">
     <div class="box-header">
       <h3 class="box-title">List Pemesanan</h3>
     </div>
     <div class="box-body">
+      <h1 class="pull-left">
+            {!! Form::open(['route' => 'downloadPdf' , 'target' => '_blank'])!!}
+            {!! Form::hidden('pemesanans', $pemesanans) !!}
+            {!! Form::submit('Donwload', ['class' => 'btn btn-danger pull-left', 'style' => 'margin-top: -10px;margin-bottom: 5px']) !!}
+            </h1>
+      <h1 class="pull-right">
+               <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('pemesanans.create') !!}">Add New</a>
+            </h1>
+          <br><br><hr>
+
+
       @include('pemesanans.table')
     </div>
   </div>

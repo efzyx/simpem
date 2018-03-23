@@ -21,7 +21,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('supirs', 'SupirController');
 
-    Route::get('pemesanans/downloadPdf', 'PemesananController@downloadPdf')->name('downloadPdf');
+    Route::post('pemesanans/downloadPdf', 'PemesananController@downloadPdf')->name('downloadPdf');
+    Route::post('pemesanans/filter', 'PemesananController@filter')->name('pemesanans.filter');
     Route::resource('pemesanans', 'PemesananController');
     Route::resource('pemesanans.produksis', 'Pemesanan\ProduksiController');
     Route::resource('pemesanans.produksis.pengiriman', 'Pemesanan\Produksi\PengirimanController');

@@ -11,13 +11,17 @@
       </tr>
     </thead>
     <tbody>
-      @php $no = 1; $status = [ 'Produksi', 'Sedang dikirim', 'Terkirim' ]; @endphp @foreach($pemesanans as $pemesanan)
+      @php $no = 1; @endphp
+      @foreach($pemesanans as $pemesanan)
       <tr>
         <td width="15vw">{{ $no++ }}</td>
         <td width="100vw">{!! $pemesanan->nama_pemesanan !!}</td>
         <td width="100vw">{!! $pemesanan->produk->mutu_produk !!}</td>
         <td width="100vw">{!! $pemesanan->tanggal_pesanan->format('d F y') !!}</td>
-        <td width="100vw">{!! $status[$pemesanan->status] !!}</td>
+        @php
+          $sisa = $pemesanan->volume_pesanan - $pemesanan->produksis->sum('volume');
+        @endphp
+        <td width="100vw">{!! 'Sisa '.$sisa !!}</td>
         <td width="100vw">
           {!! Form::open(['route' => ['pemesanans.destroy', $pemesanan->id], 'method' => 'delete']) !!}
           <div class='btn-group'>
