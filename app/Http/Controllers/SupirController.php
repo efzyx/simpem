@@ -35,8 +35,8 @@ class SupirController extends AppBaseController
         $title = "Supir";
 
         return view('supirs.index')
-            ->with('supirs', $supirs)
-            ->with('title', $title);
+              ->with('supirs', $supirs)
+              ->with('title', $title);
     }
 
     /**
@@ -48,7 +48,7 @@ class SupirController extends AppBaseController
     {
         $title = "Supir - Tambah";
         return view('supirs.create')
-        ->with('title', $title);
+              ->with('title', $title);
     }
 
     /**
@@ -87,7 +87,9 @@ class SupirController extends AppBaseController
             return redirect(route('supirs.index'));
         }
 
-        return view('supirs.show')->with('supir', $supir)->with('title', $title);
+        return view('supirs.show')
+              ->with('supir', $supir)
+              ->with('title', $title);
     }
 
     /**
@@ -108,7 +110,9 @@ class SupirController extends AppBaseController
             return redirect(route('supirs.index'));
         }
 
-        return view('supirs.edit')->with('supir', $supir)->with('title', $title);
+        return view('supirs.edit')
+              ->with('supir', $supir)
+              ->with('title', $title);
     }
 
     /**

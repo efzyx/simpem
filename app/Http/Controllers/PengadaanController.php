@@ -69,8 +69,8 @@ class PengadaanController extends AppBaseController
         $input = $request->all();
 
         if ($input['berat'] > 500) {
-          Flash::error('Maksimal kuantitas pengadaan adalah 500');
-          return redirect()->back()->withInput($input);
+            Flash::error('Maksimal kuantitas pengadaan adalah 500');
+            return redirect()->back()->withInput($input);
         }
 
         $input['user_id'] = Auth::user()->id;
@@ -134,9 +134,9 @@ class PengadaanController extends AppBaseController
         }
 
         return view('pengadaans.edit')
-        ->with('pengadaan', $pengadaan)
-        ->with('bahanBakus', $this->bahanBakus)
-        ->with('title', $title);
+              ->with('pengadaan', $pengadaan)
+              ->with('bahanBakus', $this->bahanBakus)
+              ->with('title', $title);
     }
 
     /**
@@ -150,10 +150,10 @@ class PengadaanController extends AppBaseController
     public function update($id, UpdatePengadaanRequest $request)
     {
         if ($input['volume'] > 500) {
-          Flash::error('Maksimal kuantitas pengadaan adalah 500');
-          return redirect()->back()->withInput($input);
+            Flash::error('Maksimal kuantitas pengadaan adalah 500');
+            return redirect()->back()->withInput($input);
         }
-        
+
         $pengadaan = $this->pengadaanRepository->findWithoutFail($id);
         $bahan_baku = BahanBaku::find($pengadaan->bahan_baku_id);
         $input = $request->all();

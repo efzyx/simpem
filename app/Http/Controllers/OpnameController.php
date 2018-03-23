@@ -51,8 +51,8 @@ class OpnameController extends AppBaseController
     {
         $title = "Opname - Tambah";
         return view('opnames.create')
-        ->with('bahanBakus', $this->bahanBakus)
-        ->with('title', $title);
+              ->with('bahanBakus', $this->bahanBakus)
+              ->with('title', $title);
     }
 
     /**
@@ -71,9 +71,9 @@ class OpnameController extends AppBaseController
         $bahan_baku = BahanBaku::find($opname->bahan_baku_id);
         $bahan_baku->sisa -= $opname->volume_opname;
 
-        if ($bahan_baku->sisa <= 0){
-          Flash::error('Bahan Baku Kurang');
-          return redirect()->back()->withInput($input);
+        if ($bahan_baku->sisa <= 0) {
+            Flash::error('Bahan Baku Kurang');
+            return redirect()->back()->withInput($input);
         }
 
         $bahan_baku->save();
@@ -131,9 +131,9 @@ class OpnameController extends AppBaseController
         }
 
         return view('opnames.edit')
-        ->with('opname', $opname)
-        ->with('bahanBakus', $this->bahanBakus)
-        ->with('title', $title);
+              ->with('opname', $opname)
+              ->with('bahanBakus', $this->bahanBakus)
+              ->with('title', $title);
     }
 
     /**
@@ -160,11 +160,11 @@ class OpnameController extends AppBaseController
 
         $bahan_baku->sisa -= $input['volume_opname'] - $old_volume;
 
-        if ($bahan_baku->sisa <= 0){
-          Flash::error('Bahan Baku Kurang');
-          return redirect()->back()->withInput($input);
+        if ($bahan_baku->sisa <= 0) {
+            Flash::error('Bahan Baku Kurang');
+            return redirect()->back()->withInput($input);
         }
-        
+
         $bahan_baku->update();
 
         $opname = $this->opnameRepository->update($input, $id);

@@ -38,8 +38,8 @@ class UserController extends AppBaseController
         $title = "User";
 
         return view('users.index')
-            ->with('users', $users)
-            ->with('title', $title);
+              ->with('users', $users)
+              ->with('title', $title);
     }
 
     /**
