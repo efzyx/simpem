@@ -19,6 +19,7 @@ class SupirController extends AppBaseController
     public function __construct(SupirRepository $supirRepo)
     {
         $this->supirRepository = $supirRepo;
+        $this->middleware('role:admin,manager_produksi');
     }
 
     /**

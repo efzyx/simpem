@@ -23,6 +23,8 @@ class PengadaanController extends AppBaseController
     {
         $this->pengadaanRepository = $pengadaanRepo;
         $this->bahanBakus = BahanBaku::pluck('nama_bahan_baku', 'id');
+        $this->middleware('role:admin,manager_produksi,logistik')->only('index');
+        $this->middleware('role:logistik')->except('index');
     }
 
     /**
@@ -65,6 +67,12 @@ class PengadaanController extends AppBaseController
     public function store(CreatePengadaanRequest $request)
     {
         $input = $request->all();
+
+        if ($input['berat'] > 500) {
+          Flash::error('Maksimal kuantitas pengadaan adalah 500');
+          return redirect()->back()->withInput($input);
+        }
+
         $input['user_id'] = Auth::user()->id;
 
         $pengadaan = $this->pengadaanRepository->create($input);
@@ -118,7 +126,6 @@ class PengadaanController extends AppBaseController
     public function edit($id)
     {
         $pengadaan = $this->pengadaanRepository->findWithoutFail($id);
-        $bhnbakus = BahanBaku::pluck('nama_bahan_baku', 'id');
         $title = "Pengadaan - Edit";
         if (empty($pengadaan)) {
             Flash::error('Pengadaan not found');
@@ -142,6 +149,11 @@ class PengadaanController extends AppBaseController
      */
     public function update($id, UpdatePengadaanRequest $request)
     {
+        if ($input['volume'] > 500) {
+          Flash::error('Maksimal kuantitas pengadaan adalah 500');
+          return redirect()->back()->withInput($input);
+        }
+        
         $pengadaan = $this->pengadaanRepository->findWithoutFail($id);
         $bahan_baku = BahanBaku::find($pengadaan->bahan_baku_id);
         $input = $request->all();
@@ -154,6 +166,7 @@ class PengadaanController extends AppBaseController
         }
 
         $bahan_baku->sisa += $input['berat'] - $old_volume;
+
         $bahan_baku->update();
         $pengadaan = $this->pengadaanRepository->update($input, $id);
 

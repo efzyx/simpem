@@ -22,6 +22,7 @@ class OpnameController extends AppBaseController
     {
         $this->opnameRepository = $opnameRepo;
         $this->bahanBakus = BahanBaku::pluck('nama_bahan_baku', 'id');
+        $this->middleware('role:admin,manager_produksi');
     }
 
     /**
@@ -68,23 +69,22 @@ class OpnameController extends AppBaseController
         $opname = $this->opnameRepository->create($input);
 
         $bahan_baku = BahanBaku::find($opname->bahan_baku_id);
-        $sisa = $bahan_baku->sisa - $opname->volume_opname;
+        $bahan_baku->sisa -= $opname->volume_opname;
 
-        if ($sisa>0) {
-            $bahan_baku->sisa = $sisa;
-            $bahan_baku->save();
-
-            $history = new BahanBakuHistory();
-            $history->bahan_baku_id = $opname->bahan_baku_id;
-            $history->type = 1;
-            $history->opname_id = $opname->id;
-            $history->volume = $opname->volume_opname;
-            $history->total_sisa = $bahan_baku->sisa;
-            $history->save();
-        } else {
-            Flash::error('Bahan Baku Kurang');
-            return redirect()->back()->withInput($input);
+        if ($bahan_baku->sisa <= 0){
+          Flash::error('Bahan Baku Kurang');
+          return redirect()->back()->withInput($input);
         }
+
+        $bahan_baku->save();
+
+        $history = new BahanBakuHistory();
+        $history->bahan_baku_id = $opname->bahan_baku_id;
+        $history->type = 1;
+        $history->opname_id = $opname->id;
+        $history->volume = $opname->volume_opname;
+        $history->total_sisa = $bahan_baku->sisa;
+        $history->save();
 
         Flash::success('Opname saved successfully.');
 
@@ -159,6 +159,12 @@ class OpnameController extends AppBaseController
         }
 
         $bahan_baku->sisa -= $input['volume_opname'] - $old_volume;
+
+        if ($bahan_baku->sisa <= 0){
+          Flash::error('Bahan Baku Kurang');
+          return redirect()->back()->withInput($input);
+        }
+        
         $bahan_baku->update();
 
         $opname = $this->opnameRepository->update($input, $id);

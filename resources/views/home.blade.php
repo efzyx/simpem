@@ -10,6 +10,11 @@
   </section>
   </div>
   <section class="content">
+    <div class="clearfix"></div>
+
+    @include('flash::message')
+
+    <div class="clearfix"></div>
     <div class="row">
       <div class="col-md-7">
         <div class="box box-solid box-primary">
