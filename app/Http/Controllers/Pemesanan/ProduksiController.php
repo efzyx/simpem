@@ -75,6 +75,9 @@ class ProduksiController extends AppBaseController
         $input['user_id'] = Auth::user()->id;
         $komposisi_mutus = $pemesanan->produk->komposisi_mutus;
 
+        if(!$this->checkStock($komposisi_mutus, $input['volume']))
+            return redirect()->back()->withInput($input);
+
         if (!$komposisi_mutus->count()) {
             Flash::error('Komposisi produk pemesanan belum diset');
             return redirect()->back()->withInput($input);
@@ -179,6 +182,9 @@ class ProduksiController extends AppBaseController
 
         $old_volume = $produksi->volume;
 
+        if(!$this->checkStock($komposisi_mutus, $input['volume'], $old_volume))
+            return redirect()->back()->withInput($input);
+
         if (!$komposisi_mutus->count()) {
             Flash::error('Komposisi produk pemesanan belum diset');
             return redirect()->back();
@@ -236,5 +242,19 @@ class ProduksiController extends AppBaseController
         Flash::success('Produksi deleted successfully.');
 
         return redirect(route('produksis.index'));
+    }
+
+    private function checkStock($komposisi_mutus, $volume, $old = null)
+    {
+      foreach ($komposisi_mutus as $key => $komposisi) {
+          $bahan_baku = BahanBaku::find($komposisi->bahan_baku_id);
+          $sisa = $bahan_baku->sisa - ($komposisi->volume * ($volume - $old ?: 0));
+
+          if ($sisa <= 0) {
+            Flash::error('Stock bahan baku '.$bahan_baku->nama_bahan_baku.' tidak mencukupi untuk produksi ini');
+            return false;
+          }
+      }
+      return true;
     }
 }
