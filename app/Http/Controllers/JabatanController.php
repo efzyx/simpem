@@ -31,9 +31,11 @@ class JabatanController extends AppBaseController
     {
         $this->jabatanRepository->pushCriteria(new RequestCriteria($request));
         $jabatans = $this->jabatanRepository->all();
+        $title = "Jabatan";
 
         return view('jabatans.index')
-            ->with('jabatans', $jabatans);
+            ->with('jabatans', $jabatans)
+            ->with('title', $title);
     }
 
     /**
@@ -43,7 +45,9 @@ class JabatanController extends AppBaseController
      */
     public function create()
     {
-        return view('jabatans.create');
+        $title = "Jabatan - Tambah";
+        return view('jabatans.create')
+        ->with('title', $title);
     }
 
     /**
@@ -74,6 +78,7 @@ class JabatanController extends AppBaseController
     public function show($id)
     {
         $jabatan = $this->jabatanRepository->findWithoutFail($id);
+        $title = "Jabatan - Lihat";
 
         if (empty($jabatan)) {
             Flash::error('Jabatan not found');
@@ -81,7 +86,7 @@ class JabatanController extends AppBaseController
             return redirect(route('jabatans.index'));
         }
 
-        return view('jabatans.show')->with('jabatan', $jabatan);
+        return view('jabatans.show')->with('jabatan', $jabatan)->with('title', $title);
     }
 
     /**
@@ -94,6 +99,7 @@ class JabatanController extends AppBaseController
     public function edit($id)
     {
         $jabatan = $this->jabatanRepository->findWithoutFail($id);
+        $title = "Jabatan - Edit";
 
         if (empty($jabatan)) {
             Flash::error('Jabatan not found');
@@ -101,7 +107,8 @@ class JabatanController extends AppBaseController
             return redirect(route('jabatans.index'));
         }
 
-        return view('jabatans.edit')->with('jabatan', $jabatan);
+        return view('jabatans.edit')->with('jabatan', $jabatan)
+        ->with('title', $title);
     }
 
     /**

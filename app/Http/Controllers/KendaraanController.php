@@ -36,10 +36,12 @@ class KendaraanController extends AppBaseController
     {
         $this->kendaraanRepository->pushCriteria(new RequestCriteria($request));
         $kendaraans = $this->kendaraanRepository->all();
+        $title = "Kendaraan";
 
         return view('kendaraans.index')
             ->with('kendaraans', $kendaraans)
-            ->with('status', $this->status);
+            ->with('status', $this->status)
+            ->with('title', $title);
     }
 
     /**
@@ -49,7 +51,9 @@ class KendaraanController extends AppBaseController
      */
     public function create()
     {
-        return view('kendaraans.create');
+        $title = "Kendaraan - Tambah";
+        return view('kendaraans.create')
+        ->with('title', $title);
     }
 
     /**
@@ -80,6 +84,7 @@ class KendaraanController extends AppBaseController
     public function show($id)
     {
         $kendaraan = $this->kendaraanRepository->findWithoutFail($id);
+        $title = "Kendaraan - Lihat";
 
         if (empty($kendaraan)) {
             Flash::error('Kendaraan not found');
@@ -87,7 +92,7 @@ class KendaraanController extends AppBaseController
             return redirect(route('kendaraans.index'));
         }
 
-        return view('kendaraans.show')->with('kendaraan', $kendaraan);
+        return view('kendaraans.show')->with('kendaraan', $kendaraan)->with('title', $title);
     }
 
     /**
@@ -100,6 +105,7 @@ class KendaraanController extends AppBaseController
     public function edit($id)
     {
         $kendaraan = $this->kendaraanRepository->findWithoutFail($id);
+        $title = "Kendaraan - Edit";
 
         if (empty($kendaraan)) {
             Flash::error('Kendaraan not found');
@@ -107,7 +113,7 @@ class KendaraanController extends AppBaseController
             return redirect(route('kendaraans.index'));
         }
 
-        return view('kendaraans.edit')->with('kendaraan', $kendaraan);
+        return view('kendaraans.edit')->with('kendaraan', $kendaraan)->with('title', $title);
     }
 
     /**

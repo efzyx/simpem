@@ -34,9 +34,11 @@ class OpnameController extends AppBaseController
     {
         $this->opnameRepository->pushCriteria(new RequestCriteria($request));
         $opnames = $this->opnameRepository->paginate(10);
+        $title = "Opname";
 
         return view('opnames.index')
-            ->with('opnames', $opnames);
+            ->with('opnames', $opnames)
+            ->with('title', $title);
     }
 
     /**
@@ -46,8 +48,10 @@ class OpnameController extends AppBaseController
      */
     public function create()
     {
+        $title = "Opname - Tambah";
         return view('opnames.create')
-        ->with('bahanBakus', $this->bahanBakus);
+        ->with('bahanBakus', $this->bahanBakus)
+        ->with('title', $title);
     }
 
     /**
@@ -97,6 +101,7 @@ class OpnameController extends AppBaseController
     public function show($id)
     {
         $opname = $this->opnameRepository->findWithoutFail($id);
+        $title = "Opname - Lihat";
 
         if (empty($opname)) {
             Flash::error('Opname not found');
@@ -104,7 +109,7 @@ class OpnameController extends AppBaseController
             return redirect(route('opnames.index'));
         }
 
-        return view('opnames.show')->with('opname', $opname);
+        return view('opnames.show')->with('opname', $opname)->with('title', $title);
     }
 
     /**
@@ -117,6 +122,7 @@ class OpnameController extends AppBaseController
     public function edit($id)
     {
         $opname = $this->opnameRepository->findWithoutFail($id);
+        $title = "Opname - Edit";
 
         if (empty($opname)) {
             Flash::error('Opname not found');
@@ -126,7 +132,8 @@ class OpnameController extends AppBaseController
 
         return view('opnames.edit')
         ->with('opname', $opname)
-        ->with('bahanBakus', $this->bahanBakus);
+        ->with('bahanBakus', $this->bahanBakus)
+        ->with('title', $title);
     }
 
     /**

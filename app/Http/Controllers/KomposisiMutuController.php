@@ -31,9 +31,11 @@ class KomposisiMutuController extends AppBaseController
     {
         $this->komposisiMutuRepository->pushCriteria(new RequestCriteria($request));
         $komposisiMutus = $this->komposisiMutuRepository->all();
+        $title = "Komposisi Mutu";
 
         return view('komposisi_mutus.index')
-            ->with('komposisiMutus', $komposisiMutus);
+            ->with('komposisiMutus', $komposisiMutus)
+            ->with('title', $title);
     }
 
     /**
@@ -43,7 +45,9 @@ class KomposisiMutuController extends AppBaseController
      */
     public function create()
     {
-        return view('komposisi_mutus.create');
+        $title = "Komposisi Mutu - Tambah";
+        return view('komposisi_mutus.create')
+        ->with('title', $title);
     }
 
     /**
@@ -74,6 +78,7 @@ class KomposisiMutuController extends AppBaseController
     public function show($id)
     {
         $komposisiMutu = $this->komposisiMutuRepository->findWithoutFail($id);
+        $title = "Komposisi Mutu - Lihat";
 
         if (empty($komposisiMutu)) {
             Flash::error('Komposisi Mutu not found');
@@ -81,7 +86,7 @@ class KomposisiMutuController extends AppBaseController
             return redirect(route('komposisiMutus.index'));
         }
 
-        return view('komposisi_mutus.show')->with('komposisiMutu', $komposisiMutu);
+        return view('komposisi_mutus.show')->with('komposisiMutu', $komposisiMutu)->with('title', $title);
     }
 
     /**
@@ -94,6 +99,7 @@ class KomposisiMutuController extends AppBaseController
     public function edit($id)
     {
         $komposisiMutu = $this->komposisiMutuRepository->findWithoutFail($id);
+        $title = "Komposiis Mutu - Edit";
 
         if (empty($komposisiMutu)) {
             Flash::error('Komposisi Mutu not found');
@@ -101,7 +107,7 @@ class KomposisiMutuController extends AppBaseController
             return redirect(route('komposisiMutus.index'));
         }
 
-        return view('komposisi_mutus.edit')->with('komposisiMutu', $komposisiMutu);
+        return view('komposisi_mutus.edit')->with('komposisiMutu', $komposisiMutu)->with('title', $title);
     }
 
     /**

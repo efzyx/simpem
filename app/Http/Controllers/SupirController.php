@@ -31,9 +31,11 @@ class SupirController extends AppBaseController
     {
         $this->supirRepository->pushCriteria(new RequestCriteria($request));
         $supirs = $this->supirRepository->all();
+        $title = "Supir";
 
         return view('supirs.index')
-            ->with('supirs', $supirs);
+            ->with('supirs', $supirs)
+            ->with('title', $title);
     }
 
     /**
@@ -43,7 +45,9 @@ class SupirController extends AppBaseController
      */
     public function create()
     {
-        return view('supirs.create');
+        $title = "Supir - Tambah";
+        return view('supirs.create')
+        ->with('title', $title);
     }
 
     /**
@@ -74,6 +78,7 @@ class SupirController extends AppBaseController
     public function show($id)
     {
         $supir = $this->supirRepository->findWithoutFail($id);
+        $title = "Supir - Lihat";
 
         if (empty($supir)) {
             Flash::error('Supir not found');
@@ -81,7 +86,7 @@ class SupirController extends AppBaseController
             return redirect(route('supirs.index'));
         }
 
-        return view('supirs.show')->with('supir', $supir);
+        return view('supirs.show')->with('supir', $supir)->with('title', $title);
     }
 
     /**
@@ -94,6 +99,7 @@ class SupirController extends AppBaseController
     public function edit($id)
     {
         $supir = $this->supirRepository->findWithoutFail($id);
+        $title = "Supir - Edit";
 
         if (empty($supir)) {
             Flash::error('Supir not found');
@@ -101,7 +107,7 @@ class SupirController extends AppBaseController
             return redirect(route('supirs.index'));
         }
 
-        return view('supirs.edit')->with('supir', $supir);
+        return view('supirs.edit')->with('supir', $supir)->with('title', $title);
     }
 
     /**
