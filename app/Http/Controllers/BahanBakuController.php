@@ -35,8 +35,8 @@ class BahanBakuController extends AppBaseController
         $title = "Bahan Baku";
 
         return view('bahan_bakus.index')
-            ->with('bahanBakus', $bahanBakus)
-            ->with('title', $title);
+              ->with('bahanBakus', $bahanBakus)
+              ->with('title', $title);
     }
 
     /**
@@ -48,7 +48,7 @@ class BahanBakuController extends AppBaseController
     {
         $title = "Bahan Baku - Tambah";
         return view('bahan_bakus.create')
-        ->with('title', $title);
+              ->with('title', $title);
     }
 
     /**
@@ -88,8 +88,9 @@ class BahanBakuController extends AppBaseController
             return redirect(route('bahanBakus.index'));
         }
 
-        return view('bahan_bakus.show')->with('bahanBaku', $bahanBaku)
-        ->with('title', $title);
+        return view('bahan_bakus.show')
+              ->with('bahanBaku', $bahanBaku)
+              ->with('title', $title);
     }
 
     /**
@@ -110,8 +111,9 @@ class BahanBakuController extends AppBaseController
             return redirect(route('bahanBakus.index'));
         }
 
-        return view('bahan_bakus.edit')->with('bahanBaku', $bahanBaku)
-        ->with('title', $title);
+        return view('bahan_bakus.edit')
+              ->with('bahanBaku', $bahanBaku)
+              ->with('title', $title);
     }
 
     /**
