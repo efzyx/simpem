@@ -105,18 +105,14 @@
 
 <!-- Status Field -->
 @php
-  $status = [
-    'Produksi',
-    'Sedang dikirim',
-    'Terkirim'
-  ];
+  $sisa = $pemesanan->volume_pesanan - $pemesanan->produksis->sum('volume');
 @endphp
 <div class="form-group col-sm-12">
   <div class="col-sm-3">
     {!! Form::label('status', 'Status') !!}
   </div>
   <div class="col-sm-9">
-    <p>{!! $status[$pemesanan->status] !!}</p>
+    <p>{!! 'Sisa '.$sisa !!}</p>
   </div>
 </div>
 

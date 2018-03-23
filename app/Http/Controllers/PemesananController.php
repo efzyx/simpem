@@ -13,6 +13,8 @@ use App\Models\Produk;
 use Response;
 use PDF;
 use Auth;
+use Carbon\Carbon;
+use App\Models\Pemesanan;
 
 class PemesananController extends AppBaseController
 {
@@ -34,11 +36,37 @@ class PemesananController extends AppBaseController
     {
         $this->pemesananRepository->pushCriteria(new RequestCriteria($request));
         $pemesanans = $this->pemesananRepository->all();
-        $produks = Produk::pluck('mutu_produk', 'id');
 
         return view('pemesanans.index')
-            ->with('pemesanans', $pemesanans)
-            ->with('produks', $produks);
+            ->with('pemesanans', $pemesanans);
+    }
+
+    public function filter(Request $request)
+    {
+      $this->pemesananRepository->pushCriteria(new RequestCriteria($request));
+      $pemesanans = $this->pemesananRepository->all();
+      $pemesanans = $pemesanans->filter(function($pemesanan) use ($request){
+        $pemesanan = $request['jenis_pesanan'] ?
+                    $pemesanan->jenis_pesanan == $request['jenis_pesanan'] :
+                    $pemesanan;
+        $dari = $request['tanggal_kirim_dari'] ? Carbon::parse($request['tanggal_kirim_dari']) : null;
+        $sampai = $request['tanggal_kirim_sampai'] ? Carbon::parse($request['tanggal_kirim_sampai']) : null;
+        if ($dari) {
+          if ($sampai) {
+            return ($pemesanan->tanggal_kirim_dari >= $dari &&
+                         $pemesanan->tanggal_kirim_sampai < $sampai->addDays(1)) ||
+                         ($pemesanan->tanggal_kirim_dari >= $dari &&
+                         $pemesanan->tanggal_kirim_dari < $dari->addDays(1));
+          }
+          return $pemesanan->tanggal_kirim_dari >= $dari &&
+                 $pemesanan->tanggal_kirim_dari < $dari->addDays(1);
+        }
+
+        return $pemesanan;
+      });
+
+      return view('pemesanans.index')
+          ->with('pemesanans', $pemesanans);
     }
 
     /**
@@ -175,10 +203,14 @@ class PemesananController extends AppBaseController
         return redirect(route('pemesanans.index'));
     }
 
-    public function downloadPdf()
+    public function downloadPdf(Request $request)
     {
-        $pdf = PDF::loadView('pemesanans.pdf', ['pemesanans' => $this->pemesananRepository->paginate(10)]);
+        $data = json_decode($request['pemesanans'], true);
+        $pemesanans = Pemesanan::hydrate($data);
+        $pemesanans = $pemesanans->flatten();
+        $pdf = PDF::loadView('pemesanans.pdf', ['pemesanans' => $pemesanans]);
         $pdf->setPaper('a4', 'landscape');
+        
         return $pdf->stream('pemesanan_'.time().'.pdf');
     }
 }
