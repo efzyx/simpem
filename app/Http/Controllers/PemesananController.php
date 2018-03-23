@@ -73,8 +73,8 @@ class PemesananController extends AppBaseController
         $title = 'Pemesanan - Filter';
 
         return view('pemesanans.index')
-          ->with('pemesanans', $pemesanans)
-          ->with('title', $title);
+              ->with('pemesanans', $pemesanans)
+              ->with('title', $title);
     }
 
     /**

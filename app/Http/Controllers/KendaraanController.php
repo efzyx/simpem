@@ -20,7 +20,7 @@ class KendaraanController extends AppBaseController
     {
         $this->kendaraanRepository = $kendaraanRepo;
         $this->status = [
-          '1' => 'Stand By',
+          '1' => 'StandBy',
           '2' => 'Rusak',
           '3' => 'Rental'
         ];
@@ -54,7 +54,7 @@ class KendaraanController extends AppBaseController
     {
         $title = "Kendaraan - Tambah";
         return view('kendaraans.create')
-        ->with('title', $title);
+              ->with('title', $title);
     }
 
     /**
@@ -93,7 +93,9 @@ class KendaraanController extends AppBaseController
             return redirect(route('kendaraans.index'));
         }
 
-        return view('kendaraans.show')->with('kendaraan', $kendaraan)->with('title', $title);
+        return view('kendaraans.show')
+              ->with('kendaraan', $kendaraan)
+              ->with('title', $title);
     }
 
     /**
@@ -114,7 +116,9 @@ class KendaraanController extends AppBaseController
             return redirect(route('kendaraans.index'));
         }
 
-        return view('kendaraans.edit')->with('kendaraan', $kendaraan)->with('title', $title);
+        return view('kendaraans.edit')
+              ->with('kendaraan', $kendaraan)
+              ->with('title', $title);
     }
 
     /**

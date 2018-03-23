@@ -38,8 +38,8 @@ class ProdukController extends AppBaseController
         $title = "Produk";
 
         return view('produks.index')
-            ->with('produks', $produks)
-            ->with('title', $title);
+              ->with('produks', $produks)
+              ->with('title', $title);
     }
 
     /**
