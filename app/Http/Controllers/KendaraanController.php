@@ -24,6 +24,7 @@ class KendaraanController extends AppBaseController
           '2' => 'Rusak',
           '3' => 'Rental'
         ];
+        $this->middleware('role:admin,manager_produksi');
     }
 
     /**

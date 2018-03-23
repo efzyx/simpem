@@ -23,6 +23,9 @@ class PemesananController extends AppBaseController
 
     public function __construct(PemesananRepository $pemesananRepo)
     {
+        $this->middleware('role:admin,marketing,produksi,manager_produksi')
+              ->only('index', 'filter');
+        $this->middleware('role:marketing')->except('index', 'filter');
         $this->pemesananRepository = $pemesananRepo;
     }
 

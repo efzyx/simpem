@@ -22,6 +22,7 @@ class ProdukController extends AppBaseController
     {
         $this->produkRepository = $produkRepo;
         $this->bahan_bakus = BahanBaku::all();
+        $this->middleware('role:admin,manager_produksi');
     }
 
     /**
