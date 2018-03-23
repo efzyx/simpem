@@ -38,11 +38,13 @@ class KendaraanDetailController extends AppBaseController
         // $kendaraan = Kendaraan::findOrFail($request->kendaraan);
         $this->kendaraanDetailRepository->pushCriteria(new RequestCriteria($request));
         $kendaraanDetails = $this->kendaraanDetailRepository->all();
+        $title = "Detail Kendaraan";
 
         return view('kendaraan_details.index')
             ->with('kendaraanDetails', $kendaraanDetails)
             ->with('status', $this->status)
-            ->with('kendaraan', $kendaraan);
+            ->with('kendaraan', $kendaraan)
+            ->with('title', $title);
     }
 
     /**
@@ -53,11 +55,13 @@ class KendaraanDetailController extends AppBaseController
     public function create(Kendaraan $kendaraan)
     {
         $kendaraans = Kendaraan::pluck('jenis_kendaraan', 'id');
+        $title = "Detail Kendaraan - Tambah";
 
         return view('kendaraan_details.create')
         ->with('kendaraans', $kendaraans)
         ->with('status', $this->status)
-        ->with('kendaraan', $kendaraan);
+        ->with('kendaraan', $kendaraan)
+        ->with('title', $title);
     }
 
     /**
@@ -88,6 +92,7 @@ class KendaraanDetailController extends AppBaseController
     public function show(Kendaraan $kendaraan, $id)
     {
         $kendaraanDetail = $this->kendaraanDetailRepository->findWithoutFail($id);
+        $title = "Detail Kendaraan - Lihat";
 
         if (empty($kendaraanDetail)) {
             Flash::error('Kendaraan Detail not found');
@@ -98,7 +103,8 @@ class KendaraanDetailController extends AppBaseController
         return view('kendaraan_details.show')
               ->with('kendaraanDetail', $kendaraanDetail)
               ->with('status', $this->status)
-              ->with('kendaraan', $kendaraan);
+              ->with('kendaraan', $kendaraan)
+              ->with('title', $title);
     }
 
     /**
@@ -112,6 +118,7 @@ class KendaraanDetailController extends AppBaseController
     {
         $kendaraanDetail = $this->kendaraanDetailRepository->findWithoutFail($id);
         $kendaraans = Kendaraan::pluck('jenis_kendaraan', 'id');
+        $title = "Detail Kendaraan - Edit";
 
         if (empty($kendaraanDetail)) {
             Flash::error('Kendaraan Detail not found');
@@ -123,7 +130,8 @@ class KendaraanDetailController extends AppBaseController
         ->with('kendaraanDetail', $kendaraanDetail)
         ->with('kendaraans', $kendaraans)
         ->with('status', $this->status)
-        ->with('kendaraan', $kendaraan);
+        ->with('kendaraan', $kendaraan)
+        ->with('title', $title);
     }
 
     /**
