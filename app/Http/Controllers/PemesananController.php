@@ -48,31 +48,31 @@ class PemesananController extends AppBaseController
 
     public function filter(Request $request)
     {
-      $this->pemesananRepository->pushCriteria(new RequestCriteria($request));
-      $pemesanans = $this->pemesananRepository->all();
-      $pemesanans = $pemesanans->filter(function($pemesanan) use ($request){
-        $pemesanan = $request['jenis_pesanan'] ?
+        $this->pemesananRepository->pushCriteria(new RequestCriteria($request));
+        $pemesanans = $this->pemesananRepository->all();
+        $pemesanans = $pemesanans->filter(function ($pemesanan) use ($request) {
+            $pemesanan = $request['jenis_pesanan'] ?
                     $pemesanan->jenis_pesanan == $request['jenis_pesanan'] :
                     $pemesanan;
-        $dari = $request['tanggal_kirim_dari'] ? Carbon::parse($request['tanggal_kirim_dari']) : null;
-        $sampai = $request['tanggal_kirim_sampai'] ? Carbon::parse($request['tanggal_kirim_sampai']) : null;
-        if ($dari) {
-          if ($sampai) {
-            return ($pemesanan->tanggal_kirim_dari >= $dari &&
+            $dari = $request['tanggal_kirim_dari'] ? Carbon::parse($request['tanggal_kirim_dari']) : null;
+            $sampai = $request['tanggal_kirim_sampai'] ? Carbon::parse($request['tanggal_kirim_sampai']) : null;
+            if ($dari) {
+                if ($sampai) {
+                    return ($pemesanan->tanggal_kirim_dari >= $dari &&
                          $pemesanan->tanggal_kirim_sampai < $sampai->addDays(1)) ||
                          ($pemesanan->tanggal_kirim_dari >= $dari &&
                          $pemesanan->tanggal_kirim_dari < $dari->addDays(1));
-          }
-          return $pemesanan->tanggal_kirim_dari >= $dari &&
+                }
+                return $pemesanan->tanggal_kirim_dari >= $dari &&
                  $pemesanan->tanggal_kirim_dari < $dari->addDays(1);
-        }
+            }
 
-        return $pemesanan;
-      });
+            return $pemesanan;
+        });
 
-      $title = 'Pemesanan - Filter';
+        $title = 'Pemesanan - Filter';
 
-      return view('pemesanans.index')
+        return view('pemesanans.index')
           ->with('pemesanans', $pemesanans)
           ->with('title', $title);
     }

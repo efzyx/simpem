@@ -27,8 +27,10 @@ class HomeController extends Controller
     {
         $bahanBaku = BahanBaku::all();
         $produks = Produk::all();
+        $title = "Application";
         return view('home')
         ->with('bahanBakus', $bahanBaku)
-        ->with('produks', $produks);
+        ->with('produks', $produks)
+        ->with('title', $title);
     }
 }

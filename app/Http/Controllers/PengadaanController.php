@@ -35,9 +35,11 @@ class PengadaanController extends AppBaseController
     {
         $this->pengadaanRepository->pushCriteria(new RequestCriteria($request));
         $pengadaans = $this->pengadaanRepository->paginate(10);
+        $title = "Pengadaan";
 
         return view('pengadaans.index')
-            ->with('pengadaans', $pengadaans);
+            ->with('pengadaans', $pengadaans)
+            ->with('title', $title);
     }
 
     /**
@@ -47,8 +49,10 @@ class PengadaanController extends AppBaseController
      */
     public function create()
     {
+        $title = "Pengadaan - Tambah";
         return view('pengadaans.create')
-            ->with('bahanBakus', $this->bahanBakus);
+            ->with('bahanBakus', $this->bahanBakus)
+            ->with('title', $title);
     }
 
     /**
@@ -93,6 +97,7 @@ class PengadaanController extends AppBaseController
     public function show($id)
     {
         $pengadaan = $this->pengadaanRepository->findWithoutFail($id);
+        $title = "Pengadaan - Lihat";
 
         if (empty($pengadaan)) {
             Flash::error('Pengadaan not found');
@@ -100,7 +105,7 @@ class PengadaanController extends AppBaseController
             return redirect(route('pengadaans.index'));
         }
 
-        return view('pengadaans.show')->with('pengadaan', $pengadaan);
+        return view('pengadaans.show')->with('pengadaan', $pengadaan)->with('title', $title);
     }
 
     /**
@@ -114,6 +119,7 @@ class PengadaanController extends AppBaseController
     {
         $pengadaan = $this->pengadaanRepository->findWithoutFail($id);
         $bhnbakus = BahanBaku::pluck('nama_bahan_baku', 'id');
+        $title = "Pengadaan - Edit";
         if (empty($pengadaan)) {
             Flash::error('Pengadaan not found');
 
@@ -122,7 +128,8 @@ class PengadaanController extends AppBaseController
 
         return view('pengadaans.edit')
         ->with('pengadaan', $pengadaan)
-        ->with('bahanBakus', $this->bahanBakus);
+        ->with('bahanBakus', $this->bahanBakus)
+        ->with('title', $title);
     }
 
     /**
