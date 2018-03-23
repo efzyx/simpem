@@ -19,9 +19,11 @@ class PengirimanController extends AppBaseController
     public function index(Pemesanan $pemesanan, Produksi $produksi, Request $request)
     {
         $pengirimans = $produksi->pengirimans;
+        $title = 'Pengiriman';
         return view('pengiriman.index')
             ->with('pengirimans', $pengirimans)
-            ->with('produksi', $produksi);
+            ->with('produksi', $produksi)
+            ->with('title', $title);
     }
 
 
