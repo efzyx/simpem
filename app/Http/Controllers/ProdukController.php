@@ -34,9 +34,11 @@ class ProdukController extends AppBaseController
     {
         $this->produkRepository->pushCriteria(new RequestCriteria($request));
         $produks = $this->produkRepository->all();
+        $title = "Produk";
 
         return view('produks.index')
-            ->with('produks', $produks);
+            ->with('produks', $produks)
+            ->with('title', $title);
     }
 
     /**
@@ -46,8 +48,10 @@ class ProdukController extends AppBaseController
      */
     public function create()
     {
+        $title = "Produk - Tambah";
         return view('produks.create')
-              ->with('bahan_bakus', $this->bahan_bakus);
+              ->with('bahan_bakus', $this->bahan_bakus)
+              ->with('title', $title);
     }
 
     /**
@@ -91,6 +95,7 @@ class ProdukController extends AppBaseController
     public function show($id)
     {
         $produk = $this->produkRepository->findWithoutFail($id);
+        $title = "Produk - Lihat";
 
         if (empty($produk)) {
             Flash::error('Produk not found');
@@ -98,7 +103,7 @@ class ProdukController extends AppBaseController
             return redirect(route('produks.index'));
         }
 
-        return view('produks.show')->with('produk', $produk);
+        return view('produks.show')->with('produk', $produk)->with('title', $title);
     }
 
     /**
@@ -111,6 +116,7 @@ class ProdukController extends AppBaseController
     public function edit($id)
     {
         $produk = $this->produkRepository->findWithoutFail($id);
+        $title = "Produk - Edit";
 
         if (empty($produk)) {
             Flash::error('Produk not found');
@@ -120,7 +126,8 @@ class ProdukController extends AppBaseController
 
         return view('produks.edit')
               ->with('produk', $produk)
-              ->with('bahan_bakus', $this->bahan_bakus);
+              ->with('bahan_bakus', $this->bahan_bakus)
+              ->with('title', $title);
     }
 
     /**

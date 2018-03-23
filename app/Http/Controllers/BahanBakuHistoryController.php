@@ -31,9 +31,11 @@ class BahanBakuHistoryController extends AppBaseController
     {
         $this->bahanBakuHistoryRepository->pushCriteria(new RequestCriteria($request));
         $bahanBakuHistories = $this->bahanBakuHistoryRepository->all();
+        $title = "Riwayat Bahan Baku";
 
         return view('bahan_baku_histories.index')
-            ->with('bahanBakuHistories', $bahanBakuHistories);
+            ->with('bahanBakuHistories', $bahanBakuHistories)
+            ->with('title', $title);
     }
 
     /**
@@ -43,7 +45,9 @@ class BahanBakuHistoryController extends AppBaseController
      */
     public function create()
     {
-        return view('bahan_baku_histories.create');
+        $title = "Riwayat Bahan Baku - Tambah";
+        return view('bahan_baku_histories.create')
+        ->with('title', $title);
     }
 
     /**
@@ -74,6 +78,7 @@ class BahanBakuHistoryController extends AppBaseController
     public function show($id)
     {
         $bahanBakuHistory = $this->bahanBakuHistoryRepository->findWithoutFail($id);
+        $title = "Riwayat Bahan Baku - Lihat";
 
         if (empty($bahanBakuHistory)) {
             Flash::error('Bahan Baku History not found');
@@ -81,7 +86,8 @@ class BahanBakuHistoryController extends AppBaseController
             return redirect(route('bahanBakuHistories.index'));
         }
 
-        return view('bahan_baku_histories.show')->with('bahanBakuHistory', $bahanBakuHistory);
+        return view('bahan_baku_histories.show')->with('bahanBakuHistory', $bahanBakuHistory)
+        ->with('title', $title);
     }
 
     /**
@@ -94,6 +100,7 @@ class BahanBakuHistoryController extends AppBaseController
     public function edit($id)
     {
         $bahanBakuHistory = $this->bahanBakuHistoryRepository->findWithoutFail($id);
+        $title = "Riwayat Bahan Baku - Edit";
 
         if (empty($bahanBakuHistory)) {
             Flash::error('Bahan Baku History not found');
@@ -101,7 +108,8 @@ class BahanBakuHistoryController extends AppBaseController
             return redirect(route('bahanBakuHistories.index'));
         }
 
-        return view('bahan_baku_histories.edit')->with('bahanBakuHistory', $bahanBakuHistory);
+        return view('bahan_baku_histories.edit')->with('bahanBakuHistory', $bahanBakuHistory)
+        ->with('title', $title);
     }
 
     /**

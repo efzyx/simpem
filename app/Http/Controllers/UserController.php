@@ -33,9 +33,11 @@ class UserController extends AppBaseController
     {
         $this->userRepository->pushCriteria(new RequestCriteria($request));
         $users = $this->userRepository->paginate(10);
+        $title = "User";
 
         return view('users.index')
-            ->with('users', $users);
+            ->with('users', $users)
+            ->with('title', $title);
     }
 
     /**
@@ -45,8 +47,10 @@ class UserController extends AppBaseController
      */
     public function create()
     {
+        $title = "User - Tambah";
         return view('users.create')
-              ->with('jabatans', $this->jabatans);
+              ->with('jabatans', $this->jabatans)
+              ->with('title', $title);
     }
 
     /**
@@ -79,6 +83,7 @@ class UserController extends AppBaseController
     public function show($id)
     {
         $user = $this->userRepository->findWithoutFail($id);
+        $title = "User - Lihat";
 
         if (empty($user)) {
             Flash::error('User not found');
@@ -86,7 +91,7 @@ class UserController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        return view('users.show')->with('user', $user);
+        return view('users.show')->with('user', $user)->with('title', $title);
     }
 
     /**
@@ -99,6 +104,7 @@ class UserController extends AppBaseController
     public function edit($id)
     {
         $user = $this->userRepository->findWithoutFail($id);
+        $title = "User - Edit";
 
         if (empty($user)) {
             Flash::error('User not found');
@@ -108,7 +114,8 @@ class UserController extends AppBaseController
 
         return view('users.edit')
               ->with('user', $user)
-              ->with('jabatans', $this->jabatans);
+              ->with('jabatans', $this->jabatans)
+              ->with('title', $title);
     }
 
     /**

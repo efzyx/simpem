@@ -32,9 +32,11 @@ class PengirimanController extends AppBaseController
     {
         $this->pengirimanRepository->pushCriteria(new RequestCriteria($request));
         $pengiriman = $this->pengirimanRepository->all();
+        $title = "Pengiriman";
 
         return view('pengiriman.index')
-            ->with('pengiriman', $pengiriman);
+            ->with('pengiriman', $pengiriman)
+            ->with('title', $title);
     }
 
     /**
@@ -44,7 +46,9 @@ class PengirimanController extends AppBaseController
      */
     public function create()
     {
-        return view('pengiriman.create');
+        $title = "Pengiriman - Tambah";
+        return view('pengiriman.create')
+        ->with('title', $title);
     }
 
     /**
@@ -75,6 +79,7 @@ class PengirimanController extends AppBaseController
     public function show($id)
     {
         $pengiriman = $this->pengirimanRepository->findWithoutFail($id);
+        $title = "Pengiriman - Lihat";
 
         if (empty($pengiriman)) {
             Flash::error('Pengiriman not found');
@@ -82,7 +87,7 @@ class PengirimanController extends AppBaseController
             return redirect(route('pengiriman.index'));
         }
 
-        return view('pengiriman.show')->with('pengiriman', $pengiriman);
+        return view('pengiriman.show')->with('pengiriman', $pengiriman)->with('title', $title);
     }
 
     /**
@@ -95,6 +100,7 @@ class PengirimanController extends AppBaseController
     public function edit($id)
     {
         $pengiriman = $this->pengirimanRepository->findWithoutFail($id);
+        $title = "Pengiriman - Edit";
 
         if (empty($pengiriman)) {
             Flash::error('Pengiriman not found');
@@ -102,7 +108,7 @@ class PengirimanController extends AppBaseController
             return redirect(route('pengiriman.index'));
         }
 
-        return view('pengiriman.edit')->with('pengiriman', $pengiriman);
+        return view('pengiriman.edit')->with('pengiriman', $pengiriman)->with('title', $title);
     }
 
     /**
