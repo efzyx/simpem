@@ -43,10 +43,12 @@ class ProduksiController extends AppBaseController
     {
         $this->produksiRepository->pushCriteria(new RequestCriteria($request));
         $produksis = $this->produksiRepository->all();
+        $title = "Produksi";
 
         return view('produksis.index')
             ->with('produksis', $produksis)
-            ->with('kendaraans', $this->kendaraans);
+            ->with('kendaraans', $this->kendaraans)
+            ->with('title', $title);
     }
 
     /**
@@ -56,10 +58,12 @@ class ProduksiController extends AppBaseController
      */
     public function create()
     {
+        $title = "Produksi - Tambah";
         return view('produksis.create')
               ->with('pemesanans', $this->pemesanans)
               ->with('supirs', $this->supirs)
-              ->with('kendaraans', $this->kendaraans);
+              ->with('kendaraans', $this->kendaraans)
+              ->with('title', $title);
     }
 
     /**
@@ -118,6 +122,7 @@ class ProduksiController extends AppBaseController
     public function show($id)
     {
         $produksi = $this->produksiRepository->findWithoutFail($id);
+        $title = "Produksi - Lihat";
 
         if (empty($produksi)) {
             Flash::error('Produksi not found');
@@ -125,7 +130,7 @@ class ProduksiController extends AppBaseController
             return redirect(route('produksis.index'));
         }
 
-        return view('produksis.show')->with('produksi', $produksi);
+        return view('produksis.show')->with('produksi', $produksi)->with('title', $title);
     }
 
     /**
@@ -138,6 +143,7 @@ class ProduksiController extends AppBaseController
     public function edit($id)
     {
         $produksi = $this->produksiRepository->findWithoutFail($id);
+        $title = "Produksi - Edit";
 
         if (empty($produksi)) {
             Flash::error('Produksi not found');
@@ -149,7 +155,8 @@ class ProduksiController extends AppBaseController
               ->with('produksi', $produksi)
               ->with('pemesanans', $this->pemesanans)
               ->with('supirs', $this->supirs)
-              ->with('kendaraans', $this->kendaraans);
+              ->with('kendaraans', $this->kendaraans)
+              ->with('title', $title);
         ;
     }
 

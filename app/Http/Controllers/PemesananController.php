@@ -36,37 +36,42 @@ class PemesananController extends AppBaseController
     {
         $this->pemesananRepository->pushCriteria(new RequestCriteria($request));
         $pemesanans = $this->pemesananRepository->all();
+        $title = 'Pemesanan';
 
         return view('pemesanans.index')
-            ->with('pemesanans', $pemesanans);
+            ->with('pemesanans', $pemesanans)
+            ->with('title', $title);
     }
 
     public function filter(Request $request)
     {
-      $this->pemesananRepository->pushCriteria(new RequestCriteria($request));
-      $pemesanans = $this->pemesananRepository->all();
-      $pemesanans = $pemesanans->filter(function($pemesanan) use ($request){
-        $pemesanan = $request['jenis_pesanan'] ?
+        $this->pemesananRepository->pushCriteria(new RequestCriteria($request));
+        $pemesanans = $this->pemesananRepository->all();
+        $pemesanans = $pemesanans->filter(function ($pemesanan) use ($request) {
+            $pemesanan = $request['jenis_pesanan'] ?
                     $pemesanan->jenis_pesanan == $request['jenis_pesanan'] :
                     $pemesanan;
-        $dari = $request['tanggal_kirim_dari'] ? Carbon::parse($request['tanggal_kirim_dari']) : null;
-        $sampai = $request['tanggal_kirim_sampai'] ? Carbon::parse($request['tanggal_kirim_sampai']) : null;
-        if ($dari) {
-          if ($sampai) {
-            return ($pemesanan->tanggal_kirim_dari >= $dari &&
+            $dari = $request['tanggal_kirim_dari'] ? Carbon::parse($request['tanggal_kirim_dari']) : null;
+            $sampai = $request['tanggal_kirim_sampai'] ? Carbon::parse($request['tanggal_kirim_sampai']) : null;
+            if ($dari) {
+                if ($sampai) {
+                    return ($pemesanan->tanggal_kirim_dari >= $dari &&
                          $pemesanan->tanggal_kirim_sampai < $sampai->addDays(1)) ||
                          ($pemesanan->tanggal_kirim_dari >= $dari &&
                          $pemesanan->tanggal_kirim_dari < $dari->addDays(1));
-          }
-          return $pemesanan->tanggal_kirim_dari >= $dari &&
+                }
+                return $pemesanan->tanggal_kirim_dari >= $dari &&
                  $pemesanan->tanggal_kirim_dari < $dari->addDays(1);
-        }
+            }
 
-        return $pemesanan;
-      });
+            return $pemesanan;
+        });
 
-      return view('pemesanans.index')
-          ->with('pemesanans', $pemesanans);
+        $title = 'Pemesanan - Filter';
+
+        return view('pemesanans.index')
+          ->with('pemesanans', $pemesanans)
+          ->with('title', $title);
     }
 
     /**
@@ -77,8 +82,10 @@ class PemesananController extends AppBaseController
     public function create()
     {
         $produks = Produk::pluck('mutu_produk', 'id');
+        $title = 'Pemesanan - Tambah';
         return view('pemesanans.create')
-              ->with('produks', $produks);
+              ->with('produks', $produks)
+              ->with('title', $title);
     }
 
     /**
@@ -110,6 +117,7 @@ class PemesananController extends AppBaseController
     public function show($id)
     {
         $pemesanan = $this->pemesananRepository->findWithoutFail($id);
+        $title = 'Pemesanan - Lihat';
 
         if (empty($pemesanan)) {
             Flash::error('Pemesanan not found');
@@ -117,7 +125,9 @@ class PemesananController extends AppBaseController
             return redirect(route('pemesanans.index'));
         }
 
-        return view('pemesanans.show')->with('pemesanan', $pemesanan);
+        return view('pemesanans.show')
+                ->with('pemesanan', $pemesanan)
+                ->with('title', $title);
     }
 
     /**
@@ -137,9 +147,11 @@ class PemesananController extends AppBaseController
             return redirect(route('pemesanans.index'));
         }
 
+        $title = 'Pemesanan - Edit';
         return view('pemesanans.edit')
               ->with('pemesanan', $pemesanan)
-              ->with('produks', $produks);
+              ->with('produks', $produks)
+              ->with('title', $title);
     }
 
     /**
@@ -210,7 +222,7 @@ class PemesananController extends AppBaseController
         $pemesanans = $pemesanans->flatten();
         $pdf = PDF::loadView('pemesanans.pdf', ['pemesanans' => $pemesanans]);
         $pdf->setPaper('a4', 'landscape');
-        
+
         return $pdf->stream('pemesanan_'.time().'.pdf');
     }
 }

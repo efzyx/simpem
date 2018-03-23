@@ -31,9 +31,11 @@ class BahanBakuController extends AppBaseController
     {
         $this->bahanBakuRepository->pushCriteria(new RequestCriteria($request));
         $bahanBakus = $this->bahanBakuRepository->all();
+        $title = "Bahan Baku";
 
         return view('bahan_bakus.index')
-            ->with('bahanBakus', $bahanBakus);
+            ->with('bahanBakus', $bahanBakus)
+            ->with('title', $title);
     }
 
     /**
@@ -43,7 +45,9 @@ class BahanBakuController extends AppBaseController
      */
     public function create()
     {
-        return view('bahan_bakus.create');
+        $title = "Bahan Baku - Tambah";
+        return view('bahan_bakus.create')
+        ->with('title', $title);
     }
 
     /**
@@ -75,6 +79,7 @@ class BahanBakuController extends AppBaseController
     public function show($id)
     {
         $bahanBaku = $this->bahanBakuRepository->findWithoutFail($id);
+        $title = "Bahan Baku - Lihat";
 
         if (empty($bahanBaku)) {
             Flash::error('Bahan Baku not found');
@@ -82,7 +87,8 @@ class BahanBakuController extends AppBaseController
             return redirect(route('bahanBakus.index'));
         }
 
-        return view('bahan_bakus.show')->with('bahanBaku', $bahanBaku);
+        return view('bahan_bakus.show')->with('bahanBaku', $bahanBaku)
+        ->with('title', $title);
     }
 
     /**
@@ -95,6 +101,7 @@ class BahanBakuController extends AppBaseController
     public function edit($id)
     {
         $bahanBaku = $this->bahanBakuRepository->findWithoutFail($id);
+        $title = "Bahan Baku - Edit";
 
         if (empty($bahanBaku)) {
             Flash::error('Bahan Baku not found');
@@ -102,7 +109,8 @@ class BahanBakuController extends AppBaseController
             return redirect(route('bahanBakus.index'));
         }
 
-        return view('bahan_bakus.edit')->with('bahanBaku', $bahanBaku);
+        return view('bahan_bakus.edit')->with('bahanBaku', $bahanBaku)
+        ->with('title', $title);
     }
 
     /**
