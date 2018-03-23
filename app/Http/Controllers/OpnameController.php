@@ -22,6 +22,7 @@ class OpnameController extends AppBaseController
     {
         $this->opnameRepository = $opnameRepo;
         $this->bahanBakus = BahanBaku::pluck('nama_bahan_baku', 'id');
+        $this->middleware('role:admin,manager_produksi');
     }
 
     /**

@@ -19,6 +19,7 @@ class JabatanController extends AppBaseController
     public function __construct(JabatanRepository $jabatanRepo)
     {
         $this->jabatanRepository = $jabatanRepo;
+        $this->middleware('role:admin,manager_produksi');
     }
 
     /**

@@ -19,6 +19,7 @@ class BahanBakuController extends AppBaseController
     public function __construct(BahanBakuRepository $bahanBakuRepo)
     {
         $this->bahanBakuRepository = $bahanBakuRepo;
+        $this->middleware('role:admin,manager_produksi');
     }
 
     /**
