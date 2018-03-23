@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
+use Flash;
 
 class CheckRole
 {
@@ -18,15 +19,15 @@ class CheckRole
     {
         $jabatan = Auth::user()->jabatan->kode_jabatan;
         if (is_array($roles)) {
-            foreach ($roles as $key => $role) {
-                if ($jabatan === $role) {
-                    return $next($request);
-                }
+          foreach ($roles as $key => $role) {
+            if ($jabatan === $role) {
+              return $next($request);
             }
+          }
         }
-        if ($roles === $jabatan) {
-            return $next($request);
-        }
-        return abort(401, 'Dilarang!');
+        if ($roles === $jabatan)
+          return $next($request);
+        Flash::error('Anda tidak memiliki akses ke halaman tersebut!');
+        return redirect()->back();
     }
 }
