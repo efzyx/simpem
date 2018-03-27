@@ -46,4 +46,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('kendaraans', 'KendaraanController');
 
     Route::resource('kendaraans.kendaraanDetails', 'KendaraanDetailController');
+
+    Route::resource('batasPengadaans', 'BatasPengadaanController');
 });
