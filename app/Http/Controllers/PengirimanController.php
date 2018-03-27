@@ -36,8 +36,8 @@ class PengirimanController extends AppBaseController
         $title = "Pengiriman";
 
         return view('pengiriman.index')
-            ->with('pengiriman', $pengiriman)
-            ->with('title', $title);
+              ->with('pengiriman', $pengiriman)
+              ->with('title', $title);
     }
 
     /**
@@ -49,7 +49,7 @@ class PengirimanController extends AppBaseController
     {
         $title = "Pengiriman - Tambah";
         return view('pengiriman.create')
-        ->with('title', $title);
+              ->with('title', $title);
     }
 
     /**
@@ -109,7 +109,9 @@ class PengirimanController extends AppBaseController
             return redirect(route('pengiriman.index'));
         }
 
-        return view('pengiriman.edit')->with('pengiriman', $pengiriman)->with('title', $title);
+        return view('pengiriman.edit')
+              ->with('pengiriman', $pengiriman)
+              ->with('title', $title);
     }
 
     /**

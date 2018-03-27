@@ -48,7 +48,7 @@ class KomposisiMutuController extends AppBaseController
     {
         $title = "Komposisi Mutu - Tambah";
         return view('komposisi_mutus.create')
-        ->with('title', $title);
+              ->with('title', $title);
     }
 
     /**
