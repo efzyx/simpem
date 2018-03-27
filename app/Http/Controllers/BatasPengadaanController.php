@@ -20,6 +20,7 @@ class BatasPengadaanController extends AppBaseController
     public function __construct(BatasPengadaanRepository $batasPengadaanRepo)
     {
         $this->batasPengadaanRepository = $batasPengadaanRepo;
+        $this->middleware('role:admin,manager_produksi');
     }
 
     /**
