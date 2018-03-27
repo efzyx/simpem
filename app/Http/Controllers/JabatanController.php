@@ -48,7 +48,7 @@ class JabatanController extends AppBaseController
     {
         $title = "Jabatan - Tambah";
         return view('jabatans.create')
-        ->with('title', $title);
+              ->with('title', $title);
     }
 
     /**
@@ -87,7 +87,9 @@ class JabatanController extends AppBaseController
             return redirect(route('jabatans.index'));
         }
 
-        return view('jabatans.show')->with('jabatan', $jabatan)->with('title', $title);
+        return view('jabatans.show')
+              ->with('jabatan', $jabatan)
+              ->with('title', $title);
     }
 
     /**
@@ -108,8 +110,9 @@ class JabatanController extends AppBaseController
             return redirect(route('jabatans.index'));
         }
 
-        return view('jabatans.edit')->with('jabatan', $jabatan)
-        ->with('title', $title);
+        return view('jabatans.edit')
+              ->with('jabatan', $jabatan)
+              ->with('title', $title);
     }
 
     /**

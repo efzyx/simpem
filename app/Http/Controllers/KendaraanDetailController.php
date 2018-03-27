@@ -59,10 +59,10 @@ class KendaraanDetailController extends AppBaseController
         $title = "Detail Kendaraan - Tambah";
 
         return view('kendaraan_details.create')
-        ->with('kendaraans', $kendaraans)
-        ->with('status', $this->status)
-        ->with('kendaraan', $kendaraan)
-        ->with('title', $title);
+              ->with('kendaraans', $kendaraans)
+              ->with('status', $this->status)
+              ->with('kendaraan', $kendaraan)
+              ->with('title', $title);
     }
 
     /**
@@ -128,11 +128,11 @@ class KendaraanDetailController extends AppBaseController
         }
 
         return view('kendaraan_details.edit')
-        ->with('kendaraanDetail', $kendaraanDetail)
-        ->with('kendaraans', $kendaraans)
-        ->with('status', $this->status)
-        ->with('kendaraan', $kendaraan)
-        ->with('title', $title);
+              ->with('kendaraanDetail', $kendaraanDetail)
+              ->with('kendaraans', $kendaraans)
+              ->with('status', $this->status)
+              ->with('kendaraan', $kendaraan)
+              ->with('title', $title);
     }
 
     /**

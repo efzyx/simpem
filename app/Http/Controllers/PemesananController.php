@@ -24,8 +24,8 @@ class PemesananController extends AppBaseController
     public function __construct(PemesananRepository $pemesananRepo)
     {
         $this->middleware('role:admin,marketing,produksi,manager_produksi')
-              ->only('index', 'filter');
-        $this->middleware('role:marketing')->except('index', 'filter');
+              ->only('index', 'filter', 'show');
+        $this->middleware('role:marketing')->except('index', 'filter', 'show');
         $this->pemesananRepository = $pemesananRepo;
     }
 
@@ -73,8 +73,8 @@ class PemesananController extends AppBaseController
         $title = 'Pemesanan - Filter';
 
         return view('pemesanans.index')
-          ->with('pemesanans', $pemesanans)
-          ->with('title', $title);
+              ->with('pemesanans', $pemesanans)
+              ->with('title', $title);
     }
 
     /**

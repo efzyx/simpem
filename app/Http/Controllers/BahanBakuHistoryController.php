@@ -34,8 +34,8 @@ class BahanBakuHistoryController extends AppBaseController
         $title = "Riwayat Bahan Baku";
 
         return view('bahan_baku_histories.index')
-            ->with('bahanBakuHistories', $bahanBakuHistories)
-            ->with('title', $title);
+              ->with('bahanBakuHistories', $bahanBakuHistories)
+              ->with('title', $title);
     }
 
     /**
@@ -47,7 +47,7 @@ class BahanBakuHistoryController extends AppBaseController
     {
         $title = "Riwayat Bahan Baku - Tambah";
         return view('bahan_baku_histories.create')
-        ->with('title', $title);
+              ->with('title', $title);
     }
 
     /**
@@ -86,8 +86,9 @@ class BahanBakuHistoryController extends AppBaseController
             return redirect(route('bahanBakuHistories.index'));
         }
 
-        return view('bahan_baku_histories.show')->with('bahanBakuHistory', $bahanBakuHistory)
-        ->with('title', $title);
+        return view('bahan_baku_histories.show')
+              ->with('bahanBakuHistory', $bahanBakuHistory)
+              ->with('title', $title);
     }
 
     /**
@@ -108,8 +109,9 @@ class BahanBakuHistoryController extends AppBaseController
             return redirect(route('bahanBakuHistories.index'));
         }
 
-        return view('bahan_baku_histories.edit')->with('bahanBakuHistory', $bahanBakuHistory)
-        ->with('title', $title);
+        return view('bahan_baku_histories.edit')
+              ->with('bahanBakuHistory', $bahanBakuHistory)
+              ->with('title', $title);
     }
 
     /**
