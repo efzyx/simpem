@@ -4,6 +4,7 @@
 
 * https://medium.com/@argadinata/menentukan-harga-proyek-it-untuk-freelancer-a7711afa118e
 * Padahal fitur minimal https://anadea.info/tools/calculator?id=52
+* Cuma 4-5 halaman (small) https://estimatemyapp.com/paqQNYM2Rdn3PlrEOPmG960Jx7wzWve4
 
 [![build status](https://gitlab.com/fauzipadlaw/pemesanan/badges/master/build.svg)](https://gitlab.com/fauzipadlaw/pemesanan/commits/master)
 
