@@ -96,7 +96,7 @@
               <!-- Logo -->
               <a href="{{ url('/') }}" class="logo">
                 <span class="logo-mini"><img src="{{ asset('images/TLB_PNG.png')}}" height="35px" width="32px"></span>
-                <span class="logo-lg"><img src="{{ asset('images/TLB_PNG.png')}}" height="35px" width="32px"><b>{{ str_replace(' ', '', env('APP_NAME')) }}</b></span>
+                <span class="logo-lg"><img src="{{ asset('images/TLB_PNG.png')}}" height="35px" width="32px"><b>{{ str_replace(' ', '', config('app.name')) }}</b></span>
               </a>
 
               <!-- Header Navbar -->
@@ -159,7 +159,7 @@
 
           <!-- Main Footer -->
           <footer class="main-footer" style="max-height: 100px;text-align: center">
-              <strong>Copyright © {{ date('Y')}} <a href="{{ url('/') }}">PT {{ env('APP_NAME') }}</a>.</strong> All rights reserved.
+              <strong>Copyright © {{ date('Y')}} <a href="{{ url('/') }}">PT {{ config('app.name') }}</a>.</strong> All rights reserved.
           </footer>
 
       </div>
@@ -179,7 +179,7 @@
 
                   <!-- Branding Image -->
                   <a class="navbar-brand" href="{!! url('/') !!}">
-                      {{ enc('APP_NAME')}}
+                      {{ config('app.name')}}
                   </a>
               </div>
 
