@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Contoh Login</title>
+    <title>{{ env('APP_NAME') }} | Login</title>
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -30,12 +30,23 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+<style media="screen">
+  .login-page{
+    height: 100%;
+    background-image: url({{ asset('images/TLB_PNG.png')}});
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 
+  .login-box-body{
+    opacity: 0.8;
+  }
+</style>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/') }}"><b>Contoh </b>Login</a>
+        <a href="{{ url('/') }}"><b>Login</b> Page</a>
     </div>
 
     <!-- /.login-logo -->
@@ -80,9 +91,6 @@
                 <!-- /.col -->
             </div>
         </form>
-
-        <a href="{{ url('/password/reset') }}">I forgot my password</a><br>
-        <a href="{{ url('/register') }}" class="text-center">Register a new membership</a>
 
     </div>
     <!-- /.login-box-body -->
