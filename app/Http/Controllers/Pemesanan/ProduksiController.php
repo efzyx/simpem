@@ -12,6 +12,7 @@ use Response;
 use App\Models\Pemesanan;
 use App\Models\Supir;
 use Auth;
+use PDF;
 use App\Models\Pengiriman;
 use App\Models\Kendaraan;
 use Illuminate\Support\Facades\DB;
@@ -258,5 +259,15 @@ class ProduksiController extends AppBaseController
             }
         }
         return true;
+    }
+
+    public function downloadPdf(Request $request)
+    {
+        $data = array(json_decode($request['pemesanans'], true));
+        $pemesanans = Pemesanan::hydrate($data);
+        $pemesanans = $pemesanans->flatten();
+        $pdf = PDF::loadView('pemesanans.produksis.pdf', ['pemesanans' => $pemesanans,'kendaraans' => $this->kendaraans]);
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('pengiriman_'.time().'.pdf');
     }
 }

@@ -70,9 +70,4 @@ class BahanBaku extends Model
     {
         return BahanBaku::find($id);
     }
-
-    public function batas_pengadaan()
-    {
-        return $this->hasOne(BatasPengadaan::class);
-    }
 }

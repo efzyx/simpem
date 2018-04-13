@@ -23,8 +23,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('pemesanans/downloadPdf', 'PemesananController@downloadPdf')->name('downloadPdf');
     Route::post('pemesanans/filter', 'PemesananController@filter')->name('pemesanans.filter');
+
+    Route::post('produksis/downloadPdf', 'ProduksiController@downloadPdf')->name('downloadProduksiPdf');
+    Route::post('produksis/filter', 'ProduksiController@filter')->name('produksis.filter');
+
     Route::resource('pemesanans', 'PemesananController');
     Route::resource('pemesanans.produksis', 'Pemesanan\ProduksiController');
+    Route::post('pemesanans.produksis/downloadPdf', 'Pemesanan\ProduksiController@downloadPdf')->name('downloadPengiriman');
     Route::resource('pemesanans.produksis.pengiriman', 'Pemesanan\Produksi\PengirimanController');
 
     Route::resource('produksis', 'ProduksiController');
@@ -46,6 +51,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('kendaraans', 'KendaraanController');
 
     Route::resource('kendaraans.kendaraanDetails', 'KendaraanDetailController');
-
-    Route::resource('batasPengadaans', 'BatasPengadaanController');
 });
