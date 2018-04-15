@@ -32,7 +32,7 @@
     <a href="{!! route('users.index') !!}"><i class="fa fa-users"></i><span>Pegawai</span></a>
 </li>
 
-<li class="treeview {{ Request::is('jabatans*') || Request::is('bahanBakus*') ? 'active' : '' }}">
+<li class="treeview {{ Request::is('jabatans*') || Request::is('bahanBakus*') || Request::is('batasPengadaans*') ? 'active' : '' }}">
       <a href="#">
         <i class="fa fa-gear"></i> <span>Konfigurasi</span>
         <span class="pull-right-container">
@@ -45,6 +45,9 @@
         </li>
         <li class="{{ Request::is('bahanBakus*') ? 'active' : '' }}">
             <a href="{!! route('bahanBakus.index') !!}"><i class="fa fa-circle-o"></i>Bahan Baku</a>
+        </li>
+        <li class="{{ Request::is('batasPengadaans*') ? 'active' : '' }}">
+          <a href="{!! route('batasPengadaans.index') !!}"><i class="fa fa-circle-o"></i>Batas Pengadaan</a>
         </li>
       </ul>
   </li>

@@ -23,8 +23,8 @@ class PengadaanController extends AppBaseController
     {
         $this->pengadaanRepository = $pengadaanRepo;
         $this->bahanBakus = BahanBaku::pluck('nama_bahan_baku', 'id');
-        $this->middleware('role:admin,manager_produksi,logistik')->only('index');
-        $this->middleware('role:logistik')->except('index');
+        $this->middleware('role:admin,manager_produksi,logistik')->only('index', 'show');
+        $this->middleware('role:logistik')->except('index', 'show');
     }
 
     /**
@@ -67,10 +67,13 @@ class PengadaanController extends AppBaseController
     public function store(CreatePengadaanRequest $request)
     {
         $input = $request->all();
+        $bahan_baku = BahanBaku::find($input['bahan_baku_id']);
 
-        if ($input['berat'] > 500) {
-            Flash::error('Maksimal kuantitas pengadaan adalah 500');
-            return redirect()->back()->withInput($input);
+        if ($bahan_baku->batas_pengadaan) {
+            if ($input['berat'] > $maks = $bahan_baku->batas_pengadaan->maks_pengadaan) {
+                Flash::error('Maksimal kuantitas pengadaan '.$bahan_baku->nama_bahan_baku.' adalah '. $maks.' '.$bahan_baku->satuan);
+                return redirect()->back()->withInput($input);
+            }
         }
 
         $input['user_id'] = Auth::user()->id;
@@ -149,10 +152,18 @@ class PengadaanController extends AppBaseController
      */
     public function update($id, UpdatePengadaanRequest $request)
     {
-        if ($input['volume'] > 500) {
-            Flash::error('Maksimal kuantitas pengadaan adalah 500');
-            return redirect()->back()->withInput($input);
+        $input = $request->all();
+
+        $pengadaan = $this->pengadaanRepository->findWithoutFail($id);
+        $bahan_baku = BahanBaku::find($pengadaan->bahan_baku_id);
+
+        if ($bahan_baku->batas_pengadaan) {
+            if ($input['berat'] > $maks = $bahan_baku->batas_pengadaan->maks_pengadaan) {
+                Flash::error('Maksimal kuantitas pengadaan '.$bahan_baku->nama_bahan_baku.' adalah '. $maks.' '.$bahan_baku->satuan);
+                return redirect()->back()->withInput($input);
+            }
         }
+
 
         $pengadaan = $this->pengadaanRepository->findWithoutFail($id);
         $bahan_baku = BahanBaku::find($pengadaan->bahan_baku_id);

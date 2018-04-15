@@ -17,11 +17,13 @@
         <h3 class="box-title">Filter</h3>
       </div>
       <div class="box-body">
+        <div class="table-responsive">
         {!! Form::open(['route' => 'produksis.filter']) !!}
 
             @include('produksis.filter_fields')
 
         {!! Form::close() !!}
+        </div>
       </div>
     </div>
   </div>
