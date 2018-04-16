@@ -15,6 +15,8 @@ use PDF;
 use Auth;
 use Carbon\Carbon;
 use App\Models\Pemesanan;
+use App\Models\Kendaraan;
+use Illuminate\Support\Facades\DB;
 
 class PemesananController extends AppBaseController
 {
@@ -23,6 +25,8 @@ class PemesananController extends AppBaseController
 
     public function __construct(PemesananRepository $pemesananRepo)
     {
+        $this->kendaraans = Kendaraan::select(DB::raw("concat(no_polisi, ' - ', jenis_kendaraan) as nama"), 'id')
+                        ->pluck('nama', 'id');
         $this->middleware('role:admin,marketing,produksi,manager_produksi')
               ->only('index', 'filter', 'show');
         $this->middleware('role:marketing')->except('index', 'filter', 'show');
@@ -40,7 +44,6 @@ class PemesananController extends AppBaseController
         $this->pemesananRepository->pushCriteria(new RequestCriteria($request));
         $pemesanans = $this->pemesananRepository->all();
         $title = 'Pemesanan';
-
         return view('pemesanans.index')
             ->with('pemesanans', $pemesanans)
             ->with('title', $title);
@@ -76,6 +79,15 @@ class PemesananController extends AppBaseController
               ->with('pemesanans', $pemesanans)
               ->with('title', $title);
     }
+
+
+    /**
+     * Display the specified Pemesanan.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
 
     /**
      * Show the form for creating a new Pemesanan.
@@ -223,9 +235,8 @@ class PemesananController extends AppBaseController
         $data = json_decode($request['pemesanans'], true);
         $pemesanans = Pemesanan::hydrate($data);
         $pemesanans = $pemesanans->flatten();
-        $pdf = PDF::loadView('pemesanans.pdf', ['pemesanans' => $pemesanans]);
+        $pdf = PDF::loadView('pemesanans.pdf', ['pemesanans' => $pemesanans,'kendaraans' => $this->kendaraans]);
         $pdf->setPaper('a4', 'landscape');
-
         return $pdf->stream('pemesanan_'.time().'.pdf');
     }
 }

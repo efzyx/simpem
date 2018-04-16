@@ -47,7 +47,7 @@
             <a href="{!! route('bahanBakus.index') !!}"><i class="fa fa-circle-o"></i>Bahan Baku</a>
         </li>
         <li class="{{ Request::is('batasPengadaans*') ? 'active' : '' }}">
-            <a href="{!! route('batasPengadaans.index') !!}"><i class="fa fa-circle-o"></i>Batas Pengadaan</a>
+          <a href="{!! route('batasPengadaans.index') !!}"><i class="fa fa-circle-o"></i>Batas Pengadaan</a>
         </li>
       </ul>
   </li>

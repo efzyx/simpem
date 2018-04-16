@@ -18,6 +18,11 @@
         <div class="box box-primary">
             <div class="box-body">
               <div class="table-responsive">
+                <h1 class="pull-left">
+                      {!! Form::open(['route' => 'downloadPengiriman' , 'target' => '_blank'])!!}
+                      {!! Form::hidden('pemesanans', $pemesanan) !!}
+                      {!! Form::submit('Download', ['class' => 'btn btn-danger pull-left', 'style' => 'margin-top: -10px;margin-bottom: 5px']) !!}
+                </h1>
                 @include('pemesanans.produksis.table')
               </div>
             </div>

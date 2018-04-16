@@ -24,7 +24,7 @@ class PengadaanController extends AppBaseController
         $this->pengadaanRepository = $pengadaanRepo;
         $this->bahanBakus = BahanBaku::pluck('nama_bahan_baku', 'id');
         $this->middleware('role:admin,manager_produksi,logistik')->only('index', 'show');
-        $this->middleware('role:logistik')->except('index','show');
+        $this->middleware('role:logistik')->except('index', 'show');
     }
 
     /**
@@ -79,6 +79,8 @@ class PengadaanController extends AppBaseController
         $input['user_id'] = Auth::user()->id;
 
         $pengadaan = $this->pengadaanRepository->create($input);
+
+        $bahan_baku = BahanBaku::find($pengadaan->bahan_baku_id);
         $bahan_baku->sisa = $bahan_baku->sisa + $pengadaan->berat;
         $bahan_baku->save();
 
@@ -151,6 +153,7 @@ class PengadaanController extends AppBaseController
     public function update($id, UpdatePengadaanRequest $request)
     {
         $input = $request->all();
+
         $pengadaan = $this->pengadaanRepository->findWithoutFail($id);
         $bahan_baku = BahanBaku::find($pengadaan->bahan_baku_id);
 
@@ -161,6 +164,10 @@ class PengadaanController extends AppBaseController
             }
         }
 
+
+        $pengadaan = $this->pengadaanRepository->findWithoutFail($id);
+        $bahan_baku = BahanBaku::find($pengadaan->bahan_baku_id);
+        $input = $request->all();
         $old_volume = $pengadaan->volume_opname;
 
         if (empty($pengadaan)) {
