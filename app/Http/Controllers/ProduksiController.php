@@ -13,11 +13,16 @@ use Response;
 use App\Models\Pemesanan;
 use App\Models\Supir;
 use Auth;
+use PDF;
+use Carbon\Carbon;
 use App\Models\Pengiriman;
 use App\Models\Kendaraan;
 use Illuminate\Support\Facades\DB;
 use App\Models\BahanBaku;
 use App\Models\BahanBakuHistory;
+use App\Models\Produksi;
+use App\Models\Produk;
+use App\Models\KomposisiMutu;
 
 class ProduksiController extends AppBaseController
 {
@@ -31,6 +36,7 @@ class ProduksiController extends AppBaseController
         $this->supirs = Supir::pluck('nama_supir', 'id');
         $this->kendaraans = Kendaraan::select(DB::raw("concat(no_polisi, ' - ', jenis_kendaraan) as nama"), 'id')
                           ->pluck('nama', 'id');
+        $this->produk = Produk::pluck('mutu_produk', 'id');
         $this->middleware('role:admin,marketing,produksi,manager_produksi')
                           ->only('index');
         $this->middleware('role:produksi')->except('index');
@@ -47,6 +53,38 @@ class ProduksiController extends AppBaseController
         $this->produksiRepository->pushCriteria(new RequestCriteria($request));
         $produksis = $this->produksiRepository->all();
         $title = "Produksi";
+
+        return view('produksis.index')
+              ->with('produksis', $produksis)
+              ->with('kendaraans', $this->kendaraans)
+              ->with('title', $title);
+    }
+
+    public function filter(Request $request)
+    {
+        $this->produksiRepository->pushCriteria(new RequestCriteria($request));
+        $produksis = $this->produksiRepository->all();
+        $produksis = $produksis->filter(function ($produksi) use ($request) {
+            // $produksi = $request['jenis_pesanan'] ?
+            //         $pemesanan->jenis_pesanan == $request['jenis_pesanan'] :
+            //         $pemesanan;
+            $dari = $request['tanggal_kirim_dari'] ? Carbon::parse($request['tanggal_kirim_dari']) : null;
+            $sampai = $request['tanggal_kirim_sampai'] ? Carbon::parse($request['tanggal_kirim_sampai']) : null;
+            if ($dari) {
+                if ($sampai) {
+                    return ($produksi->waktu_produksi >= $dari &&
+                         $produksi->waktu_produksi < $sampai->addDays(1)) ||
+                         ($produksi->waktu_produksi >= $dari &&
+                         $produksi->waktu_produksi < $dari->addDays(1));
+                }
+                return $produksi->waktu_produksi >= $dari &&
+                 $produksi->waktu_produksi < $dari->addDays(1);
+            }
+
+            return $produksi;
+        });
+
+        $title = 'Produksi - Filter';
 
         return view('produksis.index')
               ->with('produksis', $produksis)
@@ -261,5 +299,15 @@ class ProduksiController extends AppBaseController
             }
         }
         return true;
+    }
+
+    public function downloadPdf(Request $request)
+    {
+        $data = json_decode($request['produksis'], true);
+        $produksis = Produksi::hydrate($data);
+        $produksis = $produksis->flatten();
+        $pdf = PDF::loadView('produksis.pdf', ['produksis' => $produksis]);
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('produksi_'.time().'.pdf');
     }
 }
