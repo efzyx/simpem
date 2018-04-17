@@ -3,26 +3,23 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Penerimaan Bahan Baku <small>Tambah</small>
+            Pemesanan Bahan Baku
         </h1>
     </section>
     <div class="content">
-       <div class="clearfix"></div>
+      <div class="clearfix"></div>
 
-       @include('flash::message')
+      @include('flash::message')
 
-       <div class="clearfix"></div>
+      <div class="clearfix"></div>
         @include('adminlte-templates::common.errors')
-        <div class="box box-solid box-primary">
-          <div class="box-header">
-            <h3 class="box-title">Form Tambah Penerimaan Bahan Baku</h3>
-          </div>
+        <div class="box box-primary">
 
             <div class="box-body">
                 <div class="row">
-                    {!! Form::open(['route' => 'pengadaans.store']) !!}
+                    {!! Form::open(['route' => 'pemesananBahanBakus.store']) !!}
 
-                        @include('pengadaans.fields')
+                        @include('pemesanan_bahan_bakus.fields')
 
                     {!! Form::close() !!}
                 </div>
@@ -30,7 +27,6 @@
         </div>
     </div>
 @endsection
-
 @section('scripts')
   <script type="text/javascript">
               $(function () {

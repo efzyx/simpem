@@ -3,19 +3,19 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Pengadaan <small>Edit</small>
+            Penerimaan Bahan Baku <small>Edit</small>
         </h1>
    </section>
    <div class="content">
      <div class="clearfix"></div>
-     
+
      @include('flash::message')
 
      <div class="clearfix"></div>
        @include('adminlte-templates::common.errors')
        <div class="box box-solid box-primary">
          <div class="box-header">
-           <h3 class="box-title">Form Edit Pengadaan</h3>
+           <h3 class="box-title">Form Edit Penerimaan Bahan Baku</h3>
          </div>
            <div class="box-body">
                <div class="row">

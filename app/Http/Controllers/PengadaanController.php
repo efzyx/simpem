@@ -13,6 +13,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Models\BahanBaku;
 use Response;
 use Auth;
+use App\Models\pemesanan_bahan_baku;
 
 class PengadaanController extends AppBaseController
 {
@@ -23,6 +24,7 @@ class PengadaanController extends AppBaseController
     {
         $this->pengadaanRepository = $pengadaanRepo;
         $this->bahanBakus = BahanBaku::pluck('nama_bahan_baku', 'id');
+        $this->pemesanan_bahan_bakus = pemesanan_bahan_baku::pluck('nama_supplier', 'id');
         $this->middleware('role:admin,manager_produksi,logistik')->only('index', 'show');
         $this->middleware('role:logistik')->except('index', 'show');
     }
@@ -37,11 +39,12 @@ class PengadaanController extends AppBaseController
     {
         $this->pengadaanRepository->pushCriteria(new RequestCriteria($request));
         $pengadaans = $this->pengadaanRepository->paginate(10);
-        $title = "Pengadaan";
+        $title = "Penerimaan Bahan Baku";
 
         return view('pengadaans.index')
             ->with('pengadaans', $pengadaans)
-            ->with('title', $title);
+            ->with('title', $title)
+            ->with('supplier', $this->pemesanan_bahan_bakus);
     }
 
     /**
@@ -51,10 +54,11 @@ class PengadaanController extends AppBaseController
      */
     public function create()
     {
-        $title = "Pengadaan - Tambah";
+        $title = "Penerimaan Bahan Baku - Tambah";
         return view('pengadaans.create')
             ->with('bahanBakus', $this->bahanBakus)
-            ->with('title', $title);
+            ->with('title', $title)
+            ->with('supplier', $this->pemesanan_bahan_bakus);
     }
 
     /**
@@ -67,14 +71,16 @@ class PengadaanController extends AppBaseController
     public function store(CreatePengadaanRequest $request)
     {
         $input = $request->all();
-        $bahan_baku = BahanBaku::find($input['bahan_baku_id']);
-
+        $supplier = pemesanan_bahan_baku::find($input['supplier']);
+        $input['bahan_baku_id'] = $supplier->bahan_baku_id;
+        $bahan_baku=BahanBaku::find($input['bahan_baku_id']);
         if ($bahan_baku->batas_pengadaan) {
             if ($input['berat'] > $maks = $bahan_baku->batas_pengadaan->maks_pengadaan) {
                 Flash::error('Maksimal kuantitas pengadaan '.$bahan_baku->nama_bahan_baku.' adalah '. $maks.' '.$bahan_baku->satuan);
                 return redirect()->back()->withInput($input);
             }
         }
+
 
         $input['user_id'] = Auth::user()->id;
 
@@ -93,7 +99,7 @@ class PengadaanController extends AppBaseController
         $history->save();
 
 
-        Flash::success('Pengadaan saved successfully.');
+        Flash::success('Penerimaan Bahan Baku saved successfully.');
 
         return redirect(route('pengadaans.index'));
     }
@@ -108,15 +114,18 @@ class PengadaanController extends AppBaseController
     public function show($id)
     {
         $pengadaan = $this->pengadaanRepository->findWithoutFail($id);
-        $title = "Pengadaan - Lihat";
+        $title = "Penerimaan Bahan Baku - Lihat";
 
         if (empty($pengadaan)) {
-            Flash::error('Pengadaan not found');
+            Flash::error('Penerimaan Bahan Baku not found');
 
             return redirect(route('pengadaans.index'));
         }
 
-        return view('pengadaans.show')->with('pengadaan', $pengadaan)->with('title', $title);
+        return view('pengadaans.show')
+        ->with('pengadaan', $pengadaan)
+        ->with('title', $title)
+        ->with('supplier', $this->pemesanan_bahan_bakus);
     }
 
     /**
@@ -129,9 +138,9 @@ class PengadaanController extends AppBaseController
     public function edit($id)
     {
         $pengadaan = $this->pengadaanRepository->findWithoutFail($id);
-        $title = "Pengadaan - Edit";
+        $title = "Penerimaan Bahan Baku - Edit";
         if (empty($pengadaan)) {
-            Flash::error('Pengadaan not found');
+            Flash::error('Penerimaan Bahan Baku not found');
 
             return redirect(route('pengadaans.index'));
         }
@@ -139,7 +148,8 @@ class PengadaanController extends AppBaseController
         return view('pengadaans.edit')
               ->with('pengadaan', $pengadaan)
               ->with('bahanBakus', $this->bahanBakus)
-              ->with('title', $title);
+              ->with('title', $title)
+              ->with('supplier', $this->pemesanan_bahan_bakus);
     }
 
     /**
@@ -171,7 +181,7 @@ class PengadaanController extends AppBaseController
         $old_volume = $pengadaan->volume_opname;
 
         if (empty($pengadaan)) {
-            Flash::error('Pengadaan not found');
+            Flash::error('Penerimaan Bahan Baku not found');
 
             return redirect(route('pengadaans.index'));
         }
@@ -189,7 +199,7 @@ class PengadaanController extends AppBaseController
         $history->total_sisa = $bahan_baku->sisa;
         $history->update();
 
-        Flash::success('Pengadaan updated successfully.');
+        Flash::success('Penerimaan Bahan Baku updated successfully.');
 
         return redirect(route('pengadaans.index'));
     }
@@ -211,14 +221,14 @@ class PengadaanController extends AppBaseController
         $bahan_baku->save();
 
         if (empty($pengadaan)) {
-            Flash::error('Pengadaan not found');
+            Flash::error('Penerimaan Bahan Baku not found');
 
             return redirect(route('pengadaans.index'));
         }
 
         $this->pengadaanRepository->delete($id);
 
-        Flash::success('Pengadaan deleted successfully.');
+        Flash::success('Penerimaan Bahan Baku deleted successfully.');
 
         return redirect(route('pengadaans.index'));
     }

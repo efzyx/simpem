@@ -20,9 +20,22 @@
     <a href="{!! route('produksis.index') !!}"><i class="fa fa-flask"></i><span>Produksi</span></a>
 </li>
 
-<li class="{{ Request::is('pengadaans*') ? 'active' : '' }}">
-    <a href="{!! route('pengadaans.index') !!}"><i class="fa fa-cart-arrow-down"></i><span>Pengadaan</span></a>
-</li>
+<li class="treeview {{ Request::is('pengadaans*') || Request::is('pemesananBahanBakus*') ? 'active' : '' }}">
+      <a href="#">
+        <i class="fa fa-cart-arrow-down"></i> <span>Pengadaan</span>
+        <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+      </a>
+      <ul class="treeview-menu">
+        <li class="{{ Request::is('pemesananBahanBakus*') ? 'active' : '' }}">
+            <a href="{!! route('pemesananBahanBakus.index') !!}"><i class="fa fa-circle-o"></i><span>Pemesanan Bahan Baku</span></a>
+        </li>
+        <li class="{{ Request::is('pengadaans*') ? 'active' : '' }}">
+            <a href="{!! route('pengadaans.index') !!}"><i class="fa fa-circle-o"></i><span>Penerimaan Bahan Baku</span></a>
+        </li>
+      </ul>
+  </li>
 
 <li class="{{ Request::is('opnames*') ? 'active' : '' }}">
     <a href="{!! route('opnames.index') !!}"><i class="fa fa-search-minus"></i><span>Opname</span></a>

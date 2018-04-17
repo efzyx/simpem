@@ -1,60 +1,50 @@
+<!-- Nama Supplier Field -->
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('nama_supplier', 'Nama Supplier') !!}
+  </div>
+  <div class="col-sm-9">
+    {!!$pemesananBahanBaku->nama_supplier  !!}
+  </div>
+</div>
+
+<!-- Cp Supplier Field -->
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('cp_supplier', 'CP Supplier') !!}
+  </div>
+  <div class="col-sm-9">
+    {!!$pemesananBahanBaku->cp_supplier  !!}
+  </div>
+</div>
+
 <!-- Bahan Baku Id Field -->
 <div class="form-group col-sm-12">
   <div class="col-sm-3">
     {!! Form::label('bahan_baku_id', 'Bahan Baku') !!}
   </div>
   <div class="col-sm-9">
-    {!! $pengadaan->bahan_baku->nama_bahan_baku !!}
+    {!!$pemesananBahanBaku->bahan_baku->nama_bahan_baku  !!}
   </div>
 </div>
 
-<!-- Berat Field -->
+<!-- Volume Pemesanan Field -->
 <div class="form-group col-sm-12">
   <div class="col-sm-3">
-    {!! Form::label('berat', 'Berat') !!}
+    {!! Form::label('volume_pemesanan', 'Volume Pemesanan') !!}
   </div>
   <div class="col-sm-9">
-    {!! $pengadaan->berat !!}
+    {!!$pemesananBahanBaku->volume_pemesanan  !!}
   </div>
 </div>
 
-<!-- Supplier Field -->
+<!-- Tanggal Pemesanan Field -->
 <div class="form-group col-sm-12">
   <div class="col-sm-3">
-    {!! Form::label('supplier', 'Supplier') !!}
+    {!! Form::label('tanggal_pemesanan', 'Tangal Pemesanan') !!}
   </div>
   <div class="col-sm-9">
-    {!! $supplier[$pengadaan->supplier] !!}
-  </div>
-</div>
-
-<!-- Supir Field -->
-<div class="form-group col-sm-12">
-  <div class="col-sm-3">
-    {!! Form::label('supir', 'Supir/No Polisi') !!}
-  </div>
-  <div class="col-sm-9">
-    {!! $pengadaan->supir !!}
-  </div>
-</div>
-
-<!-- Tanggal Pengadaan Field -->
-<div class="form-group col-sm-12">
-  <div class="col-sm-3">
-    {!! Form::label('tanggal_pengadaan', 'Tanggal Pengadaan') !!}
-  </div>
-  <div class="col-sm-9">
-    {!! $pengadaan->tanggal_pengadaan !!}
-  </div>
-</div>
-
-<!-- User Id Field -->
-<div class="form-group col-sm-12">
-  <div class="col-sm-3">
-    {!! Form::label('user_id', 'Pegawai') !!}
-  </div>
-  <div class="col-sm-9">
-    {!! $pengadaan->user->name !!}
+    {!!$pemesananBahanBaku->tanggal_pemesanan  !!}
   </div>
 </div>
 
@@ -64,7 +54,7 @@
     {!! Form::label('keterangan', 'Keterangan') !!}
   </div>
   <div class="col-sm-9">
-    {!! $pengadaan->keterangan !!}
+    {!!$pemesananBahanBaku->keterangan  !!}
   </div>
 </div>
 
@@ -74,7 +64,7 @@
     {!! Form::label('created_at', 'Created At') !!}
   </div>
   <div class="col-sm-9">
-    {!! $pengadaan->created_at !!}
+    {!!$pemesananBahanBaku->created_at  !!}
   </div>
 </div>
 
@@ -84,6 +74,6 @@
     {!! Form::label('updated_at', 'Updated At') !!}
   </div>
   <div class="col-sm-9">
-    {!! $pengadaan->updated_at !!}
+    {!!$pemesananBahanBaku->updated_at  !!}
   </div>
 </div>

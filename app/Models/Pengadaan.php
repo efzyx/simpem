@@ -58,7 +58,6 @@ class Pengadaan extends Model
      * @var array
      */
     public static $rules = [
-        'bahan_baku_id' => 'required',
         'berat' => 'required',
         'supplier' => 'required',
         'supir' => 'required',
@@ -89,5 +88,9 @@ class Pengadaan extends Model
                 $bahan_baku_history->delete();
             }
         });
+    }
+    public function pemesanan_bahan_baku()
+    {
+        return $this->belongsTo('App\pemesanan_bahan_baku');
     }
 }
