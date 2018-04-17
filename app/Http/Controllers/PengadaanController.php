@@ -13,7 +13,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Models\BahanBaku;
 use Response;
 use Auth;
-use App\Models\pemesanan_bahan_baku;
+use App\Models\PemesananBahanBaku;
 
 class PengadaanController extends AppBaseController
 {
@@ -24,7 +24,7 @@ class PengadaanController extends AppBaseController
     {
         $this->pengadaanRepository = $pengadaanRepo;
         $this->bahanBakus = BahanBaku::pluck('nama_bahan_baku', 'id');
-        $this->pemesanan_bahan_bakus = pemesanan_bahan_baku::pluck('nama_supplier', 'id');
+        $this->pemesanan_bahan_bakus = PemesananBahanBaku::pluck('nama_supplier', 'id');
         $this->middleware('role:admin,manager_produksi,logistik')->only('index', 'show');
         $this->middleware('role:logistik')->except('index', 'show');
     }
@@ -71,7 +71,7 @@ class PengadaanController extends AppBaseController
     public function store(CreatePengadaanRequest $request)
     {
         $input = $request->all();
-        $supplier = pemesanan_bahan_baku::find($input['supplier']);
+        $supplier = PemesananBahanBaku::find($input['supplier']);
         $input['bahan_baku_id'] = $supplier->bahan_baku_id;
         $bahan_baku=BahanBaku::find($input['bahan_baku_id']);
         if ($bahan_baku->batas_pengadaan) {

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Createpemesanan_bahan_bakuRequest;
-use App\Http\Requests\Updatepemesanan_bahan_bakuRequest;
-use App\Repositories\pemesanan_bahan_bakuRepository;
+use App\Http\Requests\CreatePemesananBahanBakuRequest;
+use App\Http\Requests\UpdatePemesananBahanBakuRequest;
+use App\Repositories\PemesananBahanBakuRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -12,12 +12,12 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Models\BahanBaku;
 
-class pemesanan_bahan_bakuController extends AppBaseController
+class PemesananBahanBakuController extends AppBaseController
 {
-    /** @var  pemesanan_bahan_bakuRepository */
+    /** @var  PemesananBahanBakuRepository */
     private $pemesananBahanBakuRepository;
 
-    public function __construct(pemesanan_bahan_bakuRepository $pemesananBahanBakuRepo)
+    public function __construct(PemesananBahanBakuRepository $pemesananBahanBakuRepo)
     {
         $this->pemesananBahanBakuRepository = $pemesananBahanBakuRepo;
         $this->bahanBakus = BahanBaku::pluck('nama_bahan_baku', 'id');
@@ -59,11 +59,11 @@ class pemesanan_bahan_bakuController extends AppBaseController
     /**
      * Store a newly created pemesanan_bahan_baku in storage.
      *
-     * @param Createpemesanan_bahan_bakuRequest $request
+     * @param CreatePemesananBahanBakuRequest $request
      *
      * @return Response
      */
-    public function store(Createpemesanan_bahan_bakuRequest $request)
+    public function store(CreatePemesananBahanBakuRequest $request)
     {
         $input = $request->all();
 
@@ -116,6 +116,7 @@ class pemesanan_bahan_bakuController extends AppBaseController
 
         return view('pemesanan_bahan_bakus.edit')
         ->with('pemesananBahanBaku', $pemesananBahanBaku)
+        ->with('bahanBakus', $this->bahanBakus)
         ->with('title', $title);
     }
 
@@ -123,11 +124,11 @@ class pemesanan_bahan_bakuController extends AppBaseController
      * Update the specified pemesanan_bahan_baku in storage.
      *
      * @param  int              $id
-     * @param Updatepemesanan_bahan_bakuRequest $request
+     * @param UpdatePemesananBahanBakuRequest $request
      *
      * @return Response
      */
-    public function update($id, Updatepemesanan_bahan_bakuRequest $request)
+    public function update($id, UpdatePemesananBahanBakuRequest $request)
     {
         $pemesananBahanBaku = $this->pemesananBahanBakuRepository->findWithoutFail($id);
 

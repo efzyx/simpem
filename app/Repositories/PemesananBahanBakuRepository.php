@@ -2,19 +2,19 @@
 
 namespace App\Repositories;
 
-use App\Models\pemesanan_bahan_baku;
+use App\Models\PemesananBahanBaku;
 use InfyOm\Generator\Common\BaseRepository;
 
 /**
- * Class pemesanan_bahan_bakuRepository
+ * Class PemesananBahanBakuRepository
  * @package App\Repositories
  * @version April 16, 2018, 1:57 pm WIB
  *
- * @method pemesanan_bahan_baku findWithoutFail($id, $columns = ['*'])
- * @method pemesanan_bahan_baku find($id, $columns = ['*'])
- * @method pemesanan_bahan_baku first($columns = ['*'])
+ * @method PemesananBahanBaku findWithoutFail($id, $columns = ['*'])
+ * @method PemesananBahanBaku find($id, $columns = ['*'])
+ * @method PemesananBahanBaku first($columns = ['*'])
 */
-class pemesanan_bahan_bakuRepository extends BaseRepository
+class PemesananBahanBakuRepository extends BaseRepository
 {
     /**
      * @var array
@@ -33,6 +33,6 @@ class pemesanan_bahan_bakuRepository extends BaseRepository
      **/
     public function model()
     {
-        return pemesanan_bahan_baku::class;
+        return PemesananBahanBaku::class;
     }
 }

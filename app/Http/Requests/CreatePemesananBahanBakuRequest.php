@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\pemesanan_bahan_baku;
+use App\Models\PemesananBahanBaku;
 
-class Createpemesanan_bahan_bakuRequest extends FormRequest
+class CreatePemesananBahanBakuRequest extends FormRequest
 {
 
     /**
@@ -25,6 +25,6 @@ class Createpemesanan_bahan_bakuRequest extends FormRequest
      */
     public function rules()
     {
-        return pemesanan_bahan_baku::$rules;
+        return PemesananBahanBaku::$rules;
     }
 }

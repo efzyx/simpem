@@ -91,6 +91,6 @@ class Pengadaan extends Model
     }
     public function pemesanan_bahan_baku()
     {
-        return $this->belongsTo('App\pemesanan_bahan_baku');
+        return $this->belongsTo('App\Models\PemesananBahanBaku');
     }
 }

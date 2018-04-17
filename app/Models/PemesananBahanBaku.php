@@ -6,7 +6,7 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class pemesanan_bahan_baku
+ * Class PemesananBahanBaku
  * @package App\Models
  * @version April 16, 2018, 1:57 pm WIB
  *
@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property date tanggal_pemesanan
  * @property string keterangan
  */
-class pemesanan_bahan_baku extends Model
+class PemesananBahanBaku extends Model
 {
     use SoftDeletes;
 
