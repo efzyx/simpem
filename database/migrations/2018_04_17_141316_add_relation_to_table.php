@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RemoveColumnFromPengadaan extends Migration
+class AddRelationToTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class RemoveColumnFromPengadaan extends Migration
      */
     public function up()
     {
-        Schema::disableForeignKeyConstraints();
         Schema::table('pengadaans', function (Blueprint $table) {
-            $table->dropForeign('bahan_baku_id');
             $table->foreign('supplier')->references('id')->on('pemesanan_bahan_bakus')->onDelete('cascade');
         });
-        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -28,8 +25,6 @@ class RemoveColumnFromPengadaan extends Migration
      */
     public function down()
     {
-        Schema::table('pengadaans', function (Blueprint $table) {
-            $table->integer('bahan_baku_id');
-        });
+        //
     }
 }

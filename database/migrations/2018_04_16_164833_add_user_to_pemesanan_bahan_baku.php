@@ -16,6 +16,7 @@ class AddUserToPemesananBahanBaku extends Migration
         Schema::table('pemesanan_bahan_bakus', function (Blueprint $table) {
             $table->integer('user_id')->unsigned()->nullable()->after('keterangan');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('bahan_baku_id')->references('id')->on('bahan_bakus')->onDelete('cascade');
         });
     }
 

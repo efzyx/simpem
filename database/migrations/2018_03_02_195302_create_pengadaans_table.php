@@ -17,7 +17,7 @@ class CreatePengadaansTable extends Migration
             $table->increments('id');
             $table->integer('bahan_baku_id')->unsigned();
             $table->integer('berat');
-            $table->string('supplier');
+            $table->integer('supplier')->unsigned();
             $table->datetime('tanggal_pengadaan');
             $table->integer('user_id')->unsigned();
             $table->string('keterangan');
