@@ -74,8 +74,8 @@ class PemesananBahanBaku extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function pengadaan()
+    public function pengadaans()
     {
-        return $this->hasMany('App\Model\Pengadaan');
+        return $this->hasMany('App\Models\Pengadaan');
     }
 }

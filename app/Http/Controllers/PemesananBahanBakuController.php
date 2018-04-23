@@ -10,7 +10,10 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use Carbon\Carbon;
 use App\Models\BahanBaku;
+use App\Models\PemesananBahanBaku;
+use PDF;
 
 class PemesananBahanBakuController extends AppBaseController
 {
@@ -21,8 +24,8 @@ class PemesananBahanBakuController extends AppBaseController
     {
         $this->pemesananBahanBakuRepository = $pemesananBahanBakuRepo;
         $this->bahanBakus = BahanBaku::pluck('nama_bahan_baku', 'id');
-        $this->middleware('role:admin,manager_produksi,logistik')->only('index', 'show');
-        $this->middleware('role:logistik')->except('index', 'show');
+        $this->middleware('role:admin,manager_produksi,logistik')->only('index', 'show', 'filter');
+        $this->middleware('role:logistik')->except('index', 'show', 'filter');
     }
 
     /**
@@ -34,13 +37,45 @@ class PemesananBahanBakuController extends AppBaseController
     public function index(Request $request)
     {
         $this->pemesananBahanBakuRepository->pushCriteria(new RequestCriteria($request));
-        $pemesananBahanBakus = $this->pemesananBahanBakuRepository->paginate(10);
+        $pemesananBahanBakus = $this->pemesananBahanBakuRepository->all();
         $title = 'Pemesanan Bahan Baku';
 
         return view('pemesanan_bahan_bakus.index')
             ->with('pemesananBahanBakus', $pemesananBahanBakus)
             ->with('title', $title)
             ->with('bahan_baku', $this->bahanBakus);
+    }
+
+    public function filter(Request $request)
+    {
+        $this->pemesananBahanBakuRepository->pushCriteria(new RequestCriteria($request));
+        $suppliers = $this->pemesananBahanBakuRepository->all();
+        $suppliers = $suppliers->filter(function ($supplier) use ($request) {
+            $dari = $request['tanggal_kirim_dari'] ? Carbon::parse($request['tanggal_kirim_dari']) : null;
+            $sampai = $request['tanggal_kirim_sampai'] ? Carbon::parse($request['tanggal_kirim_sampai']) : null;
+            if ($dari) {
+                if ($sampai) {
+                    return ($supplier->tanggal_pemesanan >= $dari &&
+                         $supplier->tanggal_pemesanan < $sampai->addDays(1)) ||
+                         ($supplier->tanggal_pemesanan >= $dari &&
+                         $supplier->tanggal_pemesanan < $dari->addDays(1));
+                }
+                return $supplier->tanggal_pemesanan >= $dari &&
+                 $supplier->tanggal_pemesanan < $dari->addDays(1);
+            }
+            return $supplier;
+        });
+        $suppliers = $suppliers->filter(function ($supplier) use ($request) {
+            return $supplier->bahan_baku_id == $request['bahan_baku'];
+        });
+
+
+        $title = 'Pemesanan Bahan Baku - Filter';
+
+        return view('pemesanan_bahan_bakus.index')
+              ->with('pemesananBahanBakus', $suppliers)
+              ->with('title', $title)
+              ->With('bahan_baku', $this->bahanBakus);
     }
 
     /**
@@ -167,5 +202,15 @@ class PemesananBahanBakuController extends AppBaseController
         Flash::success('Pemesanan Bahan Baku deleted successfully.');
 
         return redirect(route('pemesananBahanBakus.index'));
+    }
+
+    public function downloadPdf(Request $request)
+    {
+        $data = json_decode($request['pemesananBahanBakus'], true);
+        $suppliers = PemesananBahanBaku::hydrate($data);
+        $suppliers = $suppliers->flatten();
+        $pdf = PDF::loadView('pemesanan_bahan_bakus.pdf', ['pemesananBahanBakus' => $suppliers, 'bahan_baku' => $this->bahanBakus]);
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('pemesanan_'.time().'.pdf');
     }
 }

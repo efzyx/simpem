@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property integer bahan_baku_id
  * @property integer berat
- * @property string supplier
+ * @property string pemesanan_bahan_baku_id
  * @property string supir
  * @property string|\Carbon\Carbon tanggal_pengadaan
  * @property integer user_id
@@ -31,7 +31,7 @@ class Pengadaan extends Model
     public $fillable = [
         'bahan_baku_id',
         'berat',
-        'supplier',
+        'pemesanan_bahan_baku_id',
         'supir',
         'tanggal_pengadaan',
         'user_id',
@@ -46,7 +46,7 @@ class Pengadaan extends Model
     protected $casts = [
         'bahan_baku_id' => 'integer',
         'berat' => 'integer',
-        'supplier' => 'string',
+        'pemesanan_bahan_baku_id' => 'integer',
         'supir' => 'string',
         'user_id' => 'integer',
         'keterangan' => 'string'
@@ -59,8 +59,8 @@ class Pengadaan extends Model
      */
     public static $rules = [
         'berat' => 'required',
-        'supplier' => 'required',
         'supir' => 'required',
+        'pemesanan_bahan_baku_id' => 'required',
         'tanggal_pengadaan' => 'required',
     ];
 

@@ -14,7 +14,11 @@ class AddRelationToTable extends Migration
     public function up()
     {
         Schema::table('pengadaans', function (Blueprint $table) {
-            $table->foreign('supplier')->references('id')->on('pemesanan_bahan_bakus')->onDelete('cascade');
+            DB::statement('SET FOREIGN_KEY_CHECKS=0');
+            $table->dropColumn('supplier');
+            $table->integer('pemesanan_bahan_baku_id')->after('berat')->unsigned();
+            $table->foreign('pemesanan_bahan_baku_id')->references('id')->on('pemesanan_bahan_bakus')->onDelete('cascade');
+            DB::statement('SET FOREIGN_KEY_CHECKS=1');
         });
     }
 
