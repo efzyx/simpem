@@ -33,7 +33,8 @@ class PemesananBahanBaku extends Model
         'bahan_baku_id',
         'volume_pemesanan',
         'tanggal_pemesanan',
-        'keterangan'
+        'keterangan',
+        'user_id'
     ];
 
     /**
@@ -43,10 +44,10 @@ class PemesananBahanBaku extends Model
      */
     protected $casts = [
         'nama_supplier' => 'string',
-        'cp_supplier' => 'integer',
+        'cp_supplier' => 'string',
         'bahan_baku_id' => 'integer',
         'volume_pemesanan' => 'integer',
-        'tanggal_pemesanan' => 'date',
+        'tanggal_pemesanan' => 'datetime',
         'keterangan' => 'string'
     ];
 
@@ -61,7 +62,6 @@ class PemesananBahanBaku extends Model
         'bahan_baku_id' => 'required',
         'volume_pemesanan' => 'required',
         'tanggal_pemesanan' => 'required',
-        'keterangan' => 'required'
     ];
 
     public function bahan_baku()

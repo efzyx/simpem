@@ -29,10 +29,10 @@
       </a>
       <ul class="treeview-menu">
         <li class="{{ Request::is('pemesananBahanBakus*') ? 'active' : '' }}">
-            <a href="{!! route('pemesananBahanBakus.index') !!}"><i class="fa fa-circle-o"></i><span>Pemesanan Bahan Baku</span></a>
+            <a href="{!! route('pemesananBahanBakus.index') !!}"><i class="fa fa-circle-o"></i><span>Pemesanan</span></a>
         </li>
         <li class="{{ Request::is('pengadaans*') ? 'active' : '' }}">
-            <a href="{!! route('pengadaans.index') !!}"><i class="fa fa-circle-o"></i><span>Penerimaan Bahan Baku</span></a>
+            <a href="{!! route('pengadaans.index') !!}"><i class="fa fa-circle-o"></i><span>Penerimaan</span></a>
         </li>
       </ul>
   </li>

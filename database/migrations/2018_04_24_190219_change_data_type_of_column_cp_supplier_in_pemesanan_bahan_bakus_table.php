@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddUserToPemesananBahanBaku extends Migration
+class ChangeDataTypeOfColumnCpSupplierInPemesananBahanBakusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,9 @@ class AddUserToPemesananBahanBaku extends Migration
     public function up()
     {
         Schema::table('pemesanan_bahan_bakus', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned()->after('keterangan');
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('bahan_baku_id')->references('id')->on('bahan_bakus')->onDelete('cascade');
+            $table->string('cp_supplier')->change();
+            $table->datetime('tanggal_pemesanan')->change();
+            $table->string('keterangan')->nullable()->change();
         });
     }
 
@@ -29,8 +28,9 @@ class AddUserToPemesananBahanBaku extends Migration
     public function down()
     {
         Schema::table('pemesanan_bahan_bakus', function (Blueprint $table) {
-            $table->dropColumn('user_id');
-            $table->dropForeign(['user_id', 'bahan_baku_id']);
+            $table->string('cp_supplier')->change();
+            $table->date('tanggal_pemesanan')->change();
+            $table->string('keterangan')->change();
         });
     }
 }

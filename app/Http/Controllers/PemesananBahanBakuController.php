@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use App\Models\BahanBaku;
 use App\Models\PemesananBahanBaku;
 use PDF;
+use Auth;
 
 class PemesananBahanBakuController extends AppBaseController
 {
@@ -66,7 +67,9 @@ class PemesananBahanBakuController extends AppBaseController
             return $supplier;
         });
         $suppliers = $suppliers->filter(function ($supplier) use ($request) {
-            return $supplier->bahan_baku_id == $request['bahan_baku'];
+            return $request['bahan_baku'] ?
+                   $supplier->bahan_baku_id == $request['bahan_baku'] :
+                   $supplier;
         });
 
 
@@ -101,6 +104,7 @@ class PemesananBahanBakuController extends AppBaseController
     public function store(CreatePemesananBahanBakuRequest $request)
     {
         $input = $request->all();
+        $input['user_id'] = Auth::user()->id;
 
         $pemesananBahanBaku = $this->pemesananBahanBakuRepository->create($input);
 

@@ -6,13 +6,13 @@
 
 <!-- Cp Supplier Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('cp_supplier', 'Cp Supplier:') !!}
+    {!! Form::label('cp_supplier', 'CP Supplier:') !!}
     {!! Form::number('cp_supplier', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Bahan Baku Id Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('bahan_baku_id', 'Bahan Baku Id:') !!}
+    {!! Form::label('bahan_baku_id', 'Bahan Baku:') !!}
     {!! Form::select('bahan_baku_id', $bahanBakus, null, ['class' => 'form-control']) !!}
 </div>
 
@@ -25,7 +25,7 @@
 <!-- Tanggal Pemesanan Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('tanggal_pemesanan', 'Tanggal Pemesanan:') !!}
-    {!! Form::text('tanggal_pemesanan', null, ['class' => 'form-control','id' => 'calendar1']) !!}
+    {!! Form::text('tanggal_pemesanan', null, ['class' => 'form-control','id' => 'calendar']) !!}
 </div>
 
 <!-- Keterangan Field -->

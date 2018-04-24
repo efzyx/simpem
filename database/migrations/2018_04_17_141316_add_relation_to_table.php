@@ -29,6 +29,8 @@ class AddRelationToTable extends Migration
      */
     public function down()
     {
-        //
+        $table->string('supplier');
+        $table->dropForeign(['pemesanan_bahan_baku_id']);
+        $table->dropColumn(pemesanan_bahan_baku_id);
     }
 }

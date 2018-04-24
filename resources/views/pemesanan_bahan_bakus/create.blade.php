@@ -30,7 +30,7 @@
 @section('scripts')
   <script type="text/javascript">
               $(function () {
-                  $('#calendar1').datetimepicker({
+                  $('#calendar').datetimepicker({
                     format: "YYYY-MM-DD HH:mm:ss"
                   });
               });
