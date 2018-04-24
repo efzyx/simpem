@@ -65,9 +65,6 @@ class ProduksiController extends AppBaseController
         $this->produksiRepository->pushCriteria(new RequestCriteria($request));
         $produksis = $this->produksiRepository->all();
         $produksis = $produksis->filter(function ($produksi) use ($request) {
-            // $produksi = $request['jenis_pesanan'] ?
-            //         $pemesanan->jenis_pesanan == $request['jenis_pesanan'] :
-            //         $pemesanan;
             $dari = $request['tanggal_kirim_dari'] ? Carbon::parse($request['tanggal_kirim_dari']) : null;
             $sampai = $request['tanggal_kirim_sampai'] ? Carbon::parse($request['tanggal_kirim_sampai']) : null;
             if ($dari) {

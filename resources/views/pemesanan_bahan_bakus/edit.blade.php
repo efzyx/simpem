@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Penerimaan Bahan Baku <small>Edit</small>
+            Pemesanan Bahan Baku
         </h1>
    </section>
    <div class="content">
@@ -13,15 +13,12 @@
 
      <div class="clearfix"></div>
        @include('adminlte-templates::common.errors')
-       <div class="box box-solid box-primary">
-         <div class="box-header">
-           <h3 class="box-title">Form Edit Penerimaan Bahan Baku</h3>
-         </div>
+       <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($pengadaan, ['route' => ['pengadaans.update', $pengadaan->id], 'method' => 'patch']) !!}
+                   {!! Form::model($pemesananBahanBaku, ['route' => ['pemesananBahanBakus.update', $pemesananBahanBaku->id], 'method' => 'patch']) !!}
 
-                        @include('pengadaans.fields')
+                        @include('pemesanan_bahan_bakus.fields')
 
                    {!! Form::close() !!}
                </div>
@@ -33,7 +30,7 @@
 @section('scripts')
   <script type="text/javascript">
               $(function () {
-                  $('#calendar1').datetimepicker({
+                  $('#calendar').datetimepicker({
                     format: "YYYY-MM-DD HH:mm:ss"
                   });
               });

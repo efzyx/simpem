@@ -40,6 +40,7 @@ class ProduksiController extends AppBaseController
      */
     public function index(Pemesanan $pemesanan, Request $request)
     {
+        dd($pemesanan);
         $title = 'Produksi';
         return view('pemesanans.produksis.index')
             ->with('produksis', $pemesanan->produksis)

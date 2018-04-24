@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Supplier;
 
 use App\Http\Requests\CreatePengadaanRequest;
 use App\Http\Requests\UpdatePengadaanRequest;
@@ -8,21 +8,23 @@ use App\Repositories\PengadaanRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\DB;
 use App\Models\BahanBakuHistory;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Models\BahanBaku;
 use Response;
 use Auth;
+use PDF;
 use App\Models\PemesananBahanBaku;
+use App\Models\Pengadaan;
 
 class PengadaanController extends AppBaseController
 {
     /** @var  PengadaanRepository */
     private $pengadaanRepository;
 
-    public function __construct(PengadaanRepository $pengadaanRepo)
+    public function __construct()
     {
-        $this->pengadaanRepository = $pengadaanRepo;
         $this->bahanBakus = BahanBaku::pluck('nama_bahan_baku', 'id');
         $this->pemesanan_bahan_bakus = PemesananBahanBaku::pluck('nama_supplier', 'id');
         $this->middleware('role:admin,manager_produksi,logistik')->only('index', 'show');
@@ -35,15 +37,16 @@ class PengadaanController extends AppBaseController
      * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index($pemesanan_bahan_baku, Request $request)
     {
-        $this->pengadaanRepository->pushCriteria(new RequestCriteria($request));
-        $pengadaans = $this->pengadaanRepository->paginate(10);
+        $pemesanan_bahan_baku = PemesananBahanBaku::findOrFail($pemesanan_bahan_baku);
+
+        $pengadaans = $pemesanan_bahan_baku->pengadaans;
         $title = "Penerimaan Bahan Baku";
-        return view('pengadaans.index')
+        return view('pemesanan_bahan_bakus.pengadaans.index')
             ->with('pengadaans', $pengadaans)
             ->with('title', $title)
-            ->with('supplier', $this->pemesanan_bahan_bakus);
+            ->with('supplier', $pemesanan_bahan_baku);
     }
 
     /**
@@ -51,11 +54,12 @@ class PengadaanController extends AppBaseController
      *
      * @return Response
      */
-    public function create()
+    public function create(PemesananBahanBaku $pemesanan_bahan_baku)
     {
         $title = "Penerimaan Bahan Baku - Tambah";
         return view('pengadaans.create')
             ->with('bahanBakus', $this->bahanBakus)
+            ->with('supplier', $pemesanan_bahan_baku)
             ->with('title', $title)
             ->with('supplier', $this->pemesanan_bahan_bakus);
     }
@@ -67,10 +71,10 @@ class PengadaanController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreatePengadaanRequest $request)
+    public function store(PemesananBahanBaku $pemesanan_bahan_baku, CreatePengadaanRequest $request)
     {
         $input = $request->all();
-        $supplier = PemesananBahanBaku::find($input['pemesanan_bahan_baku_id']);
+        $supplier = PemesananBahanBaku::find($input['supplier']);
         $input['bahan_baku_id'] = $supplier->bahan_baku_id;
         $bahan_baku=BahanBaku::find($input['bahan_baku_id']);
         if ($bahan_baku->batas_pengadaan) {
@@ -100,7 +104,7 @@ class PengadaanController extends AppBaseController
 
         Flash::success('Penerimaan Bahan Baku saved successfully.');
 
-        return redirect(route('pengadaans.index'));
+        return redirect(route('pengadaans.index', $pemesanan_bahan_baku));
     }
 
     /**
@@ -110,7 +114,7 @@ class PengadaanController extends AppBaseController
      *
      * @return Response
      */
-    public function show($id)
+    public function show(PemesananBahanBaku $pemesanan_bahan_baku, $id)
     {
         $pengadaan = $this->pengadaanRepository->findWithoutFail($id);
         $title = "Penerimaan Bahan Baku - Lihat";
@@ -124,7 +128,7 @@ class PengadaanController extends AppBaseController
         return view('pengadaans.show')
         ->with('pengadaan', $pengadaan)
         ->with('title', $title)
-        ->with('supplier', $this->pemesanan_bahan_bakus);
+        ->with('suplier', $pemesanan_bahan_baku);
     }
 
     /**
@@ -134,7 +138,7 @@ class PengadaanController extends AppBaseController
      *
      * @return Response
      */
-    public function edit($id)
+    public function edit(PemesananBahanBaku $pemesanan_bahan_baku, $id)
     {
         $pengadaan = $this->pengadaanRepository->findWithoutFail($id);
         $title = "Penerimaan Bahan Baku - Edit";
@@ -147,8 +151,9 @@ class PengadaanController extends AppBaseController
         return view('pengadaans.edit')
               ->with('pengadaan', $pengadaan)
               ->with('bahanBakus', $this->bahanBakus)
+              ->with('pemesanan', $pemesanan)
               ->with('title', $title)
-              ->with('supplier', $this->pemesanan_bahan_bakus);
+              ->with('supplier', $pemesanan_bahan_baku);
     }
 
     /**
@@ -159,7 +164,7 @@ class PengadaanController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdatePengadaanRequest $request)
+    public function update(PemesananBahanBaku $pemesanan_bahan_baku, $id, UpdatePengadaanRequest $request)
     {
         $input = $request->all();
 
@@ -200,7 +205,7 @@ class PengadaanController extends AppBaseController
 
         Flash::success('Penerimaan Bahan Baku updated successfully.');
 
-        return redirect(route('pengadaans.index'));
+        return redirect(route('pengadaans.index', $pemesanan_bahan_baku));
     }
 
     /**
@@ -230,5 +235,15 @@ class PengadaanController extends AppBaseController
         Flash::success('Penerimaan Bahan Baku deleted successfully.');
 
         return redirect(route('pengadaans.index'));
+    }
+
+    public function downloadPdf(Request $request)
+    {
+        $data = array(json_decode($request['supplier'], true));
+        $suppliers = PemesananBahanBaku::hydrate($data);
+        $suppliers = $suppliers->flatten();
+        $pdf = PDF::loadView('pemesanan_bahan_bakus.pengadaans.pdf', ['suppliers' => $suppliers]);
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('pengadaan_'.time().'.pdf');
     }
 }

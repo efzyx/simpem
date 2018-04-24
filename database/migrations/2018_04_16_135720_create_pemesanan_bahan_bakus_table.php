@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreatePengadaansTable extends Migration
+class CreatePemesananBahanBakusTable extends Migration
 {
 
     /**
@@ -13,18 +13,16 @@ class CreatePengadaansTable extends Migration
      */
     public function up()
     {
-        Schema::create('pengadaans', function (Blueprint $table) {
+        Schema::create('pemesanan_bahan_bakus', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('nama_supplier');
+            $table->integer('cp_supplier');
             $table->integer('bahan_baku_id')->unsigned();
-            $table->integer('berat');
-            $table->integer('supplier')->unsigned();
-            $table->datetime('tanggal_pengadaan');
-            $table->integer('user_id')->unsigned();
+            $table->integer('volume_pemesanan');
+            $table->date('tanggal_pemesanan');
             $table->string('keterangan');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('bahan_baku_id')->references('id')->on('bahan_bakus')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -35,6 +33,6 @@ class CreatePengadaansTable extends Migration
      */
     public function down()
     {
-        Schema::drop('pengadaans');
+        Schema::drop('pemesanan_bahan_bakus');
     }
 }

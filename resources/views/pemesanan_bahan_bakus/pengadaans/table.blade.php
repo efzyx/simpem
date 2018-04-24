@@ -4,10 +4,9 @@
         <th>#</th>
         <th>Bahan Baku</th>
         <th>Berat</th>
-        <th>Supplier</th>
-        <th>Supir</th>
-        <th>Pengadaan</th>
-            <th>Action</th>
+        <th>No Polisi</th>
+        <th>Tanggal Pengadaan</th>
+        <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -19,7 +18,6 @@
             <td>{{ $no++ }}</td>
             <td>{!! $pengadaan->bahan_baku->nama_bahan_baku !!}</td>
             <td>{!! $pengadaan->berat !!}</td>
-            <td>{!! $supplier[$pengadaan->pemesanan_bahan_baku_id] !!}</td>
             <td>{!! $pengadaan->supir !!}</td>
             <td>{!! $pengadaan->tanggal_pengadaan->diffForHumans() !!}</td>
             <td>
@@ -32,7 +30,6 @@
                 {!! Form::close() !!}
             </td>
         </tr>
-
     @endforeach
     </tbody>
 </table>

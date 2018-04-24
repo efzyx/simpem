@@ -6,8 +6,8 @@
 
 <!-- Supplier Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('pemesanan_bahan_baku_id', 'Supplier:') !!}
-    {!! Form::select('pemesanan_bahan_baku_id', $supplier, null, ['class' => 'form-control']) !!}
+    {!! Form::label('supplier', 'Supplier:') !!}
+    {!! Form::select('supplier', $supplier, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Supir Field -->

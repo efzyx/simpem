@@ -1,7 +1,7 @@
 image: woohuiren/php-laravel-env:latest
 
 services:
-  - mysql:latest
+  - mysql:5.7
 
 before_script:
   # For more information, view https://docs.gitlab.com/ce/ci/ssh_keys/README.html

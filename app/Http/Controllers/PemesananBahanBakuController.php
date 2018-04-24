@@ -1,0 +1,221 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\CreatePemesananBahanBakuRequest;
+use App\Http\Requests\UpdatePemesananBahanBakuRequest;
+use App\Repositories\PemesananBahanBakuRepository;
+use App\Http\Controllers\AppBaseController;
+use Illuminate\Http\Request;
+use Flash;
+use Prettus\Repository\Criteria\RequestCriteria;
+use Response;
+use Carbon\Carbon;
+use App\Models\BahanBaku;
+use App\Models\PemesananBahanBaku;
+use PDF;
+use Auth;
+
+class PemesananBahanBakuController extends AppBaseController
+{
+    /** @var  PemesananBahanBakuRepository */
+    private $pemesananBahanBakuRepository;
+
+    public function __construct(PemesananBahanBakuRepository $pemesananBahanBakuRepo)
+    {
+        $this->pemesananBahanBakuRepository = $pemesananBahanBakuRepo;
+        $this->bahanBakus = BahanBaku::pluck('nama_bahan_baku', 'id');
+        $this->middleware('role:admin,manager_produksi,logistik')->only('index', 'show', 'filter');
+        $this->middleware('role:logistik')->except('index', 'show', 'filter');
+    }
+
+    /**
+     * Display a listing of the pemesanan_bahan_baku.
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function index(Request $request)
+    {
+        $this->pemesananBahanBakuRepository->pushCriteria(new RequestCriteria($request));
+        $pemesananBahanBakus = $this->pemesananBahanBakuRepository->all();
+        $title = 'Pemesanan Bahan Baku';
+
+        return view('pemesanan_bahan_bakus.index')
+            ->with('pemesananBahanBakus', $pemesananBahanBakus)
+            ->with('title', $title)
+            ->with('bahan_baku', $this->bahanBakus);
+    }
+
+    public function filter(Request $request)
+    {
+        $this->pemesananBahanBakuRepository->pushCriteria(new RequestCriteria($request));
+        $suppliers = $this->pemesananBahanBakuRepository->all();
+        $suppliers = $suppliers->filter(function ($supplier) use ($request) {
+            $dari = $request['tanggal_kirim_dari'] ? Carbon::parse($request['tanggal_kirim_dari']) : null;
+            $sampai = $request['tanggal_kirim_sampai'] ? Carbon::parse($request['tanggal_kirim_sampai']) : null;
+            if ($dari) {
+                if ($sampai) {
+                    return ($supplier->tanggal_pemesanan >= $dari &&
+                         $supplier->tanggal_pemesanan < $sampai->addDays(1)) ||
+                         ($supplier->tanggal_pemesanan >= $dari &&
+                         $supplier->tanggal_pemesanan < $dari->addDays(1));
+                }
+                return $supplier->tanggal_pemesanan >= $dari &&
+                 $supplier->tanggal_pemesanan < $dari->addDays(1);
+            }
+            return $supplier;
+        });
+        $suppliers = $suppliers->filter(function ($supplier) use ($request) {
+            return $request['bahan_baku'] ?
+                   $supplier->bahan_baku_id == $request['bahan_baku'] :
+                   $supplier;
+        });
+
+
+        $title = 'Pemesanan Bahan Baku - Filter';
+
+        return view('pemesanan_bahan_bakus.index')
+              ->with('pemesananBahanBakus', $suppliers)
+              ->with('title', $title)
+              ->With('bahan_baku', $this->bahanBakus);
+    }
+
+    /**
+     * Show the form for creating a new pemesanan_bahan_baku.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        $title = 'Pemesanan Bahan Baku - Tambah';
+        return view('pemesanan_bahan_bakus.create')
+          ->with('bahanBakus', $this->bahanBakus)
+          ->with('title', $title);
+    }
+
+    /**
+     * Store a newly created pemesanan_bahan_baku in storage.
+     *
+     * @param CreatePemesananBahanBakuRequest $request
+     *
+     * @return Response
+     */
+    public function store(CreatePemesananBahanBakuRequest $request)
+    {
+        $input = $request->all();
+        $input['user_id'] = Auth::user()->id;
+
+        $pemesananBahanBaku = $this->pemesananBahanBakuRepository->create($input);
+
+        Flash::success('Pemesanan Bahan Baku saved successfully.');
+
+        return redirect(route('pemesananBahanBakus.index'));
+    }
+
+    /**
+     * Display the specified pemesanan_bahan_baku.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function show($id)
+    {
+        $pemesananBahanBaku = $this->pemesananBahanBakuRepository->findWithoutFail($id);
+        $title = 'Pemesanan Bahan Baku - Lihat';
+        if (empty($pemesananBahanBaku)) {
+            Flash::error('Pemesanan Bahan Baku not found');
+
+            return redirect(route('pemesananBahanBakus.index'));
+        }
+
+        return view('pemesanan_bahan_bakus.show')
+          ->with('pemesananBahanBaku', $pemesananBahanBaku)
+          ->with('title', $title);
+    }
+
+    /**
+     * Show the form for editing the specified pemesanan_bahan_baku.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function edit($id)
+    {
+        $pemesananBahanBaku = $this->pemesananBahanBakuRepository->findWithoutFail($id);
+
+        if (empty($pemesananBahanBaku)) {
+            Flash::error('Pemesanan Bahan Baku not found');
+
+            return redirect(route('pemesananBahanBakus.index'));
+        }
+        $title = 'Pemesanan Bahan Baku - Lihat';
+
+        return view('pemesanan_bahan_bakus.edit')
+        ->with('pemesananBahanBaku', $pemesananBahanBaku)
+        ->with('bahanBakus', $this->bahanBakus)
+        ->with('title', $title);
+    }
+
+    /**
+     * Update the specified pemesanan_bahan_baku in storage.
+     *
+     * @param  int              $id
+     * @param UpdatePemesananBahanBakuRequest $request
+     *
+     * @return Response
+     */
+    public function update($id, UpdatePemesananBahanBakuRequest $request)
+    {
+        $pemesananBahanBaku = $this->pemesananBahanBakuRepository->findWithoutFail($id);
+        $request['user_id'] = Auth::user()->id;
+        
+        if (empty($pemesananBahanBaku)) {
+            Flash::error('Pemesanan Bahan Baku not found');
+
+            return redirect(route('pemesananBahanBakus.index'));
+        }
+
+        $pemesananBahanBaku = $this->pemesananBahanBakuRepository->update($request->all(), $id);
+
+        Flash::success('Pemesanan Bahan Baku updated successfully.');
+
+        return redirect(route('pemesananBahanBakus.index'));
+    }
+
+    /**
+     * Remove the specified pemesanan_bahan_baku from storage.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        $pemesananBahanBaku = $this->pemesananBahanBakuRepository->findWithoutFail($id);
+
+        if (empty($pemesananBahanBaku)) {
+            Flash::error('Pemesanan Bahan Baku not found');
+
+            return redirect(route('pemesananBahanBakus.index'));
+        }
+
+        $this->pemesananBahanBakuRepository->delete($id);
+
+        Flash::success('Pemesanan Bahan Baku deleted successfully.');
+
+        return redirect(route('pemesananBahanBakus.index'));
+    }
+
+    public function downloadPdf(Request $request)
+    {
+        $data = json_decode($request['pemesananBahanBakus'], true);
+        $suppliers = PemesananBahanBaku::hydrate($data);
+        $suppliers = $suppliers->flatten();
+        $pdf = PDF::loadView('pemesanan_bahan_bakus.pdf', ['pemesananBahanBakus' => $suppliers, 'bahan_baku' => $this->bahanBakus]);
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('pemesanan_'.time().'.pdf');
+    }
+}
