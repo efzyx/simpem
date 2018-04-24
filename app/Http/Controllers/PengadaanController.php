@@ -25,8 +25,8 @@ class PengadaanController extends AppBaseController
         $this->pengadaanRepository = $pengadaanRepo;
         $this->bahanBakus = BahanBaku::pluck('nama_bahan_baku', 'id');
         $this->pemesanan_bahan_bakus = PemesananBahanBaku::pluck('nama_supplier', 'id');
-        // $this->middleware('role:admin,manager_produksi,logistik')->only('index', 'show');
-        // $this->middleware('role:logistik')->except('index', 'show');
+        $this->middleware('role:admin,manager_produksi,logistik')->only('index', 'show');
+        $this->middleware('role:logistik')->except('index', 'show');
     }
 
     /**
