@@ -16,6 +16,13 @@ use App\Models\Pengiriman;
 
 class PengirimanController extends AppBaseController
 {
+    public function __construct()
+    {
+      $this->middleware('role:admin,marketing,produksi,manager_produksi')
+                        ->only('index');
+      $this->middleware('role:produksi')->except('index');
+    }
+
     public function index(Pemesanan $pemesanan, Produksi $produksi, Request $request)
     {
         $pengirimans = $produksi->pengirimans;

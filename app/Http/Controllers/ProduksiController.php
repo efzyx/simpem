@@ -37,9 +37,9 @@ class ProduksiController extends AppBaseController
         $this->kendaraans = Kendaraan::select(DB::raw("concat(no_polisi, ' - ', jenis_kendaraan) as nama"), 'id')
                           ->pluck('nama', 'id');
         $this->produk = Produk::pluck('mutu_produk', 'id');
-        // $this->middleware('role:admin,marketing,produksi,manager_produksi')
-        //                   ->only('index');
-        // $this->middleware('role:produksi')->except('index');
+        $this->middleware('role:admin,marketing,produksi,manager_produksi')
+                          ->only('index', 'show');
+        $this->middleware('role:produksi')->except('index', 'show');
     }
 
     /**
