@@ -20,7 +20,9 @@ class PengirimanController extends AppBaseController
     public function __construct(PengirimanRepository $pengirimanRepo)
     {
         $this->pengirimanRepository = $pengirimanRepo;
-        $this->middleware('role:admin,manager_produksi,produksi')->only('index');
+        $this->middleware('role:admin,marketing,produksi,manager_produksi')
+                          ->only('index', 'show');
+        $this->middleware('role:produksi')->except('index', 'show');
     }
 
     /**

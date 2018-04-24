@@ -17,8 +17,11 @@
       <td>{!! $produksi->volume !!}</td>
       <td>{!! $produksi->waktu_produksi->diffForHumans() !!}</td>
       <td>
-        {!! Form::open(['route' => ['pemesanans.produksis.pengiriman.store', $pemesanan, $produksi], 'method' => 'post']) !!} {!! Form::select('status', $status , $produksi->pengirimans->last()->status, ['class' => 'form-control']) !!} {!! Form::hidden('produksi_id',
-        $produksi->id)!!} {!! Form::close() !!}</td>
+        {!! Form::open(['route' => ['pemesanans.produksis.pengiriman.store', $pemesanan, $produksi], 'method' => 'post']) !!}
+        {!! Form::select('status', $status , $produksi->pengirimans->last() ? $produksi->pengirimans->last()->status : null, ['class' => 'form-control status', 'placeholder' => 'Belum Diset']) !!}
+        {!! Form::hidden('produksi_id', $produksi->id)!!}
+        {!! Form::close() !!}
+      </td>
       <td>
         {!! Form::open(['route' => ['pemesanans.produksis.destroy', $pemesanan, $produksi->id], 'method' => 'delete']) !!}
         <div class='btn-group'>

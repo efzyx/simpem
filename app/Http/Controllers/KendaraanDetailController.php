@@ -36,9 +36,7 @@ class KendaraanDetailController extends AppBaseController
      */
     public function index(Kendaraan $kendaraan, Request $request)
     {
-        // $kendaraan = Kendaraan::findOrFail($request->kendaraan);
-        $this->kendaraanDetailRepository->pushCriteria(new RequestCriteria($request));
-        $kendaraanDetails = $this->kendaraanDetailRepository->all();
+        $kendaraanDetails = $kendaraan->kendaraanDetails()->orderBy('waktu', 'desc')->get();
         $title = "Detail Kendaraan";
 
         return view('kendaraan_details.index')

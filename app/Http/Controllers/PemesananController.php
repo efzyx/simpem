@@ -181,6 +181,7 @@ class PemesananController extends AppBaseController
     {
         $pemesanan = $this->pemesananRepository->findWithoutFail($id);
         $input = $request->all();
+        $input['user_id'] = Auth::user()->id;
 
         $produksis = $pemesanan->produksis;
         $old_volume = $pemesanan->volume_pesanan;

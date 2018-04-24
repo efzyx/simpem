@@ -21,7 +21,7 @@ class PengadaanRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'berat',
-        'supplier',
+        'pemesanan_bahan_baku_id',
         'tanggal_pengadaan',
         'keterangan'
     ];

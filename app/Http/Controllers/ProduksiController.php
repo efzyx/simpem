@@ -38,8 +38,8 @@ class ProduksiController extends AppBaseController
                           ->pluck('nama', 'id');
         $this->produk = Produk::pluck('mutu_produk', 'id');
         $this->middleware('role:admin,marketing,produksi,manager_produksi')
-                          ->only('index');
-        $this->middleware('role:produksi')->except('index');
+                          ->only('index', 'show');
+        $this->middleware('role:produksi')->except('index', 'show');
     }
 
     /**
@@ -65,9 +65,6 @@ class ProduksiController extends AppBaseController
         $this->produksiRepository->pushCriteria(new RequestCriteria($request));
         $produksis = $this->produksiRepository->all();
         $produksis = $produksis->filter(function ($produksi) use ($request) {
-            // $produksi = $request['jenis_pesanan'] ?
-            //         $pemesanan->jenis_pesanan == $request['jenis_pesanan'] :
-            //         $pemesanan;
             $dari = $request['tanggal_kirim_dari'] ? Carbon::parse($request['tanggal_kirim_dari']) : null;
             $sampai = $request['tanggal_kirim_sampai'] ? Carbon::parse($request['tanggal_kirim_sampai']) : null;
             if ($dari) {
@@ -119,7 +116,17 @@ class ProduksiController extends AppBaseController
         $input = $request->all();
         $input['user_id'] = Auth::user()->id;
         $pemesanan = Pemesanan::find($input['pemesanan_id']);
+        $kendaraan = Kendaraan::find($input['kendaraan_id']);
         $komposisi_mutus = $pemesanan->produk->komposisi_mutus;
+        $status = $this->statusKendaraan($kendaraan, $input);
+
+        if(is_object($status)) return $status;
+
+        if($status != 1){
+          Flash::error('Kendaraan '. $kendaraan->no_polisi.' sedang '.($status == 2 ? 'Rusak' : 'Dirental').'!');
+          return redirect()->back()->withInput($input);
+        }
+
         if (!$this->checkStock($komposisi_mutus, $input['volume'])) {
             return redirect()->back()->withInput($input);
         }
@@ -222,6 +229,16 @@ class ProduksiController extends AppBaseController
 
             return redirect(route('produksis.index'));
         }
+        $old_kendaraan = $produksi->kendaraan;
+        $kendaraan = Kendaraan::find($input['kendaraan_id']);
+        $status = $this->statusKendaraan($kendaraan, $input);
+
+        if(is_object($status)) return $status;
+
+        if($status != 1 && $old_kendaraan->id != $kendaraan->id){
+          Flash::error('Kendaraan '. $kendaraan->no_polisi.' sedang '.($status == 2 ? 'Rusak' : 'Dirental').'!');
+          return redirect()->back()->withInput($input);
+        }
 
         $komposisi_mutus = $produksi->pemesanan->produk->komposisi_mutus;
         $old_volume = $produksi->volume;
@@ -231,7 +248,7 @@ class ProduksiController extends AppBaseController
 
         if (!$komposisi_mutus->count()) {
             Flash::error('Komposisi produk pemesanan belum diset');
-            return redirect()->back();
+            return redirect()->back()->withInput($input);
         }
 
         foreach ($komposisi_mutus as $key => $komposisi) {
@@ -299,6 +316,17 @@ class ProduksiController extends AppBaseController
             }
         }
         return true;
+    }
+
+    private function statusKendaraan($kendaraan, $input)
+    {
+      $last_update = $kendaraan->lastStatus();
+
+      if (!$last_update) {
+        Flash::error('Status kendaraan '.$kendaraan->no_polisi.' belum diset');
+        return redirect()->back()->withInput($input);
+      }
+      return $last_update->status;
     }
 
     public function downloadPdf(Request $request)
