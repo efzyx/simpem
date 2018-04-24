@@ -28,8 +28,8 @@ class ProduksiController extends AppBaseController
         $this->kendaraans = Kendaraan::select(DB::raw("concat(no_polisi, ' - ', jenis_kendaraan) as nama"), 'id')
                           ->pluck('nama', 'id');
         $this->middleware('role:admin,marketing,produksi,manager_produksi')
-                          ->only('index');
-        $this->middleware('role:produksi')->except('index');
+                          ->only('index', 'show');
+        $this->middleware('role:produksi')->except('index', 'show');
     }
 
     /**
@@ -40,7 +40,6 @@ class ProduksiController extends AppBaseController
      */
     public function index(Pemesanan $pemesanan, Request $request)
     {
-        dd($pemesanan);
         $title = 'Produksi';
         return view('pemesanans.produksis.index')
             ->with('produksis', $pemesanan->produksis)

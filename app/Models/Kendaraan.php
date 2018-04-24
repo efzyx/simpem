@@ -52,4 +52,9 @@ class Kendaraan extends Model
     {
         return $this->hasMany('App\Models\KendaraanDetail');
     }
+
+    public function lastStatus()
+    {
+      return $this->kendaraanDetails()->orderBy('waktu', 'desc')->first();
+    }
 }

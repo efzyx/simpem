@@ -29,7 +29,7 @@
 @section('scripts')
   <script type="text/javascript">
               $(function () {
-                  $('#calendar1').datetimepicker({
+                  $('#calendar').datetimepicker({
                     // locale : 'id'
                     format: "YYYY-MM-DD HH:mm:ss"
                   });

@@ -33,18 +33,20 @@
       <h3 class="box-title">List Produksi</h3>
     </div>
     <div class="box-body">
+      <div class="table-responsive">
       <h1 class="pull-left">
             {!! Form::open(['route' => 'downloadProduksiPdf' , 'target' => '_blank'])!!}
             {!! Form::hidden('produksis', $produksis) !!}
             {!! Form::submit('Download', ['class' => 'btn btn-danger pull-left', 'style' => 'margin-top: -10px;margin-bottom: 5px']) !!}
+            {!! Form::close() !!}
             </h1>
       <h1 class="pull-right">
-               <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('produksis.create') !!}">Add New</a>
-            </h1>
+               <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('produksis.create') !!}">Tambah Baru</a>
+      </h1>
           <br><br><hr>
 
         @include('produksis.table')
-
+      </div>
     </div>
   </div>
   <div class="text-center">
@@ -54,10 +56,12 @@
 @endsection @section('scripts')
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#produksis-table').DataTable();
-    $('select').on('change', function() {
-      $(this.form).trigger('submit')
-    });
+    setTimeout(function(){
+      $('#produksis-table').DataTable();
+      $('.status').on('change', function() {
+        $(this.form).trigger('submit')
+      });
+    }, 1000);
   });
 </script>
 @endsection
