@@ -170,7 +170,8 @@ class PemesananBahanBakuController extends AppBaseController
     public function update($id, UpdatePemesananBahanBakuRequest $request)
     {
         $pemesananBahanBaku = $this->pemesananBahanBakuRepository->findWithoutFail($id);
-
+        $request['user_id'] = Auth::user()->id;
+        
         if (empty($pemesananBahanBaku)) {
             Flash::error('Pemesanan Bahan Baku not found');
 
