@@ -72,13 +72,14 @@ class PengadaanController extends AppBaseController
         $input = $request->all();
         $supplier = PemesananBahanBaku::find($input['pemesanan_bahan_baku_id']);
         $input['bahan_baku_id'] = $supplier->bahan_baku_id;
-        $bahan_baku=BahanBaku::find($input['bahan_baku_id']);
-        if ($bahan_baku->batas_pengadaan) {
-            if ($input['berat'] > $maks = $bahan_baku->batas_pengadaan->maks_pengadaan) {
-                Flash::error('Maksimal kuantitas pengadaan '.$bahan_baku->nama_bahan_baku.' adalah '. $maks.' '.$bahan_baku->satuan);
-                return redirect()->back()->withInput($input);
-            }
-        }
+        $bahan_baku = BahanBaku::find($input['bahan_baku_id']);
+
+        // if ($bahan_baku->batas_pengadaan) {
+        //     if ($input['berat'] > $maks = $bahan_baku->batas_pengadaan->maks_pengadaan) {
+        //         Flash::error('Maksimal kuantitas pengadaan '.$bahan_baku->nama_bahan_baku.' adalah '. $maks.' '.$bahan_baku->satuan);
+        //         return redirect()->back()->withInput($input);
+        //     }
+        // }
 
 
         $input['user_id'] = Auth::user()->id;
@@ -166,12 +167,12 @@ class PengadaanController extends AppBaseController
         $pengadaan = $this->pengadaanRepository->findWithoutFail($id);
         $bahan_baku = BahanBaku::find($pengadaan->bahan_baku_id);
 
-        if ($bahan_baku->batas_pengadaan) {
-            if ($input['berat'] > $maks = $bahan_baku->batas_pengadaan->maks_pengadaan) {
-                Flash::error('Maksimal kuantitas pengadaan '.$bahan_baku->nama_bahan_baku.' adalah '. $maks.' '.$bahan_baku->satuan);
-                return redirect()->back()->withInput($input);
-            }
-        }
+        // if ($bahan_baku->batas_pengadaan) {
+        //     if ($input['berat'] > $maks = $bahan_baku->batas_pengadaan->maks_pengadaan) {
+        //         Flash::error('Maksimal kuantitas pengadaan '.$bahan_baku->nama_bahan_baku.' adalah '. $maks.' '.$bahan_baku->satuan);
+        //         return redirect()->back()->withInput($input);
+        //     }
+        // }
 
 
         $pengadaan = $this->pengadaanRepository->findWithoutFail($id);

@@ -59,9 +59,9 @@
         <li class="{{ Request::is('bahanBakus*') ? 'active' : '' }}">
             <a href="{!! route('bahanBakus.index') !!}"><i class="fa fa-circle-o"></i>Bahan Baku</a>
         </li>
-        <li class="{{ Request::is('batasPengadaans*') ? 'active' : '' }}">
+        {{-- <li class="{{ Request::is('batasPengadaans*') ? 'active' : '' }}">
           <a href="{!! route('batasPengadaans.index') !!}"><i class="fa fa-circle-o"></i>Batas Pengadaan</a>
-        </li>
+        </li> --}}
       </ul>
   </li>
 

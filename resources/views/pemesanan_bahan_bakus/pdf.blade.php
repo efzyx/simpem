@@ -11,6 +11,7 @@
       <table class="table table-bordered">
           <thead>
               <tr>
+              <th>No</th>
               <th>Nama Supplier</th>
               <th>Cp Supplier</th>
               <th>Bahan Baku</th>
@@ -20,8 +21,12 @@
               </tr>
           </thead>
           <tbody>
+            @php
+              $no = 1;
+            @endphp
           @foreach($pemesananBahanBakus as $pemesananBahanBaku)
               <tr>
+                  <td>{!! $no++ !!}</td>
                   <td>{!! $pemesananBahanBaku->nama_supplier !!}</td>
                   <td>{!! $pemesananBahanBaku->cp_supplier !!}</td>
                   <td>{!! $bahan_baku[$pemesananBahanBaku->bahan_baku_id] !!}</td>

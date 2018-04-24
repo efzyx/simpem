@@ -87,7 +87,7 @@
 
 <body class="skin-blue sidebar-mini" onload="myFunction()" style="margin:0;">
 <div id="loader"></div>
-<div style="display:none;" id="myDiv" class="animate-bottom">
+<div id="myDiv" class="animate-bottom">
   @if (!Auth::guest())
       <div class="wrapper">
           <!-- Main Header -->

@@ -61,6 +61,16 @@
 <!-- Created At Field -->
 <div class="form-group col-sm-12">
   <div class="col-sm-3">
+    {!! Form::label('user', 'Pegawai') !!}
+  </div>
+  <div class="col-sm-9">
+    {!!$pemesananBahanBaku->user->name  !!}
+  </div>
+</div>
+
+<!-- Created At Field -->
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
     {!! Form::label('created_at', 'Created At') !!}
   </div>
   <div class="col-sm-9">
