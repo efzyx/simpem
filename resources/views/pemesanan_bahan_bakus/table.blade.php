@@ -17,7 +17,7 @@
         <tr>
             <td>{{ $no++ }}</td>
             <td>{!! $pemesananBahanBaku->nama_supplier !!}</td>
-            <td>{!! $bahan_baku[$pemesananBahanBaku->bahan_baku_id] !!}</td>
+            <td>{!! $pemesananBahanBaku->bahan_baku->nama_bahan_baku !!}</td>
             <td>{!! $pemesananBahanBaku->volume_pemesanan !!}</td>
             <td>{!! $pemesananBahanBaku->tanggal_pemesanan !!}</td>
             <td>
