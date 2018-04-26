@@ -2,13 +2,14 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left"> List Penerimaan Bahan Baku untuk <strong>{{ $supplier->nama_supplier }}</strong></h1>
+        <h1 class="pull-left">Penerimaan Bahan Baku <strong>{{$supplier->bahan_baku->nama_bahan_baku}}</strong> dari <strong>{{ $supplier->nama_supplier}}</strong></h1>
         <h1 class="pull-right">
-           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('pengadaans.create') !!}">Tambah Baru</a>
+           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('supplier.pengadaans.create', $supplier) !!}">Tambah Baru</a>
         </h1>
     </section>
     <div class="content">
         <div class="clearfix"></div>
+
         @include('flash::message')
 
         <div class="clearfix"></div>
@@ -18,12 +19,7 @@
           </div>
             <div class="box-body">
               <div class="table-responsive">
-                <h1 class="pull-left">
-                      {!! Form::open(['route' => 'downloadPengadaan' , 'target' => '_blank'])!!}
-                      {!! Form::hidden('supplier', $supplier) !!}
-                      {!! Form::submit('Download', ['class' => 'btn btn-danger pull-left', 'style' => 'margin-top: -10px;margin-bottom: 5px']) !!}
-                </h1>
-                  @include('pengadaans.table')
+                  @include('pemesanan_bahan_bakus.pengadaans.table')
               </div>
             </div>
         </div>
