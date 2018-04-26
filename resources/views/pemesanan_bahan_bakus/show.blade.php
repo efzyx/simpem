@@ -11,7 +11,7 @@
             <div class="box-body">
                 <div class="row" style="padding-left: 20px">
                     @include('pemesanan_bahan_bakus.show_fields')
-                    <a href="{!! route('pemesananBahanBakus.index') !!}" class="btn btn-default">Back</a>
+                    <a href="{!! route('supplier.index') !!}" class="btn btn-default">Back</a>
                 </div>
             </div>
         </div>

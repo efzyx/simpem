@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Penerimaan Bahan Baku <small>Edit</small>
+            Penerimaan Bahan Baku <strong>{{ $supplier->bahan_baku->nama_bahan_baku }} ({{ $supplier->nama_supplier }})</strong> <small>Edit</small>
         </h1>
    </section>
    <div class="content">
@@ -19,23 +19,13 @@
          </div>
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($pengadaan, ['route' => ['pengadaans.update', $pengadaan->id], 'method' => 'patch']) !!}
+                   {!! Form::model($pengadaan, ['route' => ['supplier.pengadaans.update', $supplier, $pengadaan->id], 'method' => 'patch']) !!}
 
-                        @include('pengadaans.fields')
+                        @include('pemesanan_bahan_bakus.pengadaans.fields')
 
                    {!! Form::close() !!}
                </div>
            </div>
        </div>
    </div>
-@endsection
-
-@section('scripts')
-  <script type="text/javascript">
-              $(function () {
-                  $('#calendar1').datetimepicker({
-                    format: "YYYY-MM-DD HH:mm:ss"
-                  });
-              });
-  </script>
 @endsection

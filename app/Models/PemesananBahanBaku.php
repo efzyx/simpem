@@ -48,7 +48,8 @@ class PemesananBahanBaku extends Model
         'bahan_baku_id' => 'integer',
         'volume_pemesanan' => 'integer',
         'tanggal_pemesanan' => 'datetime',
-        'keterangan' => 'string'
+        'keterangan' => 'string',
+        'user_id' => 'integer'
     ];
 
     /**
@@ -77,5 +78,10 @@ class PemesananBahanBaku extends Model
     public function pengadaans()
     {
         return $this->hasMany('App\Models\Pengadaan');
+    }
+
+    public function getSupplierBahanBakuAttribute()
+    {
+        return $this->nama_supplier . ' - ' . $this->bahan_baku->nama_bahan_baku;
     }
 }

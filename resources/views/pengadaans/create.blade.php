@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('content')
     <section class="content-header">
         <h1>
@@ -29,14 +30,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('scripts')
-  <script type="text/javascript">
-              $(function () {
-                  $('#calendar1').datetimepicker({
-                    format: "YYYY-MM-DD HH:mm:ss"
-                  });
-              });
-  </script>
 @endsection

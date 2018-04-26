@@ -16,7 +16,7 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($pemesananBahanBaku, ['route' => ['pemesananBahanBakus.update', $pemesananBahanBaku->id], 'method' => 'patch']) !!}
+                   {!! Form::model($pemesananBahanBaku, ['route' => ['supplier.update', $pemesananBahanBaku->id], 'method' => 'patch']) !!}
 
                         @include('pemesanan_bahan_bakus.fields')
 
@@ -25,14 +25,4 @@
            </div>
        </div>
    </div>
-@endsection
-
-@section('scripts')
-  <script type="text/javascript">
-              $(function () {
-                  $('#calendar').datetimepicker({
-                    format: "YYYY-MM-DD HH:mm:ss"
-                  });
-              });
-  </script>
 @endsection

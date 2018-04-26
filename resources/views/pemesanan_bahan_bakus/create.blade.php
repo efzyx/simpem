@@ -17,7 +17,7 @@
 
             <div class="box-body">
                 <div class="row">
-                    {!! Form::open(['route' => 'pemesananBahanBakus.store']) !!}
+                    {!! Form::open(['route' => 'supplier.store']) !!}
 
                         @include('pemesanan_bahan_bakus.fields')
 
@@ -26,13 +26,4 @@
             </div>
         </div>
     </div>
-@endsection
-@section('scripts')
-  <script type="text/javascript">
-              $(function () {
-                  $('#calendar').datetimepicker({
-                    format: "YYYY-MM-DD HH:mm:ss"
-                  });
-              });
-  </script>
 @endsection

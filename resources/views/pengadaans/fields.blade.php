@@ -7,7 +7,7 @@
 <!-- Supplier Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('pemesanan_bahan_baku_id', 'Supplier:') !!}
-    {!! Form::select('pemesanan_bahan_baku_id', $supplier, null, ['class' => 'form-control']) !!}
+    {!! Form::select('pemesanan_bahan_baku_id', $supplier, null, ['class' => 'form-control', 'id' => 'supplier', 'placeholder' => 'Pilih Supplier..']) !!}
 </div>
 
 <!-- Supir Field -->
@@ -19,7 +19,7 @@
 <!-- Tanggal Pengadaan Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('tanggal_pengadaan', 'Tanggal Penerimaan:') !!}
-    {!! Form::text('tanggal_pengadaan', null, ['class' => 'form-control','id' => 'calendar1'] ) !!}
+    {!! Form::text('tanggal_pengadaan', null, ['class' => 'form-control datetimepicker'] ) !!}
 </div>
 
 <!-- Keterangan Field -->

@@ -28,6 +28,7 @@
     <link href="{{ asset('css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/select2-mod.css')}}">
     @yield('css')
 
     <style>
@@ -240,6 +241,17 @@
           document.getElementById("loader").style.display = "none";
           document.getElementById("myDiv").style.display = "block";
         }
+
+        $(document).ready(function(){
+          $('select').select2();
+
+          $(function () {
+              $('.datetimepicker').datetimepicker({
+                // locale : 'id'
+                format: "YYYY-MM-DD HH:mm:ss"
+              });
+          });
+         });
         </script>
       @yield('scripts')
   </body>

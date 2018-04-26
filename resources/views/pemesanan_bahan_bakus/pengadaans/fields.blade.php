@@ -4,11 +4,8 @@
     {!! Form::number('berat', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Supplier Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('supplier', 'Supplier:') !!}
-    {!! Form::select('supplier', $supplier, null, ['class' => 'form-control']) !!}
-</div>
+
+{!! Form::hidden('pemesanan_bahan_baku_id', $supplier->id) !!}
 
 <!-- Supir Field -->
 <div class="form-group col-sm-12">
@@ -19,7 +16,7 @@
 <!-- Tanggal Pengadaan Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('tanggal_pengadaan', 'Tanggal Penerimaan:') !!}
-    {!! Form::text('tanggal_pengadaan', null, ['class' => 'form-control','id' => 'calendar1'] ) !!}
+    {!! Form::text('tanggal_pengadaan', null, ['class' => 'form-control datetimepicker'] ) !!}
 </div>
 
 <!-- Keterangan Field -->
@@ -31,5 +28,5 @@
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-    <a href="{!! route('pengadaans.index') !!}" class="btn btn-default">Cancel</a>
+    <a href="{!! route('supplier.pengadaans.index', $supplier) !!}" class="btn btn-default">Cancel</a>
 </div>

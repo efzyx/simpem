@@ -25,7 +25,7 @@
 <!-- Tanggal Pemesanan Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('tanggal_pemesanan', 'Tanggal Pemesanan:') !!}
-    {!! Form::text('tanggal_pemesanan', null, ['class' => 'form-control','id' => 'calendar']) !!}
+    {!! Form::text('tanggal_pemesanan', null, ['class' => 'form-control datetimepicker']) !!}
 </div>
 
 <!-- Keterangan Field -->
@@ -37,5 +37,5 @@
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-    <a href="{!! route('pemesananBahanBakus.index') !!}" class="btn btn-default">Cancel</a>
+    <a href="{!! route('supplier.index') !!}" class="btn btn-default">Cancel</a>
 </div>
