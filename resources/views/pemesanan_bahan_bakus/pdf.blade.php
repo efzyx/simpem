@@ -2,21 +2,23 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Cetak Daftar Penerimaan Bahan Baku</title>
+    <title>Cetak Daftar Pemesanan Bahan Baku</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
   <body>
-      <h1 class="text-center">Penerimaan Bahan Baku</h1>
+      <h1 class="text-center">Pemesanan Bahan Baku</h1>
       <br><br>
       <table class="table table-bordered">
           <thead>
               <tr>
               <th>No</th>
               <th>Nama Supplier</th>
-              <th>Cp Supplier</th>
+              <th>CP Supplier</th>
               <th>Bahan Baku</th>
-              <th>Volume Pemesanan</th>
-              <th>Tanggal Pemesanan</th>
+              <th>Volume</th>
+              <th>Diterima</th>
+              <th>Sisa</th>
+              <th>Tanggal</th>
               <th>Keterangan</th>
               </tr>
           </thead>
@@ -26,12 +28,17 @@
             @endphp
           @foreach($pemesananBahanBakus as $pemesananBahanBaku)
               <tr>
+                @php
+                  $satuan = $pemesananBahanBaku->bahan_baku->satuan;
+                @endphp
                   <td>{!! $no++ !!}</td>
                   <td>{!! $pemesananBahanBaku->nama_supplier !!}</td>
                   <td>{!! $pemesananBahanBaku->cp_supplier !!}</td>
-                  <td>{!! $bahan_baku[$pemesananBahanBaku->bahan_baku_id] !!}</td>
-                  <td>{!! $pemesananBahanBaku->volume_pemesanan !!}</td>
-                  <td>{!! $pemesananBahanBaku->tanggal_pemesanan !!}</td>
+                  <td>{!! $pemesananBahanBaku->bahan_baku->nama_bahan_baku !!}</td>
+                  <td>{!! $volume = $pemesananBahanBaku->volume_pemesanan !!} {!! $satuan !!}</td>
+                  <td>{!! $terima = $pemesananBahanBaku->pengadaans->sum('berat') !!} {!! $satuan !!}</td>
+                  <td>{!! $volume-$terima !!} {!! $satuan !!}</td>
+                  <td>{!! $pemesananBahanBaku->tanggal_pemesanan->format('d-m-Y') !!}</td>
                   <td>{!! $pemesananBahanBaku->keterangan !!}</td>
               </tr>
           @endforeach

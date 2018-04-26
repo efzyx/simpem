@@ -23,9 +23,9 @@ class AddRelationToTable extends Migration
               DB::statement('SET FOREIGN_KEY_CHECKS=1;');
               break;
             default:
-            $table->dropColumn('supplier');
-            $table->integer('pemesanan_bahan_baku_id')->after('berat')->unsigned();
-            $table->foreign('pemesanan_bahan_baku_id')->references('id')->on('pemesanan_bahan_bakus')->onDelete('cascade');
+              $table->dropColumn('supplier');
+              $table->integer('pemesanan_bahan_baku_id')->after('berat')->unsigned();
+              $table->foreign('pemesanan_bahan_baku_id')->references('id')->on('pemesanan_bahan_bakus')->onDelete('cascade');
               break;
           }
         });

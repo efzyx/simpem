@@ -24,7 +24,7 @@
     {!! Form::label('supplier', 'Supplier') !!}
   </div>
   <div class="col-sm-9">
-    {!! $supplier[$pengadaan->supplier] !!}
+    {!! $pengadaan->pemesanan_bahan_baku->nama_supplier !!}
   </div>
 </div>
 

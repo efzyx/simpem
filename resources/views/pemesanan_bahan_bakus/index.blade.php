@@ -2,9 +2,9 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Pemesanan Bahan Bakus</h1>
+        <h1 class="pull-left">Pemesanan Bahan Baku</h1>
         <h1 class="pull-right">
-           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('pemesananBahanBakus.create') !!}">Tambah Baru</a>
+           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('supplier.create') !!}">Tambah Baru</a>
         </h1>
     </section>
     <div class="content">

@@ -43,8 +43,7 @@ class PemesananBahanBakuController extends AppBaseController
 
         return view('pemesanan_bahan_bakus.index')
             ->with('pemesananBahanBakus', $pemesananBahanBakus)
-            ->with('title', $title)
-            ->with('bahan_baku', $this->bahanBakus);
+            ->with('title', $title);
     }
 
     public function filter(Request $request)
@@ -77,8 +76,7 @@ class PemesananBahanBakuController extends AppBaseController
 
         return view('pemesanan_bahan_bakus.index')
               ->with('pemesananBahanBakus', $suppliers)
-              ->with('title', $title)
-              ->With('bahan_baku', $this->bahanBakus);
+              ->with('title', $title);
     }
 
     /**
@@ -90,8 +88,8 @@ class PemesananBahanBakuController extends AppBaseController
     {
         $title = 'Pemesanan Bahan Baku - Tambah';
         return view('pemesanan_bahan_bakus.create')
-          ->with('bahanBakus', $this->bahanBakus)
-          ->with('title', $title);
+                ->with('bahanBakus', $this->bahanBakus)
+                ->with('title', $title);
     }
 
     /**
@@ -110,7 +108,7 @@ class PemesananBahanBakuController extends AppBaseController
 
         Flash::success('Pemesanan Bahan Baku saved successfully.');
 
-        return redirect(route('pemesananBahanBakus.index'));
+        return redirect(route('supplier.index'));
     }
 
     /**
@@ -127,7 +125,7 @@ class PemesananBahanBakuController extends AppBaseController
         if (empty($pemesananBahanBaku)) {
             Flash::error('Pemesanan Bahan Baku not found');
 
-            return redirect(route('pemesananBahanBakus.index'));
+            return redirect(route('supplier.index'));
         }
 
         return view('pemesanan_bahan_bakus.show')
@@ -149,14 +147,14 @@ class PemesananBahanBakuController extends AppBaseController
         if (empty($pemesananBahanBaku)) {
             Flash::error('Pemesanan Bahan Baku not found');
 
-            return redirect(route('pemesananBahanBakus.index'));
+            return redirect(route('supplier.index'));
         }
         $title = 'Pemesanan Bahan Baku - Lihat';
 
         return view('pemesanan_bahan_bakus.edit')
-        ->with('pemesananBahanBaku', $pemesananBahanBaku)
-        ->with('bahanBakus', $this->bahanBakus)
-        ->with('title', $title);
+                ->with('bahanBakus', $this->bahanBakus)
+                ->with('pemesananBahanBaku', $pemesananBahanBaku)
+                ->with('title', $title);
     }
 
     /**
@@ -171,18 +169,18 @@ class PemesananBahanBakuController extends AppBaseController
     {
         $pemesananBahanBaku = $this->pemesananBahanBakuRepository->findWithoutFail($id);
         $request['user_id'] = Auth::user()->id;
-        
+
         if (empty($pemesananBahanBaku)) {
             Flash::error('Pemesanan Bahan Baku not found');
 
-            return redirect(route('pemesananBahanBakus.index'));
+            return redirect(route('supplier.index'));
         }
 
         $pemesananBahanBaku = $this->pemesananBahanBakuRepository->update($request->all(), $id);
 
         Flash::success('Pemesanan Bahan Baku updated successfully.');
 
-        return redirect(route('pemesananBahanBakus.index'));
+        return redirect(route('supplier.index'));
     }
 
     /**
@@ -199,14 +197,14 @@ class PemesananBahanBakuController extends AppBaseController
         if (empty($pemesananBahanBaku)) {
             Flash::error('Pemesanan Bahan Baku not found');
 
-            return redirect(route('pemesananBahanBakus.index'));
+            return redirect(route('supplier.index'));
         }
 
         $this->pemesananBahanBakuRepository->delete($id);
 
         Flash::success('Pemesanan Bahan Baku deleted successfully.');
 
-        return redirect(route('pemesananBahanBakus.index'));
+        return redirect(route('supplier.index'));
     }
 
     public function downloadPdf(Request $request)
@@ -214,7 +212,7 @@ class PemesananBahanBakuController extends AppBaseController
         $data = json_decode($request['pemesananBahanBakus'], true);
         $suppliers = PemesananBahanBaku::hydrate($data);
         $suppliers = $suppliers->flatten();
-        $pdf = PDF::loadView('pemesanan_bahan_bakus.pdf', ['pemesananBahanBakus' => $suppliers, 'bahan_baku' => $this->bahanBakus]);
+        $pdf = PDF::loadView('pemesanan_bahan_bakus.pdf', ['pemesananBahanBakus' => $suppliers]);
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream('pemesanan_'.time().'.pdf');
     }

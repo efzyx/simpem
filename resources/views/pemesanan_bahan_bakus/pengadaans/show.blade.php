@@ -13,8 +13,8 @@
         </div>
             <div class="box-body">
                 <div class="row" style="padding-left: 20px">
-                    @include('pengadaans.show_fields')
-                    <a href="{!! route('pengadaans.index') !!}" class="btn btn-default">Back</a>
+                    @include('pemesanan_bahan_bakus.pengadaans.show_fields')
+                    <a href="{!! route('supplier.pengadaans.index', $supplier) !!}" class="btn btn-default">Back</a>
                 </div>
             </div>
         </div>

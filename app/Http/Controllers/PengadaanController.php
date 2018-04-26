@@ -24,7 +24,7 @@ class PengadaanController extends AppBaseController
     {
         $this->pengadaanRepository = $pengadaanRepo;
         $this->bahanBakus = BahanBaku::pluck('nama_bahan_baku', 'id');
-        $this->pemesanan_bahan_bakus = PemesananBahanBaku::pluck('nama_supplier', 'id');
+        $this->pemesanan_bahan_bakus = PemesananBahanBaku::get()->pluck('supplier_bahan_baku', 'id');
         $this->middleware('role:admin,manager_produksi,logistik')->only('index', 'show');
         $this->middleware('role:logistik')->except('index', 'show');
     }
@@ -38,12 +38,11 @@ class PengadaanController extends AppBaseController
     public function index(Request $request)
     {
         $this->pengadaanRepository->pushCriteria(new RequestCriteria($request));
-        $pengadaans = $this->pengadaanRepository->paginate(10);
+        $pengadaans = $this->pengadaanRepository->all();
         $title = "Penerimaan Bahan Baku";
         return view('pengadaans.index')
             ->with('pengadaans', $pengadaans)
-            ->with('title', $title)
-            ->with('supplier', $this->pemesanan_bahan_bakus);
+            ->with('title', $title);
     }
 
     /**
@@ -70,9 +69,15 @@ class PengadaanController extends AppBaseController
     public function store(CreatePengadaanRequest $request)
     {
         $input = $request->all();
-        $supplier = PemesananBahanBaku::find($input['pemesanan_bahan_baku_id']);
+        $supplier = PemesananBahanBaku::findOrFail($input['pemesanan_bahan_baku_id']);
         $input['bahan_baku_id'] = $supplier->bahan_baku_id;
         $bahan_baku = BahanBaku::find($input['bahan_baku_id']);
+        $exists = $supplier->pengadaans->sum('berat');
+
+        if($supplier->volume_pemesanan < $exists+$input['berat']){
+          Flash::error('Volume pengadaan lebih besar dari volume pemesanan bahan baku. Sisa '.($supplier->volume_pemesanan-$exists).' '.$bahan_baku->satuan);
+          return redirect()->back()->withInput($input);
+        }
 
         // if ($bahan_baku->batas_pengadaan) {
         //     if ($input['berat'] > $maks = $bahan_baku->batas_pengadaan->maks_pengadaan) {
@@ -85,8 +90,6 @@ class PengadaanController extends AppBaseController
         $input['user_id'] = Auth::user()->id;
 
         $pengadaan = $this->pengadaanRepository->create($input);
-
-        $bahan_baku = BahanBaku::find($pengadaan->bahan_baku_id);
         $bahan_baku->sisa = $bahan_baku->sisa + $pengadaan->berat;
         $bahan_baku->save();
 
@@ -124,8 +127,7 @@ class PengadaanController extends AppBaseController
 
         return view('pengadaans.show')
         ->with('pengadaan', $pengadaan)
-        ->with('title', $title)
-        ->with('supplier', $this->pemesanan_bahan_bakus);
+        ->with('title', $title);
     }
 
     /**
@@ -165,7 +167,17 @@ class PengadaanController extends AppBaseController
         $input = $request->all();
 
         $pengadaan = $this->pengadaanRepository->findWithoutFail($id);
-        $bahan_baku = BahanBaku::find($pengadaan->bahan_baku_id);
+        $bahan_baku = BahanBaku::findOrFail($pengadaan->bahan_baku_id);
+        $supplier   = PemesananBahanBaku::findOrFail($input['pemesanan_bahan_baku_id']);
+
+        $exists = $supplier->pengadaans->filter(function($p) use($pengadaan){
+                    return $p->id != $pengadaan->id;
+                  })->sum('berat');
+
+        if($supplier->volume_pemesanan < $exists+$input['berat']){
+          Flash::error('Volume pengadaan lebih besar dari volume pemesanan bahan baku. Sisa '.($supplier->volume_pemesanan-$exists).' '.$bahan_baku->satuan);
+          return redirect()->back()->withInput($input);
+        }
 
         // if ($bahan_baku->batas_pengadaan) {
         //     if ($input['berat'] > $maks = $bahan_baku->batas_pengadaan->maks_pengadaan) {
@@ -174,11 +186,7 @@ class PengadaanController extends AppBaseController
         //     }
         // }
 
-
-        $pengadaan = $this->pengadaanRepository->findWithoutFail($id);
-        $bahan_baku = BahanBaku::find($pengadaan->bahan_baku_id);
-        $input = $request->all();
-        $old_volume = $pengadaan->volume_opname;
+        $old_volume = $pengadaan->berat;
 
         if (empty($pengadaan)) {
             Flash::error('Penerimaan Bahan Baku not found');

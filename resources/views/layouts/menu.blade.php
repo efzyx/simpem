@@ -20,7 +20,7 @@
     <a href="{!! route('produksis.index') !!}"><i class="fa fa-flask"></i><span>Produksi</span></a>
 </li>
 
-<li class="treeview {{ Request::is('pengadaans*') || Request::is('pemesananBahanBakus*') ? 'active' : '' }}">
+<li class="treeview {{ Request::is('pengadaans*') || Request::is('supplier*') ? 'active' : '' }}">
       <a href="#">
         <i class="fa fa-cart-arrow-down"></i> <span>Pengadaan</span>
         <span class="pull-right-container">
@@ -28,8 +28,8 @@
         </span>
       </a>
       <ul class="treeview-menu">
-        <li class="{{ Request::is('pemesananBahanBakus*') ? 'active' : '' }}">
-            <a href="{!! route('pemesananBahanBakus.index') !!}"><i class="fa fa-circle-o"></i><span>Pemesanan</span></a>
+        <li class="{{ Request::is('supplier*') ? 'active' : '' }}">
+            <a href="{!! route('supplier.index') !!}"><i class="fa fa-circle-o"></i><span>Pemesanan</span></a>
         </li>
         <li class="{{ Request::is('pengadaans*') ? 'active' : '' }}">
             <a href="{!! route('pengadaans.index') !!}"><i class="fa fa-circle-o"></i><span>Penerimaan</span></a>
