@@ -56,7 +56,7 @@
         </div>
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-4">
         <div class="box box-solid box-info">
           <div class="box-header">
             <i class="fa fa-product-hunt"></i>
@@ -68,6 +68,7 @@
                 <tr>
                   <th>No</th>
                   <th>Mutu Produk</th>
+                  <th>Satuan</th>
                 </tr>
               </thead>
               <tbody>
@@ -75,6 +76,7 @@
                   <tr>
                     <td>{{ $key+1 }}</td>
                     <td>{{ $produk->mutu_produk }}</td>
+                    <td>{{ $produk->satuan }}</td>
                   </tr>
                 @endforeach
               </tbody>
@@ -82,6 +84,38 @@
           </div>
         </div>
       </div>
+
+      <div class="col-md-8">
+        <div class="box box-solid box-warning">
+          <div class="box-header">
+            <i class="fa fa-truck"></i>
+            <h3 class="box-title">Kendaraan</h3>
+          </div>
+          <div class="box-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Jenis Kendaraan</th>
+                  <th>Nomor Polisi</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($kendaraans as $key => $kendaraan)
+                  <tr>
+                    <td>{{ $key+1 }}</td>
+                    <td>{{ $kendaraan->jenis_kendaraan }}</td>
+                    <td>{{ $kendaraan->no_polisi }}</td>
+                    <td>{{ $kendaraan->kendaraanDetails->count() ? $status[$kendaraan->lastStatus()->status] : 'Belum Ada' }}</td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
