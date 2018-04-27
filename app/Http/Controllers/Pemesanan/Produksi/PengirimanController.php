@@ -47,6 +47,18 @@ class PengirimanController extends AppBaseController
         $input['user_id'] = Auth::user()->id;
         $pengiriman = Pengiriman::create($input);
 
+        if($pengiriman->status == 2)
+          $pengiriman->produksi->kendaraan->kendaraanDetails()->create([
+            'status' => 1,
+            'waktu'  => $pengiriman->created_at
+          ]);
+
+        else
+          $pengiriman->produksi->kendaraan->kendaraanDetails()->create([
+            'status' => 3,
+            'waktu'  => $pengiriman->created_at
+          ]);
+
         Flash::success('Pengiriman saved successfully.');
 
         return redirect()->back();

@@ -23,6 +23,7 @@ use App\Models\BahanBakuHistory;
 use App\Models\Produksi;
 use App\Models\Produk;
 use App\Models\KomposisiMutu;
+use App\Models\KendaraanDetail;
 
 class ProduksiController extends AppBaseController
 {
@@ -157,6 +158,11 @@ class ProduksiController extends AppBaseController
         $pengiriman->status = 0;
         $pengiriman->user_id = Auth::user()->id;
         $pengiriman->save();
+
+        $kendaraan->kendaraanDetails()->create([
+          'status' => 3,
+          'waktu'  => $produksi->waktu_produksi
+        ]);
 
         Flash::success('Produksi saved successfully.');
 
