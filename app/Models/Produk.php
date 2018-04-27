@@ -17,6 +17,17 @@ class Produk extends Model
 {
     use SoftDeletes;
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::deleting(function (Produk $produk) {
+            foreach ($produk->komposisi_mutus as $child) {
+                $child->delete();
+            }
+        });
+    }
+
     public $table = 'produks';
 
 

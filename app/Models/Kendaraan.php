@@ -17,6 +17,17 @@ class Kendaraan extends Model
 {
     use SoftDeletes;
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::deleting(function (Kendaraan $kendaraan) {
+            foreach ($kendaraan->kendaraanDetails as $child) {
+                $child->delete();
+            }
+        });
+    }
+
     public $table = 'kendaraans';
 
 

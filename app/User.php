@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+use App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -55,4 +56,64 @@ class User extends Authenticatable
         'password' => 'required',
         'jabatan_id' => 'required',
     ];
+
+    public function pemesanans()
+    {
+      return $this->hasMany(Models\Pemesanan::class);
+    }
+
+    public function produksis()
+    {
+      return $this->hasMany(Models\Produksi::class);
+    }
+
+    public function pengirimans()
+    {
+      return $this->hasMany(Models\Pengiriman::class);
+    }
+
+    public function pengadaans()
+    {
+      return $this->hasMany(Models\Pengadaan::class);
+    }
+
+    public function pemesanan_bahan_bakus()
+    {
+      return $this->hasMany(Models\PemesananBahanBaku::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::deleting(function (User $user) {
+            foreach ($user->pemesanans as $child) {
+                $child->delete();
+            }
+        });
+
+        self::deleting(function (User $user) {
+            foreach ($user->produksis as $child) {
+                $child->delete();
+            }
+        });
+
+        self::deleting(function (User $user) {
+            foreach ($user->pengirimans as $child) {
+                $child->delete();
+            }
+        });
+
+        self::deleting(function (User $user) {
+            foreach ($user->pengadaans as $child) {
+                $child->delete();
+            }
+        });
+
+        self::deleting(function (User $user) {
+            foreach ($user->pemesanan_bahan_bakus as $child) {
+                $child->delete();
+            }
+        });
+    }
 }
