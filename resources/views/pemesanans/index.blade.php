@@ -35,6 +35,7 @@
             {!! Form::open(['route' => 'downloadPdf' , 'target' => '_blank'])!!}
             {!! Form::hidden('pemesanans', $pemesanans) !!}
             {!! Form::submit('Download', ['class' => 'btn btn-danger pull-left', 'style' => 'margin-top: -10px;margin-bottom: 5px']) !!}
+            {!! Form::close() !!}
             </h1>
       <h1 class="pull-right">
                <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('pemesanans.create') !!}">Tambah Baru</a>

@@ -14,6 +14,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Models\BahanBaku;
 use Response;
 use Auth;
+use App\Models\Kendaraan;
 use PDF;
 use App\Models\PemesananBahanBaku;
 use App\Models\Pengadaan;
@@ -27,6 +28,8 @@ class PengadaanController extends AppBaseController
     {
         $this->pengadaanRepository = $pengadaanRepo;
         $this->bahanBakus = BahanBaku::pluck('nama_bahan_baku', 'id');
+        $this->kendaraans = Kendaraan::select(DB::raw("concat(no_polisi, ' - ', jenis_kendaraan) as nama"), 'id')
+                          ->pluck('nama', 'id');
         $this->middleware('role:admin,manager_produksi,logistik')->only('index', 'show');
         $this->middleware('role:logistik')->except('index', 'show');
     }
@@ -247,5 +250,16 @@ class PengadaanController extends AppBaseController
         Flash::success('Penerimaan Bahan Baku deleted successfully.');
 
         return redirect(route('supplier.pengadaans.index', $supplier));
+    }
+
+    public function downloadPdf(Request $request)
+    {
+        $data = array(json_decode($request['supplier'], true));
+        $suppliers = PemesananBahanBaku::hydrate($data);
+        $suppliers = $suppliers->flatten();
+        $user =  Auth::user()->name;
+        $pdf = PDF::loadView('pemesanan_bahan_bakus.pengadaans.pdf', ['suppliers' => $suppliers,'user' => $user, 'kendaraans' => $this->kendaraans,'bahan_baku' => $this->bahanBakus]);
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('pemesanan_'.time().'.pdf');
     }
 }
