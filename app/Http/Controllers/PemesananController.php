@@ -66,10 +66,14 @@ class PemesananController extends AppBaseController
                     return ($pemesanan->tanggal_kirim_dari >= $dari &&
                          $pemesanan->tanggal_kirim_sampai < $sampai->addDays(1)) ||
                          ($pemesanan->tanggal_kirim_dari >= $dari &&
-                         $pemesanan->tanggal_kirim_dari < $dari->addDays(1));
+                         $pemesanan->tanggal_kirim_dari < $dari->addDays(1)) ||
+                         ($pemesanan->tanggal_kirim_sampai >= $dari &&
+                          $pemesanan->tanggal_kirim_sampai < $dari->addDays(1));
                 }
                 return $pemesanan->tanggal_kirim_dari >= $dari &&
-                 $pemesanan->tanggal_kirim_dari < $dari->addDays(1);
+                 $pemesanan->tanggal_kirim_dari < $dari->addDays(1) ||
+                 ($pemesanan->tanggal_kirim_sampai >= $dari &&
+                 $pemesanan->tanggal_kirim_sampai < $dari->addDays(1));;
             }
 
             return $pemesanan;
