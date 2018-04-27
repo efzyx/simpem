@@ -74,9 +74,9 @@ class PengadaanController extends AppBaseController
         $bahan_baku = BahanBaku::find($input['bahan_baku_id']);
         $exists = $supplier->pengadaans->sum('berat');
 
-        if($supplier->volume_pemesanan < $exists+$input['berat']){
-          Flash::error('Volume pengadaan lebih besar dari volume pemesanan bahan baku. Sisa '.($supplier->volume_pemesanan-$exists).' '.$bahan_baku->satuan);
-          return redirect()->back()->withInput($input);
+        if ($supplier->volume_pemesanan < $exists+$input['berat']) {
+            Flash::error('Volume pengadaan lebih besar dari volume pemesanan bahan baku. Sisa '.($supplier->volume_pemesanan-$exists).' '.$bahan_baku->satuan);
+            return redirect()->back()->withInput($input);
         }
 
         // if ($bahan_baku->batas_pengadaan) {
@@ -170,13 +170,13 @@ class PengadaanController extends AppBaseController
         $bahan_baku = BahanBaku::findOrFail($pengadaan->bahan_baku_id);
         $supplier   = PemesananBahanBaku::findOrFail($input['pemesanan_bahan_baku_id']);
 
-        $exists = $supplier->pengadaans->filter(function($p) use($pengadaan){
-                    return $p->id != $pengadaan->id;
-                  })->sum('berat');
+        $exists = $supplier->pengadaans->filter(function ($p) use ($pengadaan) {
+            return $p->id != $pengadaan->id;
+        })->sum('berat');
 
-        if($supplier->volume_pemesanan < $exists+$input['berat']){
-          Flash::error('Volume pengadaan lebih besar dari volume pemesanan bahan baku. Sisa '.($supplier->volume_pemesanan-$exists).' '.$bahan_baku->satuan);
-          return redirect()->back()->withInput($input);
+        if ($supplier->volume_pemesanan < $exists+$input['berat']) {
+            Flash::error('Volume pengadaan lebih besar dari volume pemesanan bahan baku. Sisa '.($supplier->volume_pemesanan-$exists).' '.$bahan_baku->satuan);
+            return redirect()->back()->withInput($input);
         }
 
         // if ($bahan_baku->batas_pengadaan) {

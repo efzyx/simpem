@@ -8,6 +8,7 @@ use App\Repositories\BahanBakuHistoryRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Carbon\Carbon;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
@@ -36,6 +37,45 @@ class BahanBakuHistoryController extends AppBaseController
         return view('bahan_baku_histories.index')
               ->with('bahanBakuHistories', $bahanBakuHistories)
               ->with('title', $title);
+    }
+
+    public function filter(Request $request)
+    {
+        $this->bahanBakuHistoryRepository->pushCriteria(new RequestCriteria($request));
+        $histories = $this->bahanBakuHistoryRepository->all();
+        $histories = $histories->filter(function ($history) use ($request) {
+            $dari = $request['tanggal_kirim_dari'] ? Carbon::parse($request['tanggal_kirim_dari']) : null;
+            $sampai = $request['tanggal_kirim_sampai'] ? Carbon::parse($request['tanggal_kirim_sampai']) : null;
+            if ($dari) {
+                if ($sampai) {
+                    return ($history->created_at >= $dari &&
+                         $history->created_at < $sampai->addDays(1)) ||
+                         ($history->created_at >= $dari &&
+                         $history->created_at < $dari->addDays(1));
+                }
+                return $history->created_at >= $dari &&
+                 $history->created_at < $dari->addDays(1);
+            }
+            return $history;
+        });
+
+        $histories = $histories->filter(function ($history) use ($request) {
+            return $request['bahan_baku'] ?
+                   $history->bahan_baku_id == $request['bahan_baku'] :
+                   $history;
+        });
+
+        $histories = $histories->filter(function ($history) use ($request) {
+            return $request['jenis_kegiatan'] != null ?
+                   $history->type == $request['jenis_kegiatan'] :
+                   $history;
+        });
+
+        $title = 'Riwayat Bahan Baku - Filter';
+
+        return view('bahan_baku_histories.index')
+        ->with('bahanBakuHistories', $histories)
+        ->with('title', $title);
     }
 
     /**

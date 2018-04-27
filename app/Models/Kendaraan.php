@@ -55,6 +55,6 @@ class Kendaraan extends Model
 
     public function lastStatus()
     {
-      return $this->kendaraanDetails()->orderBy('waktu', 'desc')->first();
+        return $this->kendaraanDetails()->orderBy('waktu', 'desc')->first();
     }
 }
