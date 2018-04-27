@@ -160,7 +160,7 @@
 
           <!-- Main Footer -->
           <footer class="main-footer" style="max-height: 100px;text-align: center">
-              <strong>Copyright © {{ date('Y')}} <a href="{{ url('/') }}">PT {{ config('app.name') }}</a>.</strong> All rights reserved.
+              <strong>Copyright © {{ date('Y')}} <a href="{{ url('/') }}">PT {{ config('app.name') }}</a>.</strong> All rights reserved. - <strong>Versi {{ config('app.version') }}</strong>
           </footer>
 
       </div>
