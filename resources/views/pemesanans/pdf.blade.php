@@ -9,10 +9,7 @@
       <h1 class="text-center">Pemesanan</h1>
       <br><br>
 
-        @foreach ($pemesanans as $pemesanan)
-        @php
-        $produksis = $pemesanan->produksis;
-        @endphp
+
         <table class="table table-bordered">
           <thead>
             <tr>
@@ -28,7 +25,10 @@
               <th>Sisa Pesanan</th>
             </tr>
           </thead>
+          @foreach ($pemesanans as $pemesanan)
           @php
+          $produksis = $pemesanan->produksis;
+
             $jenis = ['Retail', 'Non Retail'];
             $prod = count($produksis);
             $first = true;
@@ -60,6 +60,7 @@
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         </tbody>
       </table>
+
       <br><br>
 
       <div class="pull-right">
@@ -69,6 +70,6 @@
             <br><br><br><br>
            {{$user}}
       </div>
-      
+
   </body>
 </html>
