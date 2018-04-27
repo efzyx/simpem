@@ -59,27 +59,27 @@ class User extends Authenticatable
 
     public function pemesanans()
     {
-      return $this->hasMany(Models\Pemesanan::class);
+        return $this->hasMany(Models\Pemesanan::class);
     }
 
     public function produksis()
     {
-      return $this->hasMany(Models\Produksi::class);
+        return $this->hasMany(Models\Produksi::class);
     }
 
     public function pengirimans()
     {
-      return $this->hasMany(Models\Pengiriman::class);
+        return $this->hasMany(Models\Pengiriman::class);
     }
 
     public function pengadaans()
     {
-      return $this->hasMany(Models\Pengadaan::class);
+        return $this->hasMany(Models\Pengadaan::class);
     }
 
     public function pemesanan_bahan_bakus()
     {
-      return $this->hasMany(Models\PemesananBahanBaku::class);
+        return $this->hasMany(Models\PemesananBahanBaku::class);
     }
 
     protected static function boot()

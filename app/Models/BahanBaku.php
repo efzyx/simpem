@@ -107,11 +107,11 @@ class BahanBaku extends Model
 
     public function komposisi_mutus()
     {
-      return $this->hasMany('App\Models\KomposisiMutu');
+        return $this->hasMany('App\Models\KomposisiMutu');
     }
 
     public function opnames()
     {
-      return $this->hasMany(Opname::class);
+        return $this->hasMany(Opname::class);
     }
 }
