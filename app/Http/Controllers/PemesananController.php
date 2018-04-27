@@ -54,9 +54,11 @@ class PemesananController extends AppBaseController
         $this->pemesananRepository->pushCriteria(new RequestCriteria($request));
         $pemesanans = $this->pemesananRepository->all();
         $pemesanans = $pemesanans->filter(function ($pemesanan) use ($request) {
-            $pemesanan = $request['jenis_pesanan'] ?
-                    $pemesanan->jenis_pesanan == $request['jenis_pesanan'] :
-                    $pemesanan;
+            return $request['jenis_pesanan'] ?
+                  $pemesanan->jenis_pesanan == $request['jenis_pesanan'] :
+                  $pemesanan;
+        });
+        $pemesanans = $pemesanans->filter(function ($pemesanan) use ($request) {
             $dari = $request['tanggal_kirim_dari'] ? Carbon::parse($request['tanggal_kirim_dari']) : null;
             $sampai = $request['tanggal_kirim_sampai'] ? Carbon::parse($request['tanggal_kirim_sampai']) : null;
             if ($dari) {
