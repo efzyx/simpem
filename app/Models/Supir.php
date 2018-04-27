@@ -17,6 +17,17 @@ class Supir extends Model
 {
     use SoftDeletes;
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::deleting(function (Supir $supir) {
+            foreach ($produk->produksis as $child) {
+                $child->delete();
+            }
+        });
+    }
+
     public $table = 'supirs';
 
 
@@ -47,4 +58,9 @@ class Supir extends Model
         'no_supir' => 'required|unique:supirs',
         'nama_supir' => 'required'
     ];
+
+    public function produksis()
+    {
+      return $this->hasMany(Produksi::class);
+    }
 }

@@ -27,12 +27,12 @@ class PengirimanController extends AppBaseController
     {
         $pengirimans = $produksi->pengirimans;
         $title = 'Pengiriman';
+
         return view('pengiriman.index')
             ->with('pengirimans', $pengirimans)
             ->with('produksi', $produksi)
             ->with('title', $title);
     }
-
 
     /**
      * Store a newly created Pengiriman in storage.

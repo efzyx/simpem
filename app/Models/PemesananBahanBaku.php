@@ -21,6 +21,17 @@ class PemesananBahanBaku extends Model
 {
     use SoftDeletes;
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::deleting(function (PemesananBahanBaku $pemesananBahanBaku) {
+            foreach ($pemesananBahanBaku->pengadaans as $child) {
+                $child->delete();
+            }
+        });
+    }
+
     public $table = 'pemesanan_bahan_bakus';
 
 

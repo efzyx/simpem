@@ -17,6 +17,35 @@ class BahanBaku extends Model
 {
     use SoftDeletes;
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::deleting(function (BahanBaku $bahanBaku) {
+            foreach ($bahanBaku->bahan_baku_histories as $child) {
+                $child->delete();
+            }
+        });
+
+        self::deleting(function (BahanBaku $bahanBaku) {
+            foreach ($bahanBaku->pengadaans as $child) {
+                $child->delete();
+            }
+        });
+
+        self::deleting(function (BahanBaku $bahanBaku) {
+            foreach ($bahanBaku->komposisi_mutus as $child) {
+                $child->delete();
+            }
+        });
+
+        self::deleting(function (BahanBaku $bahanBaku) {
+            foreach ($bahanBaku->opnames as $child) {
+                $child->delete();
+            }
+        });
+    }
+
     public $table = 'bahan_bakus';
 
 
@@ -70,8 +99,19 @@ class BahanBaku extends Model
     {
         return BahanBaku::find($id);
     }
+
     public function batas_pengadaan()
     {
         return $this->hasOne(BatasPengadaan::class);
+    }
+
+    public function komposisi_mutus()
+    {
+      return $this->hasMany('App\Models\KomposisiMutu');
+    }
+
+    public function opnames()
+    {
+      return $this->hasMany(Opname::class);
     }
 }
