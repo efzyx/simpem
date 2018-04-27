@@ -17,6 +17,17 @@ class Jabatan extends Model
 {
     use SoftDeletes;
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::deleting(function (Jabatan $jabatan) {
+            foreach ($jabatan->users as $child) {
+                $child->delete();
+            }
+        });
+    }
+
     public $table = 'jabatans';
 
 

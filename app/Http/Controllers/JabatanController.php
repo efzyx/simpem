@@ -47,8 +47,9 @@ class JabatanController extends AppBaseController
     public function create()
     {
         $title = "Jabatan - Tambah";
-        return view('jabatans.create')
-              ->with('title', $title);
+
+        Flash::error('Tidak bisa mengakses halaman tersebut!');
+        return redirect()->route('jabatans.index');
     }
 
     /**
@@ -60,13 +61,9 @@ class JabatanController extends AppBaseController
      */
     public function store(CreateJabatanRequest $request)
     {
-        $input = $request->all();
+        Flash::error('Tidak bisa mengakses halaman tersebut!');
 
-        $jabatan = $this->jabatanRepository->create($input);
-
-        Flash::success('Jabatan saved successfully.');
-
-        return redirect(route('jabatans.index'));
+        return redirect()->route('jabatans.index');
     }
 
     /**
@@ -81,15 +78,9 @@ class JabatanController extends AppBaseController
         $jabatan = $this->jabatanRepository->findWithoutFail($id);
         $title = "Jabatan - Lihat";
 
-        if (empty($jabatan)) {
-            Flash::error('Jabatan not found');
+        Flash::error('Tidak bisa mengakses halaman tersebut!');
 
-            return redirect(route('jabatans.index'));
-        }
-
-        return view('jabatans.show')
-              ->with('jabatan', $jabatan)
-              ->with('title', $title);
+        return redirect()->route('jabatans.index');
     }
 
     /**
@@ -151,16 +142,8 @@ class JabatanController extends AppBaseController
     {
         $jabatan = $this->jabatanRepository->findWithoutFail($id);
 
-        if (empty($jabatan)) {
-            Flash::error('Jabatan not found');
+        Flash::error('Tidak bisa mengakses halaman tersebut!');
 
-            return redirect(route('jabatans.index'));
-        }
-
-        $this->jabatanRepository->delete($id);
-
-        Flash::success('Jabatan deleted successfully.');
-
-        return redirect(route('jabatans.index'));
+        return redirect()->route('jabatans.index');
     }
 }

@@ -266,7 +266,8 @@ class ProduksiController extends AppBaseController
         $data = array(json_decode($request['pemesanans'], true));
         $pemesanans = Pemesanan::hydrate($data);
         $pemesanans = $pemesanans->flatten();
-        $pdf = PDF::loadView('pemesanans.produksis.pdf', ['pemesanans' => $pemesanans,'kendaraans' => $this->kendaraans]);
+        $user =  Auth::user()->name;
+        $pdf = PDF::loadView('pemesanans.produksis.pdf', ['pemesanans' => $pemesanans,'user' => $user, 'kendaraans' => $this->kendaraans]);
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream('pengiriman_'.time().'.pdf');
     }

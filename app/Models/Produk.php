@@ -17,6 +17,23 @@ class Produk extends Model
 {
     use SoftDeletes;
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::deleting(function (Produk $produk) {
+            foreach ($produk->komposisi_mutus as $child) {
+                $child->delete();
+            }
+        });
+
+        self::deleting(function (Produk $produk) {
+            foreach ($produk->pemesanans as $child) {
+                $child->delete();
+            }
+        });
+    }
+
     public $table = 'produks';
 
 
@@ -57,5 +74,10 @@ class Produk extends Model
     {
         $bahan_id = BahanBaku::where('kode', $kode)->first()->id;
         return $this->komposisi_mutus->where('bahan_baku_id', $bahan_id)->first();
+    }
+
+    public function pemesanans()
+    {
+        return $this->hasMany(Pemesanan::class);
     }
 }

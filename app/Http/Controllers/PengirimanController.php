@@ -134,9 +134,9 @@ class PengirimanController extends AppBaseController
 
             return redirect()->back();
         }
+
         $pengiriman->user_id = Auth::user()->id;
         $pengiriman = $this->pengirimanRepository->update($request->all(), $id);
-        dd($pengiriman);
 
         if($pengiriman->status == 2)
           $pengiriman->produksi->kendaraan->kendaraanDetails()->create([

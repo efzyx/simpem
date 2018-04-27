@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
   <body>
-      <h1 class="text-center">Pemesanan</h1>
+      <h1 class="text-center">Produksi</h1>
       <br><br>
       <?php $tmutu = [0,0,0,0,0]; ?>
       <table class="table table-bordered">
@@ -70,6 +70,14 @@
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         </tbody>
       </table>
+      <br><br>
 
+      <div class="pull-right">
+           Padang, {{date("d-m-Y")}}
+            <br>
+           Dibuat Oleh
+            <br><br><br><br>
+           {{$user}}
+      </div>
   </body>
 </html>

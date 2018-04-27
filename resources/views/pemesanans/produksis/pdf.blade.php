@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
   <body>
-      <h1 class="text-center">Pemesanan</h1>
+      <h1 class="text-center">List Produksi</h1>
       <br><br>
           @foreach ($pemesanans as $pemesanan)
           @php
@@ -46,7 +46,7 @@
               <tr>
                 <td><strong>Volume Pesanan</strong></td>
                 <td>:</td>
-                <td>{!! $produksis->sum('volume') !!}</td>
+                <td>{!! $pemesanan->volume_pesanan !!}</td>
               </tr>
               <tr>
                 <td><strong>Realisasi</strong></td>
@@ -87,7 +87,15 @@
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         </tbody>
       </table>
+      <br><br>
 
+      <div class="pull-right">
+           Padang, {{date("d-m-Y")}}
+            <br>
+           Dibuat Oleh
+            <br><br><br><br>
+           {{$user}}
+      </div>
 
 
 

@@ -212,7 +212,8 @@ class PemesananBahanBakuController extends AppBaseController
         $data = json_decode($request['pemesananBahanBakus'], true);
         $suppliers = PemesananBahanBaku::hydrate($data);
         $suppliers = $suppliers->flatten();
-        $pdf = PDF::loadView('pemesanan_bahan_bakus.pdf', ['pemesananBahanBakus' => $suppliers]);
+        $user =  Auth::user()->name;
+        $pdf = PDF::loadView('pemesanan_bahan_bakus.pdf', ['pemesananBahanBakus' => $suppliers,'user'=>$user]);
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream('pemesanan_'.time().'.pdf');
     }

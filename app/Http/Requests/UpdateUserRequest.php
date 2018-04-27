@@ -26,7 +26,9 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         $user = User::where('email',request()->email)->first();
-        User::$rules['email'] = 'required|email|unique:users,email,'.$user->id.',id';
+        
+        if($user)
+          User::$rules['email'] = 'required|email|unique:users,email,'.$user->id.',id';
 
         return User::$rules;
 
