@@ -120,11 +120,13 @@ class ProduksiController extends AppBaseController
         $komposisi_mutus = $pemesanan->produk->komposisi_mutus;
         $status = $this->statusKendaraan($kendaraan, $input);
 
-        if(is_object($status)) return $status;
+        if (is_object($status)) {
+            return $status;
+        }
 
-        if($status != 1){
-          Flash::error('Kendaraan '. $kendaraan->no_polisi.' sedang '.($status == 2 ? 'Rusak' : 'Dirental').'!');
-          return redirect()->back()->withInput($input);
+        if ($status != 1) {
+            Flash::error('Kendaraan '. $kendaraan->no_polisi.' sedang '.($status == 2 ? 'Rusak' : 'Dirental').'!');
+            return redirect()->back()->withInput($input);
         }
 
         if (!$this->checkStock($komposisi_mutus, $input['volume'])) {
@@ -233,11 +235,13 @@ class ProduksiController extends AppBaseController
         $kendaraan = Kendaraan::find($input['kendaraan_id']);
         $status = $this->statusKendaraan($kendaraan, $input);
 
-        if(is_object($status)) return $status;
+        if (is_object($status)) {
+            return $status;
+        }
 
-        if($status != 1 && $old_kendaraan->id != $kendaraan->id){
-          Flash::error('Kendaraan '. $kendaraan->no_polisi.' sedang '.($status == 2 ? 'Rusak' : 'Dirental').'!');
-          return redirect()->back()->withInput($input);
+        if ($status != 1 && $old_kendaraan->id != $kendaraan->id) {
+            Flash::error('Kendaraan '. $kendaraan->no_polisi.' sedang '.($status == 2 ? 'Rusak' : 'Dirental').'!');
+            return redirect()->back()->withInput($input);
         }
 
         $komposisi_mutus = $produksi->pemesanan->produk->komposisi_mutus;
@@ -320,13 +324,13 @@ class ProduksiController extends AppBaseController
 
     private function statusKendaraan($kendaraan, $input)
     {
-      $last_update = $kendaraan->lastStatus();
+        $last_update = $kendaraan->lastStatus();
 
-      if (!$last_update) {
-        Flash::error('Status kendaraan '.$kendaraan->no_polisi.' belum diset');
-        return redirect()->back()->withInput($input);
-      }
-      return $last_update->status;
+        if (!$last_update) {
+            Flash::error('Status kendaraan '.$kendaraan->no_polisi.' belum diset');
+            return redirect()->back()->withInput($input);
+        }
+        return $last_update->status;
     }
 
     public function downloadPdf(Request $request)

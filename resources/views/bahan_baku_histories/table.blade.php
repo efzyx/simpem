@@ -19,7 +19,7 @@
         @elseif ($pengadaan = $bahanBakuHistory->pengadaan)
         <td><a href="{{ route('pengadaans.show', $pengadaan->id)}}">Pengadaan</a></td>
         @else
-        <td><a href="{{ route('opnames.show', $bahanBakuHistory->opname->id)}}">Pengadaan</a></td>
+        <td><a href="{{ route('opnames.show', $bahanBakuHistory->opname->id)}}">Opname</a></td>
         @endif
 
         <td>{{ abs($bahanBakuHistory->volume) }}</td>

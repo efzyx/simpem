@@ -14,7 +14,7 @@ class AddRelationToTable extends Migration
     public function up()
     {
         Schema::table('pengadaans', function (Blueprint $table) {
-          switch (env('DB_CONNECTION')) {
+            switch (env('DB_CONNECTION')) {
             case 'mysql':
               DB::statement('SET FOREIGN_KEY_CHECKS=0;');
               $table->dropColumn('supplier');
