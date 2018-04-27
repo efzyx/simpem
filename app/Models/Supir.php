@@ -61,6 +61,6 @@ class Supir extends Model
 
     public function produksis()
     {
-      return $this->hasMany(Produksi::class);
+        return $this->hasMany(Produksi::class);
     }
 }

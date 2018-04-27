@@ -239,4 +239,6 @@ return [
 
     ],
 
+    'version' => env('APP_VER', 'v.1.1-alpha'),
+
 ];

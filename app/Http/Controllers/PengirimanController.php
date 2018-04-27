@@ -138,11 +138,12 @@ class PengirimanController extends AppBaseController
         $pengiriman->user_id = Auth::user()->id;
         $pengiriman = $this->pengirimanRepository->update($request->all(), $id);
 
-        if($pengiriman->status == 2)
-          $pengiriman->produksi->kendaraan->kendaraanDetails()->create([
+        if ($pengiriman->status == 2) {
+            $pengiriman->produksi->kendaraan->kendaraanDetails()->create([
             'status' => 1,
             'waktu'  => $pengiriman->produksi->waktu_produksi
           ]);
+        }
 
         Flash::success('Status updated successfully.');
 
