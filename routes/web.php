@@ -46,6 +46,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('bahanBakuHistories', 'BahanBakuHistoryController');
 
+    Route::post('bahanBakuHistories/filter', 'BahanBakuHistoryController@filter')->name('filterHistoryBahanBaku');
+
     Route::resource('komposisiMutus', 'KomposisiMutuController');
 
     Route::resource('kendaraans', 'KendaraanController');

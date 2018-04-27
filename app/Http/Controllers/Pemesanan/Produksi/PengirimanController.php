@@ -18,9 +18,9 @@ class PengirimanController extends AppBaseController
 {
     public function __construct()
     {
-      $this->middleware('role:admin,marketing,produksi,manager_produksi')
+        $this->middleware('role:admin,marketing,produksi,manager_produksi')
                         ->only('index');
-      $this->middleware('role:produksi')->except('index');
+        $this->middleware('role:produksi')->except('index');
     }
 
     public function index(Pemesanan $pemesanan, Produksi $produksi, Request $request)
@@ -46,6 +46,18 @@ class PengirimanController extends AppBaseController
         $input = $request->all();
         $input['user_id'] = Auth::user()->id;
         $pengiriman = Pengiriman::create($input);
+
+        if($pengiriman->status == 2)
+          $pengiriman->produksi->kendaraan->kendaraanDetails()->create([
+            'status' => 1,
+            'waktu'  => $pengiriman->created_at
+          ]);
+
+        else
+          $pengiriman->produksi->kendaraan->kendaraanDetails()->create([
+            'status' => 3,
+            'waktu'  => $pengiriman->created_at
+          ]);
 
         Flash::success('Pengiriman saved successfully.');
 
