@@ -236,7 +236,8 @@ class PemesananController extends AppBaseController
         $data = json_decode($request['pemesanans'], true);
         $pemesanans = Pemesanan::hydrate($data);
         $pemesanans = $pemesanans->flatten();
-        $pdf = PDF::loadView('pemesanans.pdf', ['pemesanans' => $pemesanans,'kendaraans' => $this->kendaraans]);
+        $user =  Auth::user()->name;
+        $pdf = PDF::loadView('pemesanans.pdf', ['pemesanans' => $pemesanans,'user'=>$user, 'kendaraans' => $this->kendaraans]);
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream('pemesanan_'.time().'.pdf');
     }

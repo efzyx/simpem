@@ -338,7 +338,8 @@ class ProduksiController extends AppBaseController
         $data = json_decode($request['produksis'], true);
         $produksis = Produksi::hydrate($data);
         $produksis = $produksis->flatten();
-        $pdf = PDF::loadView('produksis.pdf', ['produksis' => $produksis]);
+        $user =  Auth::user()->name;
+        $pdf = PDF::loadView('produksis.pdf', ['produksis' => $produksis,'user'=>$user]);
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream('produksi_'.time().'.pdf');
     }

@@ -60,6 +60,15 @@
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         </tbody>
       </table>
+      <br><br>
 
+      <div class="pull-right">
+           Padang, {{date("d-m-Y")}}
+            <br>
+           Dibuat Oleh
+            <br><br><br><br>
+           {{$user}}
+      </div>
+      
   </body>
 </html>
