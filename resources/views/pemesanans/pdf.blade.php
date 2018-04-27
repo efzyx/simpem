@@ -36,7 +36,7 @@
           <tbody>
             @foreach ($produksis as $key => $produksi)
               <tr>
-               @if ($first == true)
+               @if ($first)
                 <td rowspan="{{$prod}}">{{$key+1}}</td>
                 <td rowspan="{{$prod}}">{{$pemesanan->nama_pemesanan}}</td>
                 <td rowspan="{{$prod}}">{{$pemesanan->produk->mutu_produk}}</td>
@@ -46,7 +46,7 @@
                 <td>{{$produksi->waktu_produksi}}</td>
                 <td>{{$kendaraans[$produksi->kendaraan->id]}}</td>
                 <td>{{$produksi->volume}}</td>
-                @if($first==true)
+                @if($first)
                 <td rowspan="{{$prod}}">{{$pemesanan->produksis->sum('volume')}}</td>
                 <td rowspan="{{$prod}}">{{$pemesanan->volume_pesanan - $pemesanan->produksis->sum('volume')}}</td>
                 @endif
