@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
   <body>
-      <h1 class="text-center">Pemesanan</h1>
+      <h1 class="text-center">Produksi</h1>
       <br><br>
       <?php $tmutu = [0,0,0,0,0]; ?>
       <table class="table table-bordered">
