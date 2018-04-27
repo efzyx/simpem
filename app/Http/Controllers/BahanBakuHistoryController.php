@@ -65,12 +65,6 @@ class BahanBakuHistoryController extends AppBaseController
                    $history;
         });
 
-        $histories = $histories->filter(function ($history) use ($request) {
-            return $request['jenis_kegiatan'] != null ?
-                   $history->type == $request['jenis_kegiatan'] :
-                   $history;
-        });
-
         $title = 'Riwayat Bahan Baku - Filter';
 
         return view('bahan_baku_histories.index')

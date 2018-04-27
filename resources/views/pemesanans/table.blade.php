@@ -17,7 +17,7 @@
         <td width="15vw">{{ $no++ }}</td>
         <td width="100vw">{!! $pemesanan->nama_pemesanan !!}</td>
         <td width="100vw">{!! $pemesanan->produk->mutu_produk !!}</td>
-        <td width="100vw">{!! $pemesanan->tanggal_pesanan->format('d F y') !!}</td>
+        <td width="100vw">{!! $pemesanan->tanggal_pesanan->format('d F y h:m') !!}</td>
         @php
           $sisa = $pemesanan->volume_pesanan - $pemesanan->produksis->sum('volume');
         @endphp

@@ -25,10 +25,11 @@ class UpdateSupirRequest extends FormRequest
      */
     public function rules()
     {
-        $supir = Supir::where('no_supir',request()->no_supir)->first();
+        $supir = Supir::where('no_supir', request()->no_supir)->first();
 
-        if($supir)
-          Supir::$rules['no_supir'] = 'required|unique:supirs,no_supir,'.$supir->id.',id';
+        if ($supir) {
+            Supir::$rules['no_supir'] = 'required|unique:supirs,no_supir,'.$supir->id.',id';
+        }
 
         return Supir::$rules;
     }
