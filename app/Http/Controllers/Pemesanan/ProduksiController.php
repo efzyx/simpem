@@ -81,7 +81,7 @@ class ProduksiController extends AppBaseController
         }
 
         if (!$komposisi_mutus->count()) {
-            Flash::error('Komposisi produk pemesanan belum diset');
+            Flash::error('Komposisi produk ada yang belum diset');
             return redirect()->back()->withInput($input);
         }
 
@@ -189,7 +189,7 @@ class ProduksiController extends AppBaseController
         }
 
         if (!$komposisi_mutus->count()) {
-            Flash::error('Komposisi produk pemesanan belum diset');
+            Flash::error('Komposisi produk ada yang belum diset');
             return redirect()->back();
         }
 
