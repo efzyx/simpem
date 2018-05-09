@@ -24,7 +24,7 @@ class PengadaanController extends AppBaseController
     {
         $this->pengadaanRepository = $pengadaanRepo;
         $this->bahanBakus = BahanBaku::pluck('nama_bahan_baku', 'id');
-        $this->pemesanan_bahan_bakus = PemesananBahanBaku::get()->pluck('supplier_bahan_baku', 'id');
+        $this->pemesanan_bahan_bakus = PemesananBahanBaku::orderBy('id','desc')->get()->pluck('supplier_bahan_baku', 'id');
         $this->middleware('role:admin,manager_produksi,logistik')->only('index', 'show');
         $this->middleware('role:logistik')->except('index', 'show');
     }
@@ -38,7 +38,7 @@ class PengadaanController extends AppBaseController
     public function index(Request $request)
     {
         $this->pengadaanRepository->pushCriteria(new RequestCriteria($request));
-        $pengadaans = $this->pengadaanRepository->all();
+        $pengadaans = $this->pengadaanRepository->orderBy('id','desc')->all();
         $title = "Penerimaan Bahan Baku";
         return view('pengadaans.index')
             ->with('pengadaans', $pengadaans)
@@ -78,14 +78,6 @@ class PengadaanController extends AppBaseController
             Flash::error('Volume pengadaan lebih besar dari volume pemesanan bahan baku. Sisa '.($supplier->volume_pemesanan-$exists).' '.$bahan_baku->satuan);
             return redirect()->back()->withInput($input);
         }
-
-        // if ($bahan_baku->batas_pengadaan) {
-        //     if ($input['berat'] > $maks = $bahan_baku->batas_pengadaan->maks_pengadaan) {
-        //         Flash::error('Maksimal kuantitas pengadaan '.$bahan_baku->nama_bahan_baku.' adalah '. $maks.' '.$bahan_baku->satuan);
-        //         return redirect()->back()->withInput($input);
-        //     }
-        // }
-
 
         $input['user_id'] = Auth::user()->id;
 
@@ -178,13 +170,6 @@ class PengadaanController extends AppBaseController
             Flash::error('Volume pengadaan lebih besar dari volume pemesanan bahan baku. Sisa '.($supplier->volume_pemesanan-$exists).' '.$bahan_baku->satuan);
             return redirect()->back()->withInput($input);
         }
-
-        // if ($bahan_baku->batas_pengadaan) {
-        //     if ($input['berat'] > $maks = $bahan_baku->batas_pengadaan->maks_pengadaan) {
-        //         Flash::error('Maksimal kuantitas pengadaan '.$bahan_baku->nama_bahan_baku.' adalah '. $maks.' '.$bahan_baku->satuan);
-        //         return redirect()->back()->withInput($input);
-        //     }
-        // }
 
         $old_volume = $pengadaan->berat;
 

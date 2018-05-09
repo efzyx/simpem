@@ -57,7 +57,7 @@ class PemesananBahanBaku extends Model
         'nama_supplier' => 'string',
         'cp_supplier' => 'string',
         'bahan_baku_id' => 'integer',
-        'volume_pemesanan' => 'integer',
+        'volume_pemesanan' => 'double',
         'tanggal_pemesanan' => 'datetime',
         'keterangan' => 'string',
         'user_id' => 'integer'

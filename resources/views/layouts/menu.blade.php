@@ -16,12 +16,12 @@
 
 
 @if (Auth::user()->is('manager_produksi') || Auth::user()->is('admin') || Auth::user()->is('marketing'))
-  <li class="{{ Request::is('produks*') ? 'active' : '' }}">
+  <li class="{{ Request::is('produks*') && !Request::is('produksis*') ? 'active' : '' }}">
       <a href="{!! route('produks.index') !!}"><i class="fa fa-industry"></i><span>Produk</span></a>
   </li>
 @endif
 
-@if (Auth::user()->is('logistik'))
+@if (Auth::user()->is('manager_produksi'))
   <li class="treeview {{ Request::is('pengadaans*') || Request::is('supplier*') ? 'active' : '' }}">
         <a href="#">
           <i class="fa fa-cart-arrow-down"></i> <span>Pengadaan</span>
@@ -40,6 +40,15 @@
   </li>
 @endif
 
+@if (Auth::user()->is('logistik'))
+          <li class="{{ Request::is('supplier*') ? 'active' : '' }}">
+              <a href="{!! route('supplier.index') !!}"><i class="fa fa-cart-arrow-down"></i><span>Pemesanan Material</span></a>
+          </li>
+          <li class="{{ Request::is('pengadaans*') ? 'active' : '' }}">
+              <a href="{!! route('pengadaans.index') !!}"><i class="fa fa-truck"></i><span>Penerimaan Material</span></a>
+          </li>
+@endif
+
 @if (Auth::user()->is('manager_produksi') || Auth::user()->is('admin'))
   <li class="{{ Request::is('opnames*') ? 'active' : '' }}">
       <a href="{!! route('opnames.index') !!}"><i class="fa fa-search-minus"></i><span>Opname</span></a>
@@ -52,7 +61,7 @@
   </li>
 @endif
 
-@if (!Auth::user()->is('produksi'))
+@if (!Auth::user()->is('produksi') && !Auth::user()->is('marketing') && !Auth::user()->is('logistik'))
   <li class="treeview {{ Request::is('jabatans*') || Request::is('bahanBakus*') || Request::is('batasPengadaans*') || Request::is('users*') || Request::is('batasPengadaans*') || Request::is('kendaraans*') || Request::is('supirs*') ? 'active' : '' }}">
         <a href="#">
           <i class="fa fa-gear"></i> <span>Konfigurasi</span>

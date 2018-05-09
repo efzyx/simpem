@@ -14,7 +14,7 @@ class ModifyTableProduksis extends Migration
     public function up()
     {
         Schema::table('produksis', function (Blueprint $table) {
-            
+
         });
     }
 
@@ -26,7 +26,7 @@ class ModifyTableProduksis extends Migration
     public function down()
     {
         Schema::table('produksis', function (Blueprint $table) {
-            //
+
         });
     }
 }

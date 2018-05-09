@@ -14,7 +14,7 @@ class AddColumnSisaToBahanBakusTable extends Migration
     public function up()
     {
         Schema::table('bahan_bakus', function (Blueprint $table) {
-            $table->integer('sisa')->nullable();
+            $table->double('sisa')->nullable();
         });
     }
 

@@ -7,7 +7,7 @@
 <!-- Volume Opname Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('volume_opname', 'Volume Opname:') !!}
-    {!! Form::number('volume_opname', null, ['class' => 'form-control']) !!}
+    {!! Form::number('volume_opname', null, ['class' => 'form-control', 'step' => 'any']) !!}
 </div>
 
 <!-- Keterangan Field -->

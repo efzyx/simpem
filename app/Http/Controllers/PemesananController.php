@@ -42,7 +42,7 @@ class PemesananController extends AppBaseController
     public function index(Request $request)
     {
         $this->pemesananRepository->pushCriteria(new RequestCriteria($request));
-        $pemesanans = $this->pemesananRepository->all();
+        $pemesanans = $this->pemesananRepository->orderBy('id', 'desc')->all();
         $title = 'Pemesanan';
         return view('pemesanans.index')
             ->with('pemesanans', $pemesanans)
@@ -52,7 +52,7 @@ class PemesananController extends AppBaseController
     public function filter(Request $request)
     {
         $this->pemesananRepository->pushCriteria(new RequestCriteria($request));
-        $pemesanans = $this->pemesananRepository->all();
+        $pemesanans = $this->pemesananRepository->orderBy('id', 'desc')->all();;
         $pemesanans = $pemesanans->filter(function ($pemesanan) use ($request) {
             return $request['jenis_pesanan'] != null ?
                   $pemesanan->jenis_pesanan == $request['jenis_pesanan'] :
@@ -228,14 +228,14 @@ class PemesananController extends AppBaseController
         if (empty($pemesanan)) {
             Flash::error('Pemesanan not found');
 
-            return redirect(route('pemesanans.index'));
+            return redirect()->back();
         }
 
         $this->pemesananRepository->delete($id);
 
         Flash::success('Pemesanan deleted successfully.');
 
-        return redirect(route('pemesanans.index'));
+        return redirect()->back();
     }
 
     public function downloadPdf(Request $request)

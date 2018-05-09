@@ -31,7 +31,7 @@ class BahanBakuHistoryController extends AppBaseController
     public function index(Request $request)
     {
         $this->bahanBakuHistoryRepository->pushCriteria(new RequestCriteria($request));
-        $bahanBakuHistories = $this->bahanBakuHistoryRepository->all();
+        $bahanBakuHistories = $this->bahanBakuHistoryRepository->orderBy('id', 'desc')->all();
         $title = "Riwayat Bahan Baku";
 
         return view('bahan_baku_histories.index')

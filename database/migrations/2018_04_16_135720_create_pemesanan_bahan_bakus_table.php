@@ -18,7 +18,7 @@ class CreatePemesananBahanBakusTable extends Migration
             $table->string('nama_supplier');
             $table->integer('cp_supplier');
             $table->integer('bahan_baku_id')->unsigned();
-            $table->integer('volume_pemesanan');
+            $table->double('volume_pemesanan');
             $table->date('tanggal_pemesanan');
             $table->string('keterangan');
             $table->timestamps();

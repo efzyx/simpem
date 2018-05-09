@@ -39,7 +39,7 @@ class Opname extends Model
      */
     protected $casts = [
         'bahan_baku_id' => 'integer',
-        'volume_opname' => 'integer',
+        'volume_opname' => 'double',
         'keterangan' => 'string'
     ];
 

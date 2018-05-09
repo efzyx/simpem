@@ -26,9 +26,6 @@ class Produksi extends Model
         parent::boot();
 
         self::deleting(function (Produksi $produksi) {
-            foreach ($produksi->pengirimans as $pengiriman) {
-                $pengiriman->delete();
-            }
 
             foreach ($produksi->bahan_baku_histories as $bahan_baku_history) {
                 $bahan_baku_history->delete();
@@ -58,7 +55,7 @@ class Produksi extends Model
      */
     protected $casts = [
         'pemesanan_id' => 'integer',
-        'volume' => 'integer',
+        'volume' => 'double',
         'supir_id' => 'integer',
         'kendaraan_id' => 'integer'
     ];
@@ -88,11 +85,6 @@ class Produksi extends Model
     public function supir()
     {
         return $this->belongsTo('App\Models\Supir');
-    }
-
-    public function pengirimans()
-    {
-        return $this->hasMany('App\Models\Pengiriman');
     }
 
     public function kendaraan()

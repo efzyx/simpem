@@ -34,7 +34,7 @@ class OpnameController extends AppBaseController
     public function index(Request $request)
     {
         $this->opnameRepository->pushCriteria(new RequestCriteria($request));
-        $opnames = $this->opnameRepository->paginate(10);
+        $opnames = $this->opnameRepository->orderBy('id', 'desc')->all();
         $title = "Opname";
 
         return view('opnames.index')

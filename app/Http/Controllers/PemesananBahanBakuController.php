@@ -38,7 +38,7 @@ class PemesananBahanBakuController extends AppBaseController
     public function index(Request $request)
     {
         $this->pemesananBahanBakuRepository->pushCriteria(new RequestCriteria($request));
-        $pemesananBahanBakus = $this->pemesananBahanBakuRepository->all();
+        $pemesananBahanBakus = $this->pemesananBahanBakuRepository->orderBy('id', 'desc')->all();
         $title = 'Pemesanan Bahan Baku';
 
         return view('pemesanan_bahan_bakus.index')
@@ -49,7 +49,7 @@ class PemesananBahanBakuController extends AppBaseController
     public function filter(Request $request)
     {
         $this->pemesananBahanBakuRepository->pushCriteria(new RequestCriteria($request));
-        $suppliers = $this->pemesananBahanBakuRepository->all();
+        $suppliers = $this->pemesananBahanBakuRepository->orderBy('id', 'desc')->all();
         $suppliers = $suppliers->filter(function ($supplier) use ($request) {
             $dari = $request['tanggal_kirim_dari'] ? Carbon::parse($request['tanggal_kirim_dari']) : null;
             $sampai = $request['tanggal_kirim_sampai'] ? Carbon::parse($request['tanggal_kirim_sampai']) : null;
@@ -197,14 +197,14 @@ class PemesananBahanBakuController extends AppBaseController
         if (empty($pemesananBahanBaku)) {
             Flash::error('Pemesanan Bahan Baku not found');
 
-            return redirect(route('supplier.index'));
+            return redirect()->back();
         }
 
         $this->pemesananBahanBakuRepository->delete($id);
 
         Flash::success('Pemesanan Bahan Baku deleted successfully.');
 
-        return redirect(route('supplier.index'));
+        return redirect()->back();
     }
 
     public function downloadPdf(Request $request)

@@ -45,7 +45,7 @@ class Pengadaan extends Model
      */
     protected $casts = [
         'bahan_baku_id' => 'integer',
-        'berat' => 'integer',
+        'berat' => 'double',
         'pemesanan_bahan_baku_id' => 'integer',
         'supir' => 'string',
         'user_id' => 'integer',
