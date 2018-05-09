@@ -16,7 +16,7 @@ class CreateOpnamesTable extends Migration
         Schema::create('opnames', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('bahan_baku_id')->unsigned();
-            $table->integer('volume_opname');
+            $table->double('volume_opname');
             $table->string('keterangan');
             $table->datetime('tanggal_pemakaian');
             $table->timestamps();

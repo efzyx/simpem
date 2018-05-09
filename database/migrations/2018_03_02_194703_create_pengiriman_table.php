@@ -13,16 +13,16 @@ class CreatePengirimanTable extends Migration
      */
     public function up()
     {
-        Schema::create('pengiriman', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('produksi_id')->unsigned();
-            $table->integer('status');
-            $table->integer('user_id')->unsigned();
-            $table->timestamps();
-            $table->softDeletes();
-            $table->foreign('produksi_id')->references('id')->on('produksis')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        });
+        // Schema::create('pengiriman', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->integer('produksi_id')->unsigned();
+        //     $table->integer('status');
+        //     $table->integer('user_id')->unsigned();
+        //     $table->timestamps();
+        //     $table->softDeletes();
+        //     $table->foreign('produksi_id')->references('id')->on('produksis')->onDelete('cascade');
+        //     $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        // });
     }
 
     /**
@@ -32,6 +32,6 @@ class CreatePengirimanTable extends Migration
      */
     public function down()
     {
-        Schema::drop('pengiriman');
+        // Schema::drop('pengiriman');
     }
 }

@@ -20,7 +20,7 @@ class CreateBahanBakuHistoriesTable extends Migration
             $table->integer('pengadaan_id')->unsigned()->nullable();
             $table->integer('produksi_id')->unsigned()->nullable();
             $table->integer('opname_id')->unsigned()->nullable();
-            $table->integer('total_sisa');
+            $table->double('total_sisa');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('bahan_baku_id')->references('id')->on('bahan_bakus');

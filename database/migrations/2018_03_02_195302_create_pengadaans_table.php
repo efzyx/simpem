@@ -16,7 +16,7 @@ class CreatePengadaansTable extends Migration
         Schema::create('pengadaans', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('bahan_baku_id')->unsigned();
-            $table->integer('berat');
+            $table->double('berat');
             $table->integer('supplier')->unsigned();
             $table->datetime('tanggal_pengadaan');
             $table->integer('user_id')->unsigned();

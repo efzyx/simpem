@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnSisaToBahanBakusTable extends Migration
+class ModifyAgainPemesanansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddColumnSisaToBahanBakusTable extends Migration
      */
     public function up()
     {
-        Schema::table('bahan_bakus', function (Blueprint $table) {
-            $table->double('sisa')->nullable();
+        Schema::table('pemesanans', function (Blueprint $table) {
+            $table->string('keterangan')->nullable()->change();
         });
     }
 
@@ -25,8 +25,8 @@ class AddColumnSisaToBahanBakusTable extends Migration
      */
     public function down()
     {
-        Schema::table('bahan_bakus', function (Blueprint $table) {
-            $table->dropColumn('sisa');
+        Schema::table('pemesanans', function (Blueprint $table) {
+            $table->string('keterangan')->change();
         });
     }
 }

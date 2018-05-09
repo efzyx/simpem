@@ -48,8 +48,8 @@ class BahanBakuHistory extends Model
         'pengadaan_id' => 'integer',
         'produksi_id' => 'integer',
         'opname_id' => 'integer',
-        'volume' => 'integer',
-        'total_sisa' => 'integer'
+        'volume' => 'double',
+        'total_sisa' => 'double'
     ];
 
     /**
@@ -70,7 +70,7 @@ class BahanBakuHistory extends Model
     {
         return $this->belongsTo(BahanBaku::class);
     }
-    
+
     public function produksi()
     {
         return $this->belongsTo(Produksi::class);

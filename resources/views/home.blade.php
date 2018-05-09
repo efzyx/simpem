@@ -56,35 +56,6 @@
         </div>
       </div>
 
-      <div class="col-md-4">
-        <div class="box box-solid box-info">
-          <div class="box-header">
-            <i class="fa fa-product-hunt"></i>
-            <h3 class="box-title">Produk</h3>
-          </div>
-          <div class="box-body">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Mutu Produk</th>
-                  <th>Satuan</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($produks as $key => $produk)
-                  <tr>
-                    <td>{{ $key+1 }}</td>
-                    <td>{{ $produk->mutu_produk }}</td>
-                    <td>{{ $produk->satuan }}</td>
-                  </tr>
-                @endforeach
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
       <div class="col-md-8">
         <div class="box box-solid box-warning">
           <div class="box-header">
@@ -108,6 +79,35 @@
                     <td>{{ $kendaraan->jenis_kendaraan }}</td>
                     <td>{{ $kendaraan->no_polisi }}</td>
                     <td>{{ $kendaraan->kendaraanDetails->count() ? $status[$kendaraan->lastStatus()->status] : 'Belum Ada' }}</td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="box box-solid box-info">
+          <div class="box-header">
+            <i class="fa fa-product-hunt"></i>
+            <h3 class="box-title">Produk</h3>
+          </div>
+          <div class="box-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Mutu Produk</th>
+                  <th>Satuan</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($produks as $key => $produk)
+                  <tr>
+                    <td>{{ $key+1 }}</td>
+                    <td>{{ $produk->mutu_produk }}</td>
+                    <td>{{ $produk->satuan }}</td>
                   </tr>
                 @endforeach
               </tbody>

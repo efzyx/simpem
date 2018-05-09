@@ -37,7 +37,12 @@
                     {!! Form::hidden('pemesananBahanBakus', $pemesananBahanBakus) !!}
                     {!! Form::submit('Download', ['class' => 'btn btn-danger pull-left', 'style' => 'margin-top: -10px;margin-bottom: 5px']) !!}
               </h1>
-                    @include('pemesanan_bahan_bakus.table')
+              <div class="clearfix">
+
+              </div>
+              <div class="table-responsive">
+                  @include('pemesanan_bahan_bakus.table')
+              </div>
             </div>
         </div>
         <div class="text-center">

@@ -16,7 +16,7 @@ class CreateProduksisTable extends Migration
         Schema::create('produksis', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('pemesanan_id')->unsigned();
-            $table->integer('volume');
+            $table->double('volume');
             $table->integer('semen');
             $table->integer('pasir');
             $table->integer('split');

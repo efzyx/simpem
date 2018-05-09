@@ -3,9 +3,11 @@
 @section('content')
     <section class="content-header">
         <h1 class="pull-left">List Produksi untuk <strong>{{ $pemesanan->nama_pemesanan }}</strong></h1>
-        <h1 class="pull-right">
-           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('pemesanans.produksis.create', $pemesanan) !!}">Tambah Baru</a>
-        </h1>
+        @if (Auth::user()->is('produksi') || Auth::user()->is('manager_produksi'))
+          <h1 class="pull-right">
+             <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('pemesanans.produksis.create', $pemesanan) !!}">Tambah Baru</a>
+          </h1>
+        @endif
     </section>
     <div class="content">
         <div class="clearfix"></div>
@@ -19,12 +21,15 @@
           </div>
             <div class="box-body">
               <div class="table-responsive">
-                <h1 class="pull-left">
-                      {!! Form::open(['route' => 'downloadPengiriman' , 'target' => '_blank'])!!}
-                      {!! Form::hidden('pemesanans', $pemesanan) !!}
-                      {!! Form::submit('Download', ['class' => 'btn btn-danger pull-left', 'style' => 'margin-top: -10px;margin-bottom: 5px']) !!}
-                      {!! Form::close() !!}
-                </h1>
+                @if (Auth::user()->is('produksi') || Auth::user()->is('manager_produksi'))
+                  <h1 class="pull-left">
+                        {!! Form::open(['route' => 'downloadPengiriman' , 'target' => '_blank'])!!}
+                        {!! Form::hidden('pemesanans', $pemesanan) !!}
+                        {!! Form::submit('Download', ['class' => 'btn btn-danger pull-left', 'style' => 'margin-top: -10px;margin-bottom: 5px']) !!}
+                        {!! Form::close() !!}
+                  </h1>
+                @endif
+
                 @include('pemesanans.produksis.table')
               </div>
             </div>

@@ -38,7 +38,7 @@ class KomposisiMutu extends Model
     protected $casts = [
         'produk_id' => 'integer',
         'bahan_baku_id' => 'integer',
-        'volume' => 'integer'
+        'volume' => 'double'
     ];
 
     /**

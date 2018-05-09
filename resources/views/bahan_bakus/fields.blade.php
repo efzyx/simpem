@@ -13,7 +13,7 @@
 <!-- Sisa Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('sisa', 'Sisa:') !!}
-    {!! Form::number('sisa', null, ['class' => 'form-control']) !!}
+    {!! Form::number('sisa', null, ['class' => 'form-control', 'step' => 'any']) !!}
 </div>
 
 <!-- Submit Field -->

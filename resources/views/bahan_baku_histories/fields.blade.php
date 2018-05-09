@@ -31,7 +31,7 @@
 <!-- Total Sisa Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('total_sisa', 'Total Sisa:') !!}
-    {!! Form::number('total_sisa', null, ['class' => 'form-control']) !!}
+    {!! Form::number('total_sisa', null, ['class' => 'form-control', 'step' => 'any']) !!}
 </div>
 
 <!-- Submit Field -->

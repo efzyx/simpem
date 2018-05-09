@@ -17,7 +17,7 @@ class CreatePemesanansTable extends Migration
             $table->increments('id');
             $table->string('nama_pemesanan');
             $table->integer('produk_id')->unsigned();
-            $table->integer('volume_pesanan');
+            $table->double('volume_pesanan');
             $table->date('tanggal_pesanan');
             $table->date('tanggal_kirim');
             $table->string('lokasi_proyek');

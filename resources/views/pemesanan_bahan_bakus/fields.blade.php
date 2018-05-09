@@ -19,7 +19,7 @@
 <!-- Volume Pemesanan Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('volume_pemesanan', 'Volume Pemesanan:') !!}
-    {!! Form::number('volume_pemesanan', null, ['class' => 'form-control']) !!}
+    {!! Form::number('volume_pemesanan', null, ['class' => 'form-control', 'step' => 'any']) !!}
 </div>
 
 <!-- Tanggal Pemesanan Field -->
