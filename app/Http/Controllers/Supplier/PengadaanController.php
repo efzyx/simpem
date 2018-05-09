@@ -84,14 +84,6 @@ class PengadaanController extends AppBaseController
             return redirect()->back()->withInput($input);
         }
 
-        // if ($bahan_baku->batas_pengadaan) {
-        //     if ($input['berat'] > $maks = $bahan_baku->batas_pengadaan->maks_pengadaan) {
-        //         Flash::error('Maksimal kuantitas pengadaan '.$bahan_baku->nama_bahan_baku.' adalah '. $maks.' '.$bahan_baku->satuan);
-        //         return redirect()->back()->withInput($input);
-        //     }
-        // }
-
-
         $input['user_id'] = Auth::user()->id;
 
         $pengadaan = $this->pengadaanRepository->create($input);
@@ -186,14 +178,6 @@ class PengadaanController extends AppBaseController
             return redirect()->back()->withInput($input);
         }
 
-        // if ($bahan_baku->batas_pengadaan) {
-        //     if ($input['berat'] > $maks = $bahan_baku->batas_pengadaan->maks_pengadaan) {
-        //         Flash::error('Maksimal kuantitas pengadaan '.$bahan_baku->nama_bahan_baku.' adalah '. $maks.' '.$bahan_baku->satuan);
-        //         return redirect()->back()->withInput($input);
-        //     }
-        // }
-
-
         $pengadaan = $this->pengadaanRepository->findWithoutFail($id);
         $bahan_baku = BahanBaku::find($pengadaan->bahan_baku_id);
         $input = $request->all();
@@ -242,14 +226,14 @@ class PengadaanController extends AppBaseController
         if (empty($pengadaan)) {
             Flash::error('Penerimaan Bahan Baku not found');
 
-            return redirect(route('supplier.pengadaans.index', $supplier));
+            return redirect()->back();
         }
 
         $this->pengadaanRepository->delete($id);
 
         Flash::success('Penerimaan Bahan Baku deleted successfully.');
 
-        return redirect(route('supplier.pengadaans.index', $supplier));
+        return redirect()->back();
     }
 
     public function downloadPdf(Request $request)

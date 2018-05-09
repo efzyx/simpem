@@ -14,7 +14,7 @@ class AddVolumeColumnToBahanBakuHistoriesTable extends Migration
     public function up()
     {
         Schema::table('bahan_baku_histories', function (Blueprint $table) {
-            $table->integer('volume')->after('opname_id');
+            $table->double('volume')->after('opname_id');
         });
     }
 

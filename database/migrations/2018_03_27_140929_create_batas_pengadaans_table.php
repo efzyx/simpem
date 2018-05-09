@@ -13,15 +13,15 @@ class CreateBatasPengadaansTable extends Migration
      */
     public function up()
     {
-        Schema::create('batas_pengadaans', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('bahan_baku_id')->unsigned();
-            $table->integer('maks_pengadaan');
-            $table->timestamps();
-            $table->softDeletes();
-            $table->foreign('bahan_baku_id')->references('id')->on('bahan_bakus');
-            $table->unique(['bahan_baku_id']);
-        });
+        // Schema::create('batas_pengadaans', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->integer('bahan_baku_id')->unsigned();
+        //     $table->integer('maks_pengadaan');
+        //     $table->timestamps();
+        //     $table->softDeletes();
+        //     $table->foreign('bahan_baku_id')->references('id')->on('bahan_bakus');
+        //     $table->unique(['bahan_baku_id']);
+        // });
     }
 
     /**
@@ -31,6 +31,6 @@ class CreateBatasPengadaansTable extends Migration
      */
     public function down()
     {
-        Schema::drop('batas_pengadaans');
+        // Schema::drop('batas_pengadaans');
     }
 }

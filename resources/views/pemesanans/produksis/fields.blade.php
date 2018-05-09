@@ -4,7 +4,7 @@
 <!-- Volume Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('volume', 'Volume:') !!}
-    {!! Form::number('volume', null, ['class' => 'form-control']) !!}
+    {!! Form::number('volume', null, ['class' => 'form-control', 'step' => 'any']) !!}
 </div>
 
 <!-- Waktu Produksi Field -->

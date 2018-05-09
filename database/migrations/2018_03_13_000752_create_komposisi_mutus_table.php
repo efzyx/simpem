@@ -17,7 +17,7 @@ class CreateKomposisiMutusTable extends Migration
             $table->increments('id');
             $table->integer('produk_id')->unsigned();
             $table->integer('bahan_baku_id')->unsigned();
-            $table->integer('volume');
+            $table->double('volume');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('produk_id')->references('id')->on('produks');

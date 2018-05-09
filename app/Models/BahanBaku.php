@@ -67,7 +67,7 @@ class BahanBaku extends Model
     protected $casts = [
         'nama_bahan_baku' => 'string',
         'satuan' => 'string',
-        'sisa' => 'integer'
+        'sisa' => 'double'
     ];
 
     /**

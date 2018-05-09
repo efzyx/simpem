@@ -13,7 +13,6 @@ use App\Models\Pemesanan;
 use App\Models\Supir;
 use Auth;
 use PDF;
-use App\Models\Pengiriman;
 use App\Models\Kendaraan;
 use Illuminate\Support\Facades\DB;
 use App\Models\Produksi;
@@ -25,8 +24,12 @@ class ProduksiController extends AppBaseController
     public function __construct()
     {
         $this->supirs = Supir::pluck('nama_supir', 'id');
-        $this->kendaraans = Kendaraan::select(DB::raw("concat(no_polisi, ' - ', jenis_kendaraan) as nama"), 'id')
-                          ->pluck('nama', 'id');
+        $this->kendaraans = Kendaraan::select(DB::raw("concat(no_polisi, ' - ', jenis_kendaraan) as nama"), 'id')->get();
+
+        $this->kendaraans = $this->kendaraans->filter( function($k){
+          return $k->lastStatus()->status == 1;
+        })->pluck('nama', 'id');
+        
         $this->middleware('role:admin,marketing,produksi,manager_produksi')
                           ->only('index', 'show');
         $this->middleware('role:produksi')->except('index', 'show');
@@ -81,7 +84,7 @@ class ProduksiController extends AppBaseController
         }
 
         if (!$komposisi_mutus->count()) {
-            Flash::error('Komposisi produk pemesanan belum diset');
+            Flash::error('Komposisi produk ada yang belum diset');
             return redirect()->back()->withInput($input);
         }
 
@@ -100,12 +103,6 @@ class ProduksiController extends AppBaseController
             $bahan_baku_history->total_sisa = $bahan_baku->sisa;
             $bahan_baku_history->save();
         }
-
-        $pengiriman = new Pengiriman();
-        $pengiriman->produksi_id = $produksi->id;
-        $pengiriman->status = 0;
-        $pengiriman->user_id = Auth::user()->id;
-        $pengiriman->save();
 
         Flash::success('Produksi saved successfully.');
 
@@ -189,7 +186,7 @@ class ProduksiController extends AppBaseController
         }
 
         if (!$komposisi_mutus->count()) {
-            Flash::error('Komposisi produk pemesanan belum diset');
+            Flash::error('Komposisi produk ada yang belum diset');
             return redirect()->back();
         }
 
@@ -229,7 +226,7 @@ class ProduksiController extends AppBaseController
         if (empty($produksi)) {
             Flash::error('Produksi not found');
 
-            return redirect(route('pemesanans.produksis.index', $pemesanan));
+            return redirect()->back();
         }
 
         $komposisi_mutus = $produksi->pemesanan->produk->komposisi_mutus;
@@ -244,7 +241,7 @@ class ProduksiController extends AppBaseController
 
         Flash::success('Produksi deleted successfully.');
 
-        return redirect(route('produksis.index'));
+        return redirect()->back();
     }
 
     private function checkStock($komposisi_mutus, $volume, $old = null)

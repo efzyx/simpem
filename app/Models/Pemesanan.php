@@ -92,6 +92,9 @@ class Pemesanan extends Model
         'tanggal_kirim_dari' => 'required|date_format:Y-m-d H:i:s',
         'tanggal_kirim_sampai' => 'nullable|date_format:Y-m-d H:i:s',
         'jenis_pesanan' => 'required',
+        'volume_pesanan' => 'required',
+        'lokasi_proyek' => 'required',
+        'cp_pesanan' => 'required',
     ];
 
     public function produk()

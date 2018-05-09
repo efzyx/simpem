@@ -13,7 +13,7 @@
 <!-- Volume Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('volume', 'Volume:') !!}
-    {!! Form::number('volume', null, ['class' => 'form-control']) !!}
+    {!! Form::number('volume', null, ['class' => 'form-control', 'step' => 'any']) !!}
 </div>
 
 <!-- Submit Field -->
