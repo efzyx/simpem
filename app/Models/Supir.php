@@ -22,7 +22,7 @@ class Supir extends Model
         parent::boot();
 
         self::deleting(function (Supir $supir) {
-            foreach ($produk->produksis as $child) {
+            foreach ($supir->produksis as $child) {
                 $child->delete();
             }
         });

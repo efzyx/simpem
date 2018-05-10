@@ -85,7 +85,7 @@
             </li>
           @endif
 
-          @if (Auth::user()->is('manager_produksi'))
+          @if (Auth::user()->is('manager_produksi') || Auth::user()->is('admin'))
               <li class="{{ Request::is('kendaraans*') ? 'active' : '' }}">
                   <a href="{!! route('kendaraans.index') !!}"><i class="fa fa-circle-o"></i><span>Kendaraan</span></a>
               </li>
