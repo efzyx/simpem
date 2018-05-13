@@ -22,7 +22,6 @@
       <td>
         {!! Form::open(['route' => ['produksis.destroy', $produksi->id], 'method' => 'delete']) !!}
         <div class='btn-group'>
-          <a href="{!! route('pemesanans.produksis.pengiriman.index', [$produksi->pemesanan, $produksi]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-th-list"></i></a>
           <a href="{!! route('produksis.show', [$produksi->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
 
           @if (Auth::user()->is('produksi') || Auth::user()->is('manager_produksi'))
