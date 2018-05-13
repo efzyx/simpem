@@ -65,14 +65,6 @@
     'Terkirim'
   ];
 @endphp
-<div class="form-group col-sm-12">
-  <div class="col-sm-3">
-    {!! Form::label('', 'Satus') !!}
-  </div>
-  <div class="col-sm-9">
-    <p><a href="{{ route('pemesanans.produksis.pengiriman.index', [$produksi->pemesanan, $produksi]) }}">{!! $status[$produksi->pengirimans->last()->status] !!}</a></p>
-  </div>
-</div>
 
 <!-- User Id Field -->
 <div class="form-group col-sm-12">
