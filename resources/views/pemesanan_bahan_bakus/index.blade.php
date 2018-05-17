@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Pemesanan Bahan Baku</h1>
+        <h1 class="pull-left">Pemesanan Material</h1>
         <h1 class="pull-right">
            <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('supplier.create') !!}">Tambah Baru</a>
         </h1>
@@ -29,7 +29,7 @@
         </div>
         <div class="box box-solid box-primary">
           <div class="box-header">
-            <h3 class="box-title">List Pemesanan</h3>
+            <h3 class="box-title">Rekapitulasi Pemesanan Material</h3>
           </div>
             <div class="box-body">
               <h1 class="pull-left">

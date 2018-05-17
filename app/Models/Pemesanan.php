@@ -49,6 +49,7 @@ class Pemesanan extends Model
 
 
     public $fillable = [
+        'nomor_dokumen',
         'nama_pemesanan',
         'produk_id',
         'volume_pesanan',
@@ -69,6 +70,7 @@ class Pemesanan extends Model
      * @var array
      */
     protected $casts = [
+        'nomor_dokumen' => 'string',
         'nama_pemesanan' => 'string',
         'produk_id' => 'integer',
         'volume_pesanan' => 'integer',
@@ -86,6 +88,7 @@ class Pemesanan extends Model
      * @var array
      */
     public static $rules = [
+        'nomor_dokumen' => 'required|unique:pemesanans',
         'nama_pemesanan' => 'required',
         'produk_id' => 'required',
         'tanggal_pesanan' => 'required|date_format:Y-m-d H:i:s',

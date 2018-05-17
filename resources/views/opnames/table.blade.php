@@ -2,8 +2,8 @@
     <thead>
         <tr>
           <th>#</th>
-            <th>Bahan Baku</th>
-        <th>Volume Opname</th>
+            <th>Material</th>
+        <th>Volume Material Keluar</th>
         <th>Keterangan</th>
         <th>Tanggal Pemakaian</th>
             <th>Action</th>

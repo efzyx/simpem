@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">List Produksi untuk <strong>{{ $pemesanan->nama_pemesanan }}</strong></h1>
+        <h1 class="pull-left">Rekapitulasi Produksi untuk <strong>{{ $pemesanan->nama_pemesanan }}</strong></h1>
         @if (Auth::user()->is('produksi') || Auth::user()->is('manager_produksi'))
           <h1 class="pull-right">
              <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('pemesanans.produksis.create', $pemesanan) !!}">Tambah Baru</a>

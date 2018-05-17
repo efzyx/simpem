@@ -4,9 +4,9 @@
     <p>{!! $bahanBaku->id !!}</p>
 </div>
 
-<!-- Nama Bahan Baku Field -->
+<!-- Nama Material Field -->
 <div class="form-group">
-    {!! Form::label('nama_bahan_baku', 'Nama Bahan Baku:') !!}
+    {!! Form::label('nama_bahan_baku', 'Nama Material:') !!}
     <p>{!! $bahanBaku->nama_bahan_baku !!}</p>
 </div>
 

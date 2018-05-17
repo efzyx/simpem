@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Pemesanan Bahan Baku <small>Edit</small>
+            Pemesanan Material <small>Edit</small>
         </h1>
    </section>
    <div class="content">
@@ -15,7 +15,7 @@
        @include('adminlte-templates::common.errors')
        <div class="box box-solid box-primary">
          <div class="box-header">
-           <h3 class="box-title">Form Edit Pemesanan Bahan Baku</h3>
+           <h3 class="box-title">Form Edit Pemesanan Material</h3>
          </div>
            <div class="box-body">
                <div class="row">

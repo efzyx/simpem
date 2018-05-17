@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Opname</h1>
+        <h1 class="pull-left">Rekapitulasi Material Keluar Diluar Produksi</h1>
         <h1 class="pull-right">
            <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('opnames.create') !!}">Tambah Baru</a>
         </h1>
@@ -15,7 +15,7 @@
         <div class="clearfix"></div>
         <div class="box box-solid box-primary">
           <div class="box-header">
-            <h3 class="box-title">List Opname</h3>
+            <h3 class="box-title">List Material Keluar</h3>
           </div>
             <div class="box-body">
               <div class="table-responsive">

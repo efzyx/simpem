@@ -28,7 +28,7 @@
   <div class="clearfix"></div>
   <div class="box box-solid box-primary">
     <div class="box-header">
-      <h3 class="box-title">List Pemesanan</h3>
+      <h3 class="box-title">Rekapitulasi Pemesanan</h3>
     </div>
     <div class="box-body">
 
@@ -47,7 +47,7 @@
       @endif
 
       @include('pemesanans.table')
-      
+
     </div>
   </div>
   <div class="text-center">

@@ -8,6 +8,16 @@
   </div>
 </div>
 
+<!-- Nomor Dokumen -->
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('nomor_dokumen', 'Nomor Dokumen') !!}
+  </div>
+  <div class="col-sm-9">
+    {!! $pemesanan->nomor_dokumen !!}
+  </div>
+</div>
+
 <!-- Nama Pemesana Field -->
 <div class="form-group col-sm-12">
   <div class="col-sm-3">

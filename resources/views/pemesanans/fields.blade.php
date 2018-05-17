@@ -1,3 +1,9 @@
+<!-- Nomor Dokumen Field -->
+<div class="form-group col-sm-12">
+    {!! Form::label('nomor_dokumen', 'Nomor Dokumen:') !!}
+    {!! Form::text('nomor_dokumen', null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Nama Pemesana Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('nama_pemesanan', 'Nama Pemesanan:') !!}

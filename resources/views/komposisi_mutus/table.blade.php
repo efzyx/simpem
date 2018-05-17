@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <th>Produk Id</th>
-        <th>Bahan Baku Id</th>
+        <th>Material Id</th>
         <th>Volume</th>
             <th colspan="3">Action</th>
         </tr>

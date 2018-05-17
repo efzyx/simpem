@@ -8,6 +8,16 @@
   </div>
 </div>
 
+<!-- Nomor Dokumen Field -->
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('nomor_dokumen', 'Nomor Dokumen') !!}
+  </div>
+  <div class="col-sm-9">
+    <p>{!! $produksi->nomor_dokumen !!}</p>
+  </div>
+</div>
+
 <!-- Pemesanan Id Field -->
 <div class="form-group col-sm-12">
   <div class="col-sm-3">
@@ -15,6 +25,26 @@
   </div>
   <div class="col-sm-9">
     <p>{!! $produksi->pemesanan->nama_pemesanan !!}</p>
+  </div>
+</div>
+
+<!-- Nama Pengirim Field -->
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('nama_pengirim', 'Nama Pengirim') !!}
+  </div>
+  <div class="col-sm-9">
+    <p>{!! $produksi->nama_pengirim !!}</p>
+  </div>
+</div>
+
+<!-- Nama Penerima Field -->
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('nama_penerima', 'Nama Penerima') !!}
+  </div>
+  <div class="col-sm-9">
+    <p>{!! $produksi->nama_penerima !!}</p>
   </div>
 </div>
 
@@ -31,7 +61,7 @@
 <!-- Waktu Produksi Field -->
 <div class="form-group col-sm-12">
   <div class="col-sm-3">
-    {!! Form::label('waktu_produksi', 'Waktu Produksi') !!}
+    {!! Form::label('waktu_produksi', 'Tanggal Pengiriman') !!}
   </div>
   <div class="col-sm-9">
     <p>{!! $produksi->waktu_produksi !!}</p>

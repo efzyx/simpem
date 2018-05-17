@@ -26,7 +26,7 @@ class OpnameController extends AppBaseController
     }
 
     /**
-     * Display a listing of the Opname.
+     * Display a listing of the Material Keluar.
      *
      * @param Request $request
      * @return Response
@@ -35,7 +35,7 @@ class OpnameController extends AppBaseController
     {
         $this->opnameRepository->pushCriteria(new RequestCriteria($request));
         $opnames = $this->opnameRepository->orderBy('id', 'desc')->all();
-        $title = "Opname";
+        $title = "Material Keluar";
 
         return view('opnames.index')
             ->with('opnames', $opnames)
@@ -43,20 +43,20 @@ class OpnameController extends AppBaseController
     }
 
     /**
-     * Show the form for creating a new Opname.
+     * Show the form for creating a new Material Keluar.
      *
      * @return Response
      */
     public function create()
     {
-        $title = "Opname - Tambah";
+        $title = "Material Keluar - Tambah";
         return view('opnames.create')
               ->with('bahanBakus', $this->bahanBakus)
               ->with('title', $title);
     }
 
     /**
-     * Store a newly created Opname in storage.
+     * Store a newly created Material Keluar in storage.
      *
      * @param CreateOpnameRequest $request
      *
@@ -72,7 +72,7 @@ class OpnameController extends AppBaseController
         $bahan_baku->sisa -= $opname->volume_opname;
 
         if ($bahan_baku->sisa <= 0) {
-            Flash::error('Bahan Baku Kurang');
+            Flash::error('Material Kurang');
             return redirect()->back()->withInput($input);
         }
 
@@ -86,13 +86,13 @@ class OpnameController extends AppBaseController
         $history->total_sisa = $bahan_baku->sisa;
         $history->save();
 
-        Flash::success('Opname saved successfully.');
+        Flash::success('Material Keluar saved successfully.');
 
         return redirect(route('opnames.index'));
     }
 
     /**
-     * Display the specified Opname.
+     * Display the specified Material Keluar.
      *
      * @param  int $id
      *
@@ -101,10 +101,10 @@ class OpnameController extends AppBaseController
     public function show($id)
     {
         $opname = $this->opnameRepository->findWithoutFail($id);
-        $title = "Opname - Lihat";
+        $title = "Material Keluar - Lihat";
 
         if (empty($opname)) {
-            Flash::error('Opname not found');
+            Flash::error('Material Keluar not found');
 
             return redirect(route('opnames.index'));
         }
@@ -113,7 +113,7 @@ class OpnameController extends AppBaseController
     }
 
     /**
-     * Show the form for editing the specified Opname.
+     * Show the form for editing the specified Material Keluar.
      *
      * @param  int $id
      *
@@ -122,10 +122,10 @@ class OpnameController extends AppBaseController
     public function edit($id)
     {
         $opname = $this->opnameRepository->findWithoutFail($id);
-        $title = "Opname - Edit";
+        $title = "Material Keluar - Edit";
 
         if (empty($opname)) {
-            Flash::error('Opname not found');
+            Flash::error('Material Keluar not found');
 
             return redirect(route('opnames.index'));
         }
@@ -137,7 +137,7 @@ class OpnameController extends AppBaseController
     }
 
     /**
-     * Update the specified Opname in storage.
+     * Update the specified Material Keluar in storage.
      *
      * @param  int              $id
      * @param UpdateOpnameRequest $request
@@ -153,7 +153,7 @@ class OpnameController extends AppBaseController
 
 
         if (empty($opname)) {
-            Flash::error('Opname not found');
+            Flash::error('Material Keluar not found');
 
             return redirect(route('opnames.index'));
         }
@@ -161,7 +161,7 @@ class OpnameController extends AppBaseController
         $bahan_baku->sisa -= $input['volume_opname'] - $old_volume;
 
         if ($bahan_baku->sisa <= 0) {
-            Flash::error('Bahan Baku Kurang');
+            Flash::error('Material Kurang');
             return redirect()->back()->withInput($input);
         }
 
@@ -178,13 +178,13 @@ class OpnameController extends AppBaseController
         $history->update();
 
 
-        Flash::success('Opname updated successfully.');
+        Flash::success('Material Keluar updated successfully.');
 
         return redirect(route('opnames.index'));
     }
 
     /**
-     * Remove the specified Opname from storage.
+     * Remove the specified Material Keluar from storage.
      *
      * @param  int $id
      *
@@ -200,14 +200,14 @@ class OpnameController extends AppBaseController
         $bahan_baku->update();
 
         if (empty($opname)) {
-            Flash::error('Opname not found');
+            Flash::error('Material Keluar not found');
 
             return redirect(route('opnames.index'));
         }
 
         $this->opnameRepository->delete($id);
 
-        Flash::success('Opname deleted successfully.');
+        Flash::success('Material Keluar deleted successfully.');
 
         return redirect(route('opnames.index'));
     }

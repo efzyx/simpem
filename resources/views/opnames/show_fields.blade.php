@@ -1,17 +1,17 @@
-<!-- Bahan Baku Id Field -->
+<!-- Material Id Field -->
 <div class="form-group col-sm-12">
     <div class="col-sm-3">
-    {!! Form::label('bahan_baku_id', 'Bahan Baku:') !!}
+    {!! Form::label('bahan_baku_id', 'Material:') !!}
   </div>
   <div class="col-sm-9">
     {!! $opname->bahan_baku->nama_bahan_baku !!}
   </div>
 </div>
 
-<!-- Volume Opname Field -->
+<!-- Volume Material Keluar Field -->
 <div class="form-group col-sm-12">
     <div class="col-sm-3">
-    {!! Form::label('volume_opname', 'Volume Opname:') !!}
+    {!! Form::label('volume_opname', 'Volume Material Keluar:') !!}
   </div>
   <div class="col-sm-9">
     {!! $opname->volume_opname !!}

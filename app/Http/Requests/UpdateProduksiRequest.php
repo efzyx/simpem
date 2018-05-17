@@ -25,6 +25,12 @@ class UpdateProduksiRequest extends FormRequest
      */
     public function rules()
     {
+        $produksi = Produksi::where('nomor_dokumen', request()->nomor_dokumen)->first();
+
+        if ($produksi) {
+            Produksi::$rules['nomor_dokumen'] = 'required|unique:produksis,nomor_dokumen,'.$produksi->id.',id';
+        }
+
         return Produksi::$rules;
     }
 }

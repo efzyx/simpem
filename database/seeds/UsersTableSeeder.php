@@ -22,5 +22,41 @@ class UsersTableSeeder extends Seeder
         $user->save();
         $admin = Jabatan::getJabatan('admin');
         $user->jabatan()->associate($admin)->save();
+
+        $user = new User();
+        $user->name = "Logistik";
+        $user->email = 'logistik@admin.com';
+        $user->password = bcrypt('secret');
+        $user->remember_token = str_random(10);
+        $user->save();
+        $admin = Jabatan::getJabatan('logistik');
+        $user->jabatan()->associate($admin)->save();
+
+        $user = new User();
+        $user->name = "Marketing";
+        $user->email = 'marketing@admin.com';
+        $user->password = bcrypt('secret');
+        $user->remember_token = str_random(10);
+        $user->save();
+        $admin = Jabatan::getJabatan('marketing');
+        $user->jabatan()->associate($admin)->save();
+
+        $user = new User();
+        $user->name = "Produksi";
+        $user->email = 'produksi@admin.com';
+        $user->password = bcrypt('secret');
+        $user->remember_token = str_random(10);
+        $user->save();
+        $admin = Jabatan::getJabatan('produksi');
+        $user->jabatan()->associate($admin)->save();
+
+        $user = new User();
+        $user->name = "Manager Produksi";
+        $user->email = 'mapro@admin.com';
+        $user->password = bcrypt('secret');
+        $user->remember_token = str_random(10);
+        $user->save();
+        $admin = Jabatan::getJabatan('manager_produksi');
+        $user->jabatan()->associate($admin)->save();
     }
 }

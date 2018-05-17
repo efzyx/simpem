@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Cetak Daftar Pemesanan Bahan Baku</title>
+    <title>Cetak Daftar Pemesanan Material</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
   <body>
-      <h1 class="text-center">Penerimaan Bahan Baku</h1>
+      <h1 class="text-center">Penerimaan Material</h1>
       <br><br>
           @foreach ($suppliers as $supplier)
           @php
@@ -29,7 +29,7 @@
                 <td>{!! $supplier->nama_supplier !!}</td>
               </tr>
               <tr>
-                <td><strong>Nama Bahan Baku</strong></td>
+                <td><strong>Nama Material</strong></td>
                 <td>:</td>
                 <td>{!! $bahan_baku[$supplier->bahan_baku_id] !!}</td>
               </tr>

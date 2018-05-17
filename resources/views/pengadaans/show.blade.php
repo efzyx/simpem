@@ -3,13 +3,13 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Penerimaan Bahan Baku <small>Show</small>
+            Penerimaan Material <small>Show</small>
         </h1>
     </section>
     <div class="content">
       <div class="box box-solid box-primary">
         <div class="box-header">
-          <h3 class="box-title">Detail Penerimaan Bahan Baku</h3>
+          <h3 class="box-title">Detail Penerimaan Material</h3>
         </div>
             <div class="box-body">
                 <div class="row" style="padding-left: 20px">

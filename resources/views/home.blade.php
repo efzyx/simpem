@@ -19,7 +19,7 @@
       <div class="col-md-7">
         <div class="box box-solid box-primary">
           <div class="box-header">
-            <h3 class="box-title">Status Bahan Baku</h3>
+            <h3 class="box-title">Status Material</h3>
           </div>
           <div class="box-body">
             <div class="row">

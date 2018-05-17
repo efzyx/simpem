@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Penerimaan Bahan Baku <strong>{{ $supplier->bahan_baku->nama_bahan_baku }} ({{ $supplier->nama_supplier }})</strong> <small>Tambah</small>
+            Penerimaan Material <strong>{{ $supplier->bahan_baku->nama_bahan_baku }} ({{ $supplier->nama_supplier }})</strong> <small>Tambah</small>
         </h1>
     </section>
     <div class="content">
@@ -15,7 +15,7 @@
         @include('adminlte-templates::common.errors')
         <div class="box box-solid box-primary">
           <div class="box-header">
-            <h3 class="box-title">Form Tambah Penerimaan Bahan Baku</h3>
+            <h3 class="box-title">Form Tambah Penerimaan Material</h3>
           </div>
 
             <div class="box-body">

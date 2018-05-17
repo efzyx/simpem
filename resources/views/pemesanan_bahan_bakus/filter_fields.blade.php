@@ -13,8 +13,8 @@
 </div>
 
 <div class="form-group col-sm-6">
-  {!! Form::label('bahan_baku', 'Bahan Baku:') !!}
-  {!! Form::select('bahan_baku', ['1' => 'Semen','2'=>'Air','3'=>'Pasir','4'=>'Split','5'=>'Addictive'], null, ['class' => 'form-control', 'placeholder' => '- Pilih Bahan Baku -'])!!}
+  {!! Form::label('bahan_baku', 'Material:') !!}
+  {!! Form::select('bahan_baku', ['1' => 'Semen','2'=>'Air','3'=>'Pasir','4'=>'Split','5'=>'Addictive'], null, ['class' => 'form-control', 'placeholder' => '- Pilih Material -'])!!}
 </div>
 
 <div class="form-group col-sm-12">

@@ -17,7 +17,7 @@
 
 @if (Auth::user()->is('manager_produksi') || Auth::user()->is('admin') || Auth::user()->is('marketing'))
   <li class="{{ Request::is('produks*') && !Request::is('produksis*') ? 'active' : '' }}">
-      <a href="{!! route('produks.index') !!}"><i class="fa fa-industry"></i><span>Produk</span></a>
+      <a href="{!! route('produks.index') !!}"><i class="fa fa-industry"></i><span>Job Mix Formula</span></a>
   </li>
 @endif
 
@@ -49,15 +49,9 @@
           </li>
 @endif
 
-@if (Auth::user()->is('manager_produksi') || Auth::user()->is('admin'))
+@if (Auth::user()->is('manager_produksi') || Auth::user()->is('admin') || Auth::user()->is('logistik'))
   <li class="{{ Request::is('opnames*') ? 'active' : '' }}">
-      <a href="{!! route('opnames.index') !!}"><i class="fa fa-search-minus"></i><span>Opname</span></a>
-  </li>
-@endif
-
-@if (Auth::user()->is('produksi'))
-  <li class="{{ Request::is('kendaraans*') ? 'active' : '' }}">
-      <a href="{!! route('kendaraans.index') !!}"><i class="fa fa-truck"></i><span>Kendaraan</span></a>
+      <a href="{!! route('opnames.index') !!}"><i class="fa fa-search-minus"></i><span>Material Keluar</span></a>
   </li>
 @endif
 
@@ -81,7 +75,7 @@
 
           @if (Auth::user()->is('logistik') || Auth::user()->is('admin') || Auth::user()->is('manager_produksi'))
             <li class="{{ Request::is('bahanBakus*') ? 'active' : '' }}">
-                <a href="{!! route('bahanBakus.index') !!}"><i class="fa fa-circle-o"></i>Bahan Baku</a>
+                <a href="{!! route('bahanBakus.index') !!}"><i class="fa fa-circle-o"></i>Material</a>
             </li>
           @endif
 
@@ -97,6 +91,16 @@
     </li>
 @endif
 
-<li class="{{ Request::is('bahanBakuHistories*') ? 'active' : '' }}">
-    <a href="{!! route('bahanBakuHistories.index') !!}"><i class="fa fa-list"></i><span>Histori Bahan Baku</span></a>
-</li>
+@if (Auth::user()->is('logistik'))
+  <li class="{{ Request::is('kendaraans*') ? 'active' : '' }}">
+      <a href="{!! route('kendaraans.index') !!}"><i class="fa fa-truck"></i><span>Kendaraan</span></a>
+  </li>
+@endif
+
+@if (Auth::user()->is('admin') || Auth::user()->is('manager_produksi') || Auth::user()->is('logistik'))
+
+  <li class="{{ Request::is('bahanBakuHistories*') ? 'active' : '' }}">
+      <a href="{!! route('bahanBakuHistories.index') !!}"><i class="fa fa-list"></i><span>Histori Material</span></a>
+  </li>
+
+@endif

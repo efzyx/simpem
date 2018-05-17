@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
   <body>
-      <h1 class="text-center">List Produksi</h1>
+      <h1 class="text-center">Rekapitulasi Produksi</h1>
       <br><br>
           @foreach ($pemesanans as $pemesanan)
           @php

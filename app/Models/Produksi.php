@@ -40,6 +40,9 @@ class Produksi extends Model
 
 
     public $fillable = [
+        'nomor_dokumen',
+        'nama_pengirim',
+        'nama_penerima',
         'pemesanan_id',
         'volume',
         'waktu_produksi',
@@ -54,6 +57,9 @@ class Produksi extends Model
      * @var array
      */
     protected $casts = [
+        'nomor_dokumen' => 'string',
+        'nama_pengirim' => 'string',
+        'nama_penerima' => 'string',
         'pemesanan_id' => 'integer',
         'volume' => 'double',
         'supir_id' => 'integer',
@@ -66,6 +72,9 @@ class Produksi extends Model
      * @var array
      */
     public static $rules = [
+        'nomor_dokumen' => 'required|unique:produksis',
+        'nama_pengirim' => 'required',
+        'nama_penerima' => 'required',
         'pemesanan_id' => 'required',
         'volume' => 'required',
         'supir_id' => 'required',

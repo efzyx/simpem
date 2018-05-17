@@ -1,6 +1,24 @@
 
 {!! Form::hidden('pemesanan_id', $pemesanan->id) !!}
 
+<!-- Nomor Dokumen Field -->
+<div class="form-group col-sm-12">
+    {!! Form::label('nomor_dokumen', 'Nomor Dokumen:') !!}
+    {!! Form::text('nomor_dokumen', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Nama Pengirim Field -->
+<div class="form-group col-sm-12">
+    {!! Form::label('nama_pengirim', 'Nama Pengirim:') !!}
+    {!! Form::text('nama_pengirim', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Nama Penerima Field -->
+<div class="form-group col-sm-12">
+    {!! Form::label('nama_penerima', 'Nama Penerima:') !!}
+    {!! Form::text('nama_penerima', null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Volume Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('volume', 'Volume:') !!}
@@ -9,7 +27,7 @@
 
 <!-- Waktu Produksi Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('waktu_produksi', 'Waktu Produksi:') !!}
+    {!! Form::label('waktu_produksi', 'Tanggal Pengiriman:') !!}
     {!! Form::text('waktu_produksi', null, ['class' => 'form-control datetimepicker'])!!}
 </div>
 

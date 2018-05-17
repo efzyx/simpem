@@ -4,9 +4,9 @@
     {!! Form::text('produk_id', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Bahan Baku Id Field -->
+<!-- Material Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('bahan_baku_id', 'Bahan Baku Id:') !!}
+    {!! Form::label('bahan_baku_id', 'Material Id:') !!}
     {!! Form::text('bahan_baku_id', null, ['class' => 'form-control']) !!}
 </div>
 
