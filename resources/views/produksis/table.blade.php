@@ -5,7 +5,7 @@
       <th>Pemesanan</th>
       <th>Kendaraan</th>
       <th>Volume</th>
-      <th>Waktu Produksi</th>
+      <th>Pengiriman</th>
       <th>Action</th>
     </tr>
   </thead>

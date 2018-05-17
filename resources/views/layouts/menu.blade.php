@@ -55,7 +55,7 @@
   </li>
 @endif
 
-@if (Auth::user()->is('produksi'))
+@if (Auth::user()->is('admin') || Auth::user()->is('manager_produksi'))
   <li class="{{ Request::is('kendaraans*') ? 'active' : '' }}">
       <a href="{!! route('kendaraans.index') !!}"><i class="fa fa-truck"></i><span>Kendaraan</span></a>
   </li>
@@ -97,6 +97,10 @@
     </li>
 @endif
 
-<li class="{{ Request::is('bahanBakuHistories*') ? 'active' : '' }}">
-    <a href="{!! route('bahanBakuHistories.index') !!}"><i class="fa fa-list"></i><span>Histori Bahan Baku</span></a>
-</li>
+@if (Auth::user()->is('admin') || Auth::user()->is('manager_produksi'))
+
+  <li class="{{ Request::is('bahanBakuHistories*') ? 'active' : '' }}">
+      <a href="{!! route('bahanBakuHistories.index') !!}"><i class="fa fa-list"></i><span>Histori Bahan Baku</span></a>
+  </li>
+
+@endif
