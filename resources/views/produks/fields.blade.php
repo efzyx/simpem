@@ -11,7 +11,7 @@
     <hr>
 </div>
 <div class="form-group col-sm-12">
-  {!! Form::label(null, 'Volume Bahan Baku per Kg/m3 :') !!}
+  {!! Form::label(null, 'Volume Material per Kg/m3 :') !!}
   <br>
 </div>
 

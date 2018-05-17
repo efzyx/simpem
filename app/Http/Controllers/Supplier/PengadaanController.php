@@ -44,7 +44,7 @@ class PengadaanController extends AppBaseController
     {
         $this->pengadaanRepository->pushCriteria(new RequestCriteria($request));
         $pengadaans = $supplier->pengadaans;
-        $title = "Penerimaan Bahan Baku";
+        $title = "Penerimaan Material";
         return view('pemesanan_bahan_bakus.pengadaans.index')
           ->with('pengadaans', $pengadaans)
           ->with('title', $title)
@@ -58,7 +58,7 @@ class PengadaanController extends AppBaseController
      */
     public function create(PemesananBahanBaku $supplier)
     {
-        $title = "Penerimaan Bahan Baku - Tambah";
+        $title = "Penerimaan Material - Tambah";
         return view('pemesanan_bahan_bakus.pengadaans.create')
           ->with('bahanBakus', $this->bahanBakus)
           ->with('title', $title)
@@ -101,7 +101,7 @@ class PengadaanController extends AppBaseController
         $history->save();
 
 
-        Flash::success('Penerimaan Bahan Baku saved successfully.');
+        Flash::success('Penerimaan Material saved successfully.');
 
         return redirect(route('supplier.pengadaans.index', $supplier));
     }
@@ -116,10 +116,10 @@ class PengadaanController extends AppBaseController
     public function show(PemesananBahanBaku $supplier, $id)
     {
         $pengadaan = $this->pengadaanRepository->findWithoutFail($id);
-        $title = "Penerimaan Bahan Baku - Lihat";
+        $title = "Penerimaan Material - Lihat";
 
         if (empty($pengadaan)) {
-            Flash::error('Penerimaan Bahan Baku not found');
+            Flash::error('Penerimaan Material not found');
 
             return redirect(route('supplier.pengadaans.index'));
         }
@@ -140,9 +140,9 @@ class PengadaanController extends AppBaseController
     public function edit(PemesananBahanBaku $supplier, $id)
     {
         $pengadaan = $this->pengadaanRepository->findWithoutFail($id);
-        $title = "Penerimaan Bahan Baku - Edit";
+        $title = "Penerimaan Material - Edit";
         if (empty($pengadaan)) {
-            Flash::error('Penerimaan Bahan Baku not found');
+            Flash::error('Penerimaan Material not found');
 
             return redirect(route('supplier.pengadaans.index'));
         }
@@ -184,7 +184,7 @@ class PengadaanController extends AppBaseController
         $old_volume = $pengadaan->berat;
 
         if (empty($pengadaan)) {
-            Flash::error('Penerimaan Bahan Baku not found');
+            Flash::error('Penerimaan Material not found');
 
             return redirect(route('supplier.pengadaans.index'));
         }
@@ -202,7 +202,7 @@ class PengadaanController extends AppBaseController
         $history->total_sisa = $bahan_baku->sisa;
         $history->update();
 
-        Flash::success('Penerimaan Bahan Baku updated successfully.');
+        Flash::success('Penerimaan Material updated successfully.');
 
         return redirect(route('supplier.pengadaans.index', $supplier));
     }
@@ -224,14 +224,14 @@ class PengadaanController extends AppBaseController
         $bahan_baku->save();
 
         if (empty($pengadaan)) {
-            Flash::error('Penerimaan Bahan Baku not found');
+            Flash::error('Penerimaan Material not found');
 
             return redirect()->back();
         }
 
         $this->pengadaanRepository->delete($id);
 
-        Flash::success('Penerimaan Bahan Baku deleted successfully.');
+        Flash::success('Penerimaan Material deleted successfully.');
 
         return redirect()->back();
     }

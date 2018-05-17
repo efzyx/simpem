@@ -4,10 +4,10 @@
     <p>{!! $bahanBakuHistory->id !!}</p>
 </div>
 
-<!-- Bahan Baku Id Field -->
+<!-- Material Id Field -->
 <div class="form-group">
-    {!! Form::label('bahan_baku_id', 'Bahan Baku Id:') !!}
-    <p>{!! $bahanBakuHistory->bahan_baku_id !!}</p>
+    {!! Form::label('bahan_baku_id', 'Material:') !!}
+    <p>{!! $bahanBakuHistory->bahan_baku->nama_bahan_baku !!}</p>
 </div>
 
 <!-- Type Field -->
@@ -28,9 +28,9 @@
     <p>{!! $bahanBakuHistory->produksi_id !!}</p>
 </div>
 
-<!-- Opname Id Field -->
+<!-- Material Keluar Id Field -->
 <div class="form-group">
-    {!! Form::label('opname_id', 'Opname Id:') !!}
+    {!! Form::label('opname_id', 'Material Keluar Id:') !!}
     <p>{!! $bahanBakuHistory->opname_id !!}</p>
 </div>
 
@@ -51,4 +51,3 @@
     {!! Form::label('updated_at', 'Updated At:') !!}
     <p>{!! $bahanBakuHistory->updated_at !!}</p>
 </div>
-

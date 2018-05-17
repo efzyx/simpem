@@ -2,7 +2,7 @@
     <thead>
         <tr>
           <th>#</th>
-            <th>Nama Bahan Baku</th>
+            <th>Nama Material</th>
         <th>Satuan</th>
         <th>Sisa</th>
             <th>Action</th>

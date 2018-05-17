@@ -9,7 +9,7 @@
         <div class="clearfix"></div>
         <div class="box box-solid box-primary">
           <div class="box-header">
-            <h3 class="box-title">List Status Kendaraan <strong>{{ $kendaraan->jenis_kendaraan }} ({{ $kendaraan->no_polisi }})</strong></h3>
+            <h3 class="box-title">Rekapitulasi Status Kendaraan <strong>{{ $kendaraan->jenis_kendaraan }} ({{ $kendaraan->no_polisi }})</strong></h3>
           </div>
             <div class="box-body">
               <div class="table-responsive">

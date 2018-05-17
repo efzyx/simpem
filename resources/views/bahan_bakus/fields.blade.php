@@ -1,6 +1,6 @@
-<!-- Nama Bahan Baku Field -->
+<!-- Nama Material Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('nama_bahan_baku', 'Nama Bahan Baku:') !!}
+    {!! Form::label('nama_bahan_baku', 'Nama Material:') !!}
     {!! Form::text('nama_bahan_baku', null, ['class' => 'form-control']) !!}
 </div>
 

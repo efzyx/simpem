@@ -32,7 +32,7 @@ class BahanBakuController extends AppBaseController
     {
         $this->bahanBakuRepository->pushCriteria(new RequestCriteria($request));
         $bahanBakus = $this->bahanBakuRepository->all();
-        $title = "Bahan Baku";
+        $title = "Material";
 
         return view('bahan_bakus.index')
               ->with('bahanBakus', $bahanBakus)
@@ -46,7 +46,7 @@ class BahanBakuController extends AppBaseController
      */
     public function create()
     {
-        $title = "Bahan Baku - Tambah";
+        $title = "Material - Tambah";
         return view('bahan_bakus.create')
               ->with('title', $title);
     }
@@ -65,7 +65,7 @@ class BahanBakuController extends AppBaseController
 
         $bahanBaku = $this->bahanBakuRepository->create($input);
 
-        Flash::success('Bahan Baku saved successfully.');
+        Flash::success('Material saved successfully.');
 
         return redirect(route('bahanBakus.index'));
     }
@@ -80,10 +80,10 @@ class BahanBakuController extends AppBaseController
     public function show($id)
     {
         $bahanBaku = $this->bahanBakuRepository->findWithoutFail($id);
-        $title = "Bahan Baku - Lihat";
+        $title = "Material - Lihat";
 
         if (empty($bahanBaku)) {
-            Flash::error('Bahan Baku not found');
+            Flash::error('Material not found');
 
             return redirect(route('bahanBakus.index'));
         }
@@ -103,10 +103,10 @@ class BahanBakuController extends AppBaseController
     public function edit($id)
     {
         $bahanBaku = $this->bahanBakuRepository->findWithoutFail($id);
-        $title = "Bahan Baku - Edit";
+        $title = "Material - Edit";
 
         if (empty($bahanBaku)) {
-            Flash::error('Bahan Baku not found');
+            Flash::error('Material not found');
 
             return redirect(route('bahanBakus.index'));
         }
@@ -129,14 +129,14 @@ class BahanBakuController extends AppBaseController
         $bahanBaku = $this->bahanBakuRepository->findWithoutFail($id);
 
         if (empty($bahanBaku)) {
-            Flash::error('Bahan Baku not found');
+            Flash::error('Material not found');
 
             return redirect(route('bahanBakus.index'));
         }
 
         $bahanBaku = $this->bahanBakuRepository->update($request->all(), $id);
 
-        Flash::success('Bahan Baku updated successfully.');
+        Flash::success('Material updated successfully.');
 
         return redirect(route('bahanBakus.index'));
     }
@@ -153,14 +153,14 @@ class BahanBakuController extends AppBaseController
         $bahanBaku = $this->bahanBakuRepository->findWithoutFail($id);
 
         if (empty($bahanBaku)) {
-            Flash::error('Bahan Baku not found');
+            Flash::error('Material not found');
 
             return redirect(route('bahanBakus.index'));
         }
 
         $this->bahanBakuRepository->delete($id);
 
-        Flash::success('Bahan Baku deleted successfully.');
+        Flash::success('Material deleted successfully.');
 
         return redirect(route('bahanBakus.index'));
     }

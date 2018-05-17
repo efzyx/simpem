@@ -3,7 +3,7 @@
         <tr>
         <th>#</th>
         <th>Supplier</th>
-        <th>Bahan Baku</th>
+        <th>Material</th>
         <th>Volume</th>
         <th>Sisa</th>
         <th>Tanggal</th>

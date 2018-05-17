@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Cetak Daftar Pemesanan Bahan Baku</title>
+    <title>Cetak Daftar Pemesanan Material</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
   <body>
-      <h1 class="text-center">Pemesanan Bahan Baku</h1>
+      <h1 class="text-center">Pemesanan Material</h1>
       <br><br>
       <table class="table table-bordered">
           <thead>
@@ -14,7 +14,7 @@
               <th>No</th>
               <th>Nama Supplier</th>
               <th>CP Supplier</th>
-              <th>Bahan Baku</th>
+              <th>Material</th>
               <th>Volume</th>
               <th>Diterima</th>
               <th>Sisa</th>

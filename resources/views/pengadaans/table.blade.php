@@ -2,7 +2,7 @@
     <thead>
         <tr>
         <th>#</th>
-        <th>Bahan Baku</th>
+        <th>Material</th>
         <th>Berat</th>
         <th>Supplier</th>
         <th>Supir</th>

@@ -10,10 +10,10 @@
     {!! Form::number('cp_supplier', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Bahan Baku Id Field -->
+<!-- Material Id Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('bahan_baku_id', 'Bahan Baku:') !!}
-    {!! Form::select('bahan_baku_id', $bahanBakus, null, ['class' => 'form-control', 'placeholder' => 'Pilih Bahan Baku ..']) !!}
+    {!! Form::label('bahan_baku_id', 'Material:') !!}
+    {!! Form::select('bahan_baku_id', $bahanBakus, null, ['class' => 'form-control', 'placeholder' => 'Pilih Material ..']) !!}
 </div>
 
 <!-- Volume Pemesanan Field -->

@@ -1,12 +1,12 @@
-<!-- Bahan Baku Id Field -->
+<!-- Material Id Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('bahan_baku_id', 'Bahan Baku:') !!}
+    {!! Form::label('bahan_baku_id', 'Material:') !!}
     {!! Form::select('bahan_baku_id', $bahanBakus, null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Volume Opname Field -->
+<!-- Volume Material Keluar Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('volume_opname', 'Volume Opname:') !!}
+    {!! Form::label('volume_opname', 'Volume Material Keluar:') !!}
     {!! Form::number('volume_opname', null, ['class' => 'form-control', 'step' => 'any']) !!}
 </div>
 

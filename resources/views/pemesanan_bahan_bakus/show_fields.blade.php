@@ -18,10 +18,10 @@
   </div>
 </div>
 
-<!-- Bahan Baku Id Field -->
+<!-- Material Id Field -->
 <div class="form-group col-sm-12">
   <div class="col-sm-3">
-    {!! Form::label('bahan_baku_id', 'Bahan Baku') !!}
+    {!! Form::label('bahan_baku_id', 'Material') !!}
   </div>
   <div class="col-sm-9">
     {!!$pemesananBahanBaku->bahan_baku->nama_bahan_baku  !!}

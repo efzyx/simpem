@@ -10,9 +10,9 @@
     <p>{!! $komposisiMutu->produk_id !!}</p>
 </div>
 
-<!-- Bahan Baku Id Field -->
+<!-- Material Id Field -->
 <div class="form-group">
-    {!! Form::label('bahan_baku_id', 'Bahan Baku Id:') !!}
+    {!! Form::label('bahan_baku_id', 'Material Id:') !!}
     <p>{!! $komposisiMutu->bahan_baku_id !!}</p>
 </div>
 

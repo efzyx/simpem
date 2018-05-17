@@ -39,7 +39,7 @@ class PemesananBahanBakuController extends AppBaseController
     {
         $this->pemesananBahanBakuRepository->pushCriteria(new RequestCriteria($request));
         $pemesananBahanBakus = $this->pemesananBahanBakuRepository->orderBy('id', 'desc')->all();
-        $title = 'Pemesanan Bahan Baku';
+        $title = 'Pemesanan Material';
 
         return view('pemesanan_bahan_bakus.index')
             ->with('pemesananBahanBakus', $pemesananBahanBakus)
@@ -72,7 +72,7 @@ class PemesananBahanBakuController extends AppBaseController
         });
 
 
-        $title = 'Pemesanan Bahan Baku - Filter';
+        $title = 'Pemesanan Material - Filter';
 
         return view('pemesanan_bahan_bakus.index')
               ->with('pemesananBahanBakus', $suppliers)
@@ -86,7 +86,7 @@ class PemesananBahanBakuController extends AppBaseController
      */
     public function create()
     {
-        $title = 'Pemesanan Bahan Baku - Tambah';
+        $title = 'Pemesanan Material - Tambah';
         return view('pemesanan_bahan_bakus.create')
                 ->with('bahanBakus', $this->bahanBakus)
                 ->with('title', $title);
@@ -106,7 +106,7 @@ class PemesananBahanBakuController extends AppBaseController
 
         $pemesananBahanBaku = $this->pemesananBahanBakuRepository->create($input);
 
-        Flash::success('Pemesanan Bahan Baku saved successfully.');
+        Flash::success('Pemesanan Material saved successfully.');
 
         return redirect(route('supplier.index'));
     }
@@ -121,9 +121,9 @@ class PemesananBahanBakuController extends AppBaseController
     public function show($id)
     {
         $pemesananBahanBaku = $this->pemesananBahanBakuRepository->findWithoutFail($id);
-        $title = 'Pemesanan Bahan Baku - Lihat';
+        $title = 'Pemesanan Material - Lihat';
         if (empty($pemesananBahanBaku)) {
-            Flash::error('Pemesanan Bahan Baku not found');
+            Flash::error('Pemesanan Material not found');
 
             return redirect(route('supplier.index'));
         }
@@ -145,11 +145,11 @@ class PemesananBahanBakuController extends AppBaseController
         $pemesananBahanBaku = $this->pemesananBahanBakuRepository->findWithoutFail($id);
 
         if (empty($pemesananBahanBaku)) {
-            Flash::error('Pemesanan Bahan Baku not found');
+            Flash::error('Pemesanan Material not found');
 
             return redirect(route('supplier.index'));
         }
-        $title = 'Pemesanan Bahan Baku - Lihat';
+        $title = 'Pemesanan Material - Lihat';
 
         return view('pemesanan_bahan_bakus.edit')
                 ->with('bahanBakus', $this->bahanBakus)
@@ -171,14 +171,14 @@ class PemesananBahanBakuController extends AppBaseController
         $request['user_id'] = Auth::user()->id;
 
         if (empty($pemesananBahanBaku)) {
-            Flash::error('Pemesanan Bahan Baku not found');
+            Flash::error('Pemesanan Material not found');
 
             return redirect(route('supplier.index'));
         }
 
         $pemesananBahanBaku = $this->pemesananBahanBakuRepository->update($request->all(), $id);
 
-        Flash::success('Pemesanan Bahan Baku updated successfully.');
+        Flash::success('Pemesanan Material updated successfully.');
 
         return redirect(route('supplier.index'));
     }
@@ -195,14 +195,14 @@ class PemesananBahanBakuController extends AppBaseController
         $pemesananBahanBaku = $this->pemesananBahanBakuRepository->findWithoutFail($id);
 
         if (empty($pemesananBahanBaku)) {
-            Flash::error('Pemesanan Bahan Baku not found');
+            Flash::error('Pemesanan Material not found');
 
             return redirect()->back();
         }
 
         $this->pemesananBahanBakuRepository->delete($id);
 
-        Flash::success('Pemesanan Bahan Baku deleted successfully.');
+        Flash::success('Pemesanan Material deleted successfully.');
 
         return redirect()->back();
     }

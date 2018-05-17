@@ -3,14 +3,14 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Bahan Baku <small>Tambah</small>
+            Material <small>Tambah</small>
         </h1>
     </section>
     <div class="content">
         @include('adminlte-templates::common.errors')
         <div class="box box-solid box-primary">
           <div class="box-header">
-            <h3 class="box-title">Form Tambah Bahan Baku</h3>
+            <h3 class="box-title">Form Tambah Material</h3>
           </div>
 
             <div class="box-body">

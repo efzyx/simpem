@@ -32,7 +32,7 @@ class BahanBakuHistoryController extends AppBaseController
     {
         $this->bahanBakuHistoryRepository->pushCriteria(new RequestCriteria($request));
         $bahanBakuHistories = $this->bahanBakuHistoryRepository->orderBy('id', 'desc')->all();
-        $title = "Riwayat Bahan Baku";
+        $title = "Riwayat Material";
 
         return view('bahan_baku_histories.index')
               ->with('bahanBakuHistories', $bahanBakuHistories)
@@ -65,7 +65,7 @@ class BahanBakuHistoryController extends AppBaseController
                    $history;
         });
 
-        $title = 'Riwayat Bahan Baku - Filter';
+        $title = 'Riwayat Material - Filter';
 
         return view('bahan_baku_histories.index')
         ->with('bahanBakuHistories', $histories)
@@ -79,7 +79,7 @@ class BahanBakuHistoryController extends AppBaseController
      */
     public function create()
     {
-        $title = "Riwayat Bahan Baku - Tambah";
+        $title = "Riwayat Material - Tambah";
         return view('bahan_baku_histories.create')
               ->with('title', $title);
     }
@@ -97,7 +97,7 @@ class BahanBakuHistoryController extends AppBaseController
 
         $bahanBakuHistory = $this->bahanBakuHistoryRepository->create($input);
 
-        Flash::success('Bahan Baku History saved successfully.');
+        Flash::success('Material History saved successfully.');
 
         return redirect(route('bahanBakuHistories.index'));
     }
@@ -112,10 +112,10 @@ class BahanBakuHistoryController extends AppBaseController
     public function show($id)
     {
         $bahanBakuHistory = $this->bahanBakuHistoryRepository->findWithoutFail($id);
-        $title = "Riwayat Bahan Baku - Lihat";
+        $title = "Riwayat Material - Lihat";
 
         if (empty($bahanBakuHistory)) {
-            Flash::error('Bahan Baku History not found');
+            Flash::error('Material History not found');
 
             return redirect(route('bahanBakuHistories.index'));
         }
@@ -135,10 +135,10 @@ class BahanBakuHistoryController extends AppBaseController
     public function edit($id)
     {
         $bahanBakuHistory = $this->bahanBakuHistoryRepository->findWithoutFail($id);
-        $title = "Riwayat Bahan Baku - Edit";
+        $title = "Riwayat Material - Edit";
 
         if (empty($bahanBakuHistory)) {
-            Flash::error('Bahan Baku History not found');
+            Flash::error('Material History not found');
 
             return redirect(route('bahanBakuHistories.index'));
         }
@@ -161,14 +161,14 @@ class BahanBakuHistoryController extends AppBaseController
         $bahanBakuHistory = $this->bahanBakuHistoryRepository->findWithoutFail($id);
 
         if (empty($bahanBakuHistory)) {
-            Flash::error('Bahan Baku History not found');
+            Flash::error('Material History not found');
 
             return redirect(route('bahanBakuHistories.index'));
         }
 
         $bahanBakuHistory = $this->bahanBakuHistoryRepository->update($request->all(), $id);
 
-        Flash::success('Bahan Baku History updated successfully.');
+        Flash::success('Material History updated successfully.');
 
         return redirect(route('bahanBakuHistories.index'));
     }
@@ -185,14 +185,14 @@ class BahanBakuHistoryController extends AppBaseController
         $bahanBakuHistory = $this->bahanBakuHistoryRepository->findWithoutFail($id);
 
         if (empty($bahanBakuHistory)) {
-            Flash::error('Bahan Baku History not found');
+            Flash::error('Material History not found');
 
             return redirect(route('bahanBakuHistories.index'));
         }
 
         $this->bahanBakuHistoryRepository->delete($id);
 
-        Flash::success('Bahan Baku History deleted successfully.');
+        Flash::success('Material History deleted successfully.');
 
         return redirect(route('bahanBakuHistories.index'));
     }
