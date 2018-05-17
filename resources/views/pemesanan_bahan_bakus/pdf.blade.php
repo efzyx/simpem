@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
   <body>
-      <h1 class="text-center">Pemesanan Material</h1>
+      <h1 class="text-center">Rekapitulasi Pemesanan Material</h1>
       <br><br>
       <table class="table table-bordered">
           <thead>
