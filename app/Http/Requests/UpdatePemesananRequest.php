@@ -25,6 +25,12 @@ class UpdatePemesananRequest extends FormRequest
      */
     public function rules()
     {
+        $pemesanan = Pemesanan::where('nomor_dokumen', request()->nomor_dokumen)->first();
+
+        if ($pemesanan) {
+            Pemesanan::$rules['nomor_dokumen'] = 'required|unique:pemesanans,nomor_dokumen,'.$pemesanan->id.',id';
+        }
+
         return Pemesanan::$rules;
     }
 }

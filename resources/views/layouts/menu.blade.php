@@ -17,7 +17,7 @@
 
 @if (Auth::user()->is('manager_produksi') || Auth::user()->is('admin') || Auth::user()->is('marketing'))
   <li class="{{ Request::is('produks*') && !Request::is('produksis*') ? 'active' : '' }}">
-      <a href="{!! route('produks.index') !!}"><i class="fa fa-industry"></i><span>Produk</span></a>
+      <a href="{!! route('produks.index') !!}"><i class="fa fa-industry"></i><span>Job Mix Formula</span></a>
   </li>
 @endif
 

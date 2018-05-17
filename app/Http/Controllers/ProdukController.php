@@ -21,7 +21,7 @@ class ProdukController extends AppBaseController
     public function __construct(ProdukRepository $produkRepo)
     {
         $this->produkRepository = $produkRepo;
-        $this->bahan_bakus = BahanBaku::all();
+        $this->bahan_bakus = BahanBaku::orderBy('created_at', 'asc')->get();
         $this->middleware('role:admin,manager_produksi,marketing');
     }
 
