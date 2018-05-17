@@ -12,7 +12,7 @@
     @php $no =1; $status = [ 'Sedang Produksi', 'Sedang Dikirim', 'Terkirim' ]; @endphp @foreach($produksis as $produksi)
     <tr>
       <td>{{ $no++ }}</td>
-      <td>{{ $kendaraans[$produksi->kendaraan->id] }}</td>
+      <td>{{ $produksi->kendaraan->no_polisi }}</td>
       <td>{!! $produksi->volume !!}</td>
       <td>{!! $produksi->waktu_produksi->diffForHumans() !!}</td>
       <td>
