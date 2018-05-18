@@ -16,7 +16,7 @@
 
     <div class="clearfix"></div>
     <div class="row">
-      <div class="col-md-7">
+      <div class="col-md-9">
         <div class="box box-solid box-primary">
           <div class="box-header">
             <h3 class="box-title">Status Material</h3>
@@ -31,7 +31,7 @@
                 <!-- small box -->
                 <div class="small-box {{ $sisa < 250 ? 'bg-red' : ($sisa < 500 ? 'bg-yellow' : ($sisa < 1000 ? 'bg-green' : 'bg-aqua')) }}" sty>
                   <div class="inner">
-                    <h3>{!! $bahanBaku->sisa !!}</h3>
+                    <h4>{!! $bahanBaku->sisa !!}</h4>
 
                     <p>{!! $bahanBaku->satuan !!}</p>
                   </div>
@@ -44,7 +44,7 @@
 
         </div>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-3">
         <div class="box box-solid bg-green-gradient">
           <div class="box-header">
             <i class="fa fa-calendar"></i>
