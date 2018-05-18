@@ -119,9 +119,10 @@ class User extends Authenticatable
 
     public function is($role)
     {
-      if($this->jabatan->kode_jabatan == $role)
-          return true;
+        if ($this->jabatan->kode_jabatan == $role) {
+            return true;
+        }
 
-      return false;
+        return false;
     }
 }

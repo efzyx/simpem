@@ -8,8 +8,12 @@ use App\Repositories\KendaraanDetailRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use PDF;
+use Auth;
+use Carbon\Carbon;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Models\Kendaraan;
+use App\Models\KendaraanDetail;
 use Response;
 
 class KendaraanDetailController extends AppBaseController
@@ -79,6 +83,51 @@ class KendaraanDetailController extends AppBaseController
         Flash::success('Status Kendaraan saved successfully.');
 
         return redirect(route('kendaraans.kendaraanDetails.index', $kendaraan));
+    }
+
+    public function filter(Kendaraan $kendaraan, Request $request)
+    {
+        $this->kendaraanDetailRepository->pushCriteria(new RequestCriteria($request));
+        $statuss = $this->kendaraanDetailRepository->orderBy('id', 'desc')->all();
+        $statuss = $statuss->filter(function ($status) use ($request) {
+            $dari = $request['tanggal_kirim_dari'] ? Carbon::parse($request['tanggal_kirim_dari']) : null;
+            $sampai = $request['tanggal_kirim_sampai'] ? Carbon::parse($request['tanggal_kirim_sampai']) : null;
+            if ($dari) {
+                if ($sampai) {
+                    return ($status->waktu >= $dari &&
+                         $status->waktu < $sampai->addDays(1)) ||
+                         ($status->waktu >= $dari &&
+                         $status->waktu < $dari->addDays(1));
+                }
+                return $status->waktu >= $dari &&
+                 $status->waktu < $dari->addDays(1);
+            }
+            return $status;
+        });
+        $statuss = $statuss->filter(function ($status) use ($kendaraan) {
+            return $kendaraan->id ?
+                   $status->kendaraan_id == $kendaraan->id :
+                   $status;
+        });
+
+        $title = 'Status Kendaraan - Filter';
+
+        return view('kendaraan_details.index')
+              ->with('kendaraanDetails', $statuss)
+              ->with('kendaraan', $kendaraan)
+              ->with('status', $this->status)
+              ->with('title', $title);
+    }
+
+    public function downloadPdf(Kendaraan $kendaraan, Request $request)
+    {
+        $data = json_decode($request['kendaraanDetails'], true);
+        $details = KendaraanDetail::hydrate($data);
+        $details = $details->flatten();
+        $user =  Auth::user()->name;
+        $pdf = PDF::loadView('kendaraan_details.pdf', ['details' => $details,'user'=>$user, 'kendaraan' => $kendaraan, 'status' => $this->status]);
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('status_kendaraan_'.time().'.pdf');
     }
 
     /**

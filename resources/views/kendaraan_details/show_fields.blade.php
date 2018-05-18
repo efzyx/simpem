@@ -30,6 +30,16 @@
   </div>
 </div>
 
+<!-- Kendaraan Id Field -->
+<div class="form-group col-sm-12">
+    <div class="col-sm-3">
+    {!! Form::label('keterangan', 'Keterangan:') !!}
+  </div>
+  <div class="col-sm-9">
+    {!! $kendaraan->keterangan !!}
+  </div>
+</div>
+
 
 <!-- Created At Field -->
 <div class="form-group col-sm-12">
