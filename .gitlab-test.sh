@@ -6,7 +6,7 @@ set -e pipefail
 php -v
 
 # Ensure that mysql server is up and running
-ping -c 3 mysql
+# ping -c 3 mysql
 
 # Run unit testing with PHPUnit
 php vendor/bin/phpunit --coverage-text --colors=never
