@@ -9,7 +9,7 @@ mv /root/composer.phar .
 php -v
 
 # Ensure that mysql server is up and running
-ping -c 3 mysql
+# ping -c 3 mysql
 
 # Copy over testing configuration. This configuration is used for Gitlab CI unit testing
 cp -v .env.gitlab-testing .env

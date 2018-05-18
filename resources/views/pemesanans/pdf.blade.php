@@ -18,46 +18,26 @@
               <th>Mutu</th>
               <th>Lokasi Proyek</th>
               <th>Volume Pesanan</th>
-              <th>Tanggal Pengiriman</th>
-              <th>No Polisi</th>
-              <th>Volume</th>
               <th>Realisasi</th>
               <th>Sisa Pesanan</th>
             </tr>
           </thead>
-          @foreach ($pemesanans as $pemesanan)
           @php
-          $produksis = $pemesanan->produksis;
-
             $jenis = ['Retail', 'Non Retail'];
-            $prod = count($produksis);
-            $first = true;
+            $no = 1;
           @endphp
           <tbody>
-            @foreach ($produksis as $key => $produksi)
+          @foreach ($pemesanans as $pemesanan)
               <tr>
-               @if ($first)
-                <td rowspan="{{$prod}}">{{$key+1}}</td>
-                <td rowspan="{{$prod}}">{{$pemesanan->nama_pemesanan}}</td>
-                <td rowspan="{{$prod}}">{{$pemesanan->produk->mutu_produk}}</td>
-                <td rowspan="{{$prod}}">{{$pemesanan->lokasi_proyek}}</td>
-                <td rowspan="{{$prod}}">{{$pemesanan->volume_pesanan}}</td>
-                @endif
-                <td>{{$produksi->waktu_produksi}}</td>
-                <td>{{$kendaraans[$produksi->kendaraan->id]}}</td>
-                <td>{{$produksi->volume}}</td>
-                @if($first)
-                <td rowspan="{{$prod}}">{{$pemesanan->produksis->sum('volume')}}</td>
-                <td rowspan="{{$prod}}">{{$pemesanan->volume_pesanan - $pemesanan->produksis->sum('volume')}}</td>
-                @endif
-                @php $first = false; @endphp
+                <td>{{$no++}}</td>
+                <td>{{$pemesanan->nama_pemesanan}}</td>
+                <td>{{$pemesanan->produk->mutu_produk}}</td>
+                <td>{{$pemesanan->lokasi_proyek}}</td>
+                <td>{{$pemesanan->volume_pesanan}}</td>
+                <td>{{$pemesanan->produksis->sum('volume')}}</td>
+                <td>{{$pemesanan->volume_pesanan - $pemesanan->produksis->sum('volume')}}</td>
               </tr>
-            @endforeach
         @endforeach
-
-
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         </tbody>
       </table>
 
@@ -71,5 +51,7 @@
            {{$user}}
       </div>
 
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </body>
 </html>
