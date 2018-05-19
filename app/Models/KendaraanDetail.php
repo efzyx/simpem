@@ -27,7 +27,8 @@ class KendaraanDetail extends Model
     public $fillable = [
         'kendaraan_id',
         'status',
-        'waktu'
+        'waktu',
+        'keterangan'
     ];
 
     /**
@@ -36,7 +37,8 @@ class KendaraanDetail extends Model
      * @var array
      */
     protected $casts = [
-        'status' => 'integer'
+        'status' => 'integer',
+        'keterangan' => 'string'
     ];
 
     /**
@@ -46,7 +48,8 @@ class KendaraanDetail extends Model
      */
     public static $rules = [
         'status' => 'required',
-        'waktu' => 'required'
+        'waktu' => 'required',
+        'keterangan' => 'nullable'
     ];
 
     public function kendaraan()

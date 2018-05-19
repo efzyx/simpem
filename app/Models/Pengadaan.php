@@ -29,6 +29,9 @@ class Pengadaan extends Model
 
 
     public $fillable = [
+        'nomor_dokumen',
+        'nama_penerima',
+        'nama_pengirim',
         'bahan_baku_id',
         'berat',
         'pemesanan_bahan_baku_id',
@@ -44,6 +47,10 @@ class Pengadaan extends Model
      * @var array
      */
     protected $casts = [
+
+        'nomor_dokumen' => 'string',
+        'nama_penerima' => 'string',
+        'nama_pengirim' => 'string',
         'bahan_baku_id' => 'integer',
         'berat' => 'double',
         'pemesanan_bahan_baku_id' => 'integer',
@@ -58,6 +65,9 @@ class Pengadaan extends Model
      * @var array
      */
     public static $rules = [
+        'nomor_dokumen' => 'required|unique:pengadaans',
+        'nama_penerima' => 'required',
+        'nama_pengirim' => 'required',
         'berat' => 'required',
         'supir' => 'required',
         'pemesanan_bahan_baku_id' => 'required',

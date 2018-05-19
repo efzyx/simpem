@@ -55,7 +55,8 @@ class PemesananController extends AppBaseController
     public function filter(Request $request)
     {
         $this->pemesananRepository->pushCriteria(new RequestCriteria($request));
-        $pemesanans = $this->pemesananRepository->orderBy('id', 'desc')->all();;
+        $pemesanans = $this->pemesananRepository->orderBy('id', 'desc')->all();
+        
         $pemesanans = $pemesanans->filter(function ($pemesanan) use ($request) {
             return $request['jenis_pesanan'] != null ?
                   $pemesanan->jenis_pesanan == $request['jenis_pesanan'] :

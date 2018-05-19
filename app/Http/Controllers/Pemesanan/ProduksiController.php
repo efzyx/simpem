@@ -26,8 +26,8 @@ class ProduksiController extends AppBaseController
         $this->supirs = Supir::pluck('nama_supir', 'id');
         $this->kendaraans = Kendaraan::select(DB::raw("concat(no_polisi, ' - ', jenis_kendaraan) as nama"), 'id')->get();
 
-        $this->kendaraans = $this->kendaraans->filter( function($k){
-          return $k->lastStatus()->status == 1;
+        $this->kendaraans = $this->kendaraans->filter(function ($k) {
+            return $k->lastStatus()->status == 1;
         })->pluck('nama', 'id');
         
         $this->middleware('role:admin,marketing,produksi,manager_produksi')

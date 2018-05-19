@@ -7,14 +7,35 @@
         @include('flash::message')
 
         <div class="clearfix"></div>
+        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#filter"><i class="fa fa-filter"></i> Filter</button>
+        <br><br>
+        <div id="filter" class="collapse">
+          <div class="box box-solid box-primary">
+            <div class="box-header">
+              <h3 class="box-title">Filter</h3>
+            </div>
+            <div class="box-body">
+              {!! Form::open(['route' => ['filterStatusKendaraan', $kendaraan]]) !!}
+                  @include('kendaraan_details.filter_fields')
+              {!! Form::close() !!}
+            </div>
+          </div>
+        </div>
+
         <div class="box box-solid box-primary">
           <div class="box-header">
             <h3 class="box-title">Rekapitulasi Status Kendaraan <strong>{{ $kendaraan->jenis_kendaraan }} ({{ $kendaraan->no_polisi }})</strong></h3>
           </div>
             <div class="box-body">
               <div class="table-responsive">
-                <h1 class="pull-left">
+                <h1 class="pull-left" style="margin-right:10px;">
                    <a class="btn btn-default pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('kendaraans.index') !!}">List Kendaraan</a>
+                </h1>
+                <h1 class="pull-left">
+                      {!! Form::open(['route' => ['downloadStatusKendaraan', $kendaraan ], 'target' => '_blank'])!!}
+                      {!! Form::hidden('kendaraanDetails', $kendaraanDetails) !!}
+                      {!! Form::submit('Download', ['class' => 'btn btn-danger pull-left', 'style' => 'margin-top: -10px;margin-bottom: 5px']) !!}
+                      {!! Form::close() !!}
                 </h1>
                 <h1 class="pull-right">
                   <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#perbarui">

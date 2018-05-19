@@ -1,6 +1,3 @@
-
-
-<!-- Submit Field -->
 <!-- Supplier Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('jenis_kendaraan', 'Jenis Kendaraan:') !!}
@@ -11,6 +8,24 @@
 <div class="form-group col-sm-12">
     {!! Form::label('no_polisi', 'No Polisi') !!}
     {!! Form::text('no_polisi', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Masa Pajak Field -->
+<div class="form-group col-sm-12">
+    {!! Form::label('masa_pajak', 'Masa Berlaku Pajak:') !!}
+    {!! Form::date('masa_pajak', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Masa STNK Field -->
+<div class="form-group col-sm-12">
+    {!! Form::label('masa_stnk', 'Masa Berlaku STNK:') !!}
+    {!! Form::date('masa_stnk', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Masa KIR Field -->
+<div class="form-group col-sm-12">
+    {!! Form::label('masa_kir', 'Masa Berlaku KIR:') !!}
+    {!! Form::date('masa_kir', null, ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group col-sm-12">
