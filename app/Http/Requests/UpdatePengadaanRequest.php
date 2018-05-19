@@ -25,9 +25,9 @@ class UpdatePengadaanRequest extends FormRequest
      */
     public function rules()
     {
-        $pengadaan = Ppengadaan::where('nomor_dokumen', request()->nomor_dokumen)->first();
+        $pengadaan = Pengadaan::where('nomor_dokumen', request()->nomor_dokumen)->first();
 
-        if ($engadaan) {
+        if ($pengadaan) {
             Pengadaan::$rules['nomor_dokumen'] = 'required|unique:produksis,nomor_dokumen,'.$pengadaan->id.',id';
         }
 

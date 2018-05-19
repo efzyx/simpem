@@ -14,7 +14,7 @@ class EditKendaraanDetail extends Migration
     public function up()
     {
         Schema::table('kendaraan_details', function (Blueprint $table) {
-            $table->string('keterangan')->after('waktu');
+            $table->string('keterangan')->after('waktu')->nullable();
         });
     }
 

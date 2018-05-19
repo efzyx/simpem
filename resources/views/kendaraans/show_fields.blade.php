@@ -34,7 +34,7 @@
     {!! Form::label('masa_pajak', 'Masa Berlaku Pajak:') !!}
   </div>
   <div class="col-sm-9">
-    {!! $kendaraan->masa_pajak !!}
+    {!! $kendaraan->masa_pajak->format('d F Y') !!}
   </div>
 </div>
 
@@ -44,7 +44,7 @@
     {!! Form::label('masa_stnk', 'Masa Berlaku Pajak:') !!}
   </div>
   <div class="col-sm-9">
-    {!! $kendaraan->masa_stnk !!}
+    {!! $kendaraan->masa_stnk->format('d F Y') !!}
   </div>
 </div>
 
@@ -54,7 +54,7 @@
     {!! Form::label('masa_kir', 'Masa Berlaku KIR:') !!}
   </div>
   <div class="col-sm-9">
-    {!! $kendaraan->masa_kir !!}
+    {!! $kendaraan->masa_kir->format('d F Y') !!}
   </div>
 </div>
 

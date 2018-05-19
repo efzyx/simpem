@@ -13,19 +13,19 @@
 <!-- Masa Pajak Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('masa_pajak', 'Masa Berlaku Pajak:') !!}
-    {!! Form::text('masa_pajak', null, ['class' => 'form-control datetimepicker']) !!}
+    {!! Form::date('masa_pajak', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Masa STNK Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('masa_stnk', 'Masa Berlaku STNK:') !!}
-    {!! Form::text('masa_stnk', null, ['class' => 'form-control datetimepicker']) !!}
+    {!! Form::date('masa_stnk', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Masa KIR Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('masa_kir', 'Masa Berlaku KIR:') !!}
-    {!! Form::text('masa_kir', null, ['class' => 'form-control datetimepicker']) !!}
+    {!! Form::date('masa_kir', null, ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group col-sm-12">

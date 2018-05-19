@@ -28,7 +28,7 @@
           </div>
             <div class="box-body">
               <div class="table-responsive">
-                <h1 class="pull-left">
+                <h1 class="pull-left" style="margin-right:10px;">
                    <a class="btn btn-default pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('kendaraans.index') !!}">List Kendaraan</a>
                 </h1>
                 <h1 class="pull-left">

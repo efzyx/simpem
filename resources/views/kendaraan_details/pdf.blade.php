@@ -2,15 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Cetak Status Kendaraan <strong>{{$kendaraan->jenis_kendaraan}} ({{$kendaraan->no_polisi}})</strong></title>
+    <title>Rekapitulasi Status Kendaraan <strong>{{$kendaraan->jenis_kendaraan}} ({{$kendaraan->no_polisi}})</strong></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
   <body>
-      <h1 class="text-center">Cetak Status Kendaraan {{$kendaraan->jenis_kendaraan}} ({{$kendaraan->no_polisi}})</h1>
-      @php
-      $days = [0,0,0,0];
-      $first = true;
-      @endphp
+      <h1 class="text-center">Rekapitulasi Status Kendaraan {{$kendaraan->jenis_kendaraan}} ({{$kendaraan->no_polisi}})</h1>
       <br><br>
 
 
@@ -32,20 +28,6 @@
                 <td>{{$status[$detail->status]}}</td>
                 <td>{{$detail->keterangan}}</td>
               </tr>
-
-              @php
-              $date1;
-
-              if($first == true){
-                $date1 = $detail->waktu;
-                $first = false;
-              }
-              else{
-                $difference = date_diff($date1,$detail->waktu);
-                $days[$detail->status] = $days[$detail->status] + $difference->d;
-                $date1 = $detail->waktu;
-              }
-              @endphp
         @endforeach
 
 
@@ -59,17 +41,17 @@
           <tr>
             <td>Jumlah Hari Stand By </td>
             <td> : </td>
-            <td>{{$days[1]}}</td>
+            <td>{{$standby}}</td>
           </tr>
           <tr>
             <td>Jumlah Hari Rusak </td>
             <td> : </td>
-            <td>{{$days[2]}}</td>
+            <td>{{$rusak}}</td>
           </tr>
           <tr>
             <td>Jumlah Hari Rental </td>
             <td> : </td>
-            <td>{{$days[3]}}</td>
+            <td>{{$rental}}</td>
           </tr>
         </table>
       </div>

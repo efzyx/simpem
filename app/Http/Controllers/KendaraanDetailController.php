@@ -124,8 +124,44 @@ class KendaraanDetailController extends AppBaseController
         $data = json_decode($request['kendaraanDetails'], true);
         $details = KendaraanDetail::hydrate($data);
         $details = $details->flatten();
+        $urut = $details->sortBy('waktu')->getIterator();
+        $standby = 0;
+        $rusak = 0;
+        $rental = 0;
+
+        foreach($urut as $key => $detail){
+          $next = next($urut);
+          $next = $next ? $next->waktu : Carbon::now();
+          $selisih = $detail->waktu->diffInDays($next);
+
+          switch($detail->status){
+            case 1:
+              $standby += $selisih;
+              break;
+            case 2:
+              $rusak += $selisih;
+              break;
+            case 3:
+              $rental += $selisih;
+              break;
+            default:
+              break;
+          }
+        }
+
         $user =  Auth::user()->name;
-        $pdf = PDF::loadView('kendaraan_details.pdf', ['details' => $details,'user'=>$user, 'kendaraan' => $kendaraan, 'status' => $this->status]);
+
+        $pdf = PDF::loadView('kendaraan_details.pdf',
+            [
+              'details' => $details,
+              'user'=>$user,
+              'kendaraan' => $kendaraan,
+              'status' => $this->status,
+              'standby' => $standby,
+              'rusak' => $rusak,
+              'rental' => $rental
+            ]);
+
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream('status_kendaraan_'.time().'.pdf');
     }

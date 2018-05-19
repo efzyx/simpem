@@ -49,7 +49,7 @@ class KendaraanDetail extends Model
     public static $rules = [
         'status' => 'required',
         'waktu' => 'required',
-        'keterangan' => 'required'
+        'keterangan' => 'nullable'
     ];
 
     public function kendaraan()
