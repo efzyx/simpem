@@ -8,7 +8,12 @@
   <body>
       <h1 class="text-center">Produksi</h1>
       <br><br>
-      <?php $tmutu = [0,0,0,0,0]; ?>
+      @php
+      $tmutu = [];
+      $bahan = \App\Models\BahanBaku::select('id','nama_bahan_baku','satuan')->get();
+      $b = count($bahan);
+
+      @endphp
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -16,17 +21,22 @@
             <th rowspan="2">Tanggal Produksi</th>
             <th rowspan="2">Mutu Produk</th>
             <th rowspan="2">Volume</th>
-            <th colspan="5" align="text-center">Material</th>
+            <th colspan="{{$b}}" align="text-center">Material</th>
           </tr>
           <tr>
-            <th>Semen</th>
-            <th>Air</th>
-            <th>Pasir</th>
-            <th>Split</th>
-            <th>Addictive</th>
+            @foreach($bahan as $key => $bhn)
+            <th>{{$bhn->nama_bahan_baku}}</th>
+            @endforeach
           </tr>
         </thead>
         <tbody>
+          @php
+          $h = 0;
+          while($h<$b){
+            $tmutu[$h] = 0;
+            $h++;
+          }
+          @endphp
           @foreach ($produksis as $key => $produksi)
             <tr>
               <td>{{$key+1}}</td>
@@ -40,6 +50,7 @@
              $komposisi_mutu = $produksi->pemesanan->produk->komposisi_mutus;
              $i = 0;
             @endphp
+
               @foreach ($komposisi_mutu as $key => $komposisi)
                 <td>{!! $komposisi->volume * $produksi->volume!!}</td>
                 @php
@@ -51,17 +62,28 @@
                   $i++;
                 @endphp
               @endforeach
+              @php
+              while($i<$b){
+                echo "<td>0</td>";
+                  if ($tmutu[$i]>=0) {
+                      $tmutu[$i] += 0;
+                  }
+                  $i++;
+              }
+              @endphp
             </tr>
           @endforeach
           <tfoot>
             <tr>
               <td colspan="3">Total</td>
               <td>{{ $produksis->sum('volume')}}</td>
-              <td>{!! $tmutu[0] !!}</td>
-              <td>{!! $tmutu[1] !!}</td>
-              <td>{!! $tmutu[2] !!}</td>
-              <td>{!! $tmutu[3] !!}</td>
-              <td>{!! $tmutu[4] !!}</td>
+              @php
+              $a = 0;
+              while($a < $b){
+                echo "<td>$tmutu[$a]</td>";
+                $a++;
+              }
+              @endphp
             </tr>
           </tfoot>
 

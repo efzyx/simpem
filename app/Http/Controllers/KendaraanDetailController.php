@@ -129,12 +129,12 @@ class KendaraanDetailController extends AppBaseController
         $rusak = 0;
         $rental = 0;
 
-        foreach($urut as $key => $detail){
-          $next = next($urut);
-          $next = $next ? $next->waktu : Carbon::now();
-          $selisih = $detail->waktu->diffInDays($next);
+        foreach ($urut as $key => $detail) {
+            $next = next($urut);
+            $next = $next ? $next->waktu : Carbon::now();
+            $selisih = $detail->waktu->diffInDays($next);
 
-          switch($detail->status){
+            switch ($detail->status) {
             case 1:
               $standby += $selisih;
               break;
@@ -151,7 +151,8 @@ class KendaraanDetailController extends AppBaseController
 
         $user =  Auth::user()->name;
 
-        $pdf = PDF::loadView('kendaraan_details.pdf',
+        $pdf = PDF::loadView(
+            'kendaraan_details.pdf',
             [
               'details' => $details,
               'user'=>$user,
@@ -160,7 +161,8 @@ class KendaraanDetailController extends AppBaseController
               'standby' => $standby,
               'rusak' => $rusak,
               'rental' => $rental
-            ]);
+            ]
+        );
 
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream('status_kendaraan_'.time().'.pdf');
