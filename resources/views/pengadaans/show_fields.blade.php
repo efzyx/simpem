@@ -41,7 +41,7 @@
 <!-- Berat Field -->
 <div class="form-group col-sm-12">
   <div class="col-sm-3">
-    {!! Form::label('berat', 'Berat') !!}
+    {!! Form::label('berat', 'Kuantitas') !!}
   </div>
   <div class="col-sm-9">
     {!! $pengadaan->berat !!}

@@ -6,10 +6,61 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
   <body>
-      <h1 class="text-center">Rekapitulasi Status Kendaraan {{$kendaraan->jenis_kendaraan}} ({{$kendaraan->no_polisi}})</h1>
+      <h1 class="text-center">Rekapitulasi Status Kendaraan</h1>
       <br><br>
 
+      <div class="pull-left">
+        <table>
+          <tr>
+            <td>No Polisi </td>
+            <td> : </td>
+            <td>{{$kendaraan->no_polisi}}</td>
+          </tr>
+          <tr>
+            <td>Jenis Kendaraan </td>
+            <td> : </td>
+            <td>{{$kendaraan->jenis_kendaraan}}</td>
+          </tr>
+          <tr>
+            <td>Masa Berlaku Pajak </td>
+            <td> : </td>
+            <td>{{$kendaraan->masa_pajak->format('d F Y')}}</td>
+          </tr>
+          <tr>
+            <td>Masa Berlaku STNK </td>
+            <td> : </td>
+            <td>{{$kendaraan->masa_stnk->format('d F Y')}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="pull-right">
+        <table>
+          <tr>
+            <td>Masa Berlaku KIR </td>
+            <td> : </td>
+            <td>{{$kendaraan->masa_kir->format('d F Y')}}</td>
+          </tr>
+          <tr>
+            <td>Jumlah Hari StandBy </td>
+            <td> : </td>
+            <td>{{$standby}}</td>
+          </tr>
+          <tr>
+            <td>Jumlah Hari Rusak </td>
+            <td> : </td>
+            <td>{{$rusak}}</td>
+          </tr>
+          <tr>
+            <td>Jumlah Hari Rental </td>
+            <td> : </td>
+            <td>{{$rental}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="clearfix">
 
+      </div>
+      <br>
         <table class="table table-bordered">
           <thead>
             <tr>
@@ -36,27 +87,6 @@
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         </tbody>
       </table>
-      <div class="pull-left">
-        <table>
-          <tr>
-            <td>Jumlah Hari Stand By </td>
-            <td> : </td>
-            <td>{{$standby}}</td>
-          </tr>
-          <tr>
-            <td>Jumlah Hari Rusak </td>
-            <td> : </td>
-            <td>{{$rusak}}</td>
-          </tr>
-          <tr>
-            <td>Jumlah Hari Rental </td>
-            <td> : </td>
-            <td>{{$rental}}</td>
-          </tr>
-        </table>
-      </div>
-
-      <br><br>
       <br><br>
       <div class="pull-right">
            Padang, {{date("d-m-Y")}}

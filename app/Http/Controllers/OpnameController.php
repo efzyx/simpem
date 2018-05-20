@@ -114,15 +114,15 @@ class OpnameController extends AppBaseController
     {
         $input = $request->all();
 
-        $opname = $this->opnameRepository->create($input);
-
-        $bahan_baku = BahanBaku::find($opname->bahan_baku_id);
-        $bahan_baku->sisa -= $opname->volume_opname;
-
         if ($bahan_baku->sisa <= 0) {
             Flash::error('Material Kurang');
             return redirect()->back()->withInput($input);
         }
+
+        $opname = $this->opnameRepository->create($input);
+
+        $bahan_baku = BahanBaku::find($opname->bahan_baku_id);
+        $bahan_baku->sisa -= $opname->volume_opname;
 
         $bahan_baku->save();
 

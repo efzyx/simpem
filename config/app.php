@@ -241,6 +241,6 @@ return [
 
     ],
 
-    'version' => env('APP_VER', 'v.1.5-beta'),
+    'version' => env('APP_VER', 'v.2.0-beta'),
 
 ];

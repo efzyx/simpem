@@ -21,7 +21,7 @@
   </li>
 @endif
 
-@if (Auth::user()->is('manager_produksi'))
+@if (Auth::user()->is('manager_produksi') || Auth::user()->is('admin'))
   <li class="treeview {{ Request::is('pengadaans*') || Request::is('supplier*') ? 'active' : '' }}">
         <a href="#">
           <i class="fa fa-cart-arrow-down"></i> <span>Pengadaan</span>

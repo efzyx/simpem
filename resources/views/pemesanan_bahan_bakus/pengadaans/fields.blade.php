@@ -1,3 +1,21 @@
+<!-- Nomor Dokumen Field -->
+<div class="form-group col-sm-12">
+    {!! Form::label('nomor_dokumen', 'Nomor Dokumen:') !!}
+    {!! Form::text('nomor_dokumen', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Nama Penerima Field -->
+<div class="form-group col-sm-12">
+    {!! Form::label('nama_penerima', 'Nama Penerima:') !!}
+    {!! Form::text('nama_penerima', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Nama Pengirim Field -->
+<div class="form-group col-sm-12">
+    {!! Form::label('nama_pengirim', 'Nama Pengirim:') !!}
+    {!! Form::text('nama_pengirim', null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Berat Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('berat', 'Kuantitas:') !!}
