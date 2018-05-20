@@ -73,4 +73,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('supplier.pengadaans', 'Supplier\PengadaanController');
 
     Route::post('supplier/{supplier}/pengadaans/downloadPdf', 'Supplier\PengadaanController@downloadPdf')->name('downloadPengadaan');
+
+    Route::post('ganti_password', 'GantiPasswordController@simpan')->name('ganti_password');
 });

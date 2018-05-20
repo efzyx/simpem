@@ -132,7 +132,7 @@
                                   <!-- Menu Footer-->
                                   <li class="user-footer">
                                       <div class="pull-left">
-                                          <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                          <button type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#profile">Profile</button>
                                       </div>
                                       <div class="pull-right">
                                           <a href="{!! url('/logout') !!}" class="btn btn-default btn-flat"
@@ -209,6 +209,83 @@
           </div>
       </div>
       @endif
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="profile" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Profil Anda</h3>
+          </div>
+
+          <div class="modal-body">
+
+                      @php
+                        $mine = Auth::user();
+                      @endphp
+                          <table class="table">
+                            <tr>
+                              <th>Nama</th>
+                              <td> : {{ $mine->name }}</td>
+                            </tr>
+                            <tr>
+                              <th>Email</th>
+                              <td> : {{ $mine->email }}</td>
+                            </tr>
+                            <tr>
+                              <th>Jabatan</th>
+                              <td> : {{ $mine->jabatan->nama_jabatan }}</td>
+                            </tr>
+                          </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-warning pull-left" data-toggle="modal" data-target="#ganpas">Ganti Password</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="ganpas" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Ganti Password</h3>
+          </div>
+
+          <div class="modal-body">
+            {!! Form::open(['route' => 'ganti_password'])!!}
+
+            <div class="form-group col-sm-12">
+                {!! Form::label('password', 'Password Baru') !!}
+                {!! Form::password('password', ['class' => 'form-control', 'id' => 'password'])!!}
+            </div>
+
+            <div class="form-group col-sm-12">
+                {!! Form::label('password_confirmation', 'Konfirmasi Password Baru') !!}
+                {!! Form::password('password_confirmation', ['class' => 'form-control', 'id' => 'confirm_password'])!!}
+            </div>
+            <div class="form-group col-sm-12">
+              <span id='message'></span>
+              <div class="clearfix">
+
+              </div>
+              <span>* Pastikan panjang password minimal 6 karakter</span>
+            </div>
+
+            <div class="form-group col-sm-12">
+                {!! Form::submit('Simpan', ['class' => 'btn btn-primary', 'id' => 'simpan']) !!}
+            </div>
+            {!! Form::close() !!}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
     </div>
 
       <!-- jQuery 3.1.1 -->
@@ -250,6 +327,18 @@
                 // locale : 'id'
                 format: "YYYY-MM-DD HH:mm:ss"
               });
+          });
+
+          $('#password, #confirm_password').on('keyup', function () {
+            if ($('#password').val() == $('#confirm_password').val()) {
+              $('#message').html('Cocok').css('color', 'green');
+              if ($('#password').val().length >= 6) {
+                $('#simpan').removeAttr("disabled");
+              }
+            } else{
+              $('#message').html('Tidak Cocok').css('color', 'red');
+              $('#simpan').attr("disabled", "disabled");
+            }
           });
          });
         </script>
