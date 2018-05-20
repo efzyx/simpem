@@ -98,19 +98,19 @@
               <tbody>
                   <tr>
                     <th>Kemarin</th>
-                    <td>{{ $kemarin }} m3</td>
+                    <td><strong>{{ $kemarin }}</strong> m<sup>3</sup></td>
                   </tr>
                   <tr>
                     <th>Bulan Ini</th>
-                    <td>{{ $bulanini }} m3</td>
+                    <td><strong>{{ $bulanini }}</strong> m<sup>3</sup></td>
                   </tr>
                   <tr>
                     <th>Bulan Lalu</th>
-                    <td>{{ $bulanlalu }} m3</td>
+                    <td><strong>{{ $bulanlalu }}</strong> m<sup>3</sup></td>
                   </tr>
                   <tr>
                     <th>Volume Permintaan</th>
-                    <td>{{ $volume_permintaan }} m3</td>
+                    <td><strong>{{ $volume_permintaan }}</strong> m<sup>3</sup></td>
                   </tr>
               </tbody>
             </table>

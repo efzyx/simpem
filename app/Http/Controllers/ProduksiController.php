@@ -42,8 +42,8 @@ class ProduksiController extends AppBaseController
 
         $this->produk = Produk::pluck('mutu_produk', 'id');
         $this->middleware('role:admin,marketing,produksi,manager_produksi')
-                          ->only('index', 'show');
-        $this->middleware('role:produksi,manager_produksi,admin')->except('index', 'show');
+                          ->only('index', 'show', 'downloadPdf');
+        $this->middleware('role:produksi,manager_produksi,admin')->except('index', 'show', 'downloadPdf');
     }
 
     /**
