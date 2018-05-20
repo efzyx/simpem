@@ -32,7 +32,7 @@
     </div>
     <div class="box-body">
 
-      @if (Auth::user()->is('marketing') || Auth::user()->is('manager_produksi'))
+      @if (Auth::user()->is('marketing') || Auth::user()->is('manager_produksi') || Auth::user()->is('admin'))
         <h1 class="pull-left">
               {!! Form::open(['route' => 'downloadPdf' , 'target' => '_blank'])!!}
               {!! Form::hidden('pemesanans', $pemesanans) !!}

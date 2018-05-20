@@ -13,35 +13,41 @@
           $i=0;
           $pengadaans = \App\Models\Pengadaan::hydrate($supplier->pengadaans);
           $pengadaans = $pengadaans->flatten();
-          $sisa = $pengadaans->sum('berat');
+          $bahan_baku = new \App\Models\BahanBaku();
+          $supplier->bahan_baku = $bahan_baku->fill($supplier->bahan_baku);
 
           @endphp
           <table>
-            <thead>
-              <tr>
-              <th colspan="3">Data Supplier</th>
-              </tr>
-            </thead>
             <tbody>
               <tr>
-                <td><strong>Nama Supplier</strong></td>
-                <td>:</td>
+                <td><strong>Nama Supplier </strong></td>
+                <td> : </td>
                 <td>{!! $supplier->nama_supplier !!}</td>
               </tr>
               <tr>
-                <td><strong>Nama Material</strong></td>
-                <td>:</td>
-                <td>{!! $bahan_baku[$supplier->bahan_baku_id] !!}</td>
+                <td><strong>Nama Material </strong></td>
+                <td> : </td>
+                <td>{!! $supplier->bahan_baku->nama_bahan_baku !!}</td>
               </tr>
               <tr>
-                <td><strong>Total Pesanan</strong></td>
-                <td>:</td>
-                <td>{!! $supplier->volume_pemesanan !!}</td>
+                <td><strong>Satuan </strong></td>
+                <td> : </td>
+                <td>{!! $supplier->bahan_baku->satuan !!}</td>
               </tr>
               <tr>
-                <td><strong>Sisa Pesanan</strong></td>
+                <td><strong>Kuantitas Pesanan </strong></td>
+                <td> : </td>
+                <td>{!! $pesanan = $supplier->volume_pemesanan !!}</td>
+              </tr>
+              <tr>
+                <td><strong>Realisasi </strong></td>
                 <td>:</td>
-                <td>{!! $supplier->volume_pemesanan - $sisa !!}</td>
+                <td>{!! $real = $pengadaans->sum('berat'); !!}</td>
+              </tr>
+              <tr>
+                <td><strong>Sisa Pesanan </strong></td>
+                <td> : </td>
+                <td>{!! $sisa = $pesanan-$real !!}</td>
               </tr>
             </tbody>
           </table>
@@ -53,7 +59,8 @@
             <th>No</th>
             <th>Tanggal Pengiriman</th>
             <th>No. Polisi</th>
-            <th>Satuan</th>
+            <th>Pengirim</th>
+            <th>Penerima</th>
             <th>Volume</th>
           </tr>
         </thead>
@@ -64,7 +71,8 @@
             <td>{{$key+1}}</td>
             <td>{{$pengadaan->tanggal_pengadaan}}</td>
             <td>{{$pengadaan->supir}}</td>
-            <td>{{$pengadaan->bahan_baku->satuan}}</td>
+            <td>{{$pengadaan->nama_pengirim}}</td>
+            <td>{{$pengadaan->nama_penerima}}</td>
             <td>{{$pengadaan->berat}}</td>
           </tr>
           @endforeach

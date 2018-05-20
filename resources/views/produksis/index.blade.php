@@ -34,7 +34,7 @@
     </div>
     <div class="box-body">
       <div class="table-responsive">
-        @if (Auth::user()->is('produksi') || Auth::user()->is('manager_produksi'))
+        @if (Auth::user()->is('produksi') || Auth::user()->is('manager_produksi') || Auth::user()->is('admin'))
           <h1 class="pull-left">
                 {!! Form::open(['route' => 'downloadProduksiPdf' , 'target' => '_blank'])!!}
                 {!! Form::hidden('produksis', $produksis) !!}

@@ -86,7 +86,7 @@
       </style>
 </head>
 
-<body class="skin-blue sidebar-mini" onload="myFunction()" style="margin:0;">
+<body class="skin-blue sidebar-mini" onload="myFunction()" style="margin:0;" lang="id">
 <div id="loader"></div>
 <div id="myDiv" class="animate-bottom">
   @if (!Auth::guest())

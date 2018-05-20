@@ -1,3 +1,33 @@
+<!-- Nomor Dokumen Field -->
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('nomor_dokumen', 'Nomor Dokumen') !!}
+  </div>
+  <div class="col-sm-9">
+    <p>{!! $pengadaan->nomor_dokumen !!}</p>
+  </div>
+</div>
+
+<!-- Nama Penerima Field -->
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('nama_penerima', 'Nama Penerima') !!}
+  </div>
+  <div class="col-sm-9">
+    <p>{!! $pengadaan->nama_penerima !!}</p>
+  </div>
+</div>
+
+<!-- Nama Pengirim Field -->
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('nama_pengirim', 'Nama Pengirim') !!}
+  </div>
+  <div class="col-sm-9">
+    <p>{!! $pengadaan->nama_pengirim !!}</p>
+  </div>
+</div>
+
 <!-- Material Id Field -->
 <div class="form-group col-sm-12">
   <div class="col-sm-3">
@@ -11,7 +41,7 @@
 <!-- Berat Field -->
 <div class="form-group col-sm-12">
   <div class="col-sm-3">
-    {!! Form::label('berat', 'Berat') !!}
+    {!! Form::label('berat', 'Kuantitas') !!}
   </div>
   <div class="col-sm-9">
     {!! $pengadaan->berat !!}

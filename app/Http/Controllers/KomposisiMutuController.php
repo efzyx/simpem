@@ -19,7 +19,7 @@ class KomposisiMutuController extends AppBaseController
     public function __construct(KomposisiMutuRepository $komposisiMutuRepo)
     {
         $this->komposisiMutuRepository = $komposisiMutuRepo;
-        $this->middleware('role:admin,manager_produksi');
+        $this->middleware('role:admin,manager_produksi,marketing');
     }
 
     /**

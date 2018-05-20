@@ -26,7 +26,6 @@ class Produksi extends Model
         parent::boot();
 
         self::deleting(function (Produksi $produksi) {
-
             foreach ($produksi->bahan_baku_histories as $bahan_baku_history) {
                 $bahan_baku_history->delete();
             }

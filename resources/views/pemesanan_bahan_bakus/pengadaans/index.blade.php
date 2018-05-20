@@ -19,7 +19,7 @@
           </div>
             <div class="box-body">
               <h1 class="pull-left">
-                   {!! Form::open(['route' => 'downloadPengadaan' , 'target' => '_blank'])!!}
+                   {!! Form::open(['route' => ['downloadPengadaan', $supplier] , 'target' => '_blank'])!!}
                     {!! Form::hidden('supplier', $supplier) !!}
                     {!! Form::submit('Download', ['class' => 'btn btn-danger pull-left', 'style' => 'margin-top: -10px;margin-bottom: 5px']) !!}
               </h1>

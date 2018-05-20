@@ -21,8 +21,7 @@ class UserController extends AppBaseController
     {
         $this->userRepository = $userRepo;
         $this->jabatans = Jabatan::pluck('nama_jabatan', 'id');
-        $this->middleware('role:admin,manager_produksi')->only('index');
-        $this->middleware('role:admin')->except('index');
+        $this->middleware('role:admin,manager_produksi');
     }
 
     /**

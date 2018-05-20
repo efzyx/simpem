@@ -16,50 +16,41 @@
           $sisa = $produksis->sum('volume');
 
           @endphp
-          <table>
-            <thead>
-              <tr>
-              <th colspan="3">Data Pemesan</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Nama Pemesan</strong></td>
-                <td>:</td>
-                <td>{!! $pemesanan->nama_pemesanan !!}</td>
-              </tr>
-              <tr>
-                <td><strong>Lokasi Proyek</strong></td>
-                <td>:</td>
-                <td>{!! $pemesanan->lokasi_proyek !!}</td>
-              </tr>
-              <tr>
-                <td><strong>Produk</strong></td>
-                <td>:</td>
-                <td>{!! $pemesanan->produk->mutu_produk !!}</td>
-              </tr>
-              <tr>
-                <td><strong>Satuan</strong></td>
-                <td>:</td>
-                <td>{!!$pemesanan->produk->satuan !!}</td>
-              </tr>
-              <tr>
-                <td><strong>Volume Pesanan</strong></td>
-                <td>:</td>
-                <td>{!! $pemesanan->volume_pesanan !!}</td>
-              </tr>
-              <tr>
-                <td><strong>Realisasi</strong></td>
-                <td>:</td>
-                <td>{!! $produksis->sum('volume') !!}</td>
-              </tr>
-              <tr>
-                <td>Sisa</td>
-                <td>:</td>
-                <td>{!! $pemesanan->volume_pesanan - $produksis->sum('volume') !!}</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="col-sm-5">
+            <table>
+              <tbody>
+                <tr>
+                  <td style="border : none"><strong>Nama Pemesan  </strong></td>
+                  <td style="border : none">: {!! $pemesanan->nama_pemesanan !!}</td>
+                </tr>
+                <tr>
+                  <td style="border : none"><strong>Lokasi Proyek  </strong></td>
+                  <td style="border : none">: {!! $pemesanan->lokasi_proyek !!}</td>
+                </tr>
+                <tr>
+                  <td style="border : none"><strong>Produk  </strong></td>
+                  <td style="border : none">: {!! $pemesanan->produk->mutu_produk !!}</td>
+                </tr>
+                <tr>
+                  <td style="border : none"><strong>Satuan  </strong></td>
+                  <td style="border : none">: {!!$pemesanan->produk->satuan !!}</td>
+                </tr>
+                <tr>
+                  <td style="border : none"><strong>Volume Pesanan  </strong></td>
+                  <td style="border : none">: {!! $pesanan = $pemesanan->volume_pesanan !!}</td>
+                </tr>
+                <tr>
+                  <td style="border : none"><strong>Realisasi  </strong></td>
+                  <td style="border : none">: {!! $produksi = $produksis->sum('volume') !!}</td>
+                </tr>
+                <tr>
+                  <td style="border : none"><strong>Sisa  </strong></td>
+                  <td style="border : none">: {!! $pesanan-$produksi !!}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
           <br><br>
 
 <table class="table table-bordered">
@@ -68,6 +59,8 @@
             <th>No</th>
             <th>Tanggal Pengiriman</th>
             <th>No. Polisi</th>
+            <th>Pengirim</th>
+            <th>Penerima</th>
             <th>Volume</th>
           </tr>
         </thead>
@@ -76,8 +69,10 @@
           @foreach ($produksis as $key => $produksi)
           <tr>
             <td>{{$key+1}}</td>
-            <td>{{$produksi->produksi_id}}</td>
-            <td>{{$kendaraans[$produksi->kendaraan->id]}}</td>
+            <td>{{$produksi->waktu_produksi->format('d F Y h:m')}}</td>
+            <td>{{$produksi->kendaraan->no_polisi}}</td>
+            <td>{{$produksi->nama_pengirim}}</td>
+            <td>{{$produksi->nama_penerima}}</td>
             <td>{{$produksi->volume}}</td>
           </tr>
           @endforeach

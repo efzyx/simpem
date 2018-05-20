@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1 class="pull-left">Rekapitulasi Produksi untuk <strong>{{ $pemesanan->nama_pemesanan }}</strong></h1>
-        @if (Auth::user()->is('produksi') || Auth::user()->is('manager_produksi'))
+        @if (Auth::user()->is('produksi') || Auth::user()->is('manager_produksi') || Auth::user()->is('admin'))
           <h1 class="pull-right">
              <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('pemesanans.produksis.create', $pemesanan) !!}">Tambah Baru</a>
           </h1>
@@ -21,7 +21,7 @@
           </div>
             <div class="box-body">
               <div class="table-responsive">
-                @if (Auth::user()->is('produksi') || Auth::user()->is('manager_produksi'))
+                @if (Auth::user()->is('produksi') || Auth::user()->is('manager_produksi') || Auth::user()->is('admin'))
                   <h1 class="pull-left">
                         {!! Form::open(['route' => 'downloadPengiriman' , 'target' => '_blank'])!!}
                         {!! Form::hidden('pemesanans', $pemesanan) !!}

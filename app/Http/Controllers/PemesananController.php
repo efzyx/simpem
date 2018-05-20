@@ -29,7 +29,7 @@ class PemesananController extends AppBaseController
                         ->pluck('nama', 'id');
         $this->middleware('role:admin,marketing,produksi,manager_produksi')
               ->only('index', 'filter', 'show');
-        $this->middleware('role:marketing')->except('index', 'filter', 'show');
+        $this->middleware('role:marketing,admin,manager_produksi')->except('index', 'filter', 'show');
         $this->pemesananRepository = $pemesananRepo;
     }
 
@@ -52,7 +52,8 @@ class PemesananController extends AppBaseController
     public function filter(Request $request)
     {
         $this->pemesananRepository->pushCriteria(new RequestCriteria($request));
-        $pemesanans = $this->pemesananRepository->orderBy('id', 'desc')->all();;
+        $pemesanans = $this->pemesananRepository->orderBy('id', 'desc')->all();
+
         $pemesanans = $pemesanans->filter(function ($pemesanan) use ($request) {
             return $request['jenis_pesanan'] != null ?
                   $pemesanan->jenis_pesanan == $request['jenis_pesanan'] :

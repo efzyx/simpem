@@ -31,7 +31,7 @@ class PengadaanController extends AppBaseController
         $this->kendaraans = Kendaraan::select(DB::raw("concat(no_polisi, ' - ', jenis_kendaraan) as nama"), 'id')
                           ->pluck('nama', 'id');
         $this->middleware('role:admin,manager_produksi,logistik')->only('index', 'show');
-        $this->middleware('role:logistik')->except('index', 'show');
+        $this->middleware('role:logistik,admin,manager_produksi')->except('index', 'show');
     }
 
     /**

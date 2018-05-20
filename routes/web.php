@@ -42,6 +42,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('opnames', 'OpnameController');
 
+    Route::post('opnames/filter', 'OpnameController@filter')->name('filterOpname');
+
+    Route::post('opnames/downloadPdf', 'OpnameController@downloadPdf')->name('downloadOpname');
+
     Route::resource('users', 'UserController');
 
     Route::resource('bahanBakuHistories', 'BahanBakuHistoryController');
@@ -54,6 +58,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('kendaraans.kendaraanDetails', 'KendaraanDetailController');
 
+    Route::post('kendaraans/{kendaraan}/kendaraanDetails/filter', 'KendaraanDetailController@filter')->name('filterStatusKendaraan');
+
+    Route::post('kendaraans/{kendaraan}/kendaraanDetails/downloadPdf', 'KendaraanDetailController@downloadPdf')->name('downloadStatusKendaraan');
+
     Route::resource('batasPengadaans', 'BatasPengadaanController');
 
     Route::resource('supplier', 'PemesananBahanBakuController');
@@ -64,5 +72,5 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('supplier.pengadaans', 'Supplier\PengadaanController');
 
-    Route::post('supplier.pengadaans/downloadPdf', 'Supplier\PengadaanController@downloadPdf')->name('downloadPengadaan');
+    Route::post('supplier/{supplier}/pengadaans/downloadPdf', 'Supplier\PengadaanController@downloadPdf')->name('downloadPengadaan');
 });

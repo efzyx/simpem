@@ -25,8 +25,7 @@ class PemesananBahanBakuController extends AppBaseController
     {
         $this->pemesananBahanBakuRepository = $pemesananBahanBakuRepo;
         $this->bahanBakus = BahanBaku::pluck('nama_bahan_baku', 'id');
-        $this->middleware('role:admin,manager_produksi,logistik')->only('index', 'show', 'filter');
-        $this->middleware('role:logistik')->except('index', 'show', 'filter');
+        $this->middleware('role:admin,manager_produksi,logistik');
     }
 
     /**

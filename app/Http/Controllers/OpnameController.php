@@ -10,8 +10,12 @@ use Illuminate\Http\Request;
 use App\Models\BahanBaku;
 use App\Models\BahanBakuHistory;
 use Flash;
+use Carbon\Carbon;
+use PDF;
+use Auth;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Models\Opname;
 
 class OpnameController extends AppBaseController
 {
@@ -22,7 +26,7 @@ class OpnameController extends AppBaseController
     {
         $this->opnameRepository = $opnameRepo;
         $this->bahanBakus = BahanBaku::pluck('nama_bahan_baku', 'id');
-        $this->middleware('role:admin,manager_produksi');
+        $this->middleware('role:admin,manager_produksi,logistik');
     }
 
     /**
@@ -40,6 +44,50 @@ class OpnameController extends AppBaseController
         return view('opnames.index')
             ->with('opnames', $opnames)
             ->with('title', $title);
+    }
+
+    public function filter(Request $request)
+    {
+        $this->opnameRepository->pushCriteria(new RequestCriteria($request));
+        $opnames = $this->opnameRepository->orderBy('id', 'desc')->all();
+        $opnames = $opnames->filter(function ($opname) use ($request) {
+            $dari = $request['tanggal_kirim_dari'] ? Carbon::parse($request['tanggal_kirim_dari']) : null;
+            $sampai = $request['tanggal_kirim_sampai'] ? Carbon::parse($request['tanggal_kirim_sampai']) : null;
+            if ($dari) {
+                if ($sampai) {
+                    return ($opname->tanggal_pemakaian >= $dari &&
+                         $opname->tanggal_pemakaian < $sampai->addDays(1)) ||
+                         ($opname->tanggal_pemakaian >= $dari &&
+                         $opname->tanggal_pemakaian < $dari->addDays(1));
+                }
+                return $opname->tanggal_pemakaian >= $dari &&
+                 $opname->tanggal_pemakaian < $dari->addDays(1);
+            }
+            return $opname;
+        });
+        $opnames = $opnames->filter(function ($opname) use ($request) {
+            return $request['bahan_baku'] ?
+                   $opname->bahan_baku_id == $request['bahan_baku'] :
+                   $opname;
+        });
+
+
+        $title = 'Material Keluar - Filter';
+
+        return view('opnames.index')
+              ->with('opnames', $opnames)
+              ->with('title', $title);
+    }
+
+    public function downloadPdf(Request $request)
+    {
+        $data = json_decode($request['opnames'], true);
+        $opnames = Opname::hydrate($data);
+        $opnames = $opnames->flatten();
+        $user =  Auth::user()->name;
+        $pdf = PDF::loadView('opnames.pdf', ['opnames' => $opnames,'user'=>$user]);
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('pemesanan_'.time().'.pdf');
     }
 
     /**
@@ -66,15 +114,15 @@ class OpnameController extends AppBaseController
     {
         $input = $request->all();
 
-        $opname = $this->opnameRepository->create($input);
-
-        $bahan_baku = BahanBaku::find($opname->bahan_baku_id);
-        $bahan_baku->sisa -= $opname->volume_opname;
-
         if ($bahan_baku->sisa <= 0) {
             Flash::error('Material Kurang');
             return redirect()->back()->withInput($input);
         }
+
+        $opname = $this->opnameRepository->create($input);
+
+        $bahan_baku = BahanBaku::find($opname->bahan_baku_id);
+        $bahan_baku->sisa -= $opname->volume_opname;
 
         $bahan_baku->save();
 
