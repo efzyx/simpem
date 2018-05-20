@@ -80,7 +80,7 @@
           @endforeach
           <tfoot>
             <tr>
-              <td colspan="4"><strong>Total</strong></td>
+              <td colspan="5"><strong>Total</strong></td>
               <td><strong>{{$sisa}}</strong></td>
             </tr>
           </tfoot>

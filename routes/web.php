@@ -52,6 +52,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('bahanBakuHistories/filter', 'BahanBakuHistoryController@filter')->name('filterHistoryBahanBaku');
 
+    Route::post('bahanBakuHistories/downloadPdf', 'BahanBakuHistoryController@downloadPdf')->name('downloadHistoryPdf');
+
     Route::resource('komposisiMutus', 'KomposisiMutuController');
 
     Route::resource('kendaraans', 'KendaraanController');

@@ -28,6 +28,13 @@
     </div>
     <div class="box-body">
       <div class="table-responsive">
+        <h1 class="pull-left">
+              {!! Form::open(['route' => 'downloadHistoryPdf' , 'target' => '_blank'])!!}
+              {!! Form::hidden('bahanBakuHistories', $bahanBakuHistories) !!}
+              {!! Form::submit('Download', ['class' => 'btn btn-danger pull-left', 'style' => 'margin-top: -10px;margin-bottom: 5px']) !!}
+              {!! Form::close() !!}
+        </h1>
+        <div class="clearfix"></div>
         @include('bahan_baku_histories.table')
       </div>
     </div>

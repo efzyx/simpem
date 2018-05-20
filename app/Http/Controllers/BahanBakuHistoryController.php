@@ -8,7 +8,10 @@ use App\Repositories\BahanBakuHistoryRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Auth;
+use PDF;
 use Carbon\Carbon;
+use App\Models\BahanBakuHistory;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
@@ -60,7 +63,7 @@ class BahanBakuHistoryController extends AppBaseController
         });
 
         $histories = $histories->filter(function ($history) use ($request) {
-            return $request['bahan_baku'] ?
+            return $request['bahan_baku'] != null ?
                    $history->bahan_baku_id == $request['bahan_baku'] :
                    $history;
         });
@@ -70,6 +73,17 @@ class BahanBakuHistoryController extends AppBaseController
         return view('bahan_baku_histories.index')
         ->with('bahanBakuHistories', $histories)
         ->with('title', $title);
+    }
+
+    public function downloadPdf(Request $request)
+    {
+        $data = json_decode($request['bahanBakuHistories'], true);
+        $bahanBakuHistories = BahanBakuHistory::hydrate($data);
+        $bahanBakuHistories = $bahanBakuHistories->flatten();
+        $user =  Auth::user()->name;
+        $pdf = PDF::loadView('bahan_baku_histories.pdf', ['bahanBakuHistories' => $bahanBakuHistories,'user'=>$user]);
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('material_'.time().'.pdf');
     }
 
     /**

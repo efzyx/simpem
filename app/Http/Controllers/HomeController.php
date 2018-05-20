@@ -36,7 +36,7 @@ class HomeController extends Controller
         ];
 
         $kemarin = Produksi::where('waktu_produksi', '>=', Carbon::yesterday()->startOfDay())
-                           ->where('waktu_produksi', '<' , Carbon::today()->startOfDay())
+                           ->where('waktu_produksi', '<', Carbon::today()->startOfDay())
                            ->sum('volume');
 
         $bulanini = Produksi::where('waktu_produksi', '>=', Carbon::now()->startOfMonth()->startOfDay())
@@ -51,9 +51,9 @@ class HomeController extends Controller
         $sisa = 0;
 
         foreach ($pemesanans as $key => $value) {
-          $prods = $value->produksis()->sum('volume');
-          $pems = $value->volume_pesanan;
-          $sisa += $pems-$prods;
+            $prods = $value->produksis()->sum('volume');
+            $pems = $value->volume_pesanan;
+            $sisa += $pems-$prods;
         }
 
         $bahanBaku = BahanBaku::all();
