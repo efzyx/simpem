@@ -91,25 +91,27 @@
         <div class="box box-solid box-info">
           <div class="box-header">
             <i class="fa fa-product-hunt"></i>
-            <h3 class="box-title">Produk</h3>
+            <h3 class="box-title">Produksi</h3>
           </div>
           <div class="box-body">
             <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Mutu Produk</th>
-                  <th>Satuan</th>
-                </tr>
-              </thead>
               <tbody>
-                @foreach ($produks as $key => $produk)
                   <tr>
-                    <td>{{ $key+1 }}</td>
-                    <td>{{ $produk->mutu_produk }}</td>
-                    <td>{{ $produk->satuan }}</td>
+                    <th>Kemarin</th>
+                    <td>{{ $kemarin }} m3</td>
                   </tr>
-                @endforeach
+                  <tr>
+                    <th>Bulan Ini</th>
+                    <td>{{ $bulanini }} m3</td>
+                  </tr>
+                  <tr>
+                    <th>Bulan Lalu</th>
+                    <td>{{ $bulanlalu }} m3</td>
+                  </tr>
+                  <tr>
+                    <th>Volume Permintaan</th>
+                    <td>{{ $volume_permintaan }} m3</td>
+                  </tr>
               </tbody>
             </table>
           </div>

@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\BahanBaku;
 use App\Models\Produk;
 use App\Models\Kendaraan;
+use App\Models\Produksi;
+use Carbon\Carbon;
+use App\Models\Pemesanan;
 
 class HomeController extends Controller
 {
@@ -32,6 +35,27 @@ class HomeController extends Controller
           '3' => 'Rental'
         ];
 
+        $kemarin = Produksi::where('waktu_produksi', '>=', Carbon::yesterday()->startOfDay())
+                           ->where('waktu_produksi', '<' , Carbon::today()->startOfDay())
+                           ->sum('volume');
+
+        $bulanini = Produksi::where('waktu_produksi', '>=', Carbon::now()->startOfMonth()->startOfDay())
+                            ->where('waktu_produksi', '<', Carbon::now())
+                            ->sum('volume');
+
+        $bulanlalu = Produksi::where('waktu_produksi', '>=', Carbon::now()->subMonth()->startOfMonth()->startOfDay())
+                            ->where('waktu_produksi', '<', Carbon::now()->startOfMonth()->startOfDay())
+                            ->sum('volume');
+
+        $pemesanans = Pemesanan::all();
+        $sisa = 0;
+
+        foreach ($pemesanans as $key => $value) {
+          $prods = $value->produksis()->sum('volume');
+          $pems = $value->volume_pesanan;
+          $sisa += $pems-$prods;
+        }
+
         $bahanBaku = BahanBaku::all();
         $produks = Produk::all();
         $kendaraans = Kendaraan::all();
@@ -41,6 +65,10 @@ class HomeController extends Controller
               ->with('produks', $produks)
               ->with('title', $title)
               ->with('kendaraans', $kendaraans)
-              ->with('status', $status);
+              ->with('status', $status)
+              ->with('kemarin', $kemarin)
+              ->with('bulanini', $bulanini)
+              ->with('bulanlalu', $bulanlalu)
+              ->with('volume_permintaan', $sisa);
     }
 }
