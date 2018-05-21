@@ -8,14 +8,14 @@
   <body>
       <h1 class="text-center">Rekapitulasi Pemakaian Material diluar Produksi</h1>
       <br><br>
-      <table class="table table-bordered">
+      <table class="table table-bordered text-center">
           <thead>
               <tr>
-              <th>No</th>
-              <th>Bahan Baku</th>
-              <th>Volume</th>
-              <th>Tanggal Pemakaian</th>
-              <th>Keterangan</th>
+              <th class="text-center">No</th>
+              <th class="text-center">Material</th>
+              <th class="text-center">Volume</th>
+              <th class="text-center">Tanggal Pemakaian</th>
+              <th class="text-center">Keterangan</th>
               </tr>
           </thead>
           <tbody>

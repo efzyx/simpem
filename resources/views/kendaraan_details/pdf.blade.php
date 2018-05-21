@@ -12,23 +12,23 @@
       <div class="pull-left">
         <table>
           <tr>
-            <td>No Polisi </td>
-            <td> : </td>
+            <th>No Polisi </th>
+            <th> : </th>
             <td>{{$kendaraan->no_polisi}}</td>
           </tr>
           <tr>
-            <td>Jenis Kendaraan </td>
-            <td> : </td>
+            <th>Jenis Kendaraan </th>
+            <th> : </th>
             <td>{{$kendaraan->jenis_kendaraan}}</td>
           </tr>
           <tr>
-            <td>Masa Berlaku Pajak </td>
-            <td> : </td>
+            <th>Masa Berlaku Pajak </th>
+            <th> : </th>
             <td>{{$kendaraan->masa_pajak->format('d F Y')}}</td>
           </tr>
           <tr>
-            <td>Masa Berlaku STNK </td>
-            <td> : </td>
+            <th>Masa Berlaku STNK </th>
+            <th> : </th>
             <td>{{$kendaraan->masa_stnk->format('d F Y')}}</td>
           </tr>
         </table>
@@ -36,23 +36,23 @@
       <div class="pull-right">
         <table>
           <tr>
-            <td>Masa Berlaku KIR </td>
-            <td> : </td>
+            <th>Masa Berlaku KIR </th>
+            <th> : </th>
             <td>{{$kendaraan->masa_kir->format('d F Y')}}</td>
           </tr>
           <tr>
-            <td>Jumlah Hari StandBy </td>
-            <td> : </td>
+            <th>Jumlah Hari StandBy </th>
+            <th> : </th>
             <td>{{$standby}}</td>
           </tr>
           <tr>
-            <td>Jumlah Hari Rusak </td>
-            <td> : </td>
+            <th>Jumlah Hari Rusak </th>
+            <th> : </th>
             <td>{{$rusak}}</td>
           </tr>
           <tr>
-            <td>Jumlah Hari Rental </td>
-            <td> : </td>
+            <th>Jumlah Hari Rental </th>
+            <th> : </th>
             <td>{{$rental}}</td>
           </tr>
         </table>
@@ -61,13 +61,13 @@
 
       </div>
       <br>
-        <table class="table table-bordered">
+        <table class="table table-bordered text-center">
           <thead>
             <tr>
-              <th>No</th>
-              <th>Tanggal</th>
-              <th>Status Kendaran</th>
-              <th>Keterangan</th>
+              <th class="text-center">No</th>
+              <th class="text-center">Tanggal</th>
+              <th class="text-center">Status Kendaran</th>
+              <th class="text-center">Keterangan</th>
             </tr>
           </thead>
           @foreach ($details as $key => $detail)
