@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
   <body>
-      <h1 class="text-center">Rekapitulasi Produksi</h1>
+      <h1 class="text-center">BPO Sheet</h1>
       <br><br>
           @foreach ($pemesanans as $pemesanan)
           @php
@@ -67,16 +67,16 @@
           </div>
           <br>
 
-<table class="table table-bordered">
+<table class="table table-bordered text-center">
         <thead>
           <tr>
-            <th>No</th>
-            <th>No. Dokumen</th>
-            <th>Tanggal Pengiriman</th>
-            <th>No. Polisi</th>
-            <th>Pengirim</th>
-            <th>Penerima</th>
-            <th>Volume</th>
+            <th class="text-center">No</th>
+            <th class="text-center">No. Dokumen</th>
+            <th class="text-center">Tanggal Pengiriman</th>
+            <th class="text-center">No. Polisi</th>
+            <th class="text-center">Pengirim</th>
+            <th class="text-center">Penerima</th>
+            <th class="text-center">Volume</th>
           </tr>
         </thead>
 

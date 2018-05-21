@@ -10,17 +10,17 @@
       <br><br>
 
 
-        <table class="table table-bordered">
+        <table class="table table-bordered text-center">
           <thead>
             <tr>
-              <th>No</th>
-              <th>No. Dokumen</th>
-              <th>Nama Pemesan</th>
-              <th>Mutu</th>
-              <th>Lokasi Proyek</th>
-              <th>Volume Pesanan</th>
-              <th>Realisasi</th>
-              <th>Sisa Pesanan</th>
+              <th class="text-center">No</th>
+              <th class="text-center">No. Dokumen</th>
+              <th class="text-center">Nama Pemesan</th>
+              <th class="text-center">Mutu</th>
+              <th class="text-center">Lokasi Proyek</th>
+              <th class="text-center">Volume Pesanan</th>
+              <th class="text-center">Realisasi</th>
+              <th class="text-center">Sisa Pesanan</th>
             </tr>
           </thead>
           @php

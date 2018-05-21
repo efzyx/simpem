@@ -30,8 +30,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('pemesanans', 'PemesananController');
     Route::resource('pemesanans.produksis', 'Pemesanan\ProduksiController');
     Route::post('pemesanans.produksis/downloadPdf', 'Pemesanan\ProduksiController@downloadPdf')->name('downloadPengiriman');
+    Route::post('pemesanans/{pemesanan}/produksis/filter', 'Pemesanan\ProduksiController@filter')->name('pemesanans.produksis.filter');
     Route::post('pemesanans/downloadExcel', 'PemesananController@exportExcel')->name('downloadExcel');
-    Route::resource('pemesanans.produksis.pengiriman', 'Pemesanan\Produksi\PengirimanController');
 
     Route::resource('produksis', 'ProduksiController');
 
