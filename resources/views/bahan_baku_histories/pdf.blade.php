@@ -29,7 +29,7 @@
               <tr>
                 <th class="text-center">{{ $bb->nama_bahan_baku }}</th>
                 <td>{{ $bb->satuan }}</td>
-                <td>{{ $value['stock'] - $value['masuk'] }}</td>
+                <td>{{ $value['stock'] - $value['masuk'] + $value['keluar'] }}</td>
                 <td>{{ $value['masuk'] }}</td>
                 <td>{{ $value['keluar'] }}</td>
                 <td>{{ $value['stock'] }}</td>
