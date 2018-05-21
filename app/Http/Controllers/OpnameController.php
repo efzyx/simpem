@@ -129,6 +129,7 @@ class OpnameController extends AppBaseController
         $history = new BahanBakuHistory();
         $history->bahan_baku_id = $opname->bahan_baku_id;
         $history->type = 1;
+        $history->waktu = $opname->tanggal_pemesanan;
         $history->opname_id = $opname->id;
         $history->volume = $opname->volume_opname;
         $history->total_sisa = $bahan_baku->sisa;
@@ -220,6 +221,7 @@ class OpnameController extends AppBaseController
         $history = $bahan_baku->bahan_baku_histories->where('opname_id', $opname->id)->first();
         $history->bahan_baku_id = $opname->bahan_baku_id;
         $history->type = 1;
+        $history->waktu = $opname->tanggal_pemesanan;
         $history->opname_id = $opname->id;
         $history->volume = $opname->volume_opname;
         $history->total_sisa = $bahan_baku->sisa;

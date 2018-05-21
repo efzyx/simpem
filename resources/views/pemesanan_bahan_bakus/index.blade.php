@@ -36,6 +36,7 @@
                    {!! Form::open(['route' => 'downloadSupplier' , 'target' => '_blank'])!!}
                     {!! Form::hidden('pemesananBahanBakus', $pemesananBahanBakus) !!}
                     {!! Form::submit('Download', ['class' => 'btn btn-danger pull-left', 'style' => 'margin-top: -10px;margin-bottom: 5px']) !!}
+                   {!! Form::close() !!}
               </h1>
               <div class="clearfix">
 

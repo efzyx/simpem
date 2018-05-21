@@ -98,6 +98,7 @@ class ProduksiController extends AppBaseController
             $bahan_baku_history = new BahanBakuHistory();
             $bahan_baku_history->bahan_baku_id = $komposisi->bahan_baku_id;
             $bahan_baku_history->type = 0;
+            $bahan_baku_history->waktu = $produksi->waktu_produksi;
             $bahan_baku_history->produksi_id = $produksi->id;
             $bahan_baku_history->volume = $komposisi->volume * $input['volume'];
             $bahan_baku_history->total_sisa = $bahan_baku->sisa;
@@ -198,6 +199,7 @@ class ProduksiController extends AppBaseController
             $bahan_baku_history = $bahan_baku->bahan_baku_histories->where('produksi_id', $produksi->id)->first();
             $bahan_baku_history->bahan_baku_id = $komposisi->bahan_baku_id;
             $bahan_baku_history->type = 0;
+            $bahan_baku_history->waktu = $produksi->waktu_produksi;
             $bahan_baku_history->produksi_id = $produksi->id;
             $bahan_baku_history->volume = $komposisi->volume * ($input['volume'] - $old_volume);
             $bahan_baku_history->total_sisa = $bahan_baku->sisa;
