@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Produksi;
 use App\Models\BahanBaku;
 use App\Models\BahanBakuHistory;
+use Carbon\Carbon;
 
 class ProduksiController extends AppBaseController
 {
@@ -31,8 +32,8 @@ class ProduksiController extends AppBaseController
         })->pluck('nama', 'id');
 
         $this->middleware('role:admin,marketing,produksi,manager_produksi')
-                          ->only('index', 'show');
-        $this->middleware('role:produksi,manager_produksi,admin')->except('index', 'show');
+                          ->only('index', 'show', 'filter', 'downloadPdf');
+        $this->middleware('role:produksi,manager_produksi,admin')->except('index', 'show', 'filter', 'downloadPdf');
     }
 
     /**
@@ -49,6 +50,35 @@ class ProduksiController extends AppBaseController
             ->with('pemesanan', $pemesanan)
             ->with('kendaraans', $this->kendaraans)
             ->with('title', $title);
+    }
+
+    public function filter(Pemesanan $pemesanan, Request $request)
+    {
+        $produksis = $pemesanan->produksis;
+        $produksis = $produksis->filter(function ($produksi) use ($request) {
+            $dari = $request['tanggal_kirim_dari'] ? Carbon::parse($request['tanggal_kirim_dari']) : null;
+            $sampai = $request['tanggal_kirim_sampai'] ? Carbon::parse($request['tanggal_kirim_sampai']) : null;
+            if ($dari) {
+                if ($sampai) {
+                    return ($produksi->waktu_produksi >= $dari &&
+                         $produksi->waktu_produksi < $sampai->addDays(1)) ||
+                         ($produksi->waktu_produksi >= $dari &&
+                         $produksi->waktu_produksi < $dari->addDays(1));
+                }
+                return $produksi->waktu_produksi >= $dari &&
+                 $produksi->waktu_produksi < $dari->addDays(1);
+            }
+
+            return $produksi;
+        });
+
+        $title = 'Produksi - Filter';
+
+        return view('pemesanans.produksis.index')
+              ->with('produksis', $produksis)
+              ->with('kendaraans', $this->kendaraans)
+              ->with('title', $title)
+              ->with('pemesanan', $pemesanan);
     }
 
     /**

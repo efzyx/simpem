@@ -19,6 +19,7 @@
           <tr>
             <th rowspan="2" class="text-center align-middle" style="vertical-align: middle;">No</th>
             <th rowspan="2" class="text-center align-middle" style="vertical-align: middle;">No. Dokumen</th>
+            <th rowspan="2" class="text-center align-middle" style="vertical-align: middle;">Pemesan</th>
             <th rowspan="2" class="text-center align-middle" style="vertical-align: middle;">Tanggal Produksi</th>
             <th rowspan="2" class="text-center align-middle" style="vertical-align: middle;">Mutu Produk</th>
             <th rowspan="2" class="text-center align-middle" style="vertical-align: middle;">Volume</th>
@@ -42,6 +43,7 @@
             <tr>
               <td>{{$key+1}}</td>
               <td>{{$produksi->nomor_dokumen}}</td>
+              <td>{{$produksi->pemesanan->nama_pemesanan}}</td>
               <td>{{$produksi->waktu_produksi}}</td>
               @php
                 $mutu = $produksi->pemesanan->produk;
@@ -77,7 +79,7 @@
           @endforeach
           <tfoot>
             <tr>
-              <th colspan="4" class="text-center">Total</th>
+              <th colspan="5" class="text-center">Total</th>
               <th class="text-center">{{ $produksis->sum('volume')}}</th>
               @php
               $a = 0;
