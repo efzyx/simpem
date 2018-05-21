@@ -17,6 +17,9 @@ use Carbon\Carbon;
 use App\Models\Pemesanan;
 use App\Models\Kendaraan;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Concerns\FromView;
+use App\Exports\PemesananExport;
+use Excel;
 
 class PemesananController extends AppBaseController
 {
@@ -249,4 +252,20 @@ class PemesananController extends AppBaseController
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream('pemesanan_'.time().'.pdf');
     }
+
+    public function exportExcel(Request $request)
+    {
+      $data = json_decode($request['pemesanans'], true);
+      $pemesanans = Pemesanan::hydrate($data);
+      $pemesanans = $pemesanans->flatten();
+      $user =  Auth::user()->name;
+
+      return Excel::create('Rekapitulasi-Pemesanan-'.time(), function($excel) use($pemesanans, $user) {
+          $excel->sheet('Rekapitulasi Pemesanan', function($sheet) use ($pemesanans, $user) {
+              $sheet->loadView('pemesanans.xls',compact('pemesanans','user'));
+              $sheet->mergeCells('A1:G1');
+          });
+      })->export();
+    }
+
 }
