@@ -8,9 +8,13 @@ use App\Repositories\BahanBakuHistoryRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Auth;
+use PDF;
 use Carbon\Carbon;
+use App\Models\BahanBakuHistory;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Models\BahanBaku;
 
 class BahanBakuHistoryController extends AppBaseController
 {
@@ -31,7 +35,7 @@ class BahanBakuHistoryController extends AppBaseController
     public function index(Request $request)
     {
         $this->bahanBakuHistoryRepository->pushCriteria(new RequestCriteria($request));
-        $bahanBakuHistories = $this->bahanBakuHistoryRepository->orderBy('id', 'desc')->all();
+        $bahanBakuHistories = $this->bahanBakuHistoryRepository->orderBy('waktu', 'desc')->all();
         $title = "Riwayat Material";
 
         return view('bahan_baku_histories.index')
@@ -42,25 +46,25 @@ class BahanBakuHistoryController extends AppBaseController
     public function filter(Request $request)
     {
         $this->bahanBakuHistoryRepository->pushCriteria(new RequestCriteria($request));
-        $histories = $this->bahanBakuHistoryRepository->all();
+        $histories = $this->bahanBakuHistoryRepository->orderBy('waktu', 'desc')->all();
         $histories = $histories->filter(function ($history) use ($request) {
             $dari = $request['tanggal_kirim_dari'] ? Carbon::parse($request['tanggal_kirim_dari']) : null;
             $sampai = $request['tanggal_kirim_sampai'] ? Carbon::parse($request['tanggal_kirim_sampai']) : null;
             if ($dari) {
                 if ($sampai) {
-                    return ($history->created_at >= $dari &&
-                         $history->created_at < $sampai->addDays(1)) ||
-                         ($history->created_at >= $dari &&
-                         $history->created_at < $dari->addDays(1));
+                    return ($history->waktu >= $dari &&
+                         $history->waktu < $sampai->addDays(1)) ||
+                         ($history->waktu >= $dari &&
+                         $history->waktu < $dari->addDays(1));
                 }
-                return $history->created_at >= $dari &&
-                 $history->created_at < $dari->addDays(1);
+                return $history->waktu >= $dari &&
+                 $history->waktu < $dari->addDays(1);
             }
             return $history;
         });
 
         $histories = $histories->filter(function ($history) use ($request) {
-            return $request['bahan_baku'] ?
+            return $request['bahan_baku'] != null ?
                    $history->bahan_baku_id == $request['bahan_baku'] :
                    $history;
         });
@@ -69,7 +73,43 @@ class BahanBakuHistoryController extends AppBaseController
 
         return view('bahan_baku_histories.index')
         ->with('bahanBakuHistories', $histories)
-        ->with('title', $title);
+        ->with('title', $title)
+        ->with('dari', $request['tanggal_kirim_dari'])
+        ->with('sampai', $request['tanggal_kirim_sampai']);
+    }
+
+    public function downloadPdf(Request $request)
+    {
+        $data = json_decode($request['bahanBakuHistories'], true);
+        $bahanBakuHistories = BahanBakuHistory::hydrate($data);
+        $bahanBakuHistories = $bahanBakuHistories->flatten();
+        $stock = [];
+        $bahan_bakus = $bahanBakuHistories->groupBy('bahan_baku_id');
+
+        foreach($bahan_bakus as $key => $bahan_baku){
+          $masuk = $bahan_baku->filter(function($b){
+            return $b->type == 2;
+          })->sum('volume');
+          $keluar = $bahan_baku->filter(function($b){
+            return $b->type == 0 || $b->type == 1;
+          })->sum('volume');
+          $sisa = $bahan_baku->sortByDesc('waktu')->first()->total_sisa;
+          $data = ['masuk' => $masuk, 'keluar' => $keluar, 'stock' => $sisa];
+          $stock[$key] = $data;
+        }
+
+        $user =  Auth::user()->name;
+        $pdf = PDF::loadView('bahan_baku_histories.pdf',
+                [
+                  'bahanBakuHistories' => $bahanBakuHistories,
+                  'user' => $user,
+                  'stock' => $stock,
+                  'dari' => $request['dari'],
+                  'sampai' => $request['sampai'],
+                ]);
+
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('material_'.time().'.pdf');
     }
 
     /**

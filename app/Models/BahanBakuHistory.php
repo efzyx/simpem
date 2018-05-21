@@ -24,12 +24,13 @@ class BahanBakuHistory extends Model
     public $table = 'bahan_baku_histories';
 
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'waktu'];
 
 
     public $fillable = [
         'bahan_baku_id',
         'type',
+        'waktu',
         'pengadaan_id',
         'produksi_id',
         'opname_id',
@@ -60,6 +61,7 @@ class BahanBakuHistory extends Model
     public static $rules = [
         'bahan_baku_id' => 'required',
         'type' => 'required',
+        'waktu' => 'required',
         'pengadaan_id' => 'nullable',
         'produksi_id' => 'nullable',
         'opname_id' => 'nullable',

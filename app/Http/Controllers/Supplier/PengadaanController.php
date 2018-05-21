@@ -95,6 +95,7 @@ class PengadaanController extends AppBaseController
         $history = new BahanBakuHistory();
         $history->bahan_baku_id = $pengadaan->bahan_baku_id;
         $history->type = 2;
+        $history->waktu = $pengadaan->tanggal_pengadaan;
         $history->volume = $pengadaan->berat;
         $history->pengadaan_id = $pengadaan->id;
         $history->total_sisa = $bahan_baku->sisa;
@@ -197,6 +198,7 @@ class PengadaanController extends AppBaseController
         $history = $bahan_baku->bahan_baku_histories->where('pengadaan_id', $pengadaan->id)->first();
         $history->bahan_baku_id = $pengadaan->bahan_baku_id;
         $history->type = 2;
+        $history->waktu = $pengadaan->tanggal_pengadaan;
         $history->volume = $pengadaan->berat;
         $history->pengadaan_id = $pengadaan->id;
         $history->total_sisa = $bahan_baku->sisa;

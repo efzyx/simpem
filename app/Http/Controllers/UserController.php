@@ -11,6 +11,7 @@ use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Models\Jabatan;
+use Auth;
 
 class UserController extends AppBaseController
 {
@@ -21,7 +22,8 @@ class UserController extends AppBaseController
     {
         $this->userRepository = $userRepo;
         $this->jabatans = Jabatan::pluck('nama_jabatan', 'id');
-        $this->middleware('role:admin,manager_produksi');
+        $this->middleware('role:admin,manager_produksi')->only('index');
+        $this->middleware('role:admin')->except('index');
     }
 
     /**
@@ -162,6 +164,12 @@ class UserController extends AppBaseController
             Flash::error('User not found');
 
             return redirect(route('users.index'));
+        }
+
+        if ($user->id === Auth::user()->id) {
+          Flash::error('Anda tidak dapat menghapus akun sendiri');
+
+          return redirect(route('users.index'));
         }
 
         $this->userRepository->delete($id);
