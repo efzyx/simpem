@@ -14,6 +14,7 @@
           <thead>
             <tr>
               <th>No</th>
+              <th>No. Dokumen</th>
               <th>Nama Pemesan</th>
               <th>Mutu</th>
               <th>Lokasi Proyek</th>
@@ -30,6 +31,7 @@
           @foreach ($pemesanans as $pemesanan)
               <tr>
                 <td>{{$no++}}</td>
+                <td>{{$pemesanan->nomor_dokumen}}</td>
                 <td>{{$pemesanan->nama_pemesanan}}</td>
                 <td>{{$pemesanan->produk->mutu_produk}}</td>
                 <td>{{$pemesanan->lokasi_proyek}}</td>

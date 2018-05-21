@@ -16,7 +16,6 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.5.0",
         "maatwebsite/excel": "~2.1",
-        "stechstudio/laravel-php-cs-fixer": "^0.0.1",
         "symfony/css-selector": "^4.0.0"
     },
     "require-dev": {
@@ -58,8 +57,7 @@
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "php artisan optimize",
-            "@php artisan migrate:fresh --force --seed"
+            "php artisan optimize"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",

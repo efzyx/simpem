@@ -113,15 +113,14 @@ class OpnameController extends AppBaseController
     public function store(CreateOpnameRequest $request)
     {
         $input = $request->all();
+        $bahan_baku = BahanBaku::find($input['bahan_baku_id']);
 
-        if ($bahan_baku->sisa <= 0) {
-            Flash::error('Material Kurang');
+        if ($bahan_baku->sisa-$input['volume_opname'] < 0) {
+            Flash::error('Stock Material Tidak Mencukupi');
             return redirect()->back()->withInput($input);
         }
 
         $opname = $this->opnameRepository->create($input);
-
-        $bahan_baku = BahanBaku::find($opname->bahan_baku_id);
         $bahan_baku->sisa -= $opname->volume_opname;
 
         $bahan_baku->save();
@@ -129,7 +128,7 @@ class OpnameController extends AppBaseController
         $history = new BahanBakuHistory();
         $history->bahan_baku_id = $opname->bahan_baku_id;
         $history->type = 1;
-        $history->waktu = $opname->tanggal_pemesanan;
+        $history->waktu = $opname->tanggal_pemakaian;
         $history->opname_id = $opname->id;
         $history->volume = $opname->volume_opname;
         $history->total_sisa = $bahan_baku->sisa;
@@ -209,8 +208,8 @@ class OpnameController extends AppBaseController
 
         $bahan_baku->sisa -= $input['volume_opname'] - $old_volume;
 
-        if ($bahan_baku->sisa <= 0) {
-            Flash::error('Material Kurang');
+        if ($bahan_baku->sisa < 0) {
+            Flash::error('Material Tidak Mencukupi');
             return redirect()->back()->withInput($input);
         }
 
@@ -221,7 +220,7 @@ class OpnameController extends AppBaseController
         $history = $bahan_baku->bahan_baku_histories->where('opname_id', $opname->id)->first();
         $history->bahan_baku_id = $opname->bahan_baku_id;
         $history->type = 1;
-        $history->waktu = $opname->tanggal_pemesanan;
+        $history->waktu = $opname->tanggal_pemakaian;
         $history->opname_id = $opname->id;
         $history->volume = $opname->volume_opname;
         $history->total_sisa = $bahan_baku->sisa;
