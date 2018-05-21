@@ -167,9 +167,9 @@ class UserController extends AppBaseController
         }
 
         if ($user->id === Auth::user()->id) {
-          Flash::error('Anda tidak dapat menghapus akun sendiri');
+            Flash::error('Anda tidak dapat menghapus akun sendiri');
 
-          return redirect(route('users.index'));
+            return redirect(route('users.index'));
         }
 
         $this->userRepository->delete($id);

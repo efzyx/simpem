@@ -8,18 +8,18 @@
   <body>
       <h1 class="text-center">Rekapitulasi Pemesanan Material</h1>
       <br><br>
-      <table class="table table-bordered">
+      <table class="table table-bordered text-center">
           <thead>
               <tr>
-              <th>No</th>
-              <th>Nama Supplier</th>
-              <th>CP Supplier</th>
-              <th>Material</th>
-              <th>Volume</th>
-              <th>Diterima</th>
-              <th>Sisa</th>
-              <th>Tanggal</th>
-              <th>Keterangan</th>
+              <th class="text-center">No</th>
+              <th class="text-center">Nama Supplier</th>
+              <th class="text-center">Kontak</th>
+              <th class="text-center">Material</th>
+              <th class="text-center">Kuantitas</th>
+              <th class="text-center">Diterima</th>
+              <th class="text-center">Sisa</th>
+              <th class="text-center">Tanggal</th>
+              <th class="text-center">Keterangan</th>
               </tr>
           </thead>
           <tbody>

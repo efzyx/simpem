@@ -9,15 +9,15 @@
       <h1 class="text-center">Rekapitulasi Material</h1>
       <br><br>
       <p>Tanggal : {{$dari ? \Carbon\Carbon::parse($dari)->format('d F Y') : 'Semua Waktu'}} {{ $sampai ? ' - '.\Carbon\Carbon::parse($sampai)->format('d F Y') : ''}}</p>
-        <table class="table table-bordered">
+        <table class="table table-bordered text-center">
           <thead>
             <tr>
-              <th>Nama Material</th>
-              <th>Satuan</th>
-              <th>Stock</th>
-              <th>Masuk</th>
-              <th>Keluar</th>
-              <th>Jumlah</th>
+              <th class="text-center">Nama Material</th>
+              <th class="text-center">Satuan</th>
+              <th class="text-center">Stock</th>
+              <th class="text-center">Masuk</th>
+              <th class="text-center">Keluar</th>
+              <th class="text-center">Jumlah</th>
             </tr>
           </thead>
 
@@ -27,12 +27,12 @@
                 $bb = \App\Models\BahanBaku::find($key);
               @endphp
               <tr>
-                <th>{{ $bb->nama_bahan_baku }}</th>
+                <th class="text-center">{{ $bb->nama_bahan_baku }}</th>
                 <td>{{ $bb->satuan }}</td>
-                <td>{{ $value['stock'] }}</td>
+                <td>{{ $value['stock'] - $value['masuk'] }}</td>
                 <td>{{ $value['masuk'] }}</td>
                 <td>{{ $value['keluar'] }}</td>
-                <td>{{ $value['masuk'] + $value['keluar'] }}</td>
+                <td>{{ $value['stock'] }}</td>
               </tr>
             @endforeach
 

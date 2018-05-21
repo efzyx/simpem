@@ -86,27 +86,29 @@ class BahanBakuHistoryController extends AppBaseController
         $stock = [];
         $bahan_bakus = $bahanBakuHistories->groupBy('bahan_baku_id');
 
-        foreach($bahan_bakus as $key => $bahan_baku){
-          $masuk = $bahan_baku->filter(function($b){
-            return $b->type == 2;
-          })->sum('volume');
-          $keluar = $bahan_baku->filter(function($b){
-            return $b->type == 0 || $b->type == 1;
-          })->sum('volume');
-          $sisa = $bahan_baku->sortByDesc('waktu')->first()->total_sisa;
-          $data = ['masuk' => $masuk, 'keluar' => $keluar, 'stock' => $sisa];
-          $stock[$key] = $data;
+        foreach ($bahan_bakus as $key => $bahan_baku) {
+            $masuk = $bahan_baku->filter(function ($b) {
+                return $b->type == 2;
+            })->sum('volume');
+            $keluar = $bahan_baku->filter(function ($b) {
+                return $b->type == 0 || $b->type == 1;
+            })->sum('volume');
+            $sisa = $bahan_baku->sortByDesc('waktu')->first()->total_sisa;
+            $data = ['masuk' => $masuk, 'keluar' => $keluar, 'stock' => $sisa];
+            $stock[$key] = $data;
         }
 
         $user =  Auth::user()->name;
-        $pdf = PDF::loadView('bahan_baku_histories.pdf',
+        $pdf = PDF::loadView(
+            'bahan_baku_histories.pdf',
                 [
                   'bahanBakuHistories' => $bahanBakuHistories,
                   'user' => $user,
                   'stock' => $stock,
                   'dari' => $request['dari'],
                   'sampai' => $request['sampai'],
-                ]);
+                ]
+        );
 
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream('material_'.time().'.pdf');
