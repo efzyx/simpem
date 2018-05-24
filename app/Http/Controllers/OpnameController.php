@@ -16,6 +16,7 @@ use Auth;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Models\Opname;
+use Excel;
 
 class OpnameController extends AppBaseController
 {
@@ -88,6 +89,21 @@ class OpnameController extends AppBaseController
         $pdf = PDF::loadView('opnames.pdf', ['opnames' => $opnames,'user'=>$user]);
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream('pemesanan_'.time().'.pdf');
+    }
+
+    public function exportExcel(Request $request)
+    {
+        $data = json_decode($request['opnames'], true);
+        $opnames = Opname::hydrate($data);
+        $opnames = $opnames->flatten();
+        $user =  Auth::user()->name;
+
+        return Excel::create('Rekapitulasi-Material-Keluar-'.time(), function($excel) use($opnames, $user) {
+            $excel->sheet('Rekapitulasi Material Keluar', function($sheet) use ($opnames, $user) {
+                $sheet->loadView('opnames.xls',compact('opnames','user'));
+                $sheet->mergeCells('A1:E1');
+            });
+        })->export();
     }
 
     /**

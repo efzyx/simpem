@@ -15,6 +15,7 @@ use App\Models\BahanBakuHistory;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Models\BahanBaku;
+use Excel;
 
 class BahanBakuHistoryController extends AppBaseController
 {
@@ -112,6 +113,38 @@ class BahanBakuHistoryController extends AppBaseController
 
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream('material_'.time().'.pdf');
+    }
+
+    public function exportExcel(Request $request)
+    {
+      $data = json_decode($request['bahanBakuHistories'], true);
+      $bahanBakuHistories = BahanBakuHistory::hydrate($data);
+      $bahanBakuHistories = $bahanBakuHistories->flatten();
+      $stock = [];
+      $bahan_bakus = $bahanBakuHistories->groupBy('bahan_baku_id');
+
+      foreach ($bahan_bakus as $key => $bahan_baku) {
+          $masuk = $bahan_baku->filter(function ($b) {
+              return $b->type == 2;
+          })->sum('volume');
+          $keluar = $bahan_baku->filter(function ($b) {
+              return $b->type == 0 || $b->type == 1;
+          })->sum('volume');
+          $sisa = $bahan_baku->sortByDesc('waktu')->first()->total_sisa;
+          $data = ['masuk' => $masuk, 'keluar' => $keluar, 'stock' => $sisa];
+          $stock[$key] = $data;
+      }
+
+      $user =  Auth::user()->name;
+      $dari = $request['dari'];
+      $sampai = $request['sampai'];
+
+      return Excel::create('History-Material-'.time(), function($excel) use($bahanBakuHistories, $user, $stock, $dari, $sampai) {
+          $excel->sheet('History Material', function($sheet) use ($bahanBakuHistories, $user, $stock, $dari, $sampai) {
+              $sheet->loadView('bahan_baku_histories.xls',compact('bahanBakuHistories','user', 'stock', 'dari', 'sampai'));
+              $sheet->mergeCells('A1:F1');
+          });
+      })->export();
     }
 
     /**

@@ -3,10 +3,9 @@
   <head>
     <meta charset="utf-8">
     <title>Cetak Daftar Pengiriman</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
   <body>
-      <h1 class="text-center">Rekapitulasi Produksi</h1>
+      <strong>Rekapitulasi Produksi</strong>
       <br><br>
           @foreach ($pemesanans as $pemesanan)
           @php
@@ -67,15 +66,15 @@
           </div>
           <br>
 
-<table class="table table-bordered text-center">
+<table>
         <thead>
           <tr>
-            <th class="text-center">No</th>
-            <th class="text-center">No. Dokumen</th>
-            <th class="text-center">Tanggal Pengiriman</th>
-            <th class="text-center">No. Polisi</th>
-            <th class="text-center">Penerima</th>
-            <th class="text-center">Volume</th>
+            <th>No</th>
+            <th>No. Dokumen</th>
+            <th>Tanggal Pengiriman</th>
+            <th>No. Polisi</th>
+            <th>Penerima</th>
+            <th>Volume</th>
           </tr>
         </thead>
 
@@ -92,21 +91,8 @@
           @endforeach
 
           @endforeach
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         </tbody>
       </table>
       <br><br>
-
-      <div class="pull-right">
-           Padang, {{date("d-m-Y")}}
-            <br>
-           Dibuat Oleh
-            <br><br><br><br>
-           {{$user}}
-      </div>
-
-
-
   </body>
 </html>

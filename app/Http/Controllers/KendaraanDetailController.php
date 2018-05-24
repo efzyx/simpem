@@ -15,6 +15,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Models\Kendaraan;
 use App\Models\KendaraanDetail;
 use Response;
+use Excel;
 
 class KendaraanDetailController extends AppBaseController
 {
@@ -166,6 +167,47 @@ class KendaraanDetailController extends AppBaseController
 
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream('status_kendaraan_'.time().'.pdf');
+    }
+
+    public function exportExcel(Kendaraan $kendaraan, Request $request)
+    {
+        $data = json_decode($request['kendaraanDetails'], true);
+        $details = KendaraanDetail::hydrate($data);
+        $details = $details->flatten();
+        $urut = $details->sortBy('waktu')->getIterator();
+        $standby = 0;
+        $rusak = 0;
+        $rental = 0;
+
+        foreach ($urut as $key => $detail) {
+            $next = next($urut);
+            $next = $next ? $next->waktu : Carbon::now();
+            $selisih = $detail->waktu->diffInDays($next);
+
+            switch ($detail->status) {
+            case 1:
+              $standby += $selisih;
+              break;
+            case 2:
+              $rusak += $selisih;
+              break;
+            case 3:
+              $rental += $selisih;
+              break;
+            default:
+              break;
+          }
+        }
+
+        $user =  Auth::user()->name;
+        $status = $this->status;
+
+        return Excel::create('Status-Kendaraan-'.time(), function($excel) use($details, $user, $kendaraan, $status, $standby, $rusak, $rental) {
+            $excel->sheet('Status Kendaraan', function($sheet) use ($details, $user, $kendaraan, $status, $standby, $rusak, $rental) {
+                $sheet->loadView('kendaraan_details.xls',compact('details', 'user', 'kendaraan', 'status', 'standby', 'rusak', 'rental'));
+                $sheet->mergeCells('A1:D1');
+            });
+        })->export();
     }
 
     /**

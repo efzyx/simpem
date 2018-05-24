@@ -18,6 +18,7 @@ use App\Models\Kendaraan;
 use PDF;
 use App\Models\PemesananBahanBaku;
 use App\Models\Pengadaan;
+use Excel;
 
 class PengadaanController extends AppBaseController
 {
@@ -247,5 +248,19 @@ class PengadaanController extends AppBaseController
         $pdf = PDF::loadView('pemesanan_bahan_bakus.pengadaans.pdf', ['suppliers' => $suppliers,'user' => $user, 'kendaraans' => $this->kendaraans,'bahan_baku' => $this->bahanBakus]);
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream('pemesanan_'.time().'.pdf');
+    }
+
+    public function exportExcel(Request $request)
+    {
+        $data = array(json_decode($request['supplier'], true));
+        $suppliers = PemesananBahanBaku::hydrate($data);
+        $suppliers = $suppliers->flatten();
+        $user =  Auth::user()->name;
+        return Excel::create('Rekapitulasi-Pemesanan-Material'.time(), function($excel) use($suppliers, $user) {
+            $excel->sheet('Rekapitulasi Pemesanan Material', function($sheet) use ($suppliers, $user) {
+                $sheet->loadView('pemesanan_bahan_bakus.pengadaans.xls',compact('suppliers','user'));
+                $sheet->mergeCells('A1:G1');
+            });
+        })->export();
     }
 }
