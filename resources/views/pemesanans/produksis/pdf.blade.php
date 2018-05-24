@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
   <body>
-      <h1 class="text-center">BPO Sheet</h1>
+      <h1 class="text-center">Rekapitulasi Produksi</h1>
       <br><br>
           @foreach ($pemesanans as $pemesanan)
           @php
@@ -74,7 +74,6 @@
             <th class="text-center">No. Dokumen</th>
             <th class="text-center">Tanggal Pengiriman</th>
             <th class="text-center">No. Polisi</th>
-            <th class="text-center">Pengirim</th>
             <th class="text-center">Penerima</th>
             <th class="text-center">Volume</th>
           </tr>
@@ -87,7 +86,6 @@
             <td>{{$produksi->nomor_dokumen}}</td>
             <td>{{$produksi->waktu_produksi->format('d F Y h:m')}}</td>
             <td>{{$produksi->kendaraan->no_polisi}}</td>
-            <td>{{$produksi->nama_pengirim}}</td>
             <td>{{$produksi->nama_penerima}}</td>
             <td>{{$produksi->volume}}</td>
           </tr>

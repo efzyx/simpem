@@ -35,6 +35,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('produksis', 'ProduksiController');
 
+    Route::post('produksis/exportExcel', 'ProduksiController@exportExcel')->name('exportProduksi');
+
     Route::resource('pengiriman', 'PengirimanController');
 
     Route::resource('bahanBakus', 'BahanBakuController');
@@ -47,6 +49,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('opnames/downloadPdf', 'OpnameController@downloadPdf')->name('downloadOpname');
 
+    Route::post('opnames/exportExcel', 'OpnameController@exportExcel')->name('exportOpname');
+
     Route::resource('users', 'UserController');
 
     Route::resource('bahanBakuHistories', 'BahanBakuHistoryController');
@@ -54,6 +58,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('bahanBakuHistories/filter', 'BahanBakuHistoryController@filter')->name('filterHistoryBahanBaku');
 
     Route::post('bahanBakuHistories/downloadPdf', 'BahanBakuHistoryController@downloadPdf')->name('downloadHistoryPdf');
+
+    Route::post('bahanBakuHistories/exportExcel', 'BahanBakuHistoryController@exportExcel')->name('downloadHistoryExcel');
 
     Route::resource('komposisiMutus', 'KomposisiMutuController');
 
@@ -65,6 +71,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('kendaraans/{kendaraan}/kendaraanDetails/downloadPdf', 'KendaraanDetailController@downloadPdf')->name('downloadStatusKendaraan');
 
+    Route::post('kendaraans/{kendaraan}/kendaraanDetails/exportExcel', 'KendaraanDetailController@exportExcel')->name('downloadStatusExcel');
+
     Route::resource('batasPengadaans', 'BatasPengadaanController');
 
     Route::resource('supplier', 'PemesananBahanBakuController');
@@ -73,9 +81,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('supplier/filter', 'PemesananBahanBakuController@filter')->name('filterPesanBahanBaku');
 
+    Route::post('supplier/exportExcel', 'PemesananBahanBakuController@exportExcel')->name('exportSupplier');
+
     Route::resource('supplier.pengadaans', 'Supplier\PengadaanController');
 
     Route::post('supplier/{supplier}/pengadaans/downloadPdf', 'Supplier\PengadaanController@downloadPdf')->name('downloadPengadaan');
+
+    Route::post('supplier/{supplier}/pengadaans/exportExcel', 'Supplier\PengadaanController@exportExcel')->name('exportPengadaan');
 
     Route::post('ganti_password', 'GantiPasswordController@simpan')->name('ganti_password');
 });

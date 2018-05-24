@@ -23,6 +23,7 @@ use App\Models\Produksi;
 use App\Models\Produk;
 use App\Models\KomposisiMutu;
 use App\Models\KendaraanDetail;
+use Excel;
 
 class ProduksiController extends AppBaseController
 {
@@ -339,8 +340,25 @@ class ProduksiController extends AppBaseController
         $produksis = Produksi::hydrate($data);
         $produksis = $produksis->flatten();
         $user =  Auth::user()->name;
-        $pdf = PDF::loadView('produksis.pdf', ['produksis' => $produksis,'user'=>$user]);
+        $pdf = PDF::loadView('produksis.pdf', ['produksis' => $produksis,'user'=>$user,'supir'=>$this->supirs]);
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream('produksi_'.time().'.pdf');
+    }
+
+    public function exportExcel(Request $request)
+    {
+        $data = json_decode($request['produksis'], true);
+        $produksis = Produksi::hydrate($data);
+        $produksis = $produksis->flatten();
+        $user =  Auth::user()->name;
+        $supir = $this->supirs;
+
+        return Excel::create('Rekapitulasi-BPO-Sheet-'.time(), function($excel) use($produksis, $user, $supir) {
+            $excel->sheet('BPO Sheet', function($sheet) use ($produksis, $user, $supir) {
+                $sheet->loadView('produksis.xls',compact('produksis','user','supir'));
+                $sheet->mergeCells('A1:N1');
+                $sheet->mergeCells('J2:N2');
+            });
+        })->export();
     }
 }

@@ -263,7 +263,7 @@ class PemesananController extends AppBaseController
       return Excel::create('Rekapitulasi-Pemesanan-'.time(), function($excel) use($pemesanans, $user) {
           $excel->sheet('Rekapitulasi Pemesanan', function($sheet) use ($pemesanans, $user) {
               $sheet->loadView('pemesanans.xls',compact('pemesanans','user'));
-              $sheet->mergeCells('A1:G1');
+              $sheet->mergeCells('A1:H1');
           });
       })->export();
     }

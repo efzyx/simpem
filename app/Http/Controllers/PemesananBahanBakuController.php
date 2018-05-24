@@ -15,6 +15,7 @@ use App\Models\BahanBaku;
 use App\Models\PemesananBahanBaku;
 use PDF;
 use Auth;
+use Excel;
 
 class PemesananBahanBakuController extends AppBaseController
 {
@@ -215,5 +216,20 @@ class PemesananBahanBakuController extends AppBaseController
         $pdf = PDF::loadView('pemesanan_bahan_bakus.pdf', ['pemesananBahanBakus' => $suppliers,'user'=>$user]);
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream('pemesanan_'.time().'.pdf');
+    }
+
+    public function exportExcel(Request $request)
+    {
+        $data = json_decode($request['pemesananBahanBakus'], true);
+        $pemesananBahanBakus = PemesananBahanBaku::hydrate($data);
+        $pemesananBahanBakus = $pemesananBahanBakus->flatten();
+        $user =  Auth::user()->name;
+
+        return Excel::create('Rekapitulasi-Pemesanan-Material-'.time(), function($excel) use($pemesananBahanBakus, $user) {
+            $excel->sheet('Rekapitulasi Pemesanan Material', function($sheet) use ($pemesananBahanBakus, $user) {
+                $sheet->loadView('pemesanan_bahan_bakus.xls',compact('pemesananBahanBakus','user'));
+                $sheet->mergeCells('A1:I1');
+            });
+        })->export();
     }
 }
