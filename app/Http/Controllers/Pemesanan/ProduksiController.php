@@ -19,6 +19,7 @@ use App\Models\Produksi;
 use App\Models\BahanBaku;
 use App\Models\BahanBakuHistory;
 use Carbon\Carbon;
+use Excel;
 
 class ProduksiController extends AppBaseController
 {
@@ -299,5 +300,20 @@ class ProduksiController extends AppBaseController
         $pdf = PDF::loadView('pemesanans.produksis.pdf', ['pemesanans' => $pemesanans,'user' => $user, 'kendaraans' => $this->kendaraans]);
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream('pengiriman_'.time().'.pdf');
+    }
+
+    public function exportExcel(Request $request)
+    {
+        $data = array(json_decode($request['pemesanans'], true));
+        $pemesanans = Pemesanan::hydrate($data);
+        $pemesanans = $pemesanans->flatten();
+        $user =  Auth::user()->name;
+
+        return Excel::create('Rekapitulasi-Produksi-'.time(), function($excel) use($pemesanans, $user) {
+            $excel->sheet('Rekapitulasi', function($sheet) use ($pemesanans, $user) {
+                $sheet->loadView('pemesanans.produksis.xls',compact('pemesanans','user'));
+                $sheet->mergeCells('A1:F1');
+            });
+        })->export();
     }
 }
