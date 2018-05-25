@@ -15,7 +15,7 @@
           $sisa = $produksis->sum('volume');
 
           @endphp
-          <div class="pull-left">
+          <div>
             <table>
               <tbody>
                 <tr>
@@ -34,14 +34,6 @@
                   <td style="border : none"><strong>Produk  </strong></td>
                   <td style="border : none">: {!! $pemesanan->produk->mutu_produk !!}</td>
                 </tr>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="pull-right">
-            <table>
-              <tbody>
                 <tr>
                   <td style="border : none"><strong>Satuan  </strong></td>
                   <td style="border : none">: {!!$pemesanan->produk->satuan !!}</td>
@@ -61,9 +53,7 @@
               </tbody>
             </table>
           </div>
-          <div class="clearfix">
 
-          </div>
           <br>
 
 <table>
@@ -93,6 +83,5 @@
           @endforeach
         </tbody>
       </table>
-      <br><br>
   </body>
 </html>

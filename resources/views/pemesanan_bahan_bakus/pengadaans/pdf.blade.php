@@ -36,7 +36,6 @@
                   <td> : </td>
                   <td>{!! $supplier->bahan_baku->satuan !!}</td>
                 </tr>
-                </tr>
               </tbody>
             </table>
           </div>

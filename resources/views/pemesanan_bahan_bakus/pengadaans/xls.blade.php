@@ -6,7 +6,7 @@
     {{-- <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}> --}}
   </head>
   <body>
-      <h1 class="text-center">Penerimaan Material</h1>
+      <strong>Penerimaan Material</strong>
       <br><br>
           @foreach ($suppliers as $supplier)
           @php
@@ -22,53 +22,36 @@
             <table>
               <tbody>
                 <tr>
-                  <td><strong>Nama Supplier </strong></td>
-                  <td> : </td>
+                  <th>Nama Supplier</th>
                   <td>{!! $supplier->nama_supplier !!}</td>
                 </tr>
                 <tr>
-                  <td><strong>Nama Material </strong></td>
-                  <td> : </td>
+                  <th>Nama Material</th>
                   <td>{!! $supplier->bahan_baku->nama_bahan_baku !!}</td>
                 </tr>
                 <tr>
-                  <td><strong>Satuan </strong></td>
-                  <td> : </td>
+                  <th>Satuan</th>
                   <td>{!! $supplier->bahan_baku->satuan !!}</td>
                 </tr>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="pull-right">
-            <table>
-              <tbody>
                 <tr>
-                  <td><strong>Kuantitas Pesanan </strong></td>
-                  <td> : </td>
+                  <th>Kuantitas Pesanan</th>
                   <td>{!! $pesanan = $supplier->volume_pemesanan !!}</td>
                 </tr>
                 <tr>
-                  <td><strong>Realisasi </strong></td>
-                  <td>:</td>
+                  <th>Realisasi</th>
                   <td>{!! $real = $pengadaans->sum('berat'); !!}</td>
                 </tr>
                 <tr>
-                  <td><strong>Sisa Pesanan </strong></td>
-                  <td> : </td>
+                  <th>Sisa Pesanan</th>
                   <td>{!! $sisa = $pesanan-$real !!}</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-        <div class="clearfix">
-
-        </div>
         <br>
 
-<table>
+        <table>
         <thead>
           <tr>
             <th>No</th>
@@ -97,14 +80,11 @@
           @endforeach
           <tfoot>
             <tr>
-              <td colspan="6"><strong>Total</strong></td>
-              <td><strong>{{$real}}</strong></td>
+              <th colspan="6">Total</th>
+              <th>{{$real}}</th>
             </tr>
           </tfoot>
         </tbody>
       </table>
-<br><br>
-{{-- <script src="{{ asset('js/jquery.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script> --}}
   </body>
 </html>

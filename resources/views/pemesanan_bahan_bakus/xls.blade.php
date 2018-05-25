@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title>Cetak Daftar Pemesanan Material</title>
-    {{-- <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}> --}}
   </head>
   <body>
       <strong>Rekapitulasi Pemesanan Material</strong>
@@ -46,8 +45,5 @@
       </table>
         </tbody>
       </table>
-      <br><br>
-
-
   </body>
 </html>

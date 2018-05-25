@@ -13,52 +13,37 @@
         <table>
           <tr>
             <th>No Polisi </th>
-            <th> : </th>
             <td>{{$kendaraan->no_polisi}}</td>
           </tr>
           <tr>
             <th>Jenis Kendaraan </th>
-            <th> : </th>
             <td>{{$kendaraan->jenis_kendaraan}}</td>
           </tr>
           <tr>
             <th>Masa Berlaku Pajak </th>
-            <th> : </th>
             <td>{{$kendaraan->masa_pajak->format('d F Y')}}</td>
           </tr>
           <tr>
             <th>Masa Berlaku STNK </th>
-            <th> : </th>
             <td>{{$kendaraan->masa_stnk->format('d F Y')}}</td>
           </tr>
-        </table>
-      </div>
-      <div class="pull-right">
-        <table>
           <tr>
             <th>Masa Berlaku KIR </th>
-            <th> : </th>
             <td>{{$kendaraan->masa_kir->format('d F Y')}}</td>
           </tr>
           <tr>
             <th>Jumlah Hari StandBy </th>
-            <th> : </th>
             <td>{{$standby}}</td>
           </tr>
           <tr>
             <th>Jumlah Hari Rusak </th>
-            <th> : </th>
             <td>{{$rusak}}</td>
           </tr>
           <tr>
             <th>Jumlah Hari Rental </th>
-            <th> : </th>
             <td>{{$rental}}</td>
           </tr>
         </table>
-      </div>
-      <div class="clearfix">
-
       </div>
       <br>
         <table>
@@ -82,10 +67,5 @@
 
         </tbody>
       </table>
-      <br><br>
-
-              {{-- <script src="{{ asset('js/jquery.min.js') }}"></script>
-              <script src="{{ asset('js/bootstrap.min.js') }}"></script> --}}
-
   </body>
 </html>

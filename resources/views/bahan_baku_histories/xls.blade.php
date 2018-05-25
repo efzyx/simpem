@@ -6,7 +6,7 @@
     {{-- <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}> --}}
   </head>
   <body>
-      <h1 class="text-center">Rekapitulasi Material</h1>
+      <strong>Rekapitulasi Material</strong>
       <br><br>
       <p>Tanggal : {{$dari ? \Carbon\Carbon::parse($dari)->format('d F Y') : 'Semua Waktu'}} {{ $sampai ? ' - '.\Carbon\Carbon::parse($sampai)->format('d F Y') : ''}}</p>
         <table>
@@ -38,8 +38,5 @@
 
           </tbody>
       </table>
-
-      {{-- <script src="{{ asset('js/jquery.min.js') }}"></script>
-      <script src="{{ asset('js/bootstrap.min.js') }}"></script> --}}
   </body>
 </html>
