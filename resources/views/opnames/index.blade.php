@@ -7,6 +7,7 @@
            <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('opnames.create') !!}">Tambah Baru</a>
         </h1>
     </section>
+    <br>
     <div class="content">
         <div class="clearfix"></div>
 

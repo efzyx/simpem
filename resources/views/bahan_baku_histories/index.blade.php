@@ -1,7 +1,8 @@
 @extends('layouts.app') @section('content')
 <section class="content-header">
-  <h1 class="pull-left">Riwayat Material</h1>
+  <h1 class="pull-left">Histori Material</h1>
 </section>
+<br>
 <div class="content">
   <div class="clearfix"></div>
 
