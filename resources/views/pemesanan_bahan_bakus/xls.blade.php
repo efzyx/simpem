@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Cetak Daftar Pemesanan Material</title>
+    <title>Export Excel Pemesanan Material</title>
   </head>
   <body>
       <strong>Rekapitulasi Pemesanan Material</strong>

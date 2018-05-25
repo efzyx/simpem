@@ -2,8 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Rekapitulasi Pemesanan</title>
-    {{-- <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}> --}}
+    <title>Export Excel Rekapitulasi Pemesanan</title>
   </head>
   <body>
       <strong>Rekapitulasi Pemesanan</strong>
@@ -42,8 +41,5 @@
         @endforeach
         </tbody>
       </table>
-
-      {{-- <script src="{{ asset('js/jquery.min.js') }}"></script>
-      <script src="{{ asset('js/bootstrap.min.js') }}"></script> --}}
   </body>
 </html>

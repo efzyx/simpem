@@ -2,8 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Cetak Rekapitulasi Material</title>
-    {{-- <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}> --}}
+    <title>Export Excel Rekapitulasi Material</title>
   </head>
   <body>
       <strong>Rekapitulasi Material</strong>

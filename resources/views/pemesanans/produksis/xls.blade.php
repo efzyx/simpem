@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Cetak Daftar Pengiriman</title>
+    <title>Export Excel Rekapitulasi Produksi</title>
   </head>
   <body>
       <strong>Rekapitulasi Produksi</strong>

@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Cetak Daftar Pemesanan Material</title>
+    <title>Cetak Rekapitulasi Material</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
   <body>
-      <h1 class="text-center">Penerimaan Material</h1>
+      <h1 class="text-center">Rekapitulasi Penerimaan Material</h1>
       <br><br>
           @foreach ($suppliers as $supplier)
           @php

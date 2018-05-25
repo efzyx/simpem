@@ -2,8 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Rekapitulasi Kendaraan</title>
-    {{-- <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}> --}}
+    <title>Export Excel Rekapitulasi Status Kendaraan</title>
   </head>
   <body>
       <strong>Rekapitulasi Status Kendaraan</strong>

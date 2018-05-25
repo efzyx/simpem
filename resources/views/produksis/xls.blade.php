@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Cetak Daftar Produksi</title>
+    <title>Cetak BPO Sheet</title>
   </head>
   <body>
       <strong>BPO Sheet</strong>

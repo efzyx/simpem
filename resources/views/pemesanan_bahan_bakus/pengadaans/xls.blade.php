@@ -2,11 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Cetak Pemesanan Material</title>
-    {{-- <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}> --}}
+    <title>Export Excel Rekapitulasi Penerimaan Material</title>
   </head>
   <body>
-      <strong>Penerimaan Material</strong>
+      <strong>Rekapitulasi Penerimaan Material</strong>
       <br><br>
           @foreach ($suppliers as $supplier)
           @php

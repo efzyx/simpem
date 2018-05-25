@@ -2,8 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Pemakaian Material non-Produksi</title>
-    {{-- <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}> --}}
+    <title>Export Excel Pemakaian Material diluar Produksi</title>
   </head>
   <body>
       <strong>Rekapitulasi Pemakaian Material diluar Produksi</strong>
@@ -36,8 +35,5 @@
         </tbody>
 
       </table>
-      <br><br>
-      {{-- <script src="{{ asset('js/jquery.min.js') }}"></script>
-      <script src="{{ asset('js/bootstrap.min.js') }}"></script> --}}
   </body>
 </html>
