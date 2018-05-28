@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Export Excel Rekapitulasi Pemesanan</title>
+    <title>Rekapitulasi Pemesanan</title>
   </head>
   <body>
       <strong>Rekapitulasi Pemesanan</strong>

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Export Excel Rekapitulasi Penerimaan Material</title>
+    <title>Rekapitulasi Terima Material</title>
   </head>
   <body>
       <strong>Rekapitulasi Penerimaan Material</strong>

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Export Excel Pemakaian Material diluar Produksi</title>
+    <title>Pemakaian MDP</title>
   </head>
   <body>
       <strong>Rekapitulasi Pemakaian Material diluar Produksi</strong>
