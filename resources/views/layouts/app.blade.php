@@ -96,8 +96,8 @@
 
               <!-- Logo -->
               <a href="{{ url('/') }}" class="logo">
-                <span class="logo-mini"><img src="{{ asset('images/TLB_PNG.png')}}" height="35px" width="32px"></span>
-                <span class="logo-lg"><img src="{{ asset('images/TLB_PNG.png')}}" height="35px" width="32px"><b>{{ str_replace(' ', '', config('app.name')) }}</b></span>
+                <span class="logo-mini"><img src="{{ asset('images/TLB_PNG.png')}}" height="46px" width="44px" style="background-color: #FFFFFF;"></span>
+                <span class="logo-lg"><img src="{{ asset('images/TLB_PNG.png')}}" height="46px" width="44px" style="background-color: #FFFFFF;"> <b>{{ str_replace(' ', '', config('app.name')) }}</b></span>
               </a>
 
               <!-- Header Navbar -->
