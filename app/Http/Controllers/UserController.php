@@ -12,6 +12,9 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Models\Jabatan;
 use Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\UserRegistered;
+use App\Mail\UserEdited;
 
 class UserController extends AppBaseController
 {
@@ -70,6 +73,10 @@ class UserController extends AppBaseController
         $input['password'] = bcrypt($input['password']);
 
         $user = $this->userRepository->create($input);
+
+        $request['jabatan'] = $user->jabatan->nama_jabatan;
+        Mail::to($user->email)
+              ->send(new UserRegistered($request));
 
         Flash::success('User saved successfully.');
 
@@ -143,6 +150,10 @@ class UserController extends AppBaseController
         }
 
         $user = $this->userRepository->update($input, $id);
+
+        $request['jabatan'] = $user->jabatan->nama_jabatan;
+        Mail::to($user->email)
+              ->send(new UserEdited($request));
 
         Flash::success('User updated successfully.');
 

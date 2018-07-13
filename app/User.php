@@ -98,11 +98,11 @@ class User extends Authenticatable
             }
         });
 
-        self::deleting(function (User $user) {
-            foreach ($user->pengirimans as $child) {
-                $child->delete();
-            }
-        });
+        // self::deleting(function (User $user) {
+        //     foreach ($user->pengirimans as $child) {
+        //         $child->delete();
+        //     }
+        // });
 
         self::deleting(function (User $user) {
             foreach ($user->pengadaans as $child) {
