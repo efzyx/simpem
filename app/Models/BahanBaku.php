@@ -114,4 +114,9 @@ class BahanBaku extends Model
     {
         return $this->hasMany(Opname::class);
     }
+
+    public function produks()
+    {
+        return $this->belongsToMany(Produk::class, 'komposisi_mutu');
+    }
 }

@@ -80,4 +80,9 @@ class Produk extends Model
     {
         return $this->hasMany(Pemesanan::class);
     }
+
+    public function bahan_bakus()
+    {
+        return $this->belongsToMany(BahanBaku::class, 'komposisi_mutu');
+    }
 }
