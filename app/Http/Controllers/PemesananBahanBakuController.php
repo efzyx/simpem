@@ -224,12 +224,16 @@ class PemesananBahanBakuController extends AppBaseController
         $pemesananBahanBakus = PemesananBahanBaku::hydrate($data);
         $pemesananBahanBakus = $pemesananBahanBakus->flatten();
         $user =  Auth::user()->name;
+        $filename = 'Rekapitulasi-Pemesanan-Material-'.time();
 
-        return Excel::create('Rekapitulasi-Pemesanan-Material-'.time(), function($excel) use($pemesananBahanBakus, $user) {
+        return Excel::create($filename, function($excel) use($pemesananBahanBakus, $user, $filename) {
             $excel->sheet('Rekapitulasi Pemesanan Material', function($sheet) use ($pemesananBahanBakus, $user) {
                 $sheet->loadView('pemesanan_bahan_bakus.xls',compact('pemesananBahanBakus','user'));
                 $sheet->mergeCells('A1:I1');
-            });
-        })->export();
+            }, [
+                'Content-Type' => 'application/vnd.ms-excel',
+                'Content-Disposition' => "attachment; filename='".$filename.".xls'"
+            ]);
+        })->download();
     }
 }

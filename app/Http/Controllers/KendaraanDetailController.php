@@ -201,12 +201,16 @@ class KendaraanDetailController extends AppBaseController
 
         $user =  Auth::user()->name;
         $status = $this->status;
+        $filename = 'Status-Kendaraan-'.time();
 
-        return Excel::create('Status-Kendaraan-'.time(), function($excel) use($details, $user, $kendaraan, $status, $standby, $rusak, $rental) {
+        return Excel::create($filename, function($excel) use($details, $user, $kendaraan, $status, $standby, $rusak, $rental, $filename) {
             $excel->sheet('Status Kendaraan', function($sheet) use ($details, $user, $kendaraan, $status, $standby, $rusak, $rental) {
                 $sheet->loadView('kendaraan_details.xls',compact('details', 'user', 'kendaraan', 'status', 'standby', 'rusak', 'rental'));
                 $sheet->mergeCells('A1:D1');
-            });
+            }, [
+                'Content-Type' => 'application/vnd.ms-excel',
+                'Content-Disposition' => "attachment; filename='".$filename.".xls'"
+            ]);
         })->download();
     }
 

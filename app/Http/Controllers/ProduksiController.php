@@ -354,13 +354,17 @@ class ProduksiController extends AppBaseController
         $produksis = $produksis->flatten();
         $user =  Auth::user()->name;
         $supir = $this->supirs;
+        $filename = 'Rekapitulasi-BPO-Sheet-'.time();
 
-        return Excel::create('Rekapitulasi-BPO-Sheet-'.time(), function($excel) use($produksis, $user, $supir) {
+        return Excel::create($filename, function($excel) use($produksis, $user, $supir, $filename) {
             $excel->sheet('BPO Sheet', function($sheet) use ($produksis, $user, $supir) {
                 $sheet->loadView('produksis.xls',compact('produksis','user','supir'));
                 $sheet->mergeCells('A1:N1');
                 $sheet->mergeCells('J2:N2');
-            });
+            }, [
+                'Content-Type' => 'application/vnd.ms-excel',
+                'Content-Disposition' => "attachment; filename='".$filename.".xls'"
+            ]);
         })->download();
     }
 }

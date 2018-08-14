@@ -259,12 +259,15 @@ class PemesananController extends AppBaseController
       $pemesanans = Pemesanan::hydrate($data);
       $pemesanans = $pemesanans->flatten();
       $user =  Auth::user()->name;
-
-      return Excel::create('Rekapitulasi-Pemesanan-'.time(), function($excel) use($pemesanans, $user) {
+      $filename = 'Rekapitulasi-Pemesanan-'.time();
+      return Excel::create($filename, function($excel) use($pemesanans, $user, $filename) {
           $excel->sheet('Rekapitulasi Pemesanan', function($sheet) use ($pemesanans, $user) {
               $sheet->loadView('pemesanans.xls',compact('pemesanans','user'));
               $sheet->mergeCells('A1:H1');
-          });
+          }, [
+            'Content-Type' => 'application/vnd.ms-excel',
+            'Content-Disposition' => "attachment; filename='".$filename.".xls'"
+        ]);
       })->download();
     }
 

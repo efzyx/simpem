@@ -256,11 +256,16 @@ class PengadaanController extends AppBaseController
         $suppliers = PemesananBahanBaku::hydrate($data);
         $suppliers = $suppliers->flatten();
         $user =  Auth::user()->name;
-        return Excel::create('Rekapitulasi-Pemesanan-Material'.time(), function($excel) use($suppliers, $user) {
-            $excel->sheet('Rekapitulasi Pemesanan Material', function($sheet) use ($suppliers, $user) {
+        $filename = 'Rekapitulasi-Pemesanan-Material-'.time();
+
+        return Excel::create($filename, function($excel) use($suppliers, $user) {
+            $excel->sheet('Rekapitulasi Pemesanan Material', function($sheet) use ($suppliers, $user, $filename) {
                 $sheet->loadView('pemesanan_bahan_bakus.pengadaans.xls',compact('suppliers','user'));
                 $sheet->mergeCells('A1:G1');
-            });
+            },[
+                'Content-Type' => 'application/vnd.ms-excel',
+                'Content-Disposition' => "attachment; filename='".$filename.".xls'"
+            ]);
         })->download();
     }
 }

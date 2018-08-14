@@ -138,12 +138,16 @@ class BahanBakuHistoryController extends AppBaseController
       $user =  Auth::user()->name;
       $dari = $request['dari'];
       $sampai = $request['sampai'];
+      $filename = 'History-Material-'.time();
 
-      return Excel::create('History-Material-'.time(), function($excel) use($bahanBakuHistories, $user, $stock, $dari, $sampai) {
+      return Excel::create($filename, function($excel) use($bahanBakuHistories, $user, $stock, $dari, $sampai, $filename) {
           $excel->sheet('History Material', function($sheet) use ($bahanBakuHistories, $user, $stock, $dari, $sampai) {
               $sheet->loadView('bahan_baku_histories.xls',compact('bahanBakuHistories','user', 'stock', 'dari', 'sampai'));
               $sheet->mergeCells('A1:F1');
-          });
+          },[
+            'Content-Type' => 'application/vnd.ms-excel',
+            'Content-Disposition' => "attachment; filename='".$filename.".xls'"
+        ]);
       })->download();
     }
 

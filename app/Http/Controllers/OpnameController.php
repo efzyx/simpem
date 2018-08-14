@@ -97,12 +97,16 @@ class OpnameController extends AppBaseController
         $opnames = Opname::hydrate($data);
         $opnames = $opnames->flatten();
         $user =  Auth::user()->name;
+        $filename = 'Rekapitulasi-Material-Keluar-'.time();
 
-        return Excel::create('Rekapitulasi-Material-Keluar-'.time(), function($excel) use($opnames, $user) {
+        return Excel::create($filename, function($excel) use($opnames, $user, $filename) {
             $excel->sheet('Rekapitulasi Material Keluar', function($sheet) use ($opnames, $user) {
                 $sheet->loadView('opnames.xls',compact('opnames','user'));
                 $sheet->mergeCells('A1:E1');
-            });
+            }, [
+                'Content-Type' => 'application/vnd.ms-excel',
+                'Content-Disposition' => "attachment; filename='".$filename.".xls'"
+            ]);
         })->download();
     }
 

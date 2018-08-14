@@ -310,12 +310,16 @@ class ProduksiController extends AppBaseController
         $pemesanans = Pemesanan::hydrate($data);
         $pemesanans = $pemesanans->flatten();
         $user =  Auth::user()->name;
+        $filename = 'Rekapitulasi-Produksi-'.time();
 
-        return Excel::create('Rekapitulasi-Produksi-'.time(), function($excel) use($pemesanans, $user) {
+        return Excel::create($filename , function($excel) use($pemesanans, $user, $filename) {
             $excel->sheet('Rekapitulasi', function($sheet) use ($pemesanans, $user) {
                 $sheet->loadView('pemesanans.produksis.xls',compact('pemesanans','user'));
                 $sheet->mergeCells('A1:F1');
-            });
+            }, [
+                'Content-Type' => 'application/vnd.ms-excel',
+                'Content-Disposition' => "attachment; filename='".$filename.".xls'"
+            ]);
         })->download();
     }
 }
