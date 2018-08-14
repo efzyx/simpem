@@ -361,6 +361,6 @@ class ProduksiController extends AppBaseController
                 $sheet->mergeCells('A1:N1');
                 $sheet->mergeCells('J2:N2');
             });
-        })->export();
+        })->download();
     }
 }

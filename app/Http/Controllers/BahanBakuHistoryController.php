@@ -144,7 +144,7 @@ class BahanBakuHistoryController extends AppBaseController
               $sheet->loadView('bahan_baku_histories.xls',compact('bahanBakuHistories','user', 'stock', 'dari', 'sampai'));
               $sheet->mergeCells('A1:F1');
           });
-      })->export();
+      })->download();
     }
 
     /**

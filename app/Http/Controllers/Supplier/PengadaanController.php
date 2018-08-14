@@ -261,6 +261,6 @@ class PengadaanController extends AppBaseController
                 $sheet->loadView('pemesanan_bahan_bakus.pengadaans.xls',compact('suppliers','user'));
                 $sheet->mergeCells('A1:G1');
             });
-        })->export();
+        })->download();
     }
 }

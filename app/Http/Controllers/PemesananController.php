@@ -265,7 +265,7 @@ class PemesananController extends AppBaseController
               $sheet->loadView('pemesanans.xls',compact('pemesanans','user'));
               $sheet->mergeCells('A1:H1');
           });
-      })->export();
+      })->download();
     }
 
 }

@@ -316,6 +316,6 @@ class ProduksiController extends AppBaseController
                 $sheet->loadView('pemesanans.produksis.xls',compact('pemesanans','user'));
                 $sheet->mergeCells('A1:F1');
             });
-        })->export();
+        })->download();
     }
 }

@@ -103,7 +103,7 @@ class OpnameController extends AppBaseController
                 $sheet->loadView('opnames.xls',compact('opnames','user'));
                 $sheet->mergeCells('A1:E1');
             });
-        })->export();
+        })->download();
     }
 
     /**

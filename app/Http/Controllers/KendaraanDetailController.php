@@ -207,7 +207,7 @@ class KendaraanDetailController extends AppBaseController
                 $sheet->loadView('kendaraan_details.xls',compact('details', 'user', 'kendaraan', 'status', 'standby', 'rusak', 'rental'));
                 $sheet->mergeCells('A1:D1');
             });
-        })->export();
+        })->download();
     }
 
     /**
