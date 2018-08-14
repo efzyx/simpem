@@ -261,7 +261,7 @@ class PemesananController extends AppBaseController
       $pemesanans = $pemesanans->flatten();
       $user =  Auth::user()->name;
       $filename = 'Rekapitulasi-Pemesanan-'.time();
-      return Excel::create($filename, function($excel) use($pemesanans, $user, $filename) {
+      Excel::create($filename, function($excel) use($pemesanans, $user, $filename) {
           $excel->sheet('Rekapitulasi Pemesanan', function($sheet) use ($pemesanans, $user) {
               $sheet->loadView('pemesanans.xls',compact('pemesanans','user'));
               $sheet->mergeCells('A1:H1');
@@ -270,6 +270,8 @@ class PemesananController extends AppBaseController
             'Content-Disposition' => "attachment; filename='".$filename.".xls'"
         ]);
       })->download();
+
+      return redirect()->back();
     }
 
 }

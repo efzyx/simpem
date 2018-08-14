@@ -41,7 +41,7 @@
         </h1>
 
         <h1 class="pull-left clearfix">
-              {!! Form::open(['route' => 'downloadExcel' , 'target' => '_blank'])!!}
+              {!! Form::open(['route' => 'downloadExcel'])!!}
               {!! Form::hidden('pemesanans', $pemesanans) !!}
               {!! Form::button('<i class="fa fa-file-excel-o"></i> Excel', ['class' => 'btn btn-success pull-left', 'style' => 'margin-top: -10px;margin-bottom: 5px', 'type' => 'submit']) !!}
               {!! Form::close() !!}
