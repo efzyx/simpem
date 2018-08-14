@@ -252,6 +252,7 @@ class PengadaanController extends AppBaseController
 
     public function exportExcel(Request $request)
     {
+        set_time_limit(0); ini_set('memory_limit', '1G'); 
         $data = array(json_decode($request['supplier'], true));
         $suppliers = PemesananBahanBaku::hydrate($data);
         $suppliers = $suppliers->flatten();

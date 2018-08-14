@@ -349,6 +349,7 @@ class ProduksiController extends AppBaseController
 
     public function exportExcel(Request $request)
     {
+        set_time_limit(0); ini_set('memory_limit', '1G'); 
         $data = json_decode($request['produksis'], true);
         $produksis = Produksi::hydrate($data);
         $produksis = $produksis->flatten();

@@ -255,6 +255,7 @@ class PemesananController extends AppBaseController
 
     public function exportExcel(Request $request)
     {
+      set_time_limit(0); ini_set('memory_limit', '1G');  
       $data = json_decode($request['pemesanans'], true);
       $pemesanans = Pemesanan::hydrate($data);
       $pemesanans = $pemesanans->flatten();

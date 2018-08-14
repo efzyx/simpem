@@ -171,6 +171,7 @@ class KendaraanDetailController extends AppBaseController
 
     public function exportExcel(Kendaraan $kendaraan, Request $request)
     {
+        set_time_limit(0); ini_set('memory_limit', '1G'); 
         $data = json_decode($request['kendaraanDetails'], true);
         $details = KendaraanDetail::hydrate($data);
         $details = $details->flatten();

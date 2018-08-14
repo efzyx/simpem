@@ -93,6 +93,7 @@ class OpnameController extends AppBaseController
 
     public function exportExcel(Request $request)
     {
+        set_time_limit(0); ini_set('memory_limit', '1G'); 
         $data = json_decode($request['opnames'], true);
         $opnames = Opname::hydrate($data);
         $opnames = $opnames->flatten();
