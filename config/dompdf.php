@@ -238,6 +238,8 @@ return array(
          * Use the more-than-experimental HTML5 Lib parser
          */
         "enable_html5_parser" => false,
+        "DOMPDF_TEMP_DIR" => storage_path('logs/'),//I need this
+        "DOMPDF_LOG_OUTPUT_FILE" => storage_path('logs/log.htm'),
     ),
 
 
