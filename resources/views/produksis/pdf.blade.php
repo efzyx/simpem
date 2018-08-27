@@ -14,7 +14,7 @@
       $b = count($bahan);
 
       @endphp
-      <div class="table-responsive">
+      <div class="container-fluid">
       <table class="table table-bordered text-center">
         <thead>
           <tr>
