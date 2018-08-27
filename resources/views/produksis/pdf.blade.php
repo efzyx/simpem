@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
   <body>
+   <div class="content-wrapper">
       <h1 class="text-center">BPO Sheet</h1>
       <br><br>
       @php
@@ -113,5 +114,6 @@
             <br><br><br><br>
            {{$user}}
       </div>
+    </div>
   </body>
 </html>
