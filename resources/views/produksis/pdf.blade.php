@@ -111,7 +111,8 @@
       </table>
       </div>
       <br><br>
-
+      <div class="clear-fix">
+      </div>
       <div class="pull-right">
            Padang, {{date("d-m-Y")}}
             <br>
