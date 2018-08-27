@@ -110,9 +110,10 @@
         </tbody>
       </table>
       </div>
-      <br><br>
-      <div class="clear-fix">
+      
+      <div class="clearfix">
       </div>
+      <br><br>
       <div class="pull-right">
            Padang, {{date("d-m-Y")}}
             <br>
