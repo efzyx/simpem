@@ -14,6 +14,7 @@
       $b = count($bahan);
 
       @endphp
+      <div class="table-responsive">
       <table class="table table-bordered text-center">
         <thead>
           <tr>
@@ -102,6 +103,7 @@
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         </tbody>
       </table>
+      </div>
       <br><br>
 
       <div class="pull-right">
