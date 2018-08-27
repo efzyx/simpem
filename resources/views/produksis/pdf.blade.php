@@ -12,6 +12,7 @@
   </head>
   <body>
    <div class="content-wrapper">
+    <div class="content">
       <h1 class="text-center">BPO Sheet</h1>
       <br><br>
       @php
@@ -20,7 +21,6 @@
       $b = count($bahan);
 
       @endphp
-      <div class="container-fluid">
       <table class="table table-bordered text-center">
         <thead>
           <tr>
@@ -109,7 +109,6 @@
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         </tbody>
       </table>
-      </div>
       
       <div class="clearfix">
       </div>
@@ -121,6 +120,7 @@
             <br><br><br><br>
            {{$user}}
       </div>
+     </div>
     </div>
   </body>
 </html>
