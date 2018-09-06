@@ -7,7 +7,7 @@
 <!-- Volume Material Keluar Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('volume_opname', 'Volume Material Keluar:') !!}
-    {!! Form::number('volume_opname', null, ['class' => 'form-control', 'step' => 'any']) !!}
+    {!! Form::number('volume_opname', null, ['class' => 'form-control numb', 'step' => 'any']) !!}
 </div>
 
 <!-- Keterangan Field -->

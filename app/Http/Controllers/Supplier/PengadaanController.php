@@ -259,7 +259,7 @@ class PengadaanController extends AppBaseController
         $user =  Auth::user()->name;
         $filename = 'Rekapitulasi-Pemesanan-Material-'.time();
 
-        return Excel::create($filename, function($excel) use($suppliers, $user) {
+        return Excel::create($filename, function($excel) use($suppliers, $user, $filename) {
             $excel->sheet('Rekapitulasi Pemesanan Material', function($sheet) use ($suppliers, $user, $filename) {
                 $sheet->loadView('pemesanan_bahan_bakus.pengadaans.xls',compact('suppliers','user'));
                 $sheet->mergeCells('A1:G1');

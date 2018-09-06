@@ -306,7 +306,6 @@
       <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap.min.js"></script>
       <script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.min.js')}}">
       </script>
-
       <script>
         var myVar;
 
@@ -339,8 +338,9 @@
               $('#message').html('Tidak Cocok').css('color', 'red');
               $('#simpan').attr("disabled", "disabled");
             }
-          });
-         });
+	  });
+	});
+
         </script>
       @yield('scripts')
   </body>
