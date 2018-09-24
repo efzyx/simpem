@@ -17,7 +17,7 @@ class CreateOpnamesTable extends Migration
             $table->increments('id');
             $table->integer('bahan_baku_id')->unsigned();
             $table->double('volume_opname');
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->datetime('tanggal_pemakaian');
             $table->timestamps();
             $table->softDeletes();
