@@ -2,7 +2,7 @@
     <thead>
         <tr>
         <th>#</th>
-        <th>Berat</th>
+        <th>Kuantitas</th>
         <th>Supir</th>
         <th>Waktu</th>
             <th>Action</th>
@@ -15,7 +15,7 @@
     @foreach($pengadaans as $pengadaan)
         <tr>
             <td>{{ $no++ }}</td>
-            <td>{!! $pengadaan->berat !!}</td>
+            <td>{!! $pengadaan->berat !!} {!! $pengadaan->bahan_baku->satuan !!}</td>
             <td>{!! $pengadaan->supir !!}</td>
             <td>{!! $pengadaan->tanggal_pengadaan->diffForHumans() !!}</td>
             <td>

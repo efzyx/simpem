@@ -24,8 +24,14 @@
 
 <!-- Volume Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('volume', 'Volume:') !!}
-    {!! Form::number('volume', null, ['class' => 'form-control numb', 'step' => 'any']) !!}
+        {!! Form::label('volume', 'Volume:') !!}
+        <br>
+        <div class="col-sm-6">
+            {!! Form::number('volume', null, ['class' => 'form-control numb', 'step' => 'any']) !!}
+        </div>
+        <div class="col-sm-2">
+            Kg
+        </div>
 </div>
 
 <!-- Waktu Produksi Field -->

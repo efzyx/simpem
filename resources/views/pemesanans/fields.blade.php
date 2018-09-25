@@ -1,28 +1,33 @@
 <!-- Nomor Dokumen Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-7">
     {!! Form::label('nomor_dokumen', 'Nomor Dokumen:') !!}
     {!! Form::text('nomor_dokumen', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Nama Pemesana Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-7">
     {!! Form::label('nama_pemesanan', 'Nama Pemesanan:') !!}
     {!! Form::text('nama_pemesanan', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Produk Id Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-6">
     {!! Form::label('produk_id', 'Produk:') !!}
-{!! Form::select('produk_id', $produks , null, ['class' => 'form-control']) !!}</div>
+    {!! Form::select('produk_id', $produks , null, ['class' => 'form-control']) !!}
+</div>
 
 <!-- Volume Pesanan Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-9">
     {!! Form::label('volume_pesanan', 'Volume Pesanan:') !!}
+    <br>
+    <div class="col-sm-5">
     {!! Form::number('volume_pesanan', null, ['class' => 'form-control numb', 'step' => 'any']) !!}
+    </div>
+    <div class="col-sm-3">Kg</div>
 </div>
 
 <!-- Tanggal Pesanan Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-7">
     {!! Form::label('tanggal_pesanan', 'Waktu Pemesanan:') !!}
     {!! Form::text('tanggal_pesanan', null, ['class' => 'form-control datetimepicker'])!!}
 </div>
@@ -46,13 +51,13 @@
 </div>
 
 <!-- Jenis Pesanan Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-6">
     {!! Form::label('jenis_pesanan', 'Jenis Pesanan:') !!}
     {!! Form::select('jenis_pesanan', ['Retail', 'Non Retail'], null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Cp Pesanan Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-7">
     {!! Form::label('cp_pesanan', 'CP Pesanan:') !!}
     {!! Form::text('cp_pesanan', null, ['class' => 'form-control']) !!}
 </div>
@@ -60,7 +65,7 @@
 <!-- Keterangan Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('keterangan', 'Keterangan:') !!}
-    {!! Form::text('keterangan', null, ['class' => 'form-control']) !!}
+    {!! Form::textarea('keterangan', null, ['class' => 'form-control']) !!}
 </div>
 
     {!! Form::hidden('status', 0) !!}

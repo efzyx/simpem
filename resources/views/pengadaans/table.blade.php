@@ -18,7 +18,7 @@
         <tr>
             <td>{{ $no++ }}</td>
             <td>{!! $pengadaan->bahan_baku->nama_bahan_baku !!}</td>
-            <td>{!! $pengadaan->berat !!}</td>
+            <td>{!! $pengadaan->berat !!} {!! $pengadaan->bahan_baku->satuan !!}</td>
             <td>{!! $pengadaan->pemesanan_bahan_baku->nama_supplier !!}</td>
             <td>{!! $pengadaan->supir !!}</td>
             <td>{!! $pengadaan->tanggal_pengadaan->diffForHumans() !!}</td>
