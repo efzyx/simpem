@@ -40,9 +40,9 @@
                       $terima = $pemesananBahanBaku->pengadaans->sum('berat');
                       $sisa = $volume-$terima;
                   @endphp
-                  <td>{!! number_format($volume,0,",",".") !!} {!! $satuan !!}</td>
-                  <td>{!! number_format($terima,0,",",".") !!} {!! $satuan !!}</td>
-                  <td>{!! number_format($sisa,0,",",".") !!} {!! $satuan !!}</td>
+                  <td>{!! number_format($volume,2,",",".") !!} {!! $satuan !!}</td>
+                  <td>{!! number_format($terima,2,",",".") !!} {!! $satuan !!}</td>
+                  <td>{!! number_format($sisa,2,",",".") !!} {!! $satuan !!}</td>
                   <td>{!! $pemesananBahanBaku->tanggal_pemesanan->format('d-m-Y') !!}</td>
                   <td>{!! $pemesananBahanBaku->keterangan !!}</td>
               </tr>

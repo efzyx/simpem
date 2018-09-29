@@ -21,7 +21,7 @@
         @php
           $sisa = $pemesanan->volume_pesanan - $pemesanan->produksis->sum('volume');
         @endphp
-        <td width="100vw">{!! 'Sisa '.number_format($sisa,0,",",".").' Kg' !!}</td>
+        <td width="100vw">{!! 'Sisa '.number_format($sisa,2,",",".").' Kg' !!}</td>
         <td width="100vw">
           {!! Form::open(['route' => ['pemesanans.destroy', $pemesanan->id], 'method' => 'delete']) !!}
           <div class='btn-group'>

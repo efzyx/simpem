@@ -35,9 +35,9 @@
                 <td>{{$pemesanan->nama_pemesanan}}</td>
                 <td>{{$pemesanan->produk->mutu_produk}}</td>
                 <td>{{$pemesanan->lokasi_proyek}}</td>
-                <td>{{number_format($pemesanan->volume_pesanan,0,",",".")}}</td>
-                <td>{{number_format($pemesanan->produksis->sum('volume'),0,",",".")}}</td>
-                <td>{{number_format($pemesanan->volume_pesanan - $pemesanan->produksis->sum('volume'),0,",",".")}}</td>
+                <td>{{number_format($pemesanan->volume_pesanan,2,",",".")}}</td>
+                <td>{{number_format($pemesanan->produksis->sum('volume'),2,",",".")}}</td>
+                <td>{{number_format($pemesanan->volume_pesanan - $pemesanan->produksis->sum('volume'),2,",",".")}}</td>
               </tr>
         @endforeach
         </tbody>

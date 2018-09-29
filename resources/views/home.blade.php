@@ -31,7 +31,7 @@
                 <!-- small box -->
                 <div class="small-box {{ $sisa < 250 ? 'bg-red' : ($sisa < 500 ? 'bg-yellow' : ($sisa < 1000 ? 'bg-green' : 'bg-aqua')) }}" sty>
                   <div class="inner">
-                    <h4>{!! $bahanBaku->sisa !!}</h4>
+                    <h4>{!! number_format($bahanBaku->sisa,2,",",".") !!}</h4>
 
                     <p>{!! $bahanBaku->satuan !!}</p>
                   </div>

@@ -17,7 +17,7 @@
         <tr>
           <td>{!! $no++ !!}</td>
             <td>{!! $opname->bahan_baku->nama_bahan_baku !!}</td>
-            <td>{!! number_format($opname->volume_opname,0,",",".") !!} {!! $opname->bahan_baku->satuan !!}</td>
+            <td>{!! number_format($opname->volume_opname,2,",",".") !!} {!! $opname->bahan_baku->satuan !!}</td>
             <td>{!! $opname->keterangan !!}</td>
             <td>{!! $opname->tanggal_pemakaian !!}</td>
             <td>

@@ -29,10 +29,10 @@
               <tr>
                 <th class="text-center">{{ $bb->nama_bahan_baku }}</th>
                 <td>{{ $bb->satuan }}</td>
-                <td>{{ number_format($value['stock'] - $value['masuk'] + $value['keluar'],0,",",".") }}</td>
-                <td>{{ number_format($value['masuk'],0,",",".") }}</td>
-                <td>{{ number_format($value['keluar'],0,",",".") }}</td>
-                <td>{{ number_format($value['stock'],0,",",".") }}</td>
+                <td>{{ number_format($value['stock'] - $value['masuk'] + $value['keluar'],2,",",".") }}</td>
+                <td>{{ number_format($value['masuk'],2,",",".") }}</td>
+                <td>{{ number_format($value['keluar'],2,",",".") }}</td>
+                <td>{{ number_format($value['stock'],2,",",".") }}</td>
               </tr>
             @endforeach
 

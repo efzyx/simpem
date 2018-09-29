@@ -51,14 +51,14 @@
                   @php
                       $pesanan = $pemesanan->volume_pesanan;
                   @endphp
-                  <td style="border : none">: {!! number_format($pesanan,0,",",".") !!}</td>
+                  <td style="border : none">: {!! number_format($pesanan,2,",",".") !!}</td>
                 </tr>
                 <tr>
                   <td style="border : none"><strong>Realisasi  </strong></td>
                   @php
                       $produksi = $produksis->sum('volume');
                   @endphp
-                  <td style="border : none">: {!! number_format($produksi,0,",",".") !!}</td>
+                  <td style="border : none">: {!! number_format($produksi,2,",",".") !!}</td>
                 </tr>
                 <tr>
                   <td style="border : none"><strong>Sisa  </strong></td>
@@ -92,7 +92,7 @@
             <td>{{$produksi->waktu_produksi->format('d F Y h:m')}}</td>
             <td>{{$produksi->kendaraan->no_polisi}}</td>
             <td>{{$produksi->nama_penerima}}</td>
-            <td>{{number_format($produksi->volume,0,",",".")}}</td>
+            <td>{{number_format($produksi->volume,2,",",".")}}</td>
           </tr>
           @endforeach
 

@@ -62,7 +62,7 @@
                 $mutu = $produksi->pemesanan->produk;
               @endphp
               <td>{{$mutu->mutu_produk}}</td>
-              <td>{{number_format($produksi->volume,0,",",".")}}</td>
+              <td>{{number_format($produksi->volume,2,",",".")}}</td>
             @php
              $komposisi_mutu = $produksi->pemesanan->produk->komposisi_mutus;
              $i = 0;

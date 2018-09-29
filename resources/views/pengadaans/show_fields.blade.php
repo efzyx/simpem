@@ -44,7 +44,7 @@
     {!! Form::label('berat', 'Kuantitas') !!}
   </div>
   <div class="col-sm-9">
-    {!! number_format($pengadaan->berat,0,",",".") !!} {!! $pengadaan->bahan_baku->satuan !!}
+    {!! number_format($pengadaan->berat,2,",",".") !!} {!! $pengadaan->bahan_baku->satuan !!}
   </div>
 </div>
 

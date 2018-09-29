@@ -24,8 +24,8 @@
         <td><a href="{{ route('opnames.show', $bahanBakuHistory->opname->id)}}">Material Keluar</a></td>
         @endif
 
-        <td>{{ number_format(abs($bahanBakuHistory->volume),0,",",".") }}</td>
-        <td>{!! number_format($bahanBakuHistory->total_sisa,0,",",".") !!}</td>
+        <td>{{ number_format(abs($bahanBakuHistory->volume),2,",",".") }}</td>
+        <td>{!! number_format($bahanBakuHistory->total_sisa,2,",",".") !!}</td>
       </tr>
       @endforeach
     </tbody>

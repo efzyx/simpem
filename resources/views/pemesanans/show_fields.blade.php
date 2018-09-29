@@ -44,7 +44,7 @@
     {!! Form::label('volume_pesanan', 'Volume Pesanan') !!}
   </div>
   <div class="col-sm-9">
-    <p>{!! number_format($pemesanan->volume_pesanan,0,",",".") !!} Kg</p>
+    <p>{!! number_format($pemesanan->volume_pesanan,2,",",".") !!} Kg</p>
   </div>
 </div>
 
@@ -122,7 +122,7 @@
     {!! Form::label('status', 'Status') !!}
   </div>
   <div class="col-sm-9">
-    <p>{!! 'Sisa '.number_format($sisa,0,",",".") !!}</p>
+    <p>{!! 'Sisa '.number_format($sisa,2,",",".") !!}</p>
   </div>
 </div>
 

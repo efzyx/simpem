@@ -51,17 +51,17 @@
                       $real = $pengadaans->sum('berat');
                       $sisa = $pesanan-$real;
                   @endphp
-                  <td>{!! number_format($pesanan,0,",",".") !!}</td>
+                  <td>{!! number_format($pesanan,2,",",".") !!}</td>
                 </tr>
                 <tr>
                   <td><strong>Realisasi </strong></td>
                   <td>:</td>
-                  <td>{!! number_format($real,0,",",".") !!}</td>
+                  <td>{!! number_format($real,2,",",".") !!}</td>
                 </tr>
                 <tr>
                   <td><strong>Sisa Pesanan </strong></td>
                   <td> : </td>
-                  <td>{!! number_format($sisa,0,",",".") !!}</td>
+                  <td>{!! number_format($sisa,2,",",".") !!}</td>
                 </tr>
               </tbody>
             </table>
@@ -94,7 +94,7 @@
             <td>{{$pengadaan->supir}}</td>
             <td>{{$pengadaan->nama_pengirim}}</td>
             <td>{{$pengadaan->nama_penerima}}</td>
-            <td>{{number_format($pengadaan->berat,0,",",".")}}</td>
+            <td>{{number_format($pengadaan->berat,2,",",".")}}</td>
           </tr>
           @endforeach
 

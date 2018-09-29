@@ -15,7 +15,7 @@
     @foreach($pengadaans as $pengadaan)
         <tr>
             <td>{{ $no++ }}</td>
-            <td>{!! number_format($pengadaan->berat,0,",",".") !!} {!! $pengadaan->bahan_baku->satuan !!}</td>
+            <td>{!! number_format($pengadaan->berat,2,",",".") !!} {!! $pengadaan->bahan_baku->satuan !!}</td>
             <td>{!! $pengadaan->supir !!}</td>
             <td>{!! $pengadaan->tanggal_pengadaan->diffForHumans() !!}</td>
             <td>
