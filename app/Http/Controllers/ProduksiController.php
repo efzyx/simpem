@@ -235,7 +235,7 @@ class ProduksiController extends AppBaseController
     {
         $produksi = $this->produksiRepository->findWithoutFail($id);
         $input = $request->all();
-        $old_komposisi_mutus = $produksi->produk->komposisi_mutus;
+        $old_komposisi_mutus = $produksi->produk ? $produksi->produk->komposisi_mutus : null;
 
         if (empty($produksi)) {
             Flash::error('Produksi not found');
