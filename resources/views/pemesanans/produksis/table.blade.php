@@ -13,7 +13,7 @@
     <tr>
       <td>{{ $no++ }}</td>
       <td>{{ $produksi->kendaraan->no_polisi }}</td>
-      <td>{!! $produksi->volume !!}</td>
+      <td>{!! number_format($produksi->volume,0,",",".") !!}</td>
       <td>{!! $produksi->waktu_produksi->diffForHumans() !!}</td>
       <td>
         {!! Form::open(['route' => ['pemesanans.produksis.destroy', $pemesanan, $produksi->id], 'method' => 'delete']) !!}

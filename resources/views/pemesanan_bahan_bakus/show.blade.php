@@ -9,7 +9,7 @@
     <div class="content">
       <div class="box box-solid box-primary">
         <div class="box-header">
-          <h3 class="box-title">Detai Pemesanan Material</h3>
+          <h3 class="box-title">Detail Pemesanan Material</h3>
         </div>
             <div class="box-body">
                 <div class="row" style="padding-left: 20px">

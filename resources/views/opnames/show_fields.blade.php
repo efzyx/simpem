@@ -14,7 +14,7 @@
     {!! Form::label('volume_opname', 'Volume Material Keluar:') !!}
   </div>
   <div class="col-sm-9">
-    {!! $opname->volume_opname !!}
+    {!! number_format($opname->volume_opname,0,",",".") !!}
   </div>
 </div>
 

@@ -19,8 +19,12 @@
             <td>{{ $no++ }}</td>
             <td>{!! $pemesananBahanBaku->nama_supplier !!}</td>
             <td>{!! $pemesananBahanBaku->bahan_baku->nama_bahan_baku !!}</td>
-            <td>{!! $vol = $pemesananBahanBaku->volume_pemesanan !!} {!! $pemesananBahanBaku->bahan_baku->satuan !!}</td>
-            <td>{!! $vol - $pemesananBahanBaku->pengadaans->sum('berat') !!} {!! $pemesananBahanBaku->bahan_baku->satuan !!}</td>
+            @php
+                $vol = $pemesananBahanBaku->volume_pemesanan;
+                $sisa = $vol - $pemesananBahanBaku->pengadaans->sum('berat');
+            @endphp
+            <td>{!! number_format($vol,0,",",".") !!} {!! $pemesananBahanBaku->bahan_baku->satuan !!}</td>
+            <td>{!! number_format($sisa,0,",",".") !!} {!! $pemesananBahanBaku->bahan_baku->satuan !!}</td>
             <td>{!! $pemesananBahanBaku->tanggal_pemesanan !!}</td>
             <td>
                 {!! Form::open(['route' => ['supplier.destroy', $pemesananBahanBaku->id], 'method' => 'delete']) !!}

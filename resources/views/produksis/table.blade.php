@@ -18,7 +18,7 @@
       <td>{{ $no++ }}</td>
       <td>{!! $produksi->pemesanan->nama_pemesanan !!}</td>
       <td>{!! $produksi->kendaraan->no_polisi !!}</td>
-      <td>{!! $produksi->volume !!}</td>
+      <td>{!! number_format($produksi->volume,0,",",".") !!}</td>
       <td>{!! $produksi->waktu_produksi->diffForHumans() !!}</td>
       <td>
         {!! Form::open(['route' => ['produksis.destroy', $produksi->id], 'method' => 'delete']) !!}

@@ -54,7 +54,7 @@
     {!! Form::label('volume', 'Volume') !!}
   </div>
   <div class="col-sm-9">
-    <p>{!! $produksi->volume !!}</p>
+    <p>{!! number_format($produksi->volume,0,",",".") !!}</p>
   </div>
 </div>
 

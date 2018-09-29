@@ -48,11 +48,17 @@
                 </tr>
                 <tr>
                   <td style="border : none"><strong>Volume Pesanan  </strong></td>
-                  <td style="border : none">: {!! $pesanan = $pemesanan->volume_pesanan !!}</td>
+                  @php
+                      $pesanan = $pemesanan->volume_pesanan;
+                  @endphp
+                  <td style="border : none">: {!! number_format($pesanan,0,",",".") !!}</td>
                 </tr>
                 <tr>
                   <td style="border : none"><strong>Realisasi  </strong></td>
-                  <td style="border : none">: {!! $produksi = $produksis->sum('volume') !!}</td>
+                  @php
+                      $produksi = $produksis->sum('volume');
+                  @endphp
+                  <td style="border : none">: {!! number_format($produksi,0,",",".") !!}</td>
                 </tr>
                 <tr>
                   <td style="border : none"><strong>Sisa  </strong></td>
@@ -74,7 +80,7 @@
             <th class="text-center">Tanggal Pengiriman</th>
             <th class="text-center">No. Polisi</th>
             <th class="text-center">Penerima</th>
-            <th class="text-center">Volume</th>
+            <th class="text-center">Volume (Kg)</th>
           </tr>
         </thead>
 
@@ -86,7 +92,7 @@
             <td>{{$produksi->waktu_produksi->format('d F Y h:m')}}</td>
             <td>{{$produksi->kendaraan->no_polisi}}</td>
             <td>{{$produksi->nama_penerima}}</td>
-            <td>{{$produksi->volume}}</td>
+            <td>{{number_format($produksi->volume,0,",",".")}}</td>
           </tr>
           @endforeach
 

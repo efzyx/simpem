@@ -35,9 +35,14 @@
                   <td>{!! $pemesananBahanBaku->nama_supplier !!}</td>
                   <td>{!! $pemesananBahanBaku->cp_supplier !!}</td>
                   <td>{!! $pemesananBahanBaku->bahan_baku->nama_bahan_baku !!}</td>
-                  <td>{!! $volume = $pemesananBahanBaku->volume_pemesanan !!} {!! $satuan !!}</td>
-                  <td>{!! $terima = $pemesananBahanBaku->pengadaans->sum('berat') !!} {!! $satuan !!}</td>
-                  <td>{!! $volume-$terima !!} {!! $satuan !!}</td>
+                  @php
+                      $volume = $pemesananBahanBaku->volume_pemesanan;
+                      $terima = $pemesananBahanBaku->pengadaans->sum('berat');
+                      $sisa = $volume-$terima;
+                  @endphp
+                  <td>{!! number_format($volume,0,",",".") !!} {!! $satuan !!}</td>
+                  <td>{!! number_format($terima,0,",",".") !!} {!! $satuan !!}</td>
+                  <td>{!! number_format($sisa,0,",",".") !!} {!! $satuan !!}</td>
                   <td>{!! $pemesananBahanBaku->tanggal_pemesanan->format('d-m-Y') !!}</td>
                   <td>{!! $pemesananBahanBaku->keterangan !!}</td>
               </tr>
