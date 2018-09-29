@@ -98,19 +98,19 @@
               <tbody>
                   <tr>
                     <th>Kemarin</th>
-                    <td><strong>{{ $kemarin }}</strong> m<sup>3</sup></td>
+                    <td><strong>{{ number_format($kemarin,2,",",".") }}</strong> m<sup>3</sup></td>
                   </tr>
                   <tr>
                     <th>Bulan Ini</th>
-                    <td><strong>{{ $bulanini }}</strong> m<sup>3</sup></td>
+                    <td><strong>{{ number_format($bulanini,2,",",".") }}</strong> m<sup>3</sup></td>
                   </tr>
                   <tr>
                     <th>Bulan Lalu</th>
-                    <td><strong>{{ $bulanlalu }}</strong> m<sup>3</sup></td>
+                    <td><strong>{{ number_format($bulanlalu,2,",",".") }}</strong> m<sup>3</sup></td>
                   </tr>
                   <tr>
                     <th>Volume Permintaan</th>
-                    <td><strong>{{ $volume_permintaan }}</strong> m<sup>3</sup></td>
+                    <td><strong>{{ number_format($volume_permintaan,2,",",".") }}</strong> m<sup>3</sup></td>
                   </tr>
               </tbody>
             </table>
