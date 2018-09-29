@@ -64,7 +64,7 @@
     {!! Form::label('produk_id', 'Produk') !!}
   </div>
   <div class="col-sm-9">
-    <p>{!! $produksi->produk->mutu_produk !!}</p>
+    <p>{!! $produksi->produk ? $produksi->produk->mutu_produk : null !!}</p>
   </div>
 </div>
 
