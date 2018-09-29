@@ -28,13 +28,13 @@
   </div>
 </div>
 
-<!-- Produk Id Field -->
+<!-- Mutu Field -->
 <div class="form-group col-sm-12">
   <div class="col-sm-3">
-    {!! Form::label('produk_id', 'Produk') !!}
+    {!! Form::label('mutu', 'Mutu') !!}
   </div>
   <div class="col-sm-9">
-    <p>{!! $pemesanan->produk->mutu_produk !!}</p>
+    <p>{!! $pemesanan->mutu !!}</p>
   </div>
 </div>
 

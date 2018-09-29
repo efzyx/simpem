@@ -28,7 +28,7 @@ class Produk extends Model
         });
 
         self::deleting(function (Produk $produk) {
-            foreach ($produk->pemesanans as $child) {
+            foreach ($produk->produksis as $child) {
                 $child->delete();
             }
         });
@@ -76,13 +76,13 @@ class Produk extends Model
         return $this->komposisi_mutus->where('bahan_baku_id', $bahan_id)->first();
     }
 
-    public function pemesanans()
-    {
-        return $this->hasMany(Pemesanan::class);
-    }
-
     public function bahan_bakus()
     {
         return $this->belongsToMany(BahanBaku::class, 'komposisi_mutu');
+    }
+
+    public function produksis()
+    {
+        return $this->hasMany(Produksi::class);
     }
 }

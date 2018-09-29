@@ -4,7 +4,7 @@
       <tr>
         <th width="15vw">#</th>
         <th width="100vw">Pemesan</th>
-        <th width="100vw">Produk</th>
+        <th width="100vw">Mutu</th>
         <th width="100vw">Tanggal</th>
         <th width="100vw">Status</th>
         <th width="100vw">Action</th>
@@ -16,7 +16,7 @@
       <tr>
         <td width="15vw">{{ $no++ }}</td>
         <td width="100vw">{!! $pemesanan->nama_pemesanan !!}</td>
-        <td width="100vw">{!! $pemesanan->produk->mutu_produk !!}</td>
+        <td width="100vw">{!! $pemesanan->mutu !!}</td>
         <td width="100vw">{!! $pemesanan->tanggal_pesanan->format('d F y h:m') !!}</td>
         @php
           $sisa = $pemesanan->volume_pesanan - $pemesanan->produksis->sum('volume');
@@ -44,7 +44,7 @@
       <tr>
         <th width="15vw"></th>
         <th width="100vw"><input class="col-sm-12" type="text" placeholder="Pemesan" /></th>
-        <th width="100vw"><input class="col-sm-12" type="text" placeholder="Produk" /></th>
+        <th width="100vw"><input class="col-sm-12" type="text" placeholder="Mutu" /></th>
         <th width="100vw"><input class="col-sm-12" type="text" placeholder="Tanggal" /></th>
         <th width="100vw"></th>
         <th width="100vw"></th>

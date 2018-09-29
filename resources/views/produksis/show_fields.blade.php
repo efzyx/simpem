@@ -58,6 +58,16 @@
   </div>
 </div>
 
+<!-- Produk Id Field -->
+<div class="form-group col-sm-12">
+  <div class="col-sm-3">
+    {!! Form::label('produk_id', 'Produk') !!}
+  </div>
+  <div class="col-sm-9">
+    <p>{!! $produksi->produk->mutu_produk !!}</p>
+  </div>
+</div>
+
 <!-- Waktu Produksi Field -->
 <div class="form-group col-sm-12">
   <div class="col-sm-3">

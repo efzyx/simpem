@@ -51,7 +51,7 @@ class Pemesanan extends Model
     public $fillable = [
         'nomor_dokumen',
         'nama_pemesanan',
-        'produk_id',
+        'mutu',
         'volume_pesanan',
         'tanggal_pesanan',
         'tanggal_kirim_dari',
@@ -72,7 +72,7 @@ class Pemesanan extends Model
     protected $casts = [
         'nomor_dokumen' => 'string',
         'nama_pemesanan' => 'string',
-        'produk_id' => 'integer',
+        'mutu' => 'string',
         'volume_pesanan' => 'integer',
         'lokasi_proyek' => 'string',
         'jenis_pesanan' => 'integer',
@@ -90,7 +90,6 @@ class Pemesanan extends Model
     public static $rules = [
         'nomor_dokumen' => 'required|unique:pemesanans',
         'nama_pemesanan' => 'required',
-        'produk_id' => 'required',
         'tanggal_pesanan' => 'required|date_format:Y-m-d H:i:s',
         'tanggal_kirim_dari' => 'required|date_format:Y-m-d H:i:s',
         'tanggal_kirim_sampai' => 'nullable|date_format:Y-m-d H:i:s',
@@ -99,11 +98,6 @@ class Pemesanan extends Model
         'lokasi_proyek' => 'required',
         'cp_pesanan' => 'required',
     ];
-
-    public function produk()
-    {
-        return $this->belongsTo('App\Models\Produk');
-    }
 
     public function user()
     {

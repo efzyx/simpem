@@ -16,6 +16,7 @@ use PDF;
 use App\Models\Kendaraan;
 use Illuminate\Support\Facades\DB;
 use App\Models\Produksi;
+use App\Models\Produk;
 use App\Models\BahanBaku;
 use App\Models\BahanBakuHistory;
 use Carbon\Carbon;
@@ -91,12 +92,15 @@ class ProduksiController extends AppBaseController
      */
     public function create(Pemesanan $pemesanan)
     {
+        $produks = Produk::pluck('mutu_produk', 'id');
         $title = 'Produksi - Tambah';
+
         return view('pemesanans.produksis.create')
               ->with('pemesanan', $pemesanan)
               ->with('supirs', $this->supirs)
               ->with('kendaraans', $this->kendaraans)
-              ->with('title', $title);
+              ->with('title', $title)
+              ->with('produks', $produks);
     }
 
     /**
@@ -110,7 +114,8 @@ class ProduksiController extends AppBaseController
     {
         $input = $request->all();
         $input['user_id'] = Auth::user()->id;
-        $komposisi_mutus = $pemesanan->produk->komposisi_mutus;
+        $produk = Produk::findOrFail($request->produk_id);
+        $komposisi_mutus = $produk->komposisi_mutus;
 
         if (!$this->checkStock($komposisi_mutus, $input['volume'])) {
             return redirect()->back()->withInput($input);
@@ -177,6 +182,7 @@ class ProduksiController extends AppBaseController
     public function edit(Pemesanan $pemesanan, $id)
     {
         $produksi = Produksi::find($id);
+        $produks = Produk::pluck('mutu_produk', 'id');
         $title = 'Produksi - Edit';
 
         if (empty($produksi)) {
@@ -185,12 +191,27 @@ class ProduksiController extends AppBaseController
             return redirect(route('pemesanans.produksis.index', $pemesanan));
         }
 
+        $kendaraans = Kendaraan::select(DB::raw("concat(no_polisi, ' - ', jenis_kendaraan) as nama"), 'id')->get();
+
+        $kendaraans = $kendaraans->filter(function ($k) {
+            if($k->lastStatus()){
+                if($k->lastStatus()->status == 2){
+                    $k->nama .= " (RUSAK)";
+                }elseif($k->lastStatus()->status == 3){
+                    $k->nama .= " (RENTAL)";
+                }
+                return $k;
+            }
+            
+        })->pluck('nama', 'id');
+
         return view('pemesanans.produksis.edit')
               ->with('produksi', $produksi)
               ->with('pemesanan', $pemesanan)
               ->with('supirs', $this->supirs)
-              ->with('kendaraans', $this->kendaraans)
-              ->with('title', $title);
+              ->with('kendaraans', $kendaraans)
+              ->with('title', $title)
+              ->with('produks', $produks);
     }
 
     /**
@@ -205,7 +226,9 @@ class ProduksiController extends AppBaseController
     {
         $produksi = Produksi::find($id);
         $input = $request->all();
-        $komposisi_mutus = $pemesanan->produk->komposisi_mutus;
+        $produk = Produk::findOrFail($request->produk_id);        
+        $komposisi_mutus = $produk->komposisi_mutus;
+        $old_komposisi_mutus = $produksi->produk->komposisi_mutus;
 
         if (empty($produksi)) {
             Flash::error('Produksi not found');
@@ -224,19 +247,27 @@ class ProduksiController extends AppBaseController
             return redirect()->back();
         }
 
-        foreach ($komposisi_mutus as $key => $komposisi) {
+        foreach ($old_komposisi_mutus as $key => $komposisi) {
             $bahan_baku = BahanBaku::find($komposisi->bahan_baku_id);
-            $bahan_baku->sisa -= $komposisi->volume * ($input['volume'] - $old_volume);
+            $bahan_baku->sisa -= $komposisi->volume * (0 - $old_volume);
             $bahan_baku->update();
 
-            $bahan_baku_history = $bahan_baku->bahan_baku_histories->where('produksi_id', $produksi->id)->first();
+            $bahan_baku_history = $bahan_baku->bahan_baku_histories->where('produksi_id', $produksi->id)->first()->delete();
+        }
+
+        foreach ($komposisi_mutus as $key => $komposisi) {
+            $bahan_baku = BahanBaku::find($komposisi->bahan_baku_id);
+            $bahan_baku->sisa -= $komposisi->volume * $input['volume'];
+            $bahan_baku->update();
+
+            $bahan_baku_history = new BahanBakuHistory();
             $bahan_baku_history->bahan_baku_id = $komposisi->bahan_baku_id;
             $bahan_baku_history->type = 0;
             $bahan_baku_history->waktu = $produksi->waktu_produksi;
             $bahan_baku_history->produksi_id = $produksi->id;
-            $bahan_baku_history->volume = $komposisi->volume * ($input['volume'] - $old_volume);
+            $bahan_baku_history->volume = $komposisi->volume * $input['volume'];
             $bahan_baku_history->total_sisa = $bahan_baku->sisa;
-            $bahan_baku_history->update();
+            $bahan_baku_history->save();
         }
 
 

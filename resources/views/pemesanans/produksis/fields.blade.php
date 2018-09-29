@@ -31,6 +31,12 @@
     </div>
 </div>
 
+<!-- Produk Id Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('produk_id', 'Produk:') !!}
+    {!! Form::select('produk_id', $produks , null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Waktu Produksi Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('waktu_produksi', 'Tanggal Pengiriman:') !!}

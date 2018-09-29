@@ -44,6 +44,7 @@ class Produksi extends Model
         'nama_penerima',
         'pemesanan_id',
         'volume',
+        'produk_id',
         'waktu_produksi',
         'supir_id',
         'kendaraan_id',
@@ -61,6 +62,7 @@ class Produksi extends Model
         'nama_penerima' => 'string',
         'pemesanan_id' => 'integer',
         'volume' => 'double',
+        'produk_id' => 'integer',
         'supir_id' => 'integer',
         'kendaraan_id' => 'integer'
     ];
@@ -76,6 +78,7 @@ class Produksi extends Model
         'nama_penerima' => 'required',
         'pemesanan_id' => 'required',
         'volume' => 'required',
+        'produk_id' => 'required',
         'supir_id' => 'required',
         'kendaraan_id' => 'required'
     ];
@@ -103,5 +106,10 @@ class Produksi extends Model
     public function bahan_baku_histories()
     {
         return $this->hasMany(BahanBakuHistory::class);
+    }
+
+    public function produk()
+    {
+        return $this->belongsTo(Produk::class, 'produk_id', 'id');
     }
 }

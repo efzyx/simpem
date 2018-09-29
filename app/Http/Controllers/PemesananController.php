@@ -9,7 +9,6 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Models\Produk;
 use Response;
 use PDF;
 use Auth;
@@ -107,10 +106,8 @@ class PemesananController extends AppBaseController
      */
     public function create()
     {
-        $produks = Produk::pluck('mutu_produk', 'id');
         $title = 'Pemesanan - Tambah';
         return view('pemesanans.create')
-              ->with('produks', $produks)
               ->with('title', $title);
     }
 
@@ -166,7 +163,6 @@ class PemesananController extends AppBaseController
     public function edit($id)
     {
         $pemesanan = $this->pemesananRepository->findWithoutFail($id);
-        $produks = Produk::pluck('mutu_produk', 'id');
         if (empty($pemesanan)) {
             Flash::error('Pemesanan not found');
 
@@ -176,7 +172,6 @@ class PemesananController extends AppBaseController
         $title = 'Pemesanan - Edit';
         return view('pemesanans.edit')
               ->with('pemesanan', $pemesanan)
-              ->with('produks', $produks)
               ->with('title', $title);
     }
 

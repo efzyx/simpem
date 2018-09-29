@@ -10,10 +10,10 @@
     {!! Form::text('nama_pemesanan', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Produk Id Field -->
+<!-- Mutu Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('produk_id', 'Produk:') !!}
-    {!! Form::select('produk_id', $produks , null, ['class' => 'form-control']) !!}
+    {!! Form::label('mutu', 'Mutu:') !!}
+    {!! Form::text('mutu' , null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Volume Pesanan Field -->

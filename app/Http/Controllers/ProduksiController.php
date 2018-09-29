@@ -104,11 +104,13 @@ class ProduksiController extends AppBaseController
     public function create()
     {
         $title = "Produksi - Tambah";
+        $produks = Produk::pluck('mutu_produk', 'id');
         return view('produksis.create')
               ->with('pemesanans', $this->pemesanans)
               ->with('supirs', $this->supirs)
               ->with('kendaraans', $this->kendaraans)
-              ->with('title', $title);
+              ->with('title', $title)
+              ->with('produks', $produks);
     }
 
     /**
@@ -123,18 +125,8 @@ class ProduksiController extends AppBaseController
         $input = $request->all();
         $input['user_id'] = Auth::user()->id;
         $pemesanan = Pemesanan::find($input['pemesanan_id']);
-        $kendaraan = Kendaraan::find($input['kendaraan_id']);
-        $komposisi_mutus = $pemesanan->produk->komposisi_mutus;
-        $status = $this->statusKendaraan($kendaraan, $input);
-
-        if (is_object($status)) {
-            return $status;
-        }
-
-        if ($status != 1) {
-            Flash::error('Kendaraan '. $kendaraan->no_polisi.' sedang '.($status == 2 ? 'Rusak' : 'Dirental').'!');
-            return redirect()->back()->withInput($input);
-        }
+        $produk = Produk::findOrFail($request->produk_id);        
+        $komposisi_mutus = $produk->komposisi_mutus;
 
         if (!$this->checkStock($komposisi_mutus, $input['volume'])) {
             return redirect()->back()->withInput($input);
@@ -199,6 +191,21 @@ class ProduksiController extends AppBaseController
     {
         $produksi = $this->produksiRepository->findWithoutFail($id);
         $title = "Produksi - Edit";
+        $produks = Produk::pluck('mutu_produk', 'id');
+
+        $kendaraans = Kendaraan::select(DB::raw("concat(no_polisi, ' - ', jenis_kendaraan) as nama"), 'id')->get();
+
+        $kendaraans = $kendaraans->filter(function ($k) {
+            if($k->lastStatus()){
+                if($k->lastStatus()->status == 2){
+                    $k->nama .= " (RUSAK)";
+                }elseif($k->lastStatus()->status == 3){
+                    $k->nama .= " (RENTAL)";
+                }
+                return $k;
+            }
+            
+        })->pluck('nama', 'id');
 
         if (empty($produksi)) {
             Flash::error('Produksi not found');
@@ -210,8 +217,9 @@ class ProduksiController extends AppBaseController
               ->with('produksi', $produksi)
               ->with('pemesanans', $this->pemesanans)
               ->with('supirs', $this->supirs)
-              ->with('kendaraans', $this->kendaraans)
-              ->with('title', $title);
+              ->with('kendaraans', $kendaraans)
+              ->with('title', $title)
+              ->with('produks', $produks);
         ;
     }
 
@@ -227,26 +235,15 @@ class ProduksiController extends AppBaseController
     {
         $produksi = $this->produksiRepository->findWithoutFail($id);
         $input = $request->all();
+        $old_komposisi_mutus = $produksi->produk->komposisi_mutus;
 
         if (empty($produksi)) {
             Flash::error('Produksi not found');
 
             return redirect(route('produksis.index'));
         }
-        $old_kendaraan = $produksi->kendaraan;
-        $kendaraan = Kendaraan::find($input['kendaraan_id']);
-        $status = $this->statusKendaraan($kendaraan, $input);
 
-        if (is_object($status)) {
-            return $status;
-        }
-
-        if ($status != 1 && $old_kendaraan->id != $kendaraan->id) {
-            Flash::error('Kendaraan '. $kendaraan->no_polisi.' sedang '.($status == 2 ? 'Rusak' : 'Dirental').'!');
-            return redirect()->back()->withInput($input);
-        }
-
-        $komposisi_mutus = $produksi->pemesanan->produk->komposisi_mutus;
+        $komposisi_mutus = $produksi->produk->komposisi_mutus;
         $old_volume = $produksi->volume;
         if (!$this->checkStock($komposisi_mutus, $input['volume'], $old_volume)) {
             return redirect()->back()->withInput($input);
@@ -257,19 +254,27 @@ class ProduksiController extends AppBaseController
             return redirect()->back()->withInput($input);
         }
 
-        foreach ($komposisi_mutus as $key => $komposisi) {
+        foreach ($old_komposisi_mutus as $key => $komposisi) {
             $bahan_baku = BahanBaku::find($komposisi->bahan_baku_id);
-            $bahan_baku->sisa -= $komposisi->volume * ($input['volume'] - $old_volume);
+            $bahan_baku->sisa -= $komposisi->volume * (0 - $old_volume);
             $bahan_baku->update();
 
-            $bahan_baku_history = $bahan_baku->bahan_baku_histories->where('produksi_id', $produksi->id)->first();
+            $bahan_baku_history = $bahan_baku->bahan_baku_histories->where('produksi_id', $produksi->id)->first()->delete();
+        }
+
+        foreach ($komposisi_mutus as $key => $komposisi) {
+            $bahan_baku = BahanBaku::find($komposisi->bahan_baku_id);
+            $bahan_baku->sisa -= $komposisi->volume * $input['volume'];
+            $bahan_baku->update();
+
+            $bahan_baku_history = new BahanBakuHistory();
             $bahan_baku_history->bahan_baku_id = $komposisi->bahan_baku_id;
             $bahan_baku_history->type = 0;
             $bahan_baku_history->waktu = $produksi->waktu_produksi;
             $bahan_baku_history->produksi_id = $produksi->id;
-            $bahan_baku_history->volume = $komposisi->volume * ($input['volume'] - $old_volume);
+            $bahan_baku_history->volume = $komposisi->volume * $input['volume'];
             $bahan_baku_history->total_sisa = $bahan_baku->sisa;
-            $bahan_baku_history->update();
+            $bahan_baku_history->save();
         }
 
         $produksi = $this->produksiRepository->update($input, $id);
@@ -296,7 +301,7 @@ class ProduksiController extends AppBaseController
             return redirect()->back();
         }
 
-        $komposisi_mutus = $produksi->pemesanan->produk->komposisi_mutus;
+        $komposisi_mutus = $produksi->produk->komposisi_mutus;
 
         foreach ($komposisi_mutus as $key => $komposisi) {
             $bahan_baku = BahanBaku::find($komposisi->bahan_baku_id);
@@ -323,17 +328,6 @@ class ProduksiController extends AppBaseController
             }
         }
         return true;
-    }
-
-    private function statusKendaraan($kendaraan, $input)
-    {
-        $last_update = $kendaraan->lastStatus();
-
-        if (!$last_update) {
-            Flash::error('Status kendaraan '.$kendaraan->no_polisi.' belum diset');
-            return redirect()->back()->withInput($input);
-        }
-        return $last_update->status;
     }
 
     public function downloadPdf(Request $request)
