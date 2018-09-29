@@ -4,7 +4,7 @@
       <th>#</th>
       <th>Pemesanan</th>
       <th>Kendaraan</th>
-      <th>Volume</th>
+      <th>Volume (Kg)</th>
       <th>Pengiriman</th>
       <th>Action</th>
     </tr>
