@@ -45,7 +45,7 @@ class PemesananController extends AppBaseController
     public function index(Request $request)
     {
         $this->pemesananRepository->pushCriteria(new RequestCriteria($request));
-        $pemesanans = $this->pemesananRepository->orderBy('id', 'desc')->all();
+        $pemesanans = $this->pemesananRepository->orderBy('tanggal_pesanan', 'desc')->all();
         $title = 'Pemesanan';
         return view('pemesanans.index')
             ->with('pemesanans', $pemesanans)
@@ -55,7 +55,7 @@ class PemesananController extends AppBaseController
     public function filter(Request $request)
     {
         $this->pemesananRepository->pushCriteria(new RequestCriteria($request));
-        $pemesanans = $this->pemesananRepository->orderBy('id', 'desc')->all();
+        $pemesanans = $this->pemesananRepository->orderBy('tanggal_pesanan', 'desc')->all();
 
         $pemesanans = $pemesanans->filter(function ($pemesanan) use ($request) {
             return $request['jenis_pesanan'] != null ?

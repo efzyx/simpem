@@ -33,7 +33,7 @@ class ProduksiController extends AppBaseController
     public function __construct(ProduksiRepository $produksiRepo)
     {
         $this->produksiRepository = $produksiRepo;
-        $this->pemesanans = Pemesanan::orderBy('id', 'desc')->pluck('nama_pemesanan', 'id');
+        $this->pemesanans = Pemesanan::orderBy('tanggal_pesanan', 'desc')->pluck('nama_pemesanan', 'id');
         $this->supirs = Supir::pluck('nama_supir', 'id');
         $this->kendaraans = Kendaraan::select(DB::raw("concat(no_polisi, ' - ', jenis_kendaraan) as nama"), 'id')->get();
 
@@ -58,7 +58,7 @@ class ProduksiController extends AppBaseController
     public function index(Request $request)
     {
         $this->produksiRepository->pushCriteria(new RequestCriteria($request));
-        $produksis = $this->produksiRepository->all();
+        $produksis = $this->produksiRepository->orderBy('waktu_produksi', 'desc')->all();
         $title = "Produksi";
 
         return view('produksis.index')
@@ -70,7 +70,7 @@ class ProduksiController extends AppBaseController
     public function filter(Request $request)
     {
         $this->produksiRepository->pushCriteria(new RequestCriteria($request));
-        $produksis = $this->produksiRepository->all();
+        $produksis = $this->produksiRepository->orderBy('waktu_produksi', 'desc')->all();
         $produksis = $produksis->filter(function ($produksi) use ($request) {
             $dari = $request['tanggal_kirim_dari'] ? Carbon::parse($request['tanggal_kirim_dari']) : null;
             $sampai = $request['tanggal_kirim_sampai'] ? Carbon::parse($request['tanggal_kirim_sampai']) : null;

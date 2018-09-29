@@ -24,7 +24,7 @@ class PengadaanController extends AppBaseController
     {
         $this->pengadaanRepository = $pengadaanRepo;
         $this->bahanBakus = BahanBaku::pluck('nama_bahan_baku', 'id');
-        $this->pemesanan_bahan_bakus = PemesananBahanBaku::orderBy('id', 'desc')->get()->pluck('supplier_bahan_baku', 'id');
+        $this->pemesanan_bahan_bakus = PemesananBahanBaku::orderBy('tanggal_pemesanan', 'desc')->get()->pluck('supplier_bahan_baku', 'id');
         $this->middleware('role:admin,manager_produksi,logistik');
     }
 
@@ -37,7 +37,7 @@ class PengadaanController extends AppBaseController
     public function index(Request $request)
     {
         $this->pengadaanRepository->pushCriteria(new RequestCriteria($request));
-        $pengadaans = $this->pengadaanRepository->orderBy('id', 'desc')->all();
+        $pengadaans = $this->pengadaanRepository->orderBy('tanggal_pengadaan', 'desc')->all();
         $title = "Penerimaan Material";
         return view('pengadaans.index')
             ->with('pengadaans', $pengadaans)

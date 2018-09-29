@@ -49,7 +49,7 @@ class ProduksiController extends AppBaseController
     {
         $title = 'Produksi';
         return view('pemesanans.produksis.index')
-            ->with('produksis', $pemesanan->produksis)
+            ->with('produksis', $pemesanan->produksis()->orderBy('waktu_produksi', 'desc')->get())
             ->with('pemesanan', $pemesanan)
             ->with('kendaraans', $this->kendaraans)
             ->with('title', $title);
@@ -57,7 +57,7 @@ class ProduksiController extends AppBaseController
 
     public function filter(Pemesanan $pemesanan, Request $request)
     {
-        $produksis = $pemesanan->produksis;
+        $produksis = $pemesanan->produksis()->orderBy('waktu_produksi', 'desc')->get();
         $produksis = $produksis->filter(function ($produksi) use ($request) {
             $dari = $request['tanggal_kirim_dari'] ? Carbon::parse($request['tanggal_kirim_dari']) : null;
             $sampai = $request['tanggal_kirim_sampai'] ? Carbon::parse($request['tanggal_kirim_sampai']) : null;

@@ -38,7 +38,7 @@ class PemesananBahanBakuController extends AppBaseController
     public function index(Request $request)
     {
         $this->pemesananBahanBakuRepository->pushCriteria(new RequestCriteria($request));
-        $pemesananBahanBakus = $this->pemesananBahanBakuRepository->orderBy('id', 'desc')->all();
+        $pemesananBahanBakus = $this->pemesananBahanBakuRepository->orderBy('tanggal_pemesanan', 'desc')->all();
         $title = 'Pemesanan Material';
 
         return view('pemesanan_bahan_bakus.index')
@@ -49,7 +49,7 @@ class PemesananBahanBakuController extends AppBaseController
     public function filter(Request $request)
     {
         $this->pemesananBahanBakuRepository->pushCriteria(new RequestCriteria($request));
-        $suppliers = $this->pemesananBahanBakuRepository->orderBy('id', 'desc')->all();
+        $suppliers = $this->pemesananBahanBakuRepository->orderBy('tanggal_pemesanan', 'desc')->all();
         $suppliers = $suppliers->filter(function ($supplier) use ($request) {
             $dari = $request['tanggal_kirim_dari'] ? Carbon::parse($request['tanggal_kirim_dari']) : null;
             $sampai = $request['tanggal_kirim_sampai'] ? Carbon::parse($request['tanggal_kirim_sampai']) : null;

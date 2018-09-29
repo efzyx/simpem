@@ -44,7 +44,7 @@ class PengadaanController extends AppBaseController
     public function index(PemesananBahanBaku $supplier, Request $request)
     {
         $this->pengadaanRepository->pushCriteria(new RequestCriteria($request));
-        $pengadaans = $supplier->pengadaans;
+        $pengadaans = $supplier->pengadaans()->orderBy('tanggal_pengadaan', 'desc')->get();
         $title = "Penerimaan Material";
         return view('pemesanan_bahan_bakus.pengadaans.index')
           ->with('pengadaans', $pengadaans)

@@ -39,7 +39,7 @@ class OpnameController extends AppBaseController
     public function index(Request $request)
     {
         $this->opnameRepository->pushCriteria(new RequestCriteria($request));
-        $opnames = $this->opnameRepository->orderBy('id', 'desc')->all();
+        $opnames = $this->opnameRepository->orderBy('tanggal_pemakaian', 'desc')->all();
         $title = "Material Keluar";
 
         return view('opnames.index')
@@ -50,7 +50,7 @@ class OpnameController extends AppBaseController
     public function filter(Request $request)
     {
         $this->opnameRepository->pushCriteria(new RequestCriteria($request));
-        $opnames = $this->opnameRepository->orderBy('id', 'desc')->all();
+        $opnames = $this->opnameRepository->orderBy('tanggal_pemakaian', 'desc')->all();
         $opnames = $opnames->filter(function ($opname) use ($request) {
             $dari = $request['tanggal_kirim_dari'] ? Carbon::parse($request['tanggal_kirim_dari']) : null;
             $sampai = $request['tanggal_kirim_sampai'] ? Carbon::parse($request['tanggal_kirim_sampai']) : null;
