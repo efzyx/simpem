@@ -37,7 +37,7 @@
 <!-- Produk Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('produk_id', 'Produk:') !!}
-    {!! Form::select('produk_id', $produks , null, ['class' => 'form-control']) !!}
+    {!! Form::select('produk_id', $produks , null, ['class' => 'form-control', 'placeholder' => '-Pilih Produk-']) !!}
 </div>
 
 <!-- Waktu Produksi Field -->

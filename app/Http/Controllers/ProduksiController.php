@@ -254,12 +254,24 @@ class ProduksiController extends AppBaseController
             return redirect()->back()->withInput($input);
         }
 
-        foreach ($old_komposisi_mutus as $key => $komposisi) {
-            $bahan_baku = BahanBaku::find($komposisi->bahan_baku_id);
-            $bahan_baku->sisa -= $komposisi->volume * (0 - $old_volume);
-            $bahan_baku->update();
+        if ($old_komposisi_mutus){
+            foreach ($old_komposisi_mutus as $key => $komposisi) {
+                $bahan_baku = BahanBaku::find($komposisi->bahan_baku_id);
+                $bahan_baku->sisa -= $komposisi->volume * (0 - $old_volume);
+                $bahan_baku->update();
+    
+                $bahan_baku_history = $bahan_baku->bahan_baku_histories->where('produksi_id', $produksi->id)->first()->delete();
+            }
+        }else{
+            $bahan_baku_histories = $produksi->bahan_baku_histories;
 
-            $bahan_baku_history = $bahan_baku->bahan_baku_histories->where('produksi_id', $produksi->id)->first()->delete();
+            foreach($bahan_baku_histories as $bbh){
+                $bahan_baku = BahanBaku::find($komposisi->bahan_baku_id);
+                $bahan_baku->sisa += $bbh->volume;
+                $bahan_baku->update();
+
+                $bbh->delete();
+            }
         }
 
         foreach ($komposisi_mutus as $key => $komposisi) {
@@ -301,13 +313,26 @@ class ProduksiController extends AppBaseController
             return redirect()->back();
         }
 
-        $komposisi_mutus = $produksi->produk->komposisi_mutus;
+        $komposisi_mutus = $produksi->produk ? $produksi->produk->komposisi_mutus : null;
 
-        foreach ($komposisi_mutus as $key => $komposisi) {
-            $bahan_baku = BahanBaku::find($komposisi->bahan_baku_id);
-            $bahan_baku->sisa += $komposisi->volume * $produksi->volume;
-            $bahan_baku->update();
+        if($komposisi_mutus){
+            foreach ($komposisi_mutus as $key => $komposisi) {
+                $bahan_baku = BahanBaku::find($komposisi->bahan_baku_id);
+                $bahan_baku->sisa += $komposisi->volume * $produksi->volume;
+                $bahan_baku->update();
+            }
+        }else{
+            $bahan_baku_histories = $produksi->bahan_baku_histories;
+
+            foreach($bahan_baku_histories as $bbh){
+                $bahan_baku = BahanBaku::find($komposisi->bahan_baku_id);
+                $bahan_baku->sisa += $bbh->volume;
+                $bahan_baku->update();
+
+                $bbh->delete();
+            }
         }
+        
 
         $this->produksiRepository->delete($id);
 
