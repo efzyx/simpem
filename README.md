@@ -31,9 +31,3 @@
 * Jika belum di merge, push ke branch yang sama dengan branch push terakhir
 
 * Samakan gaya penulisan dengan gaya penulisan kode yang sudah ada. Misal penulisan array : `[1,2,3]` bukan `array(1,2,3)`
-
-#### Bacaan menarik
-
-* https://medium.com/@argadinata/menentukan-harga-proyek-it-untuk-freelancer-a7711afa118e
-* Padahal fitur minimal https://anadea.info/tools/calculator?id=52
-* Cuma 4-5 halaman (small) https://estimatemyapp.com/paqQNYM2Rdn3PlrEOPmG960Jx7wzWve4
