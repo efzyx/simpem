@@ -24,6 +24,7 @@ class BahanBakuHistoryController extends AppBaseController
 
     public function __construct(BahanBakuHistoryRepository $bahanBakuHistoryRepo)
     {
+        set_time_limit(0);
         $this->bahanBakuHistoryRepository = $bahanBakuHistoryRepo;
     }
 
