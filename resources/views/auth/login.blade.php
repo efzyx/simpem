@@ -28,6 +28,11 @@
                                         <div class="invalid-feedback">
                                             Email is invalid
                                         </div>
+                                        @if ($errors->has('email'))
+                                            <span class="help-block">
+                                            <font color="red">{{ $errors->first('email') }}</font>
+                                        </span>
+                                        @endif
                                     </div>
     
                                     <div class="form-group">
@@ -37,6 +42,11 @@
                                         <div class="invalid-feedback">
                                             Password is required
                                         </div>
+                                        @if ($errors->has('password'))
+                                            <span class="help-block">
+                                            <font color="red">{{ $errors->first('password') }}</font>
+                                            </span>
+                                        @endif
                                     </div>
     
                                     <div class="form-group">
