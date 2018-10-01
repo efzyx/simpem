@@ -34,15 +34,14 @@
 <!-- Waktu Produksi Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('waktu_produksi', 'Tbahan_bakuanggal Pengiriman:') !!}
-    {!! Form::text('waktu_produksi', nulbahan_bakul, ['class' => 'form-control datetimepicker'])!!}
-</div>bahan_baku
-bahan_baku
-<!-- Supir Id Field -->bahan_baku
-<div class="form-group col-sm-12">bahan_baku
-    {!! Form::label('supir_id', 'Supir')bahan_baku !!}
-    {!! Form::select('supir_id', $supirsbahan_baku , null, ['class' => 'form-control', 'placeholder' => 'Pilih Supir']) !!}
-</div>bahan_baku
-bahan_baku
+    {!! Form::text('waktu_produksi', null, ['class' => 'form-control datetimepicker'])!!}
+</div>
+
+<!-- Supir Id Field -->
+<div class="form-group col-sm-12">
+    {!! Form::label('supir_id', 'Supir') !!}
+    {!! Form::select('supir_id', $supirs , null, ['class' => 'form-control', 'placeholder' => 'Pilih Supir']) !!}
+</div>
 <!-- No Kendaraan Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('kendaraan', 'Kendaraan') !!}
