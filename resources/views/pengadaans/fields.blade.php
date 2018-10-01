@@ -57,7 +57,7 @@
     
     $('#material').change(function (e){
         var id = $('#material option:selected').val();
-        var url = "{{ url('api/bahan_baku')}}";
+        var url = "{{ url('api/supplier')}}";
         
         if(id){
             $.getJSON(url+'/'+id, function(data) {

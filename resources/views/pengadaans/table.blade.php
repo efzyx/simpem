@@ -3,7 +3,7 @@
         <tr>
         <th>#</th>
         <th>Material</th>
-        <th>Berat</th>
+        <th>Kuantitas</th>
         <th>Supplier</th>
         <th>Supir</th>
         <th>Pengadaan</th>
