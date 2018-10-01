@@ -6,7 +6,7 @@
         <th>Waktu</th>
         <th>Material</th>
         <th>Type</th>
-        <th>Volume</th>
+        <th>Kuantitas</th>
         <th>Total Sisa</th>
       </tr>
     </thead>
@@ -24,8 +24,8 @@
         <td><a href="{{ route('opnames.show', $bahanBakuHistory->opname->id)}}">Material Keluar</a></td>
         @endif
 
-        <td>{{ number_format(abs($bahanBakuHistory->volume),2,",",".") }}</td>
-        <td>{!! number_format($bahanBakuHistory->total_sisa,2,",",".") !!}</td>
+      <td>{{ number_format(abs($bahanBakuHistory->volume),2,",",".") }} {{ $satuan = $bahanBakuHistory->bahan_baku->satuan}}</td>
+      <td>{!! number_format($bahanBakuHistory->total_sisa,2,",",".") !!} {{ $satuan }}</td>
       </tr>
       @endforeach
     </tbody>

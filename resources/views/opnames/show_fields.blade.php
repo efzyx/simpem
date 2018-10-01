@@ -11,10 +11,10 @@
 <!-- Volume Material Keluar Field -->
 <div class="form-group col-sm-12">
     <div class="col-sm-3">
-    {!! Form::label('volume_opname', 'Volume Material Keluar:') !!}
+    {!! Form::label('volume_opname', 'Kuantitas Material Keluar:') !!}
   </div>
   <div class="col-sm-9">
-    {!! number_format($opname->volume_opname,2,",",".") !!}
+    {!! number_format($opname->volume_opname,2,",",".") !!} {!! $opname->bahan_baku->satuan !!}
   </div>
 </div>
 

@@ -31,7 +31,7 @@
 <!-- Volume Pemesanan Field -->
 <div class="form-group col-sm-12">
   <div class="col-sm-3">
-    {!! Form::label('volume_pemesanan', 'Volume Pemesanan') !!}
+    {!! Form::label('volume_pemesanan', 'Kuantitas Pemesanan') !!}
   </div>
   <div class="col-sm-9">
     {!!number_format($pemesananBahanBaku->volume_pemesanan,2,",",".") !!} {!! $pemesananBahanBaku->bahan_baku->satuan !!}

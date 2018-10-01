@@ -16,16 +16,16 @@
     {!! Form::text('nama_pengirim', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Berat Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('berat', 'Kuantitas:') !!}
-    {!! Form::number('berat', null, ['class' => 'form-control numb', 'step' => 'any']) !!}
-</div>
-
 <!-- Supplier Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('pemesanan_bahan_baku_id', 'Supplier:') !!}
-    {!! Form::select('pemesanan_bahan_baku_id', $supplier, null, ['class' => 'form-control', 'id' => 'supplier', 'placeholder' => 'Pilih Supplier..']) !!}
+    {!! Form::select('pemesanan_bahan_baku_id', $supplier, null, ['class' => 'form-control', 'id' => 'supplier', 'placeholder' => 'Pilih Supplier..', 'id'=> 'material']) !!}
+</div>
+
+<!-- Berat Field -->
+<div class="form-group col-sm-12">
+    {!! Form::label('berat', 'Kuantitas:', ['id'=>'material_label']) !!}
+    {!! Form::number('berat', null, ['class' => 'form-control numb', 'step' => 'any']) !!}
 </div>
 
 <!-- Supir Field -->
@@ -51,3 +51,23 @@
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
     <a href="{!! route('pengadaans.index') !!}" class="btn btn-default">Cancel</a>
 </div>
+
+@section('scripts')
+<script>
+    
+    $('#material').change(function (e){
+        var id = $('#material option:selected').val();
+        var url = "{{ url('api/bahan_baku')}}";
+        
+        if(id){
+            $.getJSON(url+'/'+id, function(data) {
+                $('#material_label').text('');
+                var label = 'Kuantitas ('+data.satuan+'):';
+                $('#material_label').text(label);
+            });
+        }else{
+            $('#material_label').text('Kuantitas:');
+        }
+    })
+</script>
+@endsection

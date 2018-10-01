@@ -20,35 +20,29 @@
 </div>
 
 <!-- Volume Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('volume', 'Volume:') !!}
-    <br>
-    <div class="col-sm-6">
-        {!! Form::number('volume', null, ['class' => 'form-control numb', 'step' => 'any']) !!}
-    </div>
-    <div class="col-sm-2">
-        Kg
-    </div>
+<div class="form-group col-sm-7">
+    {!! Form::label('volume', 'Volume (m³):') !!}
+    {!! Form::number('volume', null, ['class' => 'form-control numb', 'step' => 'any']) !!}
 </div>
 
 <!-- Produk Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('produk_id', 'Produk:') !!}
-    {!! Form::select('produk_id', $produks , null, ['class' => 'form-control', 'placeholder' => '-Pilih Produk-']) !!}
+    {!! Form::label('produk_id', 'Mutu ('.$pemesanan->mutu.'):') !!}
+    {!! Form::select('produk_id', $produks , null, ['class' => 'form-control', 'placeholder' => '-Pilih Mutu-']) !!}
 </div>
 
 <!-- Waktu Produksi Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('waktu_produksi', 'Tanggal Pengiriman:') !!}
-    {!! Form::text('waktu_produksi', null, ['class' => 'form-control datetimepicker'])!!}
-</div>
-
-<!-- Supir Id Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('supir_id', 'Supir') !!}
-    {!! Form::select('supir_id', $supirs , null, ['class' => 'form-control', 'placeholder' => 'Pilih Supir']) !!}
-</div>
-
+    {!! Form::label('waktu_produksi', 'Tbahan_bakuanggal Pengiriman:') !!}
+    {!! Form::text('waktu_produksi', nulbahan_bakul, ['class' => 'form-control datetimepicker'])!!}
+</div>bahan_baku
+bahan_baku
+<!-- Supir Id Field -->bahan_baku
+<div class="form-group col-sm-12">bahan_baku
+    {!! Form::label('supir_id', 'Supir')bahan_baku !!}
+    {!! Form::select('supir_id', $supirsbahan_baku , null, ['class' => 'form-control', 'placeholder' => 'Pilih Supir']) !!}
+</div>bahan_baku
+bahan_baku
 <!-- No Kendaraan Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('kendaraan', 'Kendaraan') !!}

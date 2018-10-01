@@ -3,7 +3,7 @@
         <tr>
           <th>#</th>
             <th>Material</th>
-        <th>Volume Material Keluar</th>
+        <th>Kuantitas Material Keluar</th>
         <th>Keterangan</th>
         <th>Tanggal Pemakaian</th>
             <th>Action</th>

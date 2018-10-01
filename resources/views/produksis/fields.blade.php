@@ -7,7 +7,7 @@
 <!-- Pemesanan Id Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('pemesanan_id', 'Pemesanan') !!}
-    {!! Form::select('pemesanan_id', $pemesanans, null, ['class' => 'form-control']) !!}
+    {!! Form::select('pemesanan_id', $pemesanans, null, ['class' => 'form-control', 'id' => 'pemesanan', 'placeholder' => '-Pilih Pemesanan']) !!}
 </div>
 
 <!-- Nama Pengirim Field -->
@@ -23,20 +23,14 @@
 </div>
 
 <!-- Volume Field -->
-<div class="form-group col-sm-12">
-        {!! Form::label('volume', 'Volume:') !!}
-        <br>
-        <div class="col-sm-6">
-            {!! Form::number('volume', null, ['class' => 'form-control numb', 'step' => 'any']) !!}
-        </div>
-        <div class="col-sm-2">
-            Kg
-        </div>
+<div class="form-group col-sm-7">
+        {!! Form::label('volume', 'Volume (m³):') !!}
+        {!! Form::number('volume', null, ['class' => 'form-control numb', 'step' => 'any']) !!}
 </div>
 
 <!-- Produk Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('produk_id', 'Produk:') !!}
+    {!! Form::label('produk_id', 'Mutu:', ['id' => 'label']) !!}
     {!! Form::select('produk_id', $produks , null, ['class' => 'form-control', 'placeholder' => '-Pilih Produk-']) !!}
 </div>
 
@@ -63,3 +57,23 @@
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
     <a href="{!! route('produksis.index') !!}" class="btn btn-default">Cancel</a>
 </div>
+
+@section('scripts')
+<script>
+    
+    $('#pemesanan').change(function (e){
+        var id = $('#pemesanan option:selected').val();
+        var url = "{{ url('api/pemesanan')}}";
+        
+        if(id){
+            $.getJSON(url+'/'+id, function(data) {
+                $('#label').text('');
+                var label = 'Mutu ('+data.mutu+'):';
+                $('#label').text(label);
+            });
+        }else{
+            $('#label').text('Mutu:');
+        }
+    })
+</script>
+@endsection

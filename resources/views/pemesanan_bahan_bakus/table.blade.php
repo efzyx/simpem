@@ -4,7 +4,7 @@
         <th>#</th>
         <th>Supplier</th>
         <th>Material</th>
-        <th>Volume</th>
+        <th>Kuantitas</th>
         <th>Sisa</th>
         <th>Tanggal</th>
         <th>Action</th>

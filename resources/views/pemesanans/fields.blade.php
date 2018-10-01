@@ -17,13 +17,9 @@
 </div>
 
 <!-- Volume Pesanan Field -->
-<div class="form-group col-sm-9">
-    {!! Form::label('volume_pesanan', 'Volume Pesanan:') !!}
-    <br>
-    <div class="col-sm-5">
+<div class="form-group col-sm-7">
+    {!! Form::label('volume_pesanan', 'Volume Pesanan (m³):') !!}
     {!! Form::number('volume_pesanan', null, ['class' => 'form-control numb', 'step' => 'any']) !!}
-    </div>
-    <div class="col-sm-3">Kg</div>
 </div>
 
 <!-- Tanggal Pesanan Field -->

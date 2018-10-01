@@ -18,7 +18,7 @@
 
 <!-- Berat Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('berat', 'Kuantitas:') !!}
+    {!! Form::label('berat', 'Kuantitas ('.$supplier->bahan_baku->satuan.'):') !!}
     {!! Form::number('berat', null, ['class' => 'form-control numb', 'step' => 'any']) !!}
 </div>
 
