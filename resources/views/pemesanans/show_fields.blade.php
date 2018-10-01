@@ -44,7 +44,7 @@
     {!! Form::label('volume_pesanan', 'Volume Pesanan') !!}
   </div>
   <div class="col-sm-9">
-    <p>{!! number_format($pemesanan->volume_pesanan,2,",",".") !!} Kg</p>
+    <p>{!! number_format($pemesanan->volume_pesanan,2,",",".") !!} m³</p>
   </div>
 </div>
 

@@ -3,7 +3,7 @@
     <tr>
       <th>#</th>
       <th>Kendaraan</th>
-      <th>Volume (Kg)</th>
+      <th>Volume (m³)</th>
       <th>Pengiriman</th>
       <th>Action</th>
     </tr>
