@@ -4,13 +4,11 @@
 
 [![build status](https://gitlab.com/fauzipadlaw/pemesanan/badges/master/build.svg)](https://gitlab.com/fauzipadlaw/pemesanan/commits/master)
 
-# Sistem Manajemen Pemesanan
-
 #### Clone Project
 
-* `git clone git@gitlab.com:fauzipadlaw/pemesanan.git`
+* `git clone url dir-name`
 
-* `cd pemesanan`
+* `cd dir-name`
 
 * Copy file .env.example to .env
 
